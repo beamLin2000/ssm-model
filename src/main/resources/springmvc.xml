@@ -16,7 +16,7 @@
     </bean>
     <mvc:cors>
         <mvc:mapping path="/**"
-                     allowed-origins="*"
+                     allowed-origins="localhost"
                      allowed-methods="*"
                      allowed-headers="*"
                      allow-credentials="true"
