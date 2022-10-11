@@ -21,8 +21,20 @@
         <property name="configLocation" value="classpath:mybatis.xml"/>
 <!--        读取mapper映射文件-->
         <property name="mapperLocations" value="classpath:mapper/*.xml"></property>
+        <!--配置分页插件-->
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <!--使用下面的方式配置参数，一行配置一个 -->
+                        <value>
+                            params=value1
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
     </bean>
-
 
 <!--    将mapper 交给spring管理-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
