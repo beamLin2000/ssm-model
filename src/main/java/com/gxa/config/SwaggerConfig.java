@@ -25,7 +25,6 @@ public class SwaggerConfig {
                 .apis(RequestHandlerSelectors.basePackage("com.gxa.controller"))
                 .build();
     }
-
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("医院就诊系统项目接口文档")
