@@ -11,13 +11,13 @@ import java.util.Date;
 public class Register {
     @ApiModelProperty("挂号单号")
     private Integer registrationForm;
-    @ApiModelProperty(name = "科室",required = true)
+    @ApiModelProperty(name = "department",value = "科室",required = true)
     private String department;
-    @ApiModelProperty(name = "接诊类型",required = true)
+    @ApiModelProperty(name = "receptionType",value = "接诊类型",required = true)
     private String receptionType;
-    @ApiModelProperty(name = "接诊医生",required = true)
+    @ApiModelProperty(name = "attendingDoctor",value = "接诊医生",required = true)
     private String attendingDoctor;
-    @ApiModelProperty(name = "挂号费",required = true)
+    @ApiModelProperty(name = "registrationFee",value = "挂号费",required = true)
     private Double registrationFee;
     @ApiModelProperty("诊疗费")
     private Double consultationFee;
