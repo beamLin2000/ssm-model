@@ -1,4 +1,4 @@
-package com.gxa.entity.woek;
+package com.gxa.entity.work;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

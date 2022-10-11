@@ -1,4 +1,4 @@
-package com.gxa.entity.woek;
+package com.gxa.entity.work;
 
 import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @ApiModel("返回对象实体")
-public class Inspect {
+public class Drug {
     private Integer id;
     private String name;
-    private String type;
-    private String unit;
+    private String norms;
+    private String stock;
     private String price;
 }

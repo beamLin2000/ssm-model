@@ -1,4 +1,4 @@
-package com.gxa.entity.woek;
+package com.gxa.entity.work;
 
 import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;

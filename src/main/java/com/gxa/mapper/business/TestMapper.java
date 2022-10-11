@@ -1,4 +1,4 @@
-package com.gxa.mapper;
+package com.gxa.mapper.business;
 
 public interface TestMapper {
 }

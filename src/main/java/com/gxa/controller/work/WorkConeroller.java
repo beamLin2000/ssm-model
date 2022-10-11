@@ -1,6 +1,6 @@
-package com.gxa.controller;
+package com.gxa.controller.work;
 
-import com.gxa.entity.woek.*;
+import com.gxa.entity.work.*;
 import com.gxa.utils.R;
 import io.swagger.annotations.Api;
 import org.springframework.stereotype.Controller;
