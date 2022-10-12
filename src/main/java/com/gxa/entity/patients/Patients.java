@@ -32,11 +32,11 @@ public class Patients {
     private String patientGroup;
     @ApiModelProperty(name = "patientMarriage",value = "婚姻状况")
     private String patientMarriage;
-    @ApiModelProperty(name = "patientAddress",value = "学历")
+    @ApiModelProperty(name = "patientAddress",value = "地址")
     private String patientAddress;
-    @ApiModelProperty(name = "patientDetailedAddress",value = "地址")
+    @ApiModelProperty(name = "patientDetailedAddress",value = "详细地址")
     private String patientDetailedAddress;
-    @ApiModelProperty(name = "patientDegree",value = "详细地址")
+    @ApiModelProperty(name = "patientDegree",value = "学历")
     private String patientDegree;
     @ApiModelProperty(name = "patientOccupation",value = "职业")
     private String patientOccupation;
