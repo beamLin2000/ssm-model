@@ -30,10 +30,6 @@ public class Register {
     private Date registrationDate;
     @ApiModelProperty(name = "registrationClerk",value = "挂号员")
     private String registrationClerk;
-    @ApiModelProperty(name = "discountAmount",value = "优惠金额")
-    private BigDecimal discountAmount;
-    @ApiModelProperty(name = "discount",value = "折扣")
-    private Integer discount;
     @ApiModelProperty(name = "medicalInsurancePayment",value = "医保支付")
     private BigDecimal medicalInsurancePayment;
     @ApiModelProperty(name = "amountPaid",value = "实收金额")
