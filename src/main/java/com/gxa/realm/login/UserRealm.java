@@ -3,9 +3,12 @@ package com.gxa.realm.login;
 import com.gxa.entity.login.User;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
+
+import java.util.Set;
 
 
 public class UserRealm extends AuthorizingRealm {
@@ -25,14 +28,14 @@ public class UserRealm extends AuthorizingRealm {
             user.setSalt("123");
             user.setUserName("admin");
             user.setPwd("3bcbb857c763d1429a24959cb8de2593");
-        }else if (userName.equals("zs")){
+        }else if (userName.equals("doctor")){
             user.setSalt("123");
-            user.setUserName("zs");
-            user.setPwd("e474c7fc72bb61bf146026e78aa11f85");
-        }else if (userName.equals("ls")){
+            user.setUserName("doctor");
+            user.setPwd("9c3b5c0672cd599ccf1019bddaa8089b");
+        }else if (userName.equals("finance")){
             user.setSalt("123");
-            user.setUserName("ls");
-            user.setPwd("f023a0cc13d2dc6c6f300909baa13aad");
+            user.setUserName("finance");
+            user.setPwd("9c3b5c0672cd599ccf1019bddaa8089b");
         }
 
         ByteSource salt = ByteSource.Util.bytes(user.getSalt());
@@ -43,6 +46,21 @@ public class UserRealm extends AuthorizingRealm {
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
+        System.out.println("-------------------授权方法------------------------");
+
+        SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
+
+        User user = (User) principalCollection.getPrimaryPrincipal();
+
+        String userName = user.getUserName();
+
+        Set<String> perms = null;
+
+        System.out.println(perms);
+
+        authorizationInfo.addStringPermissions(perms);
+
+
 
         return null;
     }

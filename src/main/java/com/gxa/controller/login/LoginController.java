@@ -1,7 +1,7 @@
 package com.gxa.controller.login;
 
-
 import com.gxa.entity.login.User;
+import com.gxa.utils.DBMenu;
 import com.gxa.utils.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -13,6 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @Api(tags = {"登录"})
@@ -31,11 +34,28 @@ public class LoginController {
         try {
             subject.login(token);
 
+            if ("admin".equals(user.getUserName())){
+
+                Map map = new HashMap();
+                map.put("menu",DBMenu.getMenu1());
+                return R.ok(map);
+            }else if ("doctor".equals(user.getUserName())){
+
+                Map map = new HashMap();
+                map.put("menu",DBMenu.getMenu2());
+                return R.ok(map);
+            }else if ("finance".equals(user.getUserName())){
+
+                Map map = new HashMap();
+                map.put("menu",DBMenu.getMenu3());
+                return R.ok(map);
+            }
+
         } catch (AuthenticationException e) {
             R.error();
             e.printStackTrace();
         }
 
-        return R.ok("suc");
+        return R.ok("fail");
     }
 }
