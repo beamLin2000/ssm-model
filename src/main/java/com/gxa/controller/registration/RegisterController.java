@@ -1,4 +1,4 @@
-package com.gxa.controller;
+package com.gxa.controller.registration;
 
 import com.gxa.entity.registration.Register;
 import com.gxa.entity.registration.RegisterMsg;

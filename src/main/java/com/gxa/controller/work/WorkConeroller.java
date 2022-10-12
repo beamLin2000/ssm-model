@@ -1,4 +1,4 @@
-package com.gxa.controller;
+package com.gxa.controller.work;
 
 import com.gxa.entity.work.*;
 import com.gxa.utils.R;
@@ -19,13 +19,13 @@ public class WorkConeroller {
         Date date = new Date();
         long time = date.getTime();
         date.setTime(time);
-        Patient patient = new Patient(1,"李四","18","nan","已就诊",date,"全科","beam","13256485216");
-        Patient patient1 = new Patient(2,"ww","18","nan","已就诊",date,"全科","beam","13256485216");
-        Patient patient2 = new Patient(3,"zn","18","nan","已就诊",date,"全科","beam","13256485216");
-        Patient patient3 = new Patient(4,"zs","18","nan","已就诊",date,"全科","beam","13256485216");
-        Patient patient4 = new Patient(5,"qq","18","nan","已就诊",date,"全科","beam","13256485216");
-        Patient patient5 = new Patient(6,"ht","18","nan","已就诊",date,"全科","beam","13256485216");
-        List<Patient> list = new ArrayList<>();
+        Patient1 patient = new Patient1(1,"李四","18","nan","已就诊",date,"全科","beam","13256485216");
+        Patient1 patient1 = new Patient1(2,"ww","18","nan","已就诊",date,"全科","beam","13256485216");
+        Patient1 patient2 = new Patient1(3,"zn","18","nan","已就诊",date,"全科","beam","13256485216");
+        Patient1 patient3 = new Patient1(4,"zs","18","nan","已就诊",date,"全科","beam","13256485216");
+        Patient1 patient4 = new Patient1(5,"qq","18","nan","已就诊",date,"全科","beam","13256485216");
+        Patient1 patient5 = new Patient1(6,"ht","18","nan","已就诊",date,"全科","beam","13256485216");
+        List<Patient1> list = new ArrayList<>();
         list.add(patient);
         list.add(patient1);
         list.add(patient2);
