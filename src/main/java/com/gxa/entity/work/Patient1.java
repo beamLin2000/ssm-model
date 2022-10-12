@@ -12,9 +12,9 @@ import java.util.Date;
 @NoArgsConstructor
 @ApiModel("返回的患者对象")
 public class Patient1 {
-    @ApiModelProperty("id")
+    @ApiModelProperty("患者id")
     private Integer id;
-    @ApiModelProperty("姓名")
+    @ApiModelProperty("名字")
     private String name;
     @ApiModelProperty("年龄")
     private String age;
