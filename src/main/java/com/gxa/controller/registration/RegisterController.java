@@ -22,7 +22,7 @@ public class RegisterController {
     @Autowired
     private RegisterService registerService;
 
-    @PostMapping("/register")
+    @PostMapping("/register/add")
     @ApiOperation(value = "添加接口",notes = "挂号添加",httpMethod = "POST")
     public R add(@ApiParam(name = "register", value = "挂号添加信息")Register register){
         R r = new R();

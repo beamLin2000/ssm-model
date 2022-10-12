@@ -20,7 +20,7 @@
 <!--        读取mybatis总配置文件-->
         <property name="configLocation" value="classpath:mybatis.xml"/>
 <!--        读取mapper映射文件-->
-        <property name="mapperLocations" value="classpath:mapper/*"></property>
+        <property name="mapperLocations" value="classpath:mapper/*.xml"></property>
         <!--配置分页插件-->
         <property name="plugins">
             <array>
