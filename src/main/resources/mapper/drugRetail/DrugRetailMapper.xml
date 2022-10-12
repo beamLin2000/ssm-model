@@ -7,7 +7,7 @@
     <insert id="save">
 
     </insert>
-    <select id="queryAll" resultType="com.gxa.entity.drugRetail.DrugMsg">
+    <select id="query" resultType="com.gxa.entity.drugRetail.DrugMsg">
 
     </select>
 </mapper>

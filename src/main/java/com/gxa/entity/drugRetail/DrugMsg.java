@@ -16,5 +16,4 @@ public class DrugMsg {
     private String manuFactor;//厂家
     private String stock;//库存
     private Double price;//零售价格
-
 }
