@@ -37,7 +37,7 @@ public class TollController {
     @PutMapping("/toll/update_state")
     @ResponseBody
     @ApiOperation(value = "修改接口",notes = "状态修改",httpMethod = "PUT")
-    public R tollState(@ApiParam(name = "tollId", value = "状态修改信息")String tollId){
+    public R tollState(@ApiParam(name = "状态修改信息", value = "tollId")String tollId){
         R r = new R();
         return r;
     }
