@@ -2,11 +2,15 @@ package com.gxa.entity.registration;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 @ApiModel("挂号查询条件")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class RegisterQueryCondition {
     @ApiModelProperty(name = "visitStatus",value = "就诊状态")
     private String visitStatus;

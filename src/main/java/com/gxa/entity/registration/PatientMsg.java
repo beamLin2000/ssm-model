@@ -2,12 +2,16 @@ package com.gxa.entity.registration;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 @Data
 @ApiModel("患者实体")
-public class Patient {
+@AllArgsConstructor
+@NoArgsConstructor
+public class PatientMsg {
     @ApiModelProperty(name = "name",value = "患者姓名",required = true)
     private String name;
     @ApiModelProperty(name = "cardNo",value = "患者卡号")
