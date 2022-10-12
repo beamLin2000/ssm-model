@@ -25,14 +25,14 @@ public class UserRealm extends AuthorizingRealm {
             user.setSalt("123");
             user.setUserName("admin");
             user.setPwd("3bcbb857c763d1429a24959cb8de2593");
-        }else if (userName.equals("zs")){
+        }else if (userName.equals("doctor")){
             user.setSalt("123");
-            user.setUserName("zs");
-            user.setPwd("e474c7fc72bb61bf146026e78aa11f85");
-        }else if (userName.equals("ls")){
+            user.setUserName("doctor");
+            user.setPwd("9c3b5c0672cd599ccf1019bddaa8089b");
+        }else if (userName.equals("finance")){
             user.setSalt("123");
-            user.setUserName("ls");
-            user.setPwd("f023a0cc13d2dc6c6f300909baa13aad");
+            user.setUserName("finance");
+            user.setPwd("9c3b5c0672cd599ccf1019bddaa8089b");
         }
 
         ByteSource salt = ByteSource.Util.bytes(user.getSalt());
