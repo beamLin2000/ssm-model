@@ -10,9 +10,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
@@ -61,9 +59,9 @@ public class PatientController {
         return r;
     }
 
-    @PostMapping("/patient/updatePre")
+    @PutMapping("/patient/updatePre")
     @ResponseBody
-    @ApiOperation(value = "修改接口",notes = "患者修改",httpMethod = "POST")
+    @ApiOperation(value = "修改接口",notes = "患者修改",httpMethod = "PUT")
     public R tpPatientUpdate(@ApiParam(name = "patient_id",value = "患者修改条件") Integer patient_id){
         R r = new R();
         this.patientService.tpPatientUpdate(patient_id);
@@ -71,9 +69,9 @@ public class PatientController {
         return r;
     }
 
-    @PostMapping("/patient/update")
+    @PutMapping("/patient/update")
     @ResponseBody
-    @ApiOperation(value = "修改接口",notes = "患者修改",httpMethod = "POST")
+    @ApiOperation(value = "修改接口",notes = "患者修改",httpMethod = "PUT")
     public R patientUpdate(@ApiParam(name = "patients",value = "患者修改") Patients patients){
         R r = new R();
         this.patientService.patientUpdate(patients);
@@ -82,9 +80,9 @@ public class PatientController {
     }
 
 
-    @GetMapping("/patient/delete")
+    @DeleteMapping("/patient/delete")
     @ResponseBody
-    @ApiOperation(value = "删除接口",notes = "患者删除",httpMethod = "GET")
+    @ApiOperation(value = "删除接口",notes = "患者删除",httpMethod = "DELETE")
     public R patientDelete(@ApiParam(name = "patient_id",value = "患者删除条件") Integer patient_id){
         return null;
     }
@@ -110,9 +108,9 @@ public class PatientController {
 
     }
 
-    @PostMapping("/family/updatePre")
+    @PutMapping("/family/updatePre")
     @ResponseBody
-    @ApiOperation(value = "修改接口",notes = "家庭修改",httpMethod = "POST")
+    @ApiOperation(value = "修改接口",notes = "家庭修改",httpMethod = "PUT")
     public R tpFamilyUpdate(@ApiParam(name = "family_id",value = "家庭修改条件") Integer family_id){
         R r = new R();
         this.familyService.tpFamilyUpdate(family_id);
@@ -121,9 +119,9 @@ public class PatientController {
     }
 
 
-    @PostMapping("/family/update")
+    @PutMapping("/family/update")
     @ResponseBody
-    @ApiOperation(value = "修改接口",notes = "家庭修改",httpMethod = "POST")
+    @ApiOperation(value = "修改接口",notes = "家庭修改",httpMethod = "PUT")
     public R familyAddUpdate(@ApiParam(name = "familyAdd",value = "患者修改") FamilyAdd familyAdd){
         R r = new R();
         this.familyService.familyAddUpdate(familyAdd);
@@ -142,9 +140,9 @@ public class PatientController {
         return r;
     }
 
-    @GetMapping("/family/delete")
+    @DeleteMapping("/family/delete")
     @ResponseBody
-    @ApiOperation(value = "删除接口",notes = "家庭删除",httpMethod = "GET")
+    @ApiOperation(value = "删除接口",notes = "家庭删除",httpMethod = "DELETE")
     public R delete(@ApiParam(name = "patient_number",value = "患者删除条件") Integer patient_number){
        return null;
     }
