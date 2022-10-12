@@ -3,9 +3,12 @@ package com.gxa.realm.login;
 import com.gxa.entity.login.User;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
+
+import java.util.Set;
 
 
 public class UserRealm extends AuthorizingRealm {
@@ -43,6 +46,21 @@ public class UserRealm extends AuthorizingRealm {
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
+        System.out.println("-------------------授权方法------------------------");
+
+        SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
+
+        User user = (User) principalCollection.getPrimaryPrincipal();
+
+        String userName = user.getUserName();
+
+        Set<String> perms = null;
+
+        System.out.println(perms);
+
+        authorizationInfo.addStringPermissions(perms);
+
+
 
         return null;
     }
