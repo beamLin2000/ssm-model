@@ -16,7 +16,7 @@
     </bean>
     <mvc:cors>
         <mvc:mapping path="/**"
-                     allowed-origins="localhost"
+                     allowed-origins="172.16.141.105,localhost"
                      allowed-methods="*"
                      allowed-headers="*"
                      allow-credentials="true"
@@ -29,4 +29,6 @@
 <!--    静态资源的映射-->
    <mvc:resources location="classpath:/META-INF/resources/" mapping="swagger-ui.html"/>
     <mvc:resources location="classpath:/META-INF/resources/webjars/" mapping="/webjars/**"/>
+
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"></bean>
 </beans>
