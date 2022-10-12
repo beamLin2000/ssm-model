@@ -13,20 +13,20 @@ import java.util.Date;
 @NoArgsConstructor
 @ApiModel("返回家庭实体")
 public class Family {
-    @ApiModelProperty(name = "family_id",value = "家庭序号")
-    private Integer family_id;
-    @ApiModelProperty(name = "family_relationship",value = "家庭关系")
-    private String family_relationship;
-    @ApiModelProperty(name = "family_name",value = "姓名")
-    private String family_name;
-    @ApiModelProperty(name = "family_unit",value = "单位")
-    private String family_unit;
-    @ApiModelProperty(name = "family_birthday",value = "出生日期")
-    private Date family_birthday;
-    @ApiModelProperty(name = "family_gender",value = "性别")
-    private String family_gender;
-    @ApiModelProperty(name = "family_phone" ,value = "手机号码")
-    private String family_phone;
-    @ApiModelProperty(name = "family_chreattiome",value = "创建时间")
-    private Date family_chreattiome;
+    @ApiModelProperty(name = "familyId",value = "家庭序号")
+    private Integer familyId;
+    @ApiModelProperty(name = "familyRelationship",value = "家庭关系")
+    private String familyRelationship;
+    @ApiModelProperty(name = "familyName",value = "姓名")
+    private String familyName;
+    @ApiModelProperty(name = "familyUnit",value = "单位")
+    private String familyUnit;
+    @ApiModelProperty(name = "familyBirthday",value = "出生日期")
+    private Date familyBirthday;
+    @ApiModelProperty(name = "familyGender",value = "性别")
+    private String familyGender;
+    @ApiModelProperty(name = "familyPhone" ,value = "手机号码")
+    private String familyPhone;
+    @ApiModelProperty(name = "familyCreatTime",value = "创建时间")
+    private Date familyCreatTime;
 }

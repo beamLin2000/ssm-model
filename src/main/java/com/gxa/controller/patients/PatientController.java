@@ -43,7 +43,7 @@ public class PatientController {
     @GetMapping("/patient/phone")
     @ResponseBody
     @ApiOperation(value = "查找接口",notes = "电话查找患者",httpMethod = "GET")
-    public R patientPhoneList(@ApiParam(name = "patient_phone", value = "电话查找患者信息")String patient_phone){
+    public R patientPhoneList(@ApiParam(name = "patientPhone", value = "电话查找患者信息")String patientPhone){
         R r = new R();
         return r;
     }
@@ -62,9 +62,9 @@ public class PatientController {
     @PutMapping("/patient/updatePre")
     @ResponseBody
     @ApiOperation(value = "修改接口",notes = "患者修改",httpMethod = "PUT")
-    public R tpPatientUpdate(@ApiParam(name = "patient_id",value = "患者修改条件") Integer patient_id){
+    public R tpPatientUpdate(@ApiParam(name = "patient_id",value = "患者修改条件") Integer patientId){
         R r = new R();
-        this.patientService.tpPatientUpdate(patient_id);
+        this.patientService.tpPatientUpdate(patientId);
         R.ok("success");
         return r;
     }
@@ -83,14 +83,14 @@ public class PatientController {
     @DeleteMapping("/patient/delete")
     @ResponseBody
     @ApiOperation(value = "删除接口",notes = "患者删除",httpMethod = "DELETE")
-    public R patientDelete(@ApiParam(name = "patient_id",value = "患者删除条件") Integer patient_id){
+    public R patientDelete(@ApiParam(name = "patientId",value = "患者删除条件") Integer patientId){
         return null;
     }
 
 
     @GetMapping("/family/list")
     @ApiOperation(value = "查找接口",notes = "查找家庭",httpMethod = "GET")
-    public R familyList(@ApiParam(name = "patient_number",value = "患者编号查询条件") Integer patient_number){
+    public R familyList(@ApiParam(name = "patientNumber",value = "患者编号查询条件") Integer patientNumber){
 //       Date date = new Date();
 //        long time = date.getTime();
 //        date.setTime(time);
@@ -111,9 +111,9 @@ public class PatientController {
     @PutMapping("/family/updatePre")
     @ResponseBody
     @ApiOperation(value = "修改接口",notes = "家庭修改",httpMethod = "PUT")
-    public R tpFamilyUpdate(@ApiParam(name = "family_id",value = "家庭修改条件") Integer family_id){
+    public R tpFamilyUpdate(@ApiParam(name = "familyId",value = "家庭修改条件") Integer familyId){
         R r = new R();
-        this.familyService.tpFamilyUpdate(family_id);
+        this.familyService.tpFamilyUpdate(familyId);
         R.ok("success");
         return r;
     }
@@ -143,7 +143,7 @@ public class PatientController {
     @DeleteMapping("/family/delete")
     @ResponseBody
     @ApiOperation(value = "删除接口",notes = "家庭删除",httpMethod = "DELETE")
-    public R delete(@ApiParam(name = "patient_number",value = "患者删除条件") Integer patient_number){
+    public R delete(@ApiParam(name = "familyId",value = "患者删除条件") Integer familyId){
        return null;
     }
 }

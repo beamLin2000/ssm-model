@@ -10,9 +10,9 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FamilyAdd {
-    private String family_relationship;
-    private String family_name;
-    private Date family_birthday;
-    private String family_gender;
-    private Integer family_phone;
+    private String familyRelationship;
+    private String familyName;
+    private Date familyBirthday;
+    private String familyGender;
+    private Integer familyPhone;
 }

@@ -1,40 +1,62 @@
 package com.gxa.entity.patients;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.util.Date;
 @Data
 public class Patients {
-    private Integer patient_id;
-    private Integer patient_number;
-    private String patient_name;
-    private Integer patient_card;
-    private Integer patient_age;
-    private Date patient_birthday;
-    private String patient_gender;
-    private String patient_phone;
-    private Integer patient_documents;
-    private String patient_source;
-    private Date patient_expiry;
-    private String patient_group;
-    private String patient_marriage;
-    private String patient_address;
-    private String patient_detailed_address;
-    private String patient_degree;
-    private String patient_occupation;
-    private String patient_job;
-    private String patient_remark;
-    private Date patient_creattime;
+    @ApiModelProperty(name = "patientId",value = "患者序号")
+    private Integer patientId;
+    @ApiModelProperty(name = "patientNumber",value = "患者编码")
+    private Integer patientNumber;
+    @ApiModelProperty(name = "patientName",value = "患者姓名")
+    private String patientName;
+    @ApiModelProperty(name = "patientCard",value = "患者卡号")
+    private Integer patientCard;
+    @ApiModelProperty(name = "patientAge",value = "患者年龄")
+    private Integer patientAge;
+    @ApiModelProperty(name = "patientBirthday",value = "出生日期")
+    private Date patientBirthday;
+    @ApiModelProperty(name = "patientGender",value = "性别")
+    private String patientGender;
+    @ApiModelProperty(name = "patientPhone",value = "手机号码")
+    private String patientPhone;
+    @ApiModelProperty(name = "patientDocuments",value = "证据号码")
+    private Integer patientDocuments;
+    @ApiModelProperty(name = "patientSource",value = "患者来源")
+    private String patientSource;
+    @ApiModelProperty(name = "patientExpiry",value = "到期时间")
+    private Date patientExpiry;
+    @ApiModelProperty(name = "patientGroup",value = "民族")
+    private String patientGroup;
+    @ApiModelProperty(name = "patientMarriage",value = "婚姻状况")
+    private String patientMarriage;
+    @ApiModelProperty(name = "patientAddress",value = "学历")
+    private String patientAddress;
+    @ApiModelProperty(name = "patientDetailedAddress",value = "地址")
+    private String patientDetailedAddress;
+    @ApiModelProperty(name = "patientDegree",value = "详细地址")
+    private String patientDegree;
+    @ApiModelProperty(name = "patientOccupation",value = "职业")
+    private String patientOccupation;
+    @ApiModelProperty(name = "patientJob",value = "工作单位")
+    private String patientJob;
+    @ApiModelProperty(name = "patientRemark",value = "备注")
+    private String patientRemark;
+    @ApiModelProperty(name = "patientCreatTime",value = "创建时间")
+    private Date patientCreatTime;
+    @ApiModelProperty(name = "operators",value = "操作人员")
     private String operators;
 
-    public Patients(Integer patient_id, Integer patient_number, String patient_name, Integer patient_age, String patient_gender, String patient_phone, Date patient_creattime, String operators) {
-        this.patient_id = patient_id;
-        this.patient_number = patient_number;
-        this.patient_name = patient_name;
-        this.patient_age = patient_age;
-        this.patient_gender = patient_gender;
-        this.patient_phone = patient_phone;
-        this.patient_creattime = patient_creattime;
+    public Patients(Integer patientId, Integer patientNumber, String patientName, Integer patientAge, String patientGender, String patientPhone, Date patientCreatTime, String operators) {
+        this.patientId = patientId;
+        this.patientNumber = patientNumber;
+        this.patientName = patientName;
+        this.patientAge = patientAge;
+        this.patientGender = patientGender;
+        this.patientPhone = patientPhone;
+        this.patientCreatTime = patientCreatTime;
         this.operators = operators;
     }
 
