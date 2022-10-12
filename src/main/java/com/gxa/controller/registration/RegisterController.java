@@ -30,7 +30,7 @@ public class RegisterController {
         R.ok("success");
         return r;
     }
-    @GetMapping("/register/byCondition")
+    @GetMapping("/register/query")
     @ApiOperation(value = "查找接口",notes = "查找挂号记录",httpMethod = "GET")
     public R queryByCondition(@ApiParam(name = "registerQueryCondition",value = "挂号记录查询条件") RegisterQueryCondition registerQueryCondition){
         Date date = new Date();
