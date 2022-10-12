@@ -1,6 +1,7 @@
 package com.gxa.service.impl;
 
 import com.gxa.entity.drugRetail.DrugMsg;
+import com.gxa.entity.drugRetail.DrugQueryCondition;
 import com.gxa.entity.drugRetail.DrugRetail;
 import com.gxa.mapper.drugRetail.DrugRetailMapper;
 import com.gxa.service.drugRetail.DrugRetailService;
@@ -18,7 +19,7 @@ public class DrugRetailServiceImpl implements DrugRetailService {
     }
 
     @Override
-    public DrugMsg queryAll() {
-        return this.drugRetailMapper.queryAll();
+    public DrugMsg query(DrugQueryCondition drugQueryConditiond) {
+        return this.drugRetailMapper.query(drugQueryConditiond);
     }
 }
