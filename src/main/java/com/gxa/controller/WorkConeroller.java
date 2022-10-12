@@ -1,10 +1,11 @@
-package com.gxa.controller.work;
+package com.gxa.controller;
 
 import com.gxa.entity.work.*;
 import com.gxa.utils.R;
 import io.swagger.annotations.Api;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.*;
@@ -111,7 +112,7 @@ public class WorkConeroller {
 
         return r.ok(map);
     }
-    @GetMapping("/work/prescriptionDetailsList")
+    @GetMapping("/work/prescriptionDetailsList01")
     @ResponseBody
     public R prescriptionDetailsList(){
         Date date = new Date();
@@ -124,4 +125,58 @@ public class WorkConeroller {
 
         return r.ok(map);
     }
+    @GetMapping("/work/medicalRecordList")
+    @ResponseBody
+    public R medicalRecordList(){
+        Date date = new Date();
+        long time = date.getTime();
+        date.setTime(time);
+        MedicalRecord medicalRecord = new MedicalRecord(1,date,"头疼","现病史","既往史","过敏史",
+                "个人史","家族史","辅助检查","治疗意见","备注");
+        Map map = new HashMap();
+        map.put("medicalRecords",medicalRecord);
+        R r = new R();
+
+        return r.ok(map);
+    }
+    @GetMapping("/work/prescriptionDetailsList02")
+    @ResponseBody
+    public R physicalList(){
+
+        Physical physical  = new Physical(1,"36.50","36.50","36.50","36.50","36.50","36.50","36.50","36.50");
+        Map map = new HashMap();
+        map.put("physicals",physical);
+        R r = new R();
+
+        return r.ok(map);
+    }
+
+
+    @PostMapping ("/work/prescriptionDetailsSave")
+    @ResponseBody
+    public R prescriptionDetailsSave(PrescriptionDetails prescriptionDetails){
+
+        R r = new R();
+
+        return r.ok();
+    }
+    @PostMapping ("/work/physicalSave")
+    @ResponseBody
+    public R physicalSave(PrescriptionDetails prescriptionDetails){
+
+        R r = new R();
+
+        return r.ok();
+    }
+    @PostMapping ("/work/medicalRecordSave")
+    @ResponseBody
+    public R medicalRecordSave(PrescriptionDetails prescriptionDetails){
+
+        R r = new R();
+
+        return r.ok();
+    }
+
+
+
 }

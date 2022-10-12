@@ -1,4 +1,4 @@
-package com.gxa.controller.register;
+package com.gxa.controller;
 
 import com.gxa.entity.registration.Register;
 import com.gxa.service.register.RegisterService;

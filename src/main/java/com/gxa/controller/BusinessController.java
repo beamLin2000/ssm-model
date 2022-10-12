@@ -1,4 +1,4 @@
-package com.gxa.controller.business;
+package com.gxa.controller;
 
 import com.gxa.entity.business.Business;
 import com.gxa.entity.business.OutpatientRecordToday;
