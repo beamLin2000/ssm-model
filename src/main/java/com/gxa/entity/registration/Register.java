@@ -4,12 +4,13 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 @ApiModel("挂号实体")
 @Data
 public class Register {
-    @ApiModelProperty("挂号单号")
+    @ApiModelProperty(name = "registrationForm",value = "挂号单号")
     private Integer registrationForm;
     @ApiModelProperty(name = "department",value = "科室",required = true)
     private String department;
@@ -19,12 +20,23 @@ public class Register {
     private String attendingDoctor;
     @ApiModelProperty(name = "registrationFee",value = "挂号费",required = true)
     private Double registrationFee;
-    @ApiModelProperty("诊疗费")
+    @ApiModelProperty(name = "consultationFee",value = "诊疗费")
     private Double consultationFee;
-    @ApiModelProperty("挂号日期")
+    @ApiModelProperty(name = "registrationDate",value = "挂号日期")
     private Date registrationDate;
-    @ApiModelProperty("挂号员")
+    @ApiModelProperty(name = "registrationClerk",value = "挂号员")
     private String registrationClerk;
-    @ApiModelProperty("实收金额")
-    private Double amountPaid;
+    @ApiModelProperty(name = "discountAmount",value = "优惠金额")
+    private BigDecimal discountAmount;
+    @ApiModelProperty(name = "discount",value = "折扣")
+    private Integer discount;
+    @ApiModelProperty(name = "medicalInsurancePayment",value = "医保支付")
+    private BigDecimal medicalInsurancePayment;
+    @ApiModelProperty(name = "amountPaid",value = "实收金额")
+    private BigDecimal amountPaid;
+    @ApiModelProperty(name = "paymentMethod",value = "支付方式")
+    private String paymentMethod;
+    @ApiModelProperty(name = "collectionRemarks",value = "收款备注")
+    private String collectionRemarks;
+
 }
