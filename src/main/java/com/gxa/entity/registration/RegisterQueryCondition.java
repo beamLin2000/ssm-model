@@ -14,8 +14,8 @@ import java.util.Date;
 public class RegisterQueryCondition {
     @ApiModelProperty(name = "visitStatus",value = "就诊状态")
     private String visitStatus;
-    @ApiModelProperty(name = "department",value = "挂号科室")
-    private String department;
+//    @ApiModelProperty(name = "department",value = "挂号科室")
+//    private String department;
     @ApiModelProperty(name = "attendingDoctor",value = "挂号医生")
     private String attendingDoctor;
     @ApiModelProperty(name = "visitTime",value = "就诊时间")

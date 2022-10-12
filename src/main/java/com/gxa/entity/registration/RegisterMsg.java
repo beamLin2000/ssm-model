@@ -16,7 +16,7 @@ public class RegisterMsg {
     private String gender;
     private Integer age;
     private String phoneNo;
-    private String department;
+//    private String department;
     private String attendingDoctor;
     private Date receptionTime;
     private BigDecimal willPaid;

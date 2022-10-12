@@ -18,7 +18,7 @@ import java.util.Date;
 
 @Api(tags = {"系统设置接口"})
 @RestController
-public class SystemSettings_Controller {
+public class SystemSettingsController {
 
     @Autowired
     private CheckProjectSet_Service checkProjectSet_service;
