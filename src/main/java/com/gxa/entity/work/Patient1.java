@@ -10,7 +10,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @ApiModel("返回的患者对象")
-public class Patient {
+public class Patient1 {
     private Integer id;
     private String name;
     private String age;
