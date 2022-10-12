@@ -16,7 +16,7 @@ import java.util.*;
 public class BusinessController {
     @GetMapping("/business/list")
     @ResponseBody
-    public R contrast(@ApiParam("传入天数") Integer days){
+    public R contrast(@ApiParam("传入天数") Integer days,@ApiParam("今天的日期到天就行")Date todayTime){
         List<Double> list = new ArrayList<>();
         list.add(1000.0);
         list.add(2000.0);
@@ -28,7 +28,7 @@ public class BusinessController {
         Date date = new Date();
         long time = date.getTime();
         date.setTime(time);
-        OutpatientRecordToday today = new OutpatientRecordToday(1,"就诊中","200","张三","男","18","12345678911","复诊","外科","beam",
+        OutpatientRecordToday today = new OutpatientRecordToday(1,"就诊中","200","张三","男","18","12345678911","复诊","beam",
                 date);
         List<OutpatientRecordToday> list1 = new ArrayList<>();
         list1.add(today);
@@ -45,15 +45,15 @@ public class BusinessController {
         Date date = new Date();
         long time = date.getTime();
         date.setTime(time);
-        OutpatientRecordToday today0 = new OutpatientRecordToday(1,"就诊中","200","张三","男","18","12345678911","复诊","外科","beam",
+        OutpatientRecordToday today0 = new OutpatientRecordToday(1,"就诊中","200","张三","男","18","12345678911","复诊","beam",
                 date);
-        OutpatientRecordToday today1 = new OutpatientRecordToday(2,"就诊中","200","张三","男","18","12345678911","复诊","外科","beam",
+        OutpatientRecordToday today1 = new OutpatientRecordToday(2,"就诊中","200","张三","男","18","12345678911","复诊","beam",
                 date);
-        OutpatientRecordToday today2 = new OutpatientRecordToday(3,"就诊中","200","张三","男","18","12345678911","复诊","外科","beam",
+        OutpatientRecordToday today2 = new OutpatientRecordToday(3,"就诊中","200","张三","男","18","12345678911","复诊","beam",
                 date);
-        OutpatientRecordToday today3 = new OutpatientRecordToday(4,"就诊中","200","张三","男","18","12345678911","复诊","外科","beam",
+        OutpatientRecordToday today3 = new OutpatientRecordToday(4,"就诊中","200","张三","男","18","12345678911","复诊","beam",
                 date);
-        OutpatientRecordToday today4= new OutpatientRecordToday(5,"就诊中","200","张三","男","18","12345678911","复诊","外科","beam",
+        OutpatientRecordToday today4= new OutpatientRecordToday(5,"就诊中","200","张三","男","18","12345678911","复诊","beam",
                 date);
         List<OutpatientRecordToday> list = new ArrayList<>();
         list.add(today0);
