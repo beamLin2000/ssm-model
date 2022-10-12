@@ -22,7 +22,7 @@ public class RegisterMsgUpdate {
     private Date birthDay;
     private Integer age;
     private String phoneNo;
-    private String department;
+//    private String department;
     private String attendingDoctor;//接诊医生
     private BigDecimal willPaid;//应收金额
     private BigDecimal amountPaid;//实收金额

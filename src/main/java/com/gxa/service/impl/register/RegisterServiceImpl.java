@@ -13,7 +13,9 @@ public class RegisterServiceImpl implements RegisterService {
     private RegisterMapper registerMapper;
     @Override
     public void add(Register register) {
-        this.registerMapper.save(register);
+        this.registerMapper.saveRegister(register);
+        this.registerMapper.savePatient(register);
+        this.registerMapper.saveCharge(register);
     }
 
     @Override
