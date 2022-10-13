@@ -3,8 +3,10 @@ package com.gxa.controller.business;
 import com.gxa.entity.business.Business;
 import com.gxa.entity.business.OutpatientRecordToday;
 import com.gxa.entity.work.MedicalRecord;
+import com.gxa.service.business.BusinessService;
 import com.gxa.utils.R;
 import io.swagger.annotations.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,6 +16,8 @@ import java.util.*;
 @Controller
 @Api(tags = {"经营状况"})
 public class BusinessController {
+    @Autowired
+    private BusinessService service;
     @GetMapping("/business/list")
     @ResponseBody
     @ApiOperation(value = "经营状况",notes = "")
@@ -29,6 +33,8 @@ public class BusinessController {
         list.add(8000.0);
         list.add(5000.0);
         list.add(6000.0);
+        List<Business> businesses = this.service.queryAll();
+        System.out.println(businesses);
         Date date = new Date();
         long time = date.getTime();
         date.setTime(time);

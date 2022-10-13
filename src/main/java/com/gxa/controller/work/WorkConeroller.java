@@ -44,6 +44,7 @@ public class WorkConeroller {
 
         Map map = new HashMap();
         map.put("drugs",list);
+        map.put("username","username");
         R r = new R();
         return r.ok(map);
     }
