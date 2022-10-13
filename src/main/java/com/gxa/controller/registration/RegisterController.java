@@ -4,7 +4,6 @@ import com.gxa.entity.registration.Register;
 import com.gxa.entity.registration.RegisterMsg;
 import com.gxa.entity.registration.RegisterMsgUpdate;
 import com.gxa.entity.registration.RegisterQueryCondition;
-import com.gxa.entity.work.MedicalRecord;
 import com.gxa.service.register.RegisterService;
 import com.gxa.utils.R;
 import io.swagger.annotations.*;
@@ -12,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @RestController
@@ -29,6 +29,7 @@ public class RegisterController {
         long time = date.getTime();
         date.setTime(time);
         register.setRegistrationDateTime(date);
+        register.setRegistrationDate(date);
 //        this.registerService.add(register);
         return r.ok("success");
     }
