@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel
+@ApiModel(value = "DrugPriceAdjustInfoList",description = "新增调价历史记录")
 public class DrugPriceAdjustInfoList {
     //采购编号
     @ApiModelProperty(value = "purchaseNo",name = "采购编号",required = true)

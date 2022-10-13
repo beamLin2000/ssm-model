@@ -15,10 +15,9 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@ApiModel
+@ApiModel(value = "DrugPriceAdjustInfo",description = "药品调价table表")
 public class DrugPriceAdjustInfo {
     @ApiModelProperty(value = "id",name = "主键id",required = true)
-    //主键id
     private Integer id;
     //药品编码
     @ApiModelProperty(value = "code",name = "药品编码",required = true)

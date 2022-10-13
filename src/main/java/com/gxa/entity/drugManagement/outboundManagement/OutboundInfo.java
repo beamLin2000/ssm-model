@@ -15,7 +15,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel
+@ApiModel(value = "OutboundInfo",description = "出库管理table表")
 public class OutboundInfo {
     //id
     @ApiModelProperty(value = "id",name = "主键id",required = true)

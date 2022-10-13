@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel
+@ApiModel(value = "OutboundInfoAddArray",description = "编辑或新增中的添加药品功能数据列表")
 public class OutboundInfoAddArray {
     @ApiModelProperty(value = "id",name = "主键id",required = true)
     private Integer id;

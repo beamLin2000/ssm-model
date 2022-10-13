@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@ApiModel
+@ApiModel(value = "InventoryCountingInfo",description = "库存盘点列表")
 public class InventoryCountingInfo {
 
     //主键id
