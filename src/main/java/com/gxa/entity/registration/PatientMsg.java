@@ -14,6 +14,8 @@ import java.util.Date;
 public class PatientMsg {
     @ApiModelProperty(name = "name",value = "患者姓名",required = true)
     private String name;
+    @ApiModelProperty(name = "registrationForm",value = "挂号单号")
+    private Integer registrationForm;
     @ApiModelProperty(name = "cardNo",value = "患者卡号")
     private String cardNo;
     @ApiModelProperty(name = "age",value = "患者年龄",required = true)
