@@ -66,10 +66,12 @@ public class RegisterController {
 //        System.out.println(registrationForm);
         R r = new R();
         RegisterMsgUpdate register = this.registerService.toUpdate(registrationForm);
+        List<RegisterMsgUpdate> list = new ArrayList<>();
+        list.add(register);
         Map map = new HashMap();
-        map.put("registerMsg",register);
+        map.put("registerMsg",list);
         return r.ok(map);
-//       RegisterMsgUpdate msgUpdate = new RegisterMsgUpdate("202210130001","王蒙",null,null,
+//       RegisterMsgUpdate msgUpdate = new RegisterMsgUpdate("202210130001","王蒙","男",null,
 //               "5105111515156151","成都市高新区","备注",null,20,"1008611","林鹤",new BigDecimal(60),new BigDecimal(30),new BigDecimal(30),"微信",new BigDecimal(0),null,"林鹤","初诊",10.00,50.00);
 //        List<RegisterMsgUpdate> list = new ArrayList<>();
 //        list.add(msgUpdate);
