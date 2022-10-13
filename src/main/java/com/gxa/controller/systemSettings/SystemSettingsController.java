@@ -1,13 +1,14 @@
 package com.gxa.controller.systemSettings;
 
 import com.gxa.entity.systemSettings.CPSMainTable;
+import com.gxa.entity.systemSettings.CPSViceTable;
 import com.gxa.entity.systemSettings.EMEmployeeTable;
 import com.gxa.entity.systemSettings.RolesTable;
 import com.gxa.form.systemSettings.CPSEdit;
-import com.gxa.form.systemSettings.CPSSelect;
 import com.gxa.form.systemSettings.EMEdit;
 import com.gxa.form.systemSettings.EMSelect;
-import com.gxa.service.systemSettings.CheckProjectSet_Service;
+import com.gxa.service.systemSettings.CheckProjectSetService;
+import com.gxa.service.systemSettings.RolesSetService;
 import com.gxa.utils.systemSettings.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -15,32 +16,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Api(tags = {"系统设置接口"})
 @RestController
 public class SystemSettingsController {
 
     @Autowired
-    private CheckProjectSet_Service checkProjectSet_service;
+    private CheckProjectSetService checkProjectSet_service;
+    @Autowired
+    private RolesSetService rolesSetService;
 
 
     @GetMapping("/CheckProjectSet/List")//查询所有
     @ApiOperation(value = "检查项目设置-查询所有数据" ,notes = "",httpMethod = "Get",response = CPSMainTable.class)
     public Result CheckProjectSet_List(){
 
-//        List<CheckProjectSet> checkProjectSets = checkProjectSet_service.selectAll();
-//        map.put("checkProjectSets",checkProjectSets);
-
-        Date date = new Date(2000 - 2 - 2);
-        CPSMainTable cps_mainTable = new CPSMainTable(1, 1, "", "", "", 23, 23, "", true, date, "", "", 23);
-        Result result = new Result(cps_mainTable);
+        List<CPSMainTable> cpsMainTables = checkProjectSet_service.selectAll();
+        Result result = new Result(1,"seccess",cpsMainTables);
         return result;
     }
 
     @PostMapping("/CheckProjectSet/Edit")//编辑
     @ApiOperation(value = "检查项目设置-编辑数据" ,notes = "",httpMethod = "Post")
     public Result CheckProjectSet_Edit(@RequestBody CPSEdit cps_edit){
-
+        checkProjectSet_service.update(cps_edit);
         Result result = new Result(2,"成功","hello");
         return result;
     }
@@ -49,6 +49,8 @@ public class SystemSettingsController {
     @ApiOperation(value = "检查项目设置-添加数据" ,notes = "",httpMethod = "Post")
     public Result CheckProjectSet_Insert(@RequestBody CPSEdit cps_edit){
 
+        System.out.println(cps_edit);
+        checkProjectSet_service.insert(cps_edit);
         Result result = new Result(2,"成功","hello");
         return result;
     }
@@ -56,19 +58,18 @@ public class SystemSettingsController {
     @GetMapping("/CheckProjectSet/Delete")//删除
     @ApiOperation(value = "检查项目设置-删除数据" ,notes = "根据id删除数据",httpMethod = "Get")
     public Result CheckProjectSet_Delete(@RequestParam("id") int id ){
-
+        checkProjectSet_service.delete(id);
         Result result = new Result(2,"成功","hello");
         return result;
     }
 
     @GetMapping("/CheckProjectSet/Select")//根据条件搜索
     @ApiOperation(value = "检查项目设置-根据条件查询数据" ,notes = "",httpMethod = "get")
-    public Result CheckProjectSet_Select(@RequestBody CPSSelect cps_select){
+    public Result CheckProjectSet_Select(@RequestBody CPSEdit cpsEdit){
 
-        System.out.println(cps_select);
-        Date date = new Date(2000 - 2 - 2);
-        CPSMainTable cps_mainTable = new CPSMainTable(1, 1, "", "", "", 23, 23, "", true, date, "", "", 23);
-        Result result = new Result(cps_mainTable);
+        System.out.println(cpsEdit);
+        CPSMainTable select = checkProjectSet_service.select(cpsEdit);
+        Result result = new Result(1,"成功",select);
         return result;
     }
 
@@ -76,9 +77,8 @@ public class SystemSettingsController {
     @ApiOperation(value = "检查项目设置-下拉框的数据" ,notes = "",httpMethod = "Get")
     public Result CheckProjectSet_Drop(){
 
-        Date date = new Date(2000 - 2 - 2);
-        CPSMainTable cps_mainTable = new CPSMainTable(1, 1, "", "", "", 23, 23, "", true, date, "", "", 23);
-        Result result = new Result(cps_mainTable);
+        List<CPSViceTable> drop = checkProjectSet_service.drop();
+        Result result = new Result(1,"seccess",drop);
         return result;
     }
 
@@ -96,14 +96,9 @@ public class SystemSettingsController {
     @GetMapping("/Roles/List")//查询所有
     @ApiOperation(value = "角色列表-查询所有数据" ,notes = "",httpMethod = "Get",response = RolesTable.class)
     public Result Roles_List(){
+        List<RolesTable> rolesTables = rolesSetService.selectAll();
 
-//        List<CheckProjectSet> checkProjectSets = checkProjectSet_service.selectAll();
-//        map.put("checkProjectSets",checkProjectSets);
-
-
-        Date date = new Date(2000 - 2 - 2);
-        RolesTable roles_table = new RolesTable(1,"1","1","1",date,"1",true);
-        Result result = new Result(roles_table);
+        Result result = new Result(1,"seccess",rolesTables);
         return result;
     }
 
@@ -136,8 +131,8 @@ public class SystemSettingsController {
     public Result Roles_Select(@RequestBody EMSelect em_select){
 
         Date date = new Date(2000 - 2 - 2);
-        RolesTable roles_table = new RolesTable(1,"1","1","1",date,"1",true);
-        Result result = new Result(roles_table);
+        RolesTable roles_table = new RolesTable(1,1,"1","1",date,"1","1");
+        Result result = new Result();
         return result;
     }
 
@@ -146,8 +141,8 @@ public class SystemSettingsController {
     public Result Roles_Drop(){
 
         Date date = new Date(2000 - 2 - 2);
-        RolesTable roles_table = new RolesTable(1,"1","1","1",date,"1",true);
-        Result result = new Result(roles_table);
+        RolesTable roles_table = new RolesTable(1,1,"1","1",date,"1","1");
+        Result result = new Result();
         return result;
     }
 
@@ -167,8 +162,8 @@ public class SystemSettingsController {
 //        map.put("checkProjectSets",checkProjectSets);
 
         Date date = new Date(2000 - 2 - 2);
-        EMEmployeeTable emEmployeeTable = new EMEmployeeTable(1, 1, "1", "1", "1", 1, "1", "1", date, "1", true);
-        Result result = new Result(emEmployeeTable);
+        EMEmployeeTable emEmployeeTable = new EMEmployeeTable(1, 1, "1", "1", "1", 1, "1", "1", date, "1", "1");
+        Result result = new Result();
         return result;
     }
 
@@ -201,8 +196,8 @@ public class SystemSettingsController {
     public Result EmployeeManagement_Select(@RequestBody EMSelect em_select){
 
         Date date = new Date(2000 - 2 - 2);
-        EMEmployeeTable emEmployeeTable = new EMEmployeeTable(1, 1, "1", "1", "1", 1, "1", "1", date, "1", true);
-        Result result = new Result(emEmployeeTable);
+        EMEmployeeTable emEmployeeTable = new EMEmployeeTable(1, 1, "1", "1", "1", 1, "1", "1", date, "1", "1");
+        Result result = new Result();
         return result;
     }
 
@@ -211,8 +206,8 @@ public class SystemSettingsController {
     public Result EmployeeManagement_Drop(){
 
         Date date = new Date(2000 - 2 - 2);
-        EMEmployeeTable emEmployeeTable = new EMEmployeeTable(1, 1, "1", "1", "1", 1, "1", "1", date, "1", true);
-        Result result = new Result(emEmployeeTable);
+        EMEmployeeTable emEmployeeTable = new EMEmployeeTable(1, 1, "1", "1", "1", 1, "1", "1", date, "1", "1");
+        Result result = new Result();
         return result;
     }
 
