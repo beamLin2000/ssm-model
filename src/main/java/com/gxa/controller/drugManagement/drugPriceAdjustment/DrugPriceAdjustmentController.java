@@ -1,14 +1,11 @@
-package com.gxa.controller.drugmanagement.drugPriceAdjustment;
+package com.gxa.controller.drugManagement.drugPriceAdjustment;
 
-import com.gxa.entity.drugManagement.basicInfo.BasicInfo;
 import com.gxa.entity.drugManagement.drugPriceAdjustment.DrugPriceAdjustInfo;
 import com.gxa.result.Result;
 import com.gxa.result.ResultUtils;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/drugPriceAdjustment")
-@Api(value = "DrugPriceAdjustmentController",description = "药品调价的增删改查")
+@Api(tags = {"药品调价接口"})
 public class DrugPriceAdjustmentController {
 
     @Autowired
@@ -31,8 +28,9 @@ public class DrugPriceAdjustmentController {
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok",response = DrugPriceAdjustInfo.class )
     })
-    public Result search(){
-        System.out.println("drugPriceAdjustment");
+    public Result search(@ApiParam(value = "处方类别")String drugType,
+                         @ApiParam(value = "药品名称/编码/生产厂家")String rules){
+        System.out.println(drugType+","+rules);
         return ResultUtils.buildFail(200,"drugPriceAdjustment",0L,drugPriceAdjustmentVisualData.getDrugPriceAdjustInfos().get(0));
     }
     //调价pre
@@ -41,23 +39,23 @@ public class DrugPriceAdjustmentController {
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok",response = DrugPriceAdjustInfo.class )
     })
-    public Result updatePre(){
-        System.out.println("updatePre");
+    public Result queryById(@ApiParam(value = "需要调价信息的id")Integer id){
+        System.out.println(id);
         return ResultUtils.buildFail(200,"updatePre",0L,drugPriceAdjustmentVisualData.getDrugPriceAdjustInfos().get(1));
     }
     //调价保存
     @PostMapping("/save")
-    @ApiOperation(value = "save",notes = "药品调价完毕进行保存")
+    @ApiOperation(value = "save",notes = "药品调价完毕进行保存(适用于新增与修改)")
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok")
     })
-    public Result update(){
-        System.out.println("update");
+    public Result save(@ApiParam(value = "调价保存的数据") DrugPriceAdjustInfo drugPriceAdjustInfo){
+        System.out.println(drugPriceAdjustInfo);
         return ResultUtils.buildFail(200,"update",0L,null);
     }
     //list
     @GetMapping("/list")
-    @ApiOperation(value = "list",notes = "药品调价信息")
+    @ApiOperation(value = "list",notes = "药品调价 信息")
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok",response = DrugPriceAdjustInfo.class )
     })
@@ -71,8 +69,8 @@ public class DrugPriceAdjustmentController {
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok",response = DrugPriceAdjustInfo.class )
     })
-    public Result detail(){
-        System.out.println("detail");
+    public Result detail(@ApiParam(value="调价记录查看详情")Integer id){
+        System.out.println(id);
         return ResultUtils.buildFail(200,"updatePre",0L,drugPriceAdjustmentVisualData.getDrugPriceAdjustInfos().get(1));
     }
 

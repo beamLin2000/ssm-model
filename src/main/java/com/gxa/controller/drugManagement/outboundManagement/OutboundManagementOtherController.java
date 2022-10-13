@@ -1,19 +1,19 @@
-package com.gxa.controller.drugmanagement.outboundManagement;
+package com.gxa.controller.drugManagement.outboundManagement;
 
 import com.gxa.entity.drugManagement.basicInfo.BasicInfo;
 import com.gxa.entity.drugManagement.outboundManagement.OutboundInfo;
 import com.gxa.entity.drugManagement.outboundManagement.OutboundInfoAddArray;
 import com.gxa.result.Result;
 import com.gxa.result.ResultUtils;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author :林溪
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/outboundManagementOther")
-@Api(value = "OutboundManagementOtherController",description = "新增出库管理中下拉框和添加药品")
+@Api(tags = {"出库管理新增功能中的增删改查接口"})
 public class OutboundManagementOtherController {
 
     @Autowired
@@ -57,23 +57,25 @@ public class OutboundManagementOtherController {
         return ResultUtils.buildFail(200,"addPre",0L,outboundManagerVisualData.getLoArray());
     }
     //添加药品
-    @PostMapping("/add")
-    @ApiOperation(value = "add",notes = "添加药品")
-    @ApiResponses({
-            @ApiResponse(code = 200,message = "ok")
-    })
-    public Result add(){
-        System.out.println("add");
-        return ResultUtils.buildFail(200,"add",0L,null);
-    }
+//    @PostMapping("/add")
+//    @ApiOperation(value = "add",notes = "添加药品")
+//    @ApiResponses({
+//            @ApiResponse(code = 200,message = "ok")
+//    })
+//    public Result add(){
+//        System.out.println("add");
+//        return ResultUtils.buildFail(200,"add",0L,null);
+//    }
     //搜索药品
     @GetMapping("/search")
     @ApiOperation(value = "search",notes = "搜索药品")
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok",response = OutboundInfo.class)
     })
-    public Result search(){
+    public Result search(@ApiParam(name = "drugType",value = "处方类别") String drugType,
+                         @ApiParam(name = "rule",value = "药品编码/药品名称") String rule){
         System.out.println("search");
         return ResultUtils.buildFail(200,"search",0L,outboundManagerVisualData.getLoArray().get(0));
     }
+
 }

@@ -14,19 +14,21 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ApiModel
+@ApiModel(value = "DrugOtherInformation",description = "其他信息")
 public class DrugOtherInformation {
-    @ApiModelProperty(value = "inventoryFloor",name = "库存下限",required = true)
+    @ApiModelProperty(name = "id",value = "主键id")
+    private Integer id;
+    @ApiModelProperty(name = "inventoryFloor",value = "库存下限",required = true)
     private Integer inventoryFloor;
-    @ApiModelProperty(value = "inventoryFloor",name = "库存上限",required = true)
+    @ApiModelProperty(name = "inventoryCeiling",value = "库存上限",required = true)
     private Integer inventoryCeiling;
-    @ApiModelProperty(value = "inventoryFloor",name = "货位号",required = true)
+    @ApiModelProperty(name = "locationNo",value = "货位号",required = true)
     private String locationNo;
-    @ApiModelProperty(value = "inventoryFloor",name = "有效期预警",required = true)
+    @ApiModelProperty(name = "validPeriodAlert",value = "有效期预警",required = true)
     private Integer validPeriodAlert;
-    @ApiModelProperty(value = "inventoryFloor",name = "药品说明",required = true)
+    @ApiModelProperty(name = "drugDescription",value = "药品说明",required = true)
     private String drugDescription;
-    @ApiModelProperty(value = "inventoryFloor",name = "备注",required = true)
+    @ApiModelProperty(name = "remarks",value = "备注",required = true)
     private String remarks;
 
 }
