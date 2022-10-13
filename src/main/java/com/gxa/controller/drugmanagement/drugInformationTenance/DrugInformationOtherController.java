@@ -40,6 +40,12 @@ public class DrugInformationOtherController {
     private List<BasicInfo> useMethod = new ArrayList<>();
     //剂量单位
     private List<BasicInfo> DosageUnit = new ArrayList<>();
+    //频度
+    private List<BasicInfo> Frequency = new ArrayList<>();
+    //天数
+    private List<BasicInfo> Days = new ArrayList<>();
+    //药品单位
+    private List<BasicInfo> unit = new ArrayList<>();
 
     {
         //药品编码
@@ -56,17 +62,40 @@ public class DrugInformationOtherController {
         invoiceItems.add(new BasicInfo(3,"西药费"));
         //生产厂家
         Manufacturer.add(new BasicInfo(1,"昆明制药集团"));
-        Manufacturer.add(new BasicInfo(1,"上海集团"));
-        Manufacturer.add(new BasicInfo(1,"山东集团"));
+        Manufacturer.add(new BasicInfo(2,"上海集团"));
+        Manufacturer.add(new BasicInfo(3,"山东集团"));
         //包装单位
         packingUnit.add(new BasicInfo(1,"包"));
+        packingUnit.add(new BasicInfo(2,"袋"));
         //基本系数
         basicUnit.add(new BasicInfo(1,"个"));
+        basicUnit.add(new BasicInfo(2,"颗"));
         //剂量单位
         DosageUnit.add(new BasicInfo(1,"口服"));
+        DosageUnit.add(new BasicInfo(2,"外敷"));
         //用法
         useMethod.add(new BasicInfo(1,"注射"));
-
+        useMethod.add(new BasicInfo(2,"点滴"));
+        //频度
+        Frequency.add(new BasicInfo(1,"一天一次"));
+        Frequency.add(new BasicInfo(2,"一天两次"));
+        Frequency.add(new BasicInfo(3,"一天三次"));
+        Frequency.add(new BasicInfo(4,"两天一次"));
+        Frequency.add(new BasicInfo(5,"三天一次"));
+        Frequency.add(new BasicInfo(6,"四天一次"));
+        //天数
+        Days.add(new BasicInfo(1,"1"));
+        Days.add(new BasicInfo(2,"2"));
+        Days.add(new BasicInfo(3,"3"));
+        Days.add(new BasicInfo(4,"4"));
+        Days.add(new BasicInfo(5,"5"));
+        Days.add(new BasicInfo(6,"6"));
+        Days.add(new BasicInfo(7,"7"));
+        //单位
+        unit.add(new BasicInfo(1,"瓶"));
+        unit.add(new BasicInfo(2,"盒"));
+        unit.add(new BasicInfo(3,"袋"));
+        unit.add(new BasicInfo(4,"壶"));
     }
 
     /**
@@ -263,4 +292,45 @@ public class DrugInformationOtherController {
         return ResultUtils.buildFail(200,"ok",2L,useMethod);
     }
 
+    /**
+     *
+     * @return频度
+     */
+    @GetMapping("/frequencyQuery")
+    @ApiOperation(value = "frequencyQuery",notes = "频度下拉框")
+    @ApiResponses({
+            @ApiResponse(code = 200,message = "ok",response = BasicInfo.class)
+    })
+    public Result frequencyQuery(){
+        System.out.println("frequencyQuery");
+        return ResultUtils.buildFail(200,"ok",0L,Frequency);
+    }
+
+    /**
+     *
+     * @return天数
+     */
+    @GetMapping("/daysQuery")
+    @ApiOperation(value = "daysQuery",notes = "天数下拉框")
+    @ApiResponses({
+            @ApiResponse(code = 200,message = "ok",response = BasicInfo.class)
+    })
+    public Result daysQuery(){
+        System.out.println("daysQuery");
+        return ResultUtils.buildFail(200,"ok",0L,Days);
+    }
+
+    /**
+     *
+     * @return单位下拉框
+     */
+    @GetMapping("/unit")
+    @ApiOperation(value = "unit",notes = "单位下拉框")
+    @ApiResponses({
+            @ApiResponse(code = 200,message = "ok",response = BasicInfo.class)
+    })
+    public Result unit(){
+        System.out.println("unit");
+        return ResultUtils.buildFail(200,"ok",0L,unit);
+    }
 }

@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel
+@ApiModel(value = "InventoryCountingInfoArray",description = "单个工作人员对药品的盘点列表")
 public class InventoryCountingInfoArray {
 
     //主键id

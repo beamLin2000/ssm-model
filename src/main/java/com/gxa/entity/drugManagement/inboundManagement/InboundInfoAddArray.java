@@ -1,5 +1,6 @@
 package com.gxa.entity.drugManagement.inboundManagement;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,6 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ApiModel(value = "InboundInfoAddArray",description="出库信息编辑功能中的添加药品功能已添加以及未添加显示的数据格式")
 public class InboundInfoAddArray {
     @ApiModelProperty(value = "id",name = "主键id",required = true)
     private Integer id;

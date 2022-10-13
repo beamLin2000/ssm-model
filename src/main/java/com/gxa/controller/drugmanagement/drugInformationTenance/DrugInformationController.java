@@ -1,7 +1,7 @@
 package com.gxa.controller.drugmanagement.drugInformationTenance;
 
 import com.gxa.entity.drugManagement.basicInfo.BasicInfo;
-import com.gxa.entity.drugManagement.drugInformationTenance.DrugInfo;
+import com.gxa.entity.drugManagement.drugInformationTenance.*;
 import com.gxa.result.Result;
 import com.gxa.result.ResultUtils;
 import io.swagger.annotations.Api;
@@ -23,6 +23,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/drugInfo")
 @Api(value = "DrugInformationController",description ="药品信息维护的增删改查" )
+@SuppressWarnings({"all"})
 public class DrugInformationController {
 
 //    @Autowired
@@ -35,17 +36,20 @@ public class DrugInformationController {
             @ApiResponse(code = 200,message = "ok",response = DrugInfo.class )
     })
     public Result list(){
-        //创建data
-        List<DrugInfo> data = new ArrayList<>();
+        //创建DrugBasicInformation
+        List<DrugBasicInformation> drugBasicInformation = new ArrayList<>();
         //添加列表
-        data.add(new DrugInfo(1, "1002", "阿莫西林", "20", "中", 2, 20.2, "dasdsa", 1, new SimpleDateFormat("YYYY-MM-dd").format(new Date(System.currentTimeMillis()-30000))));
-        data.add(new DrugInfo(1, "1002", "阿莫西林1", "20", "西", 2, 20.2, "dasdsa", 2, new SimpleDateFormat("YYYY-MM-dd").format(new Date(System.currentTimeMillis()-60000))));
-        data.add(new DrugInfo(1, "1002", "阿莫西林2", "20", "中", 2, 20.2, "dasdsa", 2, new SimpleDateFormat("YYYY-MM-dd").format(new Date(System.currentTimeMillis()-36000))));
-        data.add(new DrugInfo(1, "1002", "阿莫西林3", "20", "西", 2, 20.2, "dasdsa", 1, new SimpleDateFormat("YYYY-MM-dd").format(new Date(System.currentTimeMillis()-30000))));
-        data.add(new DrugInfo(1, "1002", "阿莫西林4", "20", "中", 2, 20.2, "dasdsa", 2, new SimpleDateFormat("YYYY-MM-dd").format(new Date(System.currentTimeMillis()-3600))));
-        data.add(new DrugInfo(1, "1002", "阿莫西林5", "20", "西", 2, 20.2, "dasdsa", 1, new SimpleDateFormat("YYYY-MM-dd").format(new Date(System.currentTimeMillis()-360))));
-        //返回json
-        return ResultUtils.buildFail(123,"查询所有",2L,data);
+        drugBasicInformation.add(new DrugBasicInformation(1,"dsadsa","asdasdasdas","阿莫西林1","AMoXiLin","注射类","32","片剂",1,"西药费","qwasd123","昆明制药",1,23.1,56.2,"2022-10-21",null,null,null));
+        drugBasicInformation.add(new DrugBasicInformation(2,"eqw","safdzc","阿莫西林2","AMoXiLin","口服","32","片剂",1,"西药费","qwasd123","昆明制药",1,23.1,56.2,"2022-10-21",null,null,null));
+        drugBasicInformation.add(new DrugBasicInformation(3,"fasd","dgfcb","阿莫西林3","AMoXiLin","外敷","32","片剂",1,"西药费","qwasd123","昆明制药",1,23.1,56.2,"2022-10-21",null,null,null));
+        drugBasicInformation.add(new DrugBasicInformation(4,"zcvcz","fhvn","阿莫西林4","AMoXiLin","注射类","32","片剂",1,"西药费","qwasd123","昆明制药",1,23.1,56.2,"2022-10-21",null,null,null));
+        drugBasicInformation.add(new DrugBasicInformation(5,"dasfzc","kjmbfj","阿莫西林5","AMoXiLin","注射类","32","片剂",1,"西药费","qwasd123","昆明制药",1,23.1,56.2,"2022-10-21",null,null,null));
+        drugBasicInformation.add(new DrugBasicInformation(6,"xcvbhg","sfdxvcas","阿莫西林6","AMoXiLin","注射类","32","片剂",1,"西药费","qwasd123","昆明制药",1,23.1,56.2,"2022-10-21",null,null,null));
+        drugBasicInformation.add(new DrugBasicInformation(7,"mnvfgh","asdfzc","阿莫西林7","AMoXiLin","注射类","32","片剂",1,"西药费","qwasd123","昆明制药",1,23.1,56.2,"2022-10-21",null,null,null));
+        drugBasicInformation.add(new DrugBasicInformation(8,"xvbxcvczx","asdfvfdsh","阿莫西林8","AMoXiLin","注射类","32","片剂",1,"西药费","qwasd123","昆明制药",1,23.1,56.2,"2022-10-21",null,null,null));
+        drugBasicInformation.add(new DrugBasicInformation(9,"sdfzxcv","fcnb","阿莫西林9","AMoXiLin","注射类","32","片剂",1,"西药费","qwasd123","昆明制药",1,23.1,56.2,"2022-10-21",null,null,null));
+        drugBasicInformation.add(new DrugBasicInformation(10,"asdfzc","fdgtrhfnchn","阿莫西林0","AMoXiLin","注射类","32","片剂",1,"西药费","qwasd123","昆明制药",1,23.1,56.2,"2022-10-21",null,null,null));
+        return ResultUtils.buildFail(200,"ok",2L,drugBasicInformation);
     }
 
     //搜索功能
@@ -55,22 +59,11 @@ public class DrugInformationController {
             @ApiResponse(code = 200,message = "ok",response =DrugInfo.class )
     })
     public Result search(){
-        System.out.println();
-        //创建data
-        List<DrugInfo> data = new ArrayList<>();
-        //添加列表
-        if(System.currentTimeMillis()/3==1){
-            data.add(new DrugInfo(1, "1002", "阿莫西林", "20", "中", 2, 20.2, "dasdsa", 1, new SimpleDateFormat("YYYY-MM-dd").format(new Date(System.currentTimeMillis()-30000))));
-            data.add(new DrugInfo(1, "1002", "阿莫西林1", "20", "西", 2, 20.2, "dasdsa", 2, new SimpleDateFormat("YYYY-MM-dd").format(new Date(System.currentTimeMillis()-60000))));
-        }else if(System.currentTimeMillis()/3==0){
-            data.add(new DrugInfo(1, "1002", "阿莫西林4", "20", "中", 2, 20.2, "dasdsa", 2, new SimpleDateFormat("YYYY-MM-dd").format(new Date(System.currentTimeMillis()-3600))));
-            data.add(new DrugInfo(1, "1002", "阿莫西林5", "20", "西", 2, 20.2, "dasdsa", 1, new SimpleDateFormat("YYYY-MM-dd").format(new Date(System.currentTimeMillis()-360))));
-        }else{
-            data.add(new DrugInfo(1, "1002", "阿莫西林2", "20", "中", 2, 20.2, "dasdsa", 2, new SimpleDateFormat("YYYY-MM-dd").format(new Date(System.currentTimeMillis()-36000))));
-            data.add(new DrugInfo(1, "1002", "阿莫西林3", "20", "西", 2, 20.2, "dasdsa", 1, new SimpleDateFormat("YYYY-MM-dd").format(new Date(System.currentTimeMillis()-30000))));
-        }
-        //返回json
-        return ResultUtils.buildFail(200,"ok",2L,data);
+        System.out.println("search");
+        //创建DrugBasicInformation
+        List<DrugBasicInformation> drugBasicInformation = new ArrayList<>();
+        drugBasicInformation.add(new DrugBasicInformation(1,"dsadsa","asdasdasdas","阿莫西林","AMoXiLin","注射类","32","片剂",1,"西药费","qwasd123","昆明制药",1,23.1,56.2,"2022-10-21",null,null,null));
+        return ResultUtils.buildFail(200,"ok",2L,drugBasicInformation);
     }
 
     //修改状态
@@ -99,15 +92,21 @@ public class DrugInformationController {
     @PostMapping("/queryById")
     @ApiOperation(value = "queryById",notes = "对需要修改的数据查询")
     @ApiResponses({
-            @ApiResponse(code = 200,message = "ok",response =DrugInfo.class )
+            @ApiResponse(code = 200,message = "ok",response = DrugBasicInformation.class )
     })
     public Result editPre(){
         System.out.println("editPre");
-        //创建data
-        List<DrugInfo> data = new ArrayList<>();
+        //创建DrugBasicInformation
+        List<DrugBasicInformation> drugBasicInformation = new ArrayList<>();
+        //创建drugPackageInformation
+        DrugPackageInformation drugPackageInformation = new DrugPackageInformation(1,"盒","0.23","颗","0.11","袋",12.3,16.9,1,1);
+        //创建AfficacyDescription
+        AfficacyDescription afficacyDescription = new AfficacyDescription(1,"口服",1,"一天一次","14",3,"瓶");
+        //创建DrugOtherInformation
+        DrugOtherInformation drugOtherInformation = new DrugOtherInformation(1,32,150,"1-1023",456,"好吃,多买","不要吃的太多");
         //添加列表
-        data.add(new DrugInfo(1, "1002", "阿莫西林", "20", "中", 2, 20.2, "dasdsa", 1, new SimpleDateFormat("YYYY-MM-dd").format(new Date(System.currentTimeMillis()-30000))));
-        return ResultUtils.buildFail(200,"ok",2L,data);
+        drugBasicInformation.add(new DrugBasicInformation(1,"dsadsa","asdasdasdas","阿莫西林","AMoXiLin","注射类","32","片剂",1,"西药费","qwasd123","昆明制药",1,23.1,56.2,"2022-10-21",drugPackageInformation,afficacyDescription,drugOtherInformation));
+        return ResultUtils.buildFail(200,"ok",2L,drugBasicInformation);
     }
 
     //对所有数据进行保存

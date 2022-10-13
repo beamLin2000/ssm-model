@@ -1,5 +1,6 @@
 package com.gxa.entity.drugManagement.drugInformationTenance;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -14,8 +15,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel
+@ApiModel(value = "DrugBasicInformation",description = "适用于药品信息以及药品信息新增中的所有信息")
 public class DrugBasicInformation {
+  @ApiModelProperty(value = "id",name = "主键id")
+  private Integer id;
   @ApiModelProperty(value = "code",name = "药品编码",required = true)
   private String code;
   @ApiModelProperty(value = "barcode",name = "药品条形码",required = true)
@@ -40,4 +43,19 @@ public class DrugBasicInformation {
   private String manufacturer;
   @ApiModelProperty(value = "status",name = "药品状态",required = true)
   private Integer status;
+
+
+  @ApiModelProperty(value = "purchasePrice",name = "采购价格",required = true)
+  private Double purchasePrice;
+  @ApiModelProperty(value = "salesPrice",name = "售出价",required = true)
+  private Double salesPrice;
+  @ApiModelProperty(value = "createTime",name = "创建时间",required = true)
+  private String createTime;
+
+  @ApiModelProperty(value = "drugPackageInformation",name = "包装信息数据集")
+  private DrugPackageInformation drugPackageInformation;
+  @ApiModelProperty(value = "afficacyDescription",name = "功效说明数据集")
+  private AfficacyDescription afficacyDescription;
+  @ApiModelProperty(value = "drugOtherInformation",name = "其他信息数据集")
+  private DrugOtherInformation drugOtherInformation;
 }

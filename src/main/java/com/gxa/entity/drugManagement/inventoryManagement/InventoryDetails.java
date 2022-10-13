@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ApiModel
+@ApiModel(value = "InventoryDetails",description = "库存明细")
 public class InventoryDetails {
   //序号
   @ApiModelProperty(value = "id",name = "主键id",required = true)
