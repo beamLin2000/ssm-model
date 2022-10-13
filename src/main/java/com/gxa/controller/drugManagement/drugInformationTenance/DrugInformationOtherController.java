@@ -1,4 +1,4 @@
-package com.gxa.controller.drugmanagement.drugInformationTenance;
+package com.gxa.controller.drugManagement.drugInformationTenance;
 
 import com.gxa.entity.drugManagement.basicInfo.BasicInfo;
 import com.gxa.result.Result;
@@ -21,7 +21,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/drugInformationOtherController")
-@Api(value = "DrugInformationOtherController",description = "增加功能中下拉框的增,查")
+@Api(tags = {"药品信息维护新增功能中的下拉框接口"})
 public class DrugInformationOtherController {
 
     //药品分类

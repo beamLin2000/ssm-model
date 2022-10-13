@@ -1,4 +1,4 @@
-package com.gxa.controller.drugmanagement.inventoryCountingManagement;
+package com.gxa.controller.drugManagement.inventoryCountingManagement;
 
 import com.gxa.entity.drugManagement.inventoryCountingManagement.InventoryCountingInfo;
 import com.gxa.entity.drugManagement.inventoryCountingManagement.InventoryCountingInfoArray;

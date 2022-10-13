@@ -1,4 +1,4 @@
-package com.gxa.controller.drugmanagement.drugPriceAdjustment;
+package com.gxa.controller.drugManagement.drugPriceAdjustment;
 
 import com.gxa.entity.drugManagement.drugPriceAdjustment.DrugPriceAdjustInfo;
 import com.gxa.entity.drugManagement.drugPriceAdjustment.DrugPriceAdjustInfoList;

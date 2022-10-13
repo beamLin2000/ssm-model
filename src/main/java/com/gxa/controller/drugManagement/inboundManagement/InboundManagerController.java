@@ -1,6 +1,5 @@
-package com.gxa.controller.drugmanagement.inboundManagement;
+package com.gxa.controller.drugManagement.inboundManagement;
 
-import com.gxa.entity.drugManagement.drugPriceAdjustment.DrugPriceAdjustInfo;
 import com.gxa.entity.drugManagement.inboundManagement.InboundInfo;
 import com.gxa.result.Result;
 import com.gxa.result.ResultUtils;
@@ -20,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/inboundManager")
-@Api(value = "InboundManagerController",description = "入库管理")
+@Api(tags = {"入库管理接口"})
 public class InboundManagerController {
 
     @Autowired

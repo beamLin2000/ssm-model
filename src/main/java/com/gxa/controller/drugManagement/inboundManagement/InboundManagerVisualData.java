@@ -1,4 +1,4 @@
-package com.gxa.controller.drugmanagement.inboundManagement;
+package com.gxa.controller.drugManagement.inboundManagement;
 
 import com.gxa.entity.drugManagement.inboundManagement.InboundInfo;
 import com.gxa.entity.drugManagement.inboundManagement.InboundInfoAddArray;

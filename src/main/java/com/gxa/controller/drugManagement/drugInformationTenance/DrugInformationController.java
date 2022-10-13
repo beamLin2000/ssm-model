@@ -1,6 +1,5 @@
-package com.gxa.controller.drugmanagement.drugInformationTenance;
+package com.gxa.controller.drugManagement.drugInformationTenance;
 
-import com.gxa.entity.drugManagement.basicInfo.BasicInfo;
 import com.gxa.entity.drugManagement.drugInformationTenance.*;
 import com.gxa.result.Result;
 import com.gxa.result.ResultUtils;
@@ -10,9 +9,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,8 +19,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/drugInfo")
-@Api(value = "DrugInformationController",description ="药品信息维护的增删改查" )
-@SuppressWarnings({"all"})
+@Api(tags = {"药品信息维护的接口"})
 public class DrugInformationController {
 
 //    @Autowired
