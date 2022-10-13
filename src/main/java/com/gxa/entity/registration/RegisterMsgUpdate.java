@@ -1,6 +1,5 @@
 package com.gxa.entity.registration;
 
-import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,7 +25,7 @@ public class RegisterMsgUpdate {
     private String attendingDoctor;//接诊医生
     private BigDecimal willPaid;//应收金额
     private BigDecimal amountPaid;//实收金额
-    private BigDecimal discountPaid;//优惠金额
+//    private BigDecimal discountPaid;//优惠金额
     private BigDecimal insurancePayment;//医保支付
     private String payMethod;//支付方式
     private BigDecimal changeMoney;//找零

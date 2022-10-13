@@ -4,7 +4,6 @@ import com.gxa.entity.drugRetail.DrugDetailed;
 import com.gxa.entity.drugRetail.DrugMsg;
 import com.gxa.entity.drugRetail.DrugQueryCondition;
 import com.gxa.entity.drugRetail.DrugRetail;
-import com.gxa.entity.registration.RegisterMsg;
 import com.gxa.service.drugRetail.DrugRetailService;
 import com.gxa.utils.R;
 import io.swagger.annotations.Api;
