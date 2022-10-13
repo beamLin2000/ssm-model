@@ -58,7 +58,7 @@ public class RegisterController {
         R r = new R();
         return r.ok(map);
     }
-    @GetMapping("/register/update")
+    @GetMapping("/register/toUpdate")
     @ApiOperation(value = "数据回显接口",notes = "挂号信息回显",httpMethod = "GET")
     @ApiResponses({
             @ApiResponse(code = 0,message = "ok",response = RegisterMsgUpdate.class)
