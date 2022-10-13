@@ -5,7 +5,7 @@
 <mapper namespace="com.gxa.mapper.register.RegisterMapper">
 
     <resultMap id="registerCondition" type="com.gxa.entity.registration.RegisterMsg">
-        <id property="registrationForm" column="挂单单号"></id>
+        <id property="registrationForm" column="挂号单号"></id>
         <result property="name" column="patientName"></result>
         <result property="gender" column="patientGender"></result>
         <result property="phoneNo" column="patientPhone"></result>
@@ -16,7 +16,7 @@
         <result property="status" column="就诊状态"></result>
     </resultMap>
     <resultMap id="registerUpdateMsg" type="com.gxa.entity.registration.RegisterMsgUpdate">
-        <id property="registrationForm" column="挂单单号"></id>
+        <id property="registrationForm" column="挂号单号"></id>
         <result property="willPaid" column="实收金额"></result>
         <result property="insurancePayment" column="医保支付" ></result>
         <result property="amountPaid" column="实收金额" ></result>
@@ -87,7 +87,7 @@
            </if>
         </where>>
     </select>
-    <select id="toUpdate" resultMap="registerUpdateMsg">
+    <select id="toUpdate" resultMap="registerUpdateMsg" parameterType="string">
         select r.挂号单号,c.实收金额,c.医保支付,c.支付方式,c.找零,c.创建时间,r.接诊类型,
                r.接诊医生,r.挂号费,r.诊疗费,p.patientName,p.patientCard,p.patientAge
                 ,p.patientBirthday,p.patientGender,p.patientPhone,p.patientDocuments
