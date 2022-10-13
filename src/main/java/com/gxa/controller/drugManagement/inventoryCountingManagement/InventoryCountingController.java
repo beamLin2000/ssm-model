@@ -42,7 +42,7 @@ public class InventoryCountingController {
         return ResultUtils.buildFail(200,"ok",0L,inventoryCountingVisualData.getInventoryCountingInfo().get(2));
     }
 
-    @RequestMapping("/delete")
+    @PostMapping("/delete")
     @ApiOperation(value = "delete",notes = "库存盘点删除功能")
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok")//,response = InventoryCountingInfo.class

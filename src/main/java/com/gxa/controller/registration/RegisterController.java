@@ -30,7 +30,8 @@ public class RegisterController {
         date.setTime(time);
         register.setRegistrationDateTime(date);
         register.setRegistrationDate(date);
-//        this.registerService.add(register);
+        register.setStatus("未就诊");
+        this.registerService.add(register);
         return r.ok("success");
     }
     @GetMapping("/register/query")
