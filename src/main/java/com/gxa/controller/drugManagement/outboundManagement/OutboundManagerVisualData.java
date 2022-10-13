@@ -28,10 +28,10 @@ public class OutboundManagerVisualData {
     private List<BasicInfo> deliveryType = new ArrayList<>();
     {
         //初始化添加药品array
-        loArray.add(new OutboundInfoAddArray(1,"asda","头孢","黑云制药",20,"粒",20.0,30.1,"123qweas321321","2019-05-06",1253.0,415.0));
-        loArray.add(new OutboundInfoAddArray(2,"qwe","头孢1","黑云制药1",21,"粒",20.0,30.1,"123qweas321123","2019-04-06",1623.0,245.0));
-        loArray.add(new OutboundInfoAddArray(3,"zxc","头孢2","黑云制药2",220,"粒",20.0,30.1,"123212qewassa","2019-06-06",1283.0,435.0));
-        loArray.add(new OutboundInfoAddArray(4,"cvbcv","头孢3","黑云制药3",240,"粒",20.0,30.1,"123qweas321123ee","2012-05-06",1293.0,445.0));
+        loArray.add(new OutboundInfoAddArray(1,"asda","头孢","西/成药","6g*10袋/盒","黑云制药",200,20,"粒",20.0,30.1,"123qweas321321","2019-05-06",1253.0,415.0));
+        loArray.add(new OutboundInfoAddArray(2,"qwe","头孢1","西/成药","6g*10袋/盒","黑云制药1",200,21,"粒",20.0,30.1,"123qweas321123","2019-04-06",1623.0,245.0));
+        loArray.add(new OutboundInfoAddArray(3,"zxc","头孢2","西/成药","6g*10袋/盒","黑云制药2",200,220,"粒",20.0,30.1,"123212qewassa","2019-06-06",1283.0,435.0));
+        loArray.add(new OutboundInfoAddArray(4,"cvbcv","头孢3","西/成药","6g*10袋/盒","黑云制药3",200,240,"粒",20.0,30.1,"123qweas321123ee","2012-05-06",1293.0,445.0));
 
         //创建list1
         los.add(new OutboundInfo(1,"asdzasdxc","科室领药","lx",2000.0,32230.0,"lx","2021-10-13",1,"2010-10-6","2022-10-11","nothing",null));
