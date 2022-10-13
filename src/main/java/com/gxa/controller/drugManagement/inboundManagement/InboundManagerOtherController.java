@@ -5,10 +5,7 @@ import com.gxa.entity.drugManagement.inboundManagement.InboundInfo;
 import com.gxa.entity.drugManagement.inboundManagement.InboundInfoAddArray;
 import com.gxa.result.Result;
 import com.gxa.result.ResultUtils;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,8 +29,6 @@ public class InboundManagerOtherController {
     private List<BasicInfo> lbType = new ArrayList<>();
     //供应商
     private List<BasicInfo> lbmanufacture = new ArrayList<>();
-    //创建data
-    private Integer count=3;
 
     {
         //入库人员
@@ -63,16 +58,28 @@ public class InboundManagerOtherController {
         System.out.println("inboundType");
         return ResultUtils.buildFail(200,"inboundType",0L,lbType);
     }
-    //添加药品
-    @PostMapping("/add")
-    @ApiOperation(value = "add",notes = "新增功能中的提交添加药品")
+
+    //入库人员
+    @GetMapping("/warehousingPersonnel")
+    @ApiOperation(value = "warehousingPersonnel",notes = "入库人员下拉框查询")
     @ApiResponses({
-            @ApiResponse(code = 200,message = "ok")
+            @ApiResponse(code = 200,message = "ok",response = BasicInfo.class )
     })
-    public Result add(){
-        System.out.println("add");
-        return ResultUtils.buildFail(200,"add",0L,null);
+    public Result warehousingPersonnel(){
+        System.out.println("inboundType");
+        return ResultUtils.buildFail(200,"ok",0L,lbPerson);
     }
+    //添加药品
+//    @PostMapping("/add")
+//    @ApiOperation(value = "add",notes = "新增功能中的提交添加药品")
+//    @ApiResponses({
+//            @ApiResponse(code = 200,message = "ok")
+//    })
+//    public Result add(){
+//        System.out.println("add");
+//        return ResultUtils.buildFail(200,"add",0L,null);
+//    }
+
     //添加药品pre
     @GetMapping("/addPre")
     @ApiOperation(value = "addPre",notes = "添加药品前的查询列表")
@@ -89,8 +96,9 @@ public class InboundManagerOtherController {
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok",response = InboundInfoAddArray.class )
     })
-    public Result search(){
-        System.out.println("addPre");
+    public Result search(@ApiParam("处方类别")String drugType,
+                         @ApiParam("编码/药品名称")String rules){
+        System.out.println(drugType+","+rules);
         return ResultUtils.buildFail(200,"search",0L,inboundManagerVisualData.getInboundInfoAddArray());
     }
 
@@ -102,6 +110,6 @@ public class InboundManagerOtherController {
     })
     public Result manufacture(){
         System.out.println("manufacture");
-        return ResultUtils.buildFail(200,"manufacture",0L,lbmanufacture);
+        return ResultUtils.buildFail(200,"ok",0L,lbmanufacture);
     }
 }

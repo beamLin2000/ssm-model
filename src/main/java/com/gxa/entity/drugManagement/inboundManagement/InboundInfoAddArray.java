@@ -2,6 +2,7 @@ package com.gxa.entity.drugManagement.inboundManagement;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiParam;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,11 +20,18 @@ public class InboundInfoAddArray {
     private Integer id;
     @ApiModelProperty(name = "code",value = "药品编码",required = true)
     private String code;
+    @ApiParam(name = "drugType",value = "收费类别/处方类别",required = true)
+    private String drugType;
+    @ApiParam(name = "drugSpecifications",value = "药品规格",required = true)
+    private String drugSpecifications;
     @ApiModelProperty(name = "medicalName",value = "药品名称",required = true)
     private String medicalName;
     @ApiModelProperty(name = "manufacturer",value = "生产厂家",required = true)
     private String manufacturer;
-    @ApiModelProperty(name = "medicalNumber",value = "数量",required = true)
+//    @ApiModelProperty(name = "stock",value = "库存",required = true)
+//    private String stock;
+
+    @ApiModelProperty(name = "medicalNumber",value = "数量",required = true) //数量+单位=库存
     private Integer medicalNumber;
     @ApiModelProperty(name = "unit",value = "单位",required = true)
     private String unit;

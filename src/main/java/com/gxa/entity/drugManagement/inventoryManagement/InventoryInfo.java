@@ -31,8 +31,8 @@ public class InventoryInfo {
     @ApiModelProperty(name = "drugName",value = "药品名称",required = true)
     private String drugName;
     //处方类型
-    @ApiModelProperty(name = "prescriptionType",value = "处方类型",required = true)
-    private String prescriptionType;
+    @ApiModelProperty(name = "drugType",value = "处方类别",required = true)
+    private String drugType;
     //规格
     @ApiModelProperty(name = "specs",value = "药品/规格",required = true)
     private String specs;

@@ -29,8 +29,8 @@ public class InventoryCountingInfoArray {
     @ApiModelProperty(name = "locationNo",value = "货位号",required = true)
     private String locationNo;
     //收费类别
-    @ApiModelProperty(name = "chargeCategory",value = "收费类别",required = true)
-    private String chargeCategory;
+    @ApiModelProperty(name = "drugType",value = "收费类别",required = true)
+    private String drugType;
     //规格
     @ApiModelProperty(name = "specs",value = "规格",required = true)
     private String specs;

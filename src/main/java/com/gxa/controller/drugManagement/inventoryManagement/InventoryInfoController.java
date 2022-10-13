@@ -2,10 +2,7 @@ package com.gxa.controller.drugManagement.inventoryManagement;
 import com.gxa.entity.drugManagement.inventoryManagement.InventoryInfo;
 import com.gxa.result.Result;
 import com.gxa.result.ResultUtils;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,8 +37,8 @@ public class InventoryInfoController {
   @ApiResponses({
           @ApiResponse(code = 200,message = "ok",response = InventoryInfo.class)//,
   })
-  public Result search(){
-    System.out.println("search");
+  public Result search(@ApiParam("处方类别")String drugType,@ApiParam("药品名称/编码/生产厂家")String rules){
+    System.out.println(drugType+","+rules);
     return ResultUtils.buildFail(200,"查询所有",2L,inventoryInfoVisualData.getInventoryDetails().get(1));
   }
 
@@ -50,8 +47,8 @@ public class InventoryInfoController {
   @ApiResponses({
           @ApiResponse(code = 200,message = "ok",response = InventoryInfo.class)//,
   })
-  public Result queryDetails(){
-    System.out.println("queryDetails");
+  public Result queryDetails(@ApiParam("根据id查看单条数据明细")Integer id){
+    System.out.println(id);
     return ResultUtils.buildFail(200,"查询所有",2L,inventoryInfoVisualData.getInventoryDetails().get(2));
   }
 }
