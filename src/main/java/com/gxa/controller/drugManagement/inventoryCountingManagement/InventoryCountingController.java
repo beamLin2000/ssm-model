@@ -3,10 +3,7 @@ package com.gxa.controller.drugManagement.inventoryCountingManagement;
 import com.gxa.entity.drugManagement.inventoryCountingManagement.InventoryCountingInfo;
 import com.gxa.result.Result;
 import com.gxa.result.ResultUtils;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,8 +37,8 @@ public class InventoryCountingController {
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok",response = InventoryCountingInfo.class )//,response = InventoryCountingInfo.class
     })
-    public Result search(){
-        System.out.println("search");
+    public Result search(@ApiParam("创建时间")String createTime,@ApiParam("盘点单号")String countSheetNo){
+        System.out.println(createTime+","+countSheetNo);
         return ResultUtils.buildFail(200,"ok",0L,inventoryCountingVisualData.getInventoryCountingInfo().get(2));
     }
 
@@ -50,8 +47,8 @@ public class InventoryCountingController {
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok")//,response = InventoryCountingInfo.class
     })
-    public Result delete(){
-        System.out.println("delete");
+    public Result delete(@ApiParam("需要北山出的数据id")Integer id){
+        System.out.println(id);
         return ResultUtils.buildFail(200,"ok",0L,null);
     }
 
@@ -60,8 +57,8 @@ public class InventoryCountingController {
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok",response = InventoryCountingInfo.class)//,
     })
-    public Result queryById(){
-        System.out.println("delete");
+    public Result queryById(@ApiParam("需要查看记录的id")Integer id){
+        System.out.println(id);
         return ResultUtils.buildFail(200,"ok",0L,inventoryCountingVisualData.getInventoryCountingInfo().get(1));
     }
 
@@ -70,8 +67,8 @@ public class InventoryCountingController {
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok")//,
     })
-    public Result save(){
-        System.out.println("save");
+    public Result save(@ApiParam("提交需要被保存的数据")InventoryCountingInfo inventoryCountingInfo){
+        System.out.println(inventoryCountingInfo);
         return ResultUtils.buildFail(200,"ok",0L,null);
     }
 }

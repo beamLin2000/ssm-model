@@ -19,15 +19,15 @@ public class DrugPackageInformation {
     @ApiModelProperty(name = "id",value = "主键id")
     private Integer id;
     @ApiModelProperty(name = "unit",value = "包装单位", required = true)
-    private String unit;
-    @ApiModelProperty(name = "basicCoefficient",value = "基本系数", required = true)
-    private String basicCoefficient;
+    private String packingUnit;
+    @ApiModelProperty(name = "basicUnit",value = "基本系数", required = true)
+    private String basicUnit;
     @ApiModelProperty(name = "baseUnit",value = "基本单位", required = true)
     private String baseUnit;
     @ApiModelProperty(name = "doseCoefficient",value = "剂量系数", required = true)
     private String doseCoefficient;
-    @ApiModelProperty(name = "doseUnit",value = "剂量单位", required = true)
-    private String doseUnit;
+    @ApiModelProperty(name = "dosageUnit",value = "剂量单位", required = true)
+    private String dosageUnit;
     @ApiModelProperty(name = "purchasePrice",value = "采购价（元）", required = true)
     private Double purchasePrice;
     @ApiModelProperty(name = "retailPrice",value = "零售价（元）", required = true)

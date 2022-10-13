@@ -3,10 +3,7 @@ package com.gxa.controller.drugManagement.drugInformationTenance;
 import com.gxa.entity.drugManagement.basicInfo.BasicInfo;
 import com.gxa.result.Result;
 import com.gxa.result.ResultUtils;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -100,7 +97,7 @@ public class DrugInformationOtherController {
 
     /**
      *
-     * @return药品
+     * @return药品分类
      */
     //药品查询列表
     @GetMapping("/drugTypeQuery")
@@ -113,14 +110,14 @@ public class DrugInformationOtherController {
         return ResultUtils.buildFail(200,"ok",2L,drugType);
     }
 
-    //药品新增
+    //药品分类新增
     @PostMapping("/drugTypeAdd")
     @ApiOperation(value = "drugTypeAdd",notes = "药品分类下拉框的新增")
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok")
     })
-    public Result drugTypeAdd(){
-        System.out.println("drugDosageQuery");
+    public Result drugTypeAdd(@ApiParam(value = "药品分类新增名字")String drugType){
+        System.out.println(drugType);
         return ResultUtils.buildFail(200,"ok",2L,null);
     }
 
@@ -128,7 +125,7 @@ public class DrugInformationOtherController {
      *
      * @return药品剂型
      */
-    //药品查询列表
+    //药品剂型列表
     @GetMapping("/drugDosageQuery")
     @ApiOperation(value = "drugDosageQuery",notes = "药品剂型查询列表")
     @ApiResponses({
@@ -139,13 +136,13 @@ public class DrugInformationOtherController {
         return ResultUtils.buildFail(200,"ok",2L,drugDosage);
     }
 
-    //药品新增
+    //药品剂型新增
     @PostMapping("/drugDosageAdd")
     @ApiOperation(value = "drugDosageAdd",notes = "药品剂型新增")
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok")
     })
-    public Result drugDosageAdd(){
+    public Result drugDosageAdd(@ApiParam(value = "药品剂型新增名字")String drugType){
         return ResultUtils.buildFail(200,"ok",2L,null);
     }
 
@@ -159,7 +156,7 @@ public class DrugInformationOtherController {
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok")
     })
-    public Result invoiceItemsAdd(){
+    public Result invoiceItemsAdd(@ApiParam(value = "新增发票名字")String invoiceItems){
         return ResultUtils.buildFail(200,"ok",2L,null);
     }
 
@@ -183,7 +180,7 @@ public class DrugInformationOtherController {
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok",response = BasicInfo.class)
     })
-    public Result ManufacturerAdd(){
+    public Result manufacturerAdd(@ApiParam(value = "生产厂家名字")String manufacturer){
         return ResultUtils.buildFail(200,"ok",2L,null);
     }
 
@@ -207,7 +204,8 @@ public class DrugInformationOtherController {
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok",response = BasicInfo.class)
     })
-    public Result packingUnitAdd(){
+    public Result packingUnitAdd(@ApiParam(value = "包装单位新增名字")String packingUnit){
+        System.out.println(packingUnit);
         return ResultUtils.buildFail(200,"ok",2L,null);
     }
 
@@ -225,17 +223,18 @@ public class DrugInformationOtherController {
      *
      * @returnj基本系数
      */
-    //剂量系数新增
+    //基本系数新增
     @PostMapping("/basicUnitAdd")
     @ApiOperation(value = "basicUnitAdd",notes = "剂量系数新增")
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok",response = BasicInfo.class)
     })
-    public Result basicUnitAdd(){
+    public Result basicUnitAdd(@ApiParam(value = "基本系数名字")String basicUnit){
+        System.out.println(basicUnit);
         return ResultUtils.buildFail(200,"ok",2L,null);
     }
 
-    //剂量系数查询列表
+    //基本系数查询列表
     @GetMapping("/basicUnitQuery")
     @ApiOperation(value = "drugDosageQuery",notes = "基本系数查询列表")
     @ApiResponses({
@@ -255,8 +254,8 @@ public class DrugInformationOtherController {
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok",response = BasicInfo.class)
     })
-    public Result DosageUnitAdd(){
-        System.out.println("dosageUnitAdd");
+    public Result dosageUnitAdd(@ApiParam(value = "新增剂量系数名字")String dosageUnit){
+        System.out.println(dosageUnit);
         return ResultUtils.buildFail(200,"ok",2L,null);
     }
     //剂量单位查询列表
@@ -265,7 +264,7 @@ public class DrugInformationOtherController {
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok",response = BasicInfo.class)
     })
-    public Result DosageUnitQuery(){
+    public Result dosageUnitQuery(){
         return ResultUtils.buildFail(200,"ok",2L,DosageUnit);
     }
 
@@ -274,11 +273,12 @@ public class DrugInformationOtherController {
      */
     //使用方法
     @PostMapping("/useMethodAdd")
-    @ApiOperation(value = "useMethodAdd",notes = "药品使用方法新增")
+    @ApiOperation(value = "useMethodAdd",notes = "新增的方法名")
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok")
     })
-    public Result useMethodAdd(){
+    public Result useMethodAdd(@ApiParam(value = "使用方法名字")String useMethod){
+        System.out.println(useMethod);
         return ResultUtils.buildFail(200,"ok",2L,null);
     }
     //剂量系数查询列表

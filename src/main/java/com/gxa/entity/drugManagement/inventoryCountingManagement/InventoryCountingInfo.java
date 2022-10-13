@@ -25,7 +25,7 @@ public class InventoryCountingInfo {
     @ApiModelProperty(name = "countSheetNo",value = "盘点单号",required = true)
     private String countSheetNo;
     //盘点日期
-    @ApiModelProperty(name = "countDate",value = "盘点日期",required = true)
+    @ApiModelProperty(name = "createTime",value = "盘点日期",required = true)
     private String countDate;
     //制单人
     @ApiModelProperty(name = "voucherPreparer",value = "制单人",required = true)

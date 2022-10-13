@@ -22,8 +22,14 @@ public class OutboundInfoAddArray {
     private String code;
     @ApiModelProperty(name = "medicalName",value = "药品名称",required = true)
     private String medicalName;
+    @ApiModelProperty(name = "drugType",value = "收费类别/处方类别",required = true)
+    private String drugType;
+    @ApiModelProperty(name = "specifications",value = "规格",required = true)
+    private String specifications;
     @ApiModelProperty(name = "manufacturer",value = "生产厂家",required = true)
     private String manufacturer;
+    @ApiModelProperty(name = "stock",value = "库存",required = true)
+    private Integer stock;
     @ApiModelProperty(name = "medicalNumber",value = "数量",required = true)
     private Integer medicalNumber;
     @ApiModelProperty(name = "unit",value = "单位",required = true)

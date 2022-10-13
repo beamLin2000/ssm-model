@@ -27,7 +27,7 @@ public class DrugBasicInformation {
   private String commonNameDrug;
   @ApiModelProperty(name = "pinyinCode",value = "拼音码",required = true)
   private String pinyinCode;
-  @ApiModelProperty(name = "drugType",value = "药品分类",required = true)
+  @ApiModelProperty(name = "drugType",value = "药品分类/收费类别",required = true)
   private String drugType;
   @ApiModelProperty(name = "drugSpecifications",value = "药品规格",required = true)
   private String drugSpecifications;
