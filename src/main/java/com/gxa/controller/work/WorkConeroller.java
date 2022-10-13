@@ -3,9 +3,13 @@ package com.gxa.controller.work;
 import com.gxa.entity.work.*;
 import com.gxa.utils.R;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.*;
@@ -13,18 +17,23 @@ import java.util.*;
 @Controller
 @Api(tags = {"工作台接口"})
 public class WorkConeroller {
+    //工作台list
     @GetMapping("/work/list")
     @ResponseBody
-    public R patientList(){
+    @ApiOperation(value = "工作台的数据接口",notes = "工作台list")
+    @ApiResponses({
+            @ApiResponse(code = 0,message = "ok",response = Patient1.class)
+    })
+    public R workList(Integer page,Integer limit){
         Date date = new Date();
         long time = date.getTime();
         date.setTime(time);
-        Patient1 patient = new Patient1(1,"李四","18","nan","已就诊",date,"全科","beam","13256485216");
-        Patient1 patient1 = new Patient1(2,"ww","18","nan","已就诊",date,"全科","beam","13256485216");
-        Patient1 patient2 = new Patient1(3,"zn","18","nan","已就诊",date,"全科","beam","13256485216");
-        Patient1 patient3 = new Patient1(4,"zs","18","nan","已就诊",date,"全科","beam","13256485216");
-        Patient1 patient4 = new Patient1(5,"qq","18","nan","已就诊",date,"全科","beam","13256485216");
-        Patient1 patient5 = new Patient1(6,"ht","18","nan","已就诊",date,"全科","beam","13256485216");
+        Patient1 patient = new Patient1(1,"李四","18","nan","已就诊",date,"beam","13256485216");
+        Patient1 patient1 = new Patient1(2,"ww","18","nan","已就诊",date,"beam","13256485216");
+        Patient1 patient2 = new Patient1(3,"zn","18","nan","已就诊",date,"beam","13256485216");
+        Patient1 patient3 = new Patient1(4,"zs","18","nan","已就诊",date,"beam","13256485216");
+        Patient1 patient4 = new Patient1(5,"qq","18","nan","已就诊",date,"beam","13256485216");
+        Patient1 patient5 = new Patient1(6,"ht","18","nan","已就诊",date,"beam","13256485216");
         List<Patient1> list = new ArrayList<>();
         list.add(patient);
         list.add(patient1);
@@ -38,9 +47,14 @@ public class WorkConeroller {
         R r = new R();
         return r.ok(map);
     }
-    @GetMapping("/work/list01")
+    //处方患者信息
+    @GetMapping("/work/patientList")
     @ResponseBody
-    public R patientList01(Integer id){
+    @ApiOperation(value = "工作台的数据接口",notes = "就诊人信息")
+    @ApiResponses({
+            @ApiResponse(code = 0,message = "ok",response = WorkPatient.class)
+    })
+    public R patientList(Integer id){
         Date date = new Date();
         long time = date.getTime();
         date.setTime(time);
@@ -53,9 +67,14 @@ public class WorkConeroller {
         R r = new R();
         return r.ok(map);
     }
-    @GetMapping("/work/durglist0")
+    //处方list  传一个string
+    @GetMapping("/work/durglist")
     @ResponseBody
-    public R durgList0(){
+    @ApiOperation(value = "工作台的数据接口",notes = "西，成处方,中药处方")
+    @ApiResponses({
+            @ApiResponse(code = 0,message = "ok",response = Drug.class)
+    })
+    public R durgList(String prescriptionName){
         Drug drug = new Drug(1,"阿莫西林","1g*1","1000","0.16");
         Drug drug1 = new Drug(2,"减肥药复合袋","1g*1","1000","0.15");
         Drug drug2 = new Drug(3,"阿莫西林","1g*1","1000","0.18");
@@ -68,65 +87,29 @@ public class WorkConeroller {
         R r = new R();
         return r.ok(map);
     }
-    @GetMapping("/work/durglist1")
+    //体格信息
+    @GetMapping("/work/physicalList")
     @ResponseBody
-    public R durgList1(){
-        Drug drug = new Drug(1,"阿莫西林","1g*1","1000","0.16");
-        Drug drug1 = new Drug(2,"减肥药复合袋","1g*1","1000","0.15");
-        Drug drug2 = new Drug(3,"阿莫西林","1g*1","1000","0.18");
-        List<Drug> list = new ArrayList<>();
-        list.add(drug);
-        list.add(drug1);
-        list.add(drug2);
-        Map map = new HashMap();
-        map.put("list",list);
-        R r = new R();
-        return r.ok(map);
-    }
+    @ApiOperation(value = "工作台的数据接口",notes = "体格信息")
+    @ApiResponses({
+            @ApiResponse(code = 0,message = "ok",response = Physical.class)
+    })
+    public R physicalList(){
 
-    @GetMapping("/work/durglist2")
-    @ResponseBody
-    public R durgList2(){
-        Inspect drug = new Inspect(1,"局部推拿","检查费","次","20");
-        Inspect drug1 = new Inspect(2,"煎药费","材料费","次","20");
-        Inspect drug2 = new Inspect(3,"拔牙","治疗费","次","100");
-        List<Inspect> drugs = new ArrayList<>();
-        drugs.add(drug);
-        drugs.add(drug1);
-        drugs.add(drug2);
+        Physical physical  = new Physical(1,"36.50","36.50","36.50","36.50","36.50","36.50","36.50","36.50");
         Map map = new HashMap();
-        map.put("drugs",drugs);
-        R r = new R();
-        return r.ok(map);
-    }
-    @GetMapping("/work/prescriptionlist")
-    @ResponseBody
-    public R prescription(){
-        Date date = new Date();
-        long time = date.getTime();
-        date.setTime(time);
-        PrescriptionTemplate template = new PrescriptionTemplate(1,"rz2000005","处方模板名称","通用","西/成药处方","私人模板","心悸",date,"王冕");
-        Map map = new HashMap();
-        map.put("template",template);
+        map.put("physicals",physical);
         R r = new R();
 
         return r.ok(map);
     }
-    @GetMapping("/work/prescriptionDetailsList01")
-    @ResponseBody
-    public R prescriptionDetailsList(){
-        Date date = new Date();
-        long time = date.getTime();
-        date.setTime(time);
-        PrescriptionDetails details = new PrescriptionDetails(1,"1","头孢丙烯分散片","1片","温水吞服","一天三次","2天","6片","6元");
-        Map map = new HashMap();
-        map.put("details",details);
-        R r = new R();
-
-        return r.ok(map);
-    }
+    //病历信息
     @GetMapping("/work/medicalRecordList")
     @ResponseBody
+    @ApiOperation(value = "工作台的数据接口",notes = "病历信息")
+    @ApiResponses({
+            @ApiResponse(code = 0,message = "ok",response = MedicalRecord.class)
+    })
     public R medicalRecordList(){
         Date date = new Date();
         long time = date.getTime();
@@ -139,44 +122,61 @@ public class WorkConeroller {
 
         return r.ok(map);
     }
-    @GetMapping("/work/prescriptionDetailsList02")
+
+
+    //保存患者信息
+    @PostMapping("/work/savePatient")
     @ResponseBody
-    public R physicalList(){
-
-        Physical physical  = new Physical(1,"36.50","36.50","36.50","36.50","36.50","36.50","36.50","36.50");
-        Map map = new HashMap();
-        map.put("physicals",physical);
-        R r = new R();
-
-        return r.ok(map);
-    }
-
-
-    @PostMapping ("/work/prescriptionDetailsSave")
-    @ResponseBody
-    public R prescriptionDetailsSave(PrescriptionDetails prescriptionDetails){
-
+    public R savePatient(@RequestBody Patient1 patient1){
+        System.out.println(patient1);
         R r = new R();
 
         return r.ok();
     }
-    @PostMapping ("/work/physicalSave")
+    //保存西、成处方信息
+    @PostMapping("/work/saveDurg")
     @ResponseBody
-    public R physicalSave(PrescriptionDetails prescriptionDetails){
-
+    public R saveDurg(Drug drug){
+        System.out.println(drug);
         R r = new R();
 
         return r.ok();
     }
-    @PostMapping ("/work/medicalRecordSave")
+    //保存中药处方
+ @PostMapping("/work/saveTraditional")
     @ResponseBody
-    public R medicalRecordSave(PrescriptionDetails prescriptionDetails){
-
+    public R saveTraditional (Drug drug){
+     System.out.println(drug);
         R r = new R();
 
         return r.ok();
     }
+    //保存检查项目
+    @PostMapping("/work/saveInspect")
+    @ResponseBody
+    public R saveInspect(Inspect inspect){
+        System.out.println(inspect);
+        R r = new R();
 
+        return r.ok();
+    }
+    //保存体格信息
+@PostMapping("/work/saveMedical")
+    @ResponseBody
+    public R saveMedical(Physical physical){
+    System.out.println(physical);
+        R r = new R();
 
+        return r.ok();
+    }
+    //保存病历信息
+    @PostMapping("/work/saveMedicalRecord")
+    @ResponseBody
+    public R saveMedicalRecord(MedicalRecord medicalRecord){
+        System.out.println(medicalRecord);
+        R r = new R();
+
+        return r.ok();
+    }
 
 }
