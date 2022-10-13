@@ -73,4 +73,28 @@ public class TollController {
         R r = new R();
         return r;
     }
+
+    @GetMapping("/toll/PatientDrugs")
+    @ResponseBody
+    @ApiOperation(value = "查询人员信息",notes = "人员信息",httpMethod = "GET")
+    public R PatientDrugs(@ApiParam(name = "人员id", value = "patientId")Integer patientId){
+        R r = new R();
+        return r;
+    }
+
+    @GetMapping("/toll/TollDrugs")
+    @ResponseBody
+    @ApiOperation(value = "查询项目明细",notes = "项目明细",httpMethod = "GET")
+    public R TollDrugs(@ApiParam(name = "人员id", value = "patientId")Integer patientId){
+        R r = new R();
+        return r;
+    }
+
+    @GetMapping("/toll/TollPatient")
+    @ResponseBody
+    @ApiOperation(value = "查询接诊信息",notes = "接诊信息",httpMethod = "GET")
+    public R TollPatient(@ApiParam(name = "人员id", value = "patientId")Integer patientId){
+        R r = new R();
+        return r;
+    }
 }
