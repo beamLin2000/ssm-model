@@ -23,7 +23,7 @@ public class Patients {
     @ApiModelProperty(name = "patientPhone",value = "手机号码")
     private String patientPhone;
     @ApiModelProperty(name = "patientDocuments",value = "证件号码")
-    private Integer patientDocuments;
+    private String patientDocuments;
     @ApiModelProperty(name = "patientSource",value = "患者来源")
     private String patientSource;
     @ApiModelProperty(name = "patientExpiry",value = "到期时间")
