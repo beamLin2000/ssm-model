@@ -1,5 +1,7 @@
 package com.gxa.controller.systemSettings;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.gxa.entity.systemSettings.ClinicInformation;
 import com.gxa.form.systemsettings.CostSettngsForm.RegisterFeeForm;
 import com.gxa.form.systemsettings.CostSettngsForm.SurchargeForm;
@@ -35,6 +37,16 @@ public class SystemSettingsController {
         Result result = new Result(1, "成功", 1,clinicInformations );
 
         return result;
+    }
+
+    @GetMapping("/clinicinformation/list01")
+    public PageInfo<ClinicInformation>qrall(@RequestParam("page") int page,@RequestParam("size")int size){
+        PageHelper.startPage(page,size);
+        List<ClinicInformation>list = this.clinicInformationService.queryAll();
+        PageInfo<ClinicInformation>pageInfo = new PageInfo<>(list);
+
+        return pageInfo;
+
     }
 
     @PutMapping("/clinicinformation/edit")
