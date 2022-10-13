@@ -65,17 +65,17 @@ public class RegisterController {
     public R toUpdate(@ApiParam(name = "registrationForm",value = "挂号单号")String registrationForm){
 //        System.out.println(registrationForm);
         R r = new R();
-//        RegisterMsgUpdate register = this.registerService.toUpdate(registrationForm);
-//        Map map = new HashMap();
-//        map.put("registerMsg",register);
-//        return r.ok(map);
-       RegisterMsgUpdate msgUpdate = new RegisterMsgUpdate("202210130001","王蒙",null,null,
-               "5105111515156151","成都市高新区","备注",null,20,"1008611","林鹤",new BigDecimal(60),new BigDecimal(30),new BigDecimal(30),"微信",new BigDecimal(0),null,"林鹤","初诊",10.00,50.00);
-        List<RegisterMsgUpdate> list = new ArrayList<>();
-        list.add(msgUpdate);
+        RegisterMsgUpdate register = this.registerService.toUpdate(registrationForm);
         Map map = new HashMap();
-        map.put("registerMsg",list);
+        map.put("registerMsg",register);
         return r.ok(map);
+//       RegisterMsgUpdate msgUpdate = new RegisterMsgUpdate("202210130001","王蒙",null,null,
+//               "5105111515156151","成都市高新区","备注",null,20,"1008611","林鹤",new BigDecimal(60),new BigDecimal(30),new BigDecimal(30),"微信",new BigDecimal(0),null,"林鹤","初诊",10.00,50.00);
+//        List<RegisterMsgUpdate> list = new ArrayList<>();
+//        list.add(msgUpdate);
+//        Map map = new HashMap();
+//        map.put("registerMsg",list);
+//        return r.ok(map);
     }
     @PutMapping("/register/update")
     @ApiOperation(value = "编辑接口",notes = "挂号信息编辑",httpMethod = "PUT")

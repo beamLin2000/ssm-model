@@ -25,11 +25,14 @@ public class RegisterServiceImpl implements RegisterService {
 
     @Override
     public void update(RegisterMsgUpdate registerMsgUpdate) {
-        this.registerMapper.update(registerMsgUpdate);
+        this.registerMapper.updateRegister(registerMsgUpdate);
+        this.registerMapper.updatePatient(registerMsgUpdate);
     }
 
     @Override
     public void delete(String registrationForm) {
-        this.registerMapper.delete(registrationForm);
+        this.registerMapper.deletePatient(registrationForm);
+        this.registerMapper.deleteCharge(registrationForm);
+        this.registerMapper.deleteRegister(registrationForm);
     }
 }

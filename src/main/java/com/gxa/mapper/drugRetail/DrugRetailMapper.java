@@ -6,6 +6,5 @@ import com.gxa.entity.drugRetail.DrugRetail;
 
 public interface DrugRetailMapper {
     void save(DrugRetail drugRetail);
-
     DrugMsg query(DrugQueryCondition drugQueryCondition);
 }

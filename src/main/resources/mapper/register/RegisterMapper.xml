@@ -52,11 +52,27 @@
                             patientAddress,patientRemark)
         values (#{registrationForm},#{name},#{cardNo},#{age},#{birthDay},#{gender},#{phoneNo},#{idNo},#{loc},#{remarks})
     </insert>
-    <update id="update" parameterType="com.gxa.entity.registration.RegisterMsgUpdate">
+    <update id="updateRegister" parameterType="com.gxa.entity.registration.RegisterMsgUpdate">
+        UPDATE register
+        SET 接诊类型=#{receptionType},接诊医生=#{attendingDoctor}
+        WHERE 挂号单号=#{registrationForm}
+    </update>
+    <update id="updatePatient" parameterType="com.gxa.entity.registration.RegisterMsgUpdate">
+        UPDATE patient
+        SET patientAge=#{age},patientBirthday=#{birthDay},patientGender=#{gender},
+            patientPhone=#{phoneNo},patientDocuments=#{idNo},patientAddress=#{loc},
+            patientRemark=#{remarks}
+        WHERE patientRegistration=#{registrationForm}
 
     </update>
-    <delete id="delete">
-
+    <delete id="deleteCharge">
+        DELETE FROM charge WHERE 挂号单号=#{registrationForm}
+    </delete>
+    <delete id="deleteRegister">
+        DELETE FROM register WHERE 挂号单号=#{registrationForm}
+    </delete>
+    <delete id="deletePatient">
+        DELETE FROM patient WHERE patientRegistration=#{registrationForm}
     </delete>
     <select id="query" resultMap="registerCondition" parameterType="com.gxa.entity.registration.RegisterQueryCondition">
         select c.实收金额,p.patientName,p.patientGender,p.patientAge,p.patientPhone,r.接诊医生,r.挂号单号

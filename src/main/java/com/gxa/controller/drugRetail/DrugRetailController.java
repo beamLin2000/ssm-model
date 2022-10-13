@@ -30,7 +30,7 @@ public class DrugRetailController {
 //        this.drugRetailService.add(drugRetail);
         return r.ok("success");
     }
-    @GetMapping("/drugRetail/query")
+    @GetMapping("/drugRetail/queryDrug")
     @ApiOperation(value = "查询药品接口",notes = "查询药品",httpMethod = "GET")
     @ApiResponses({
             @ApiResponse(code = 0,message = "ok",response = DrugMsg.class)
