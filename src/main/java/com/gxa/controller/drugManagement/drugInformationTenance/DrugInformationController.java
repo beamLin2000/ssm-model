@@ -3,10 +3,7 @@ package com.gxa.controller.drugManagement.drugInformationTenance;
 import com.gxa.entity.drugManagement.drugInformationTenance.*;
 import com.gxa.result.Result;
 import com.gxa.result.ResultUtils;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -35,16 +32,15 @@ public class DrugInformationController {
         //创建DrugBasicInformation
         List<DrugBasicInformation> drugBasicInformation = new ArrayList<>();
         //添加列表
-        drugBasicInformation.add(new DrugBasicInformation(1,"dsadsa","asdasdasdas","阿莫西林1","AMoXiLin","注射类","32","片剂",1,"西药费","qwasd123","昆明制药",1,23.1,56.2,"2022-10-21",null,null,null));
-        drugBasicInformation.add(new DrugBasicInformation(2,"eqw","safdzc","阿莫西林2","AMoXiLin","口服","32","片剂",1,"西药费","qwasd123","昆明制药",1,23.1,56.2,"2022-10-21",null,null,null));
-        drugBasicInformation.add(new DrugBasicInformation(3,"fasd","dgfcb","阿莫西林3","AMoXiLin","外敷","32","片剂",1,"西药费","qwasd123","昆明制药",1,23.1,56.2,"2022-10-21",null,null,null));
-        drugBasicInformation.add(new DrugBasicInformation(4,"zcvcz","fhvn","阿莫西林4","AMoXiLin","注射类","32","片剂",1,"西药费","qwasd123","昆明制药",1,23.1,56.2,"2022-10-21",null,null,null));
-        drugBasicInformation.add(new DrugBasicInformation(5,"dasfzc","kjmbfj","阿莫西林5","AMoXiLin","注射类","32","片剂",1,"西药费","qwasd123","昆明制药",1,23.1,56.2,"2022-10-21",null,null,null));
-        drugBasicInformation.add(new DrugBasicInformation(6,"xcvbhg","sfdxvcas","阿莫西林6","AMoXiLin","注射类","32","片剂",1,"西药费","qwasd123","昆明制药",1,23.1,56.2,"2022-10-21",null,null,null));
-        drugBasicInformation.add(new DrugBasicInformation(7,"mnvfgh","asdfzc","阿莫西林7","AMoXiLin","注射类","32","片剂",1,"西药费","qwasd123","昆明制药",1,23.1,56.2,"2022-10-21",null,null,null));
-        drugBasicInformation.add(new DrugBasicInformation(8,"xvbxcvczx","asdfvfdsh","阿莫西林8","AMoXiLin","注射类","32","片剂",1,"西药费","qwasd123","昆明制药",1,23.1,56.2,"2022-10-21",null,null,null));
-        drugBasicInformation.add(new DrugBasicInformation(9,"sdfzxcv","fcnb","阿莫西林9","AMoXiLin","注射类","32","片剂",1,"西药费","qwasd123","昆明制药",1,23.1,56.2,"2022-10-21",null,null,null));
-        drugBasicInformation.add(new DrugBasicInformation(10,"asdfzc","fdgtrhfnchn","阿莫西林0","AMoXiLin","注射类","32","片剂",1,"西药费","qwasd123","昆明制药",1,23.1,56.2,"2022-10-21",null,null,null));
+        drugBasicInformation.add(new DrugBasicInformation(1,"dsadsa","asdasdasdas","阿莫西林1","AMoXiLin","注射类","32","片剂",1,"西药费","qwasd123","昆明制药",1,"西/成药",23.1,56.2,"2022-10-21",null,null,null));
+        drugBasicInformation.add(new DrugBasicInformation(2,"eqw","safdzc","阿莫西林2","AMoXiLin","口服","32","片剂",1,"西药费","qwasd123","昆明制药",1,"西/成药",23.1,56.2,"2022-10-21",null,null,null));
+        drugBasicInformation.add(new DrugBasicInformation(3,"fasd","dgfcb","阿莫西林3","AMoXiLin","外敷","32","片剂",1,"西药费","qwasd123","昆明制药",1,"西/成药",23.1,56.2,"2022-10-21",null,null,null));
+        drugBasicInformation.add(new DrugBasicInformation(4,"zcvcz","fhvn","阿莫西林4","AMoXiLin","注射类","32","片剂",1,"西药费","qwasd123","昆明制药",1,"西/成药",23.1,56.2,"2022-10-21",null,null,null));
+        drugBasicInformation.add(new DrugBasicInformation(5,"dasfzc","kjmbfj","阿莫西林5","AMoXiLin","注射类","32","片剂",1,"西药费","qwasd123","昆明制药",1,"西/成药",23.1,56.2,"2022-10-21",null,null,null));
+        drugBasicInformation.add(new DrugBasicInformation(6,"xcvbhg","sfdxvcas","阿莫西林6","AMoXiLin","注射类","32","片剂",1,"西药费","qwasd123","昆明制药",1,"西/成药",23.1,56.2,"2022-10-21",null,null,null));
+        drugBasicInformation.add(new DrugBasicInformation(7,"mnvfgh","asdfzc","阿莫西林7","AMoXiLin","注射类","32","片剂",1,"西药费","qwasd123","昆明制药",1,"西/成药",23.1,56.2,"2022-10-21",null,null,null));
+        drugBasicInformation.add(new DrugBasicInformation(9,"sdfzxcv","fcnb","阿莫西林9","AMoXiLin","注射类","32","片剂",1,"西药费","qwasd123","昆明制药",1,"西/成药",23.1,56.2,"2022-10-21",null,null,null));
+        drugBasicInformation.add(new DrugBasicInformation(10,"asdfzc","fdgtrhfnchn","阿莫西林0","AMoXiLin","注射类","32","片剂",1,"西药费","qwasd123","昆明制药",1,"西/成药",23.1,56.2,"2022-10-21",null,null,null));
         return ResultUtils.buildFail(200,"ok",2L,drugBasicInformation);
     }
 
@@ -54,11 +50,11 @@ public class DrugInformationController {
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok",response =DrugInfo.class )
     })
-    public Result search(){
+    public Result search(String prescriptionCategory,String status,String createTime,@ApiParam(name = "",value = "药品名称/编码/生成厂家") String rules){
         System.out.println("search");
         //创建DrugBasicInformation
         List<DrugBasicInformation> drugBasicInformation = new ArrayList<>();
-        drugBasicInformation.add(new DrugBasicInformation(1,"dsadsa","asdasdasdas","阿莫西林","AMoXiLin","注射类","32","片剂",1,"西药费","qwasd123","昆明制药",1,23.1,56.2,"2022-10-21",null,null,null));
+        drugBasicInformation.add(new DrugBasicInformation(1,"dsadsa","asdasdasdas","阿莫西林","AMoXiLin","注射类","32","片剂",1,"西药费","qwasd123","昆明制药",1,"西/成药",23.1,56.2,"2022-10-21",null,null,null));
         return ResultUtils.buildFail(200,"ok",2L,drugBasicInformation);
     }
 
@@ -79,7 +75,7 @@ public class DrugInformationController {
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok")
     })
-    public Result add(){
+    public Result add(@ApiParam(value = "药品新增需要提供的数据",name = "DrugBasicInformation") DrugBasicInformation drugBasicInformation){
         System.out.println("add success");
         return ResultUtils.buildFail(200,"ok",2L,null);
     }
@@ -90,7 +86,7 @@ public class DrugInformationController {
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok",response = DrugBasicInformation.class )
     })
-    public Result editPre(){
+    public Result editPre(@ApiParam("需要被更新记录的id") Integer id){
         System.out.println("editPre");
         //创建DrugBasicInformation
         List<DrugBasicInformation> drugBasicInformation = new ArrayList<>();
@@ -101,7 +97,7 @@ public class DrugInformationController {
         //创建DrugOtherInformation
         DrugOtherInformation drugOtherInformation = new DrugOtherInformation(1,32,150,"1-1023",456,"好吃,多买","不要吃的太多");
         //添加列表
-        drugBasicInformation.add(new DrugBasicInformation(1,"dsadsa","asdasdasdas","阿莫西林","AMoXiLin","注射类","32","片剂",1,"西药费","qwasd123","昆明制药",1,23.1,56.2,"2022-10-21",drugPackageInformation,afficacyDescription,drugOtherInformation));
+        drugBasicInformation.add(new DrugBasicInformation(1,"dsadsa","asdasdasdas","阿莫西林","AMoXiLin","注射类","32","片剂",1,"西药费","qwasd123","昆明制药",1,"西/成药",23.1,56.2,"2022-10-21",drugPackageInformation,afficacyDescription,drugOtherInformation));
         return ResultUtils.buildFail(200,"ok",2L,drugBasicInformation);
     }
 

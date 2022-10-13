@@ -15,40 +15,42 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @ApiModel(value = "DrugPriceAdjustInfoList",description = "新增调价历史记录")
 public class DrugPriceAdjustInfoList {
+    @ApiModelProperty(name = "id",value = "主键id")
+    private Integer id;
     //采购编号
-    @ApiModelProperty(value = "purchaseNo",name = "采购编号",required = true)
+    @ApiModelProperty(name = "purchaseNo",value = "采购编号",required = true)
     private String purchaseNo;
     //规格
-    @ApiModelProperty(value = "specs",name = "规格",required = true)
+    @ApiModelProperty(name = "specs",value = "规格",required = true)
     private String specs;
     //库存量
-    @ApiModelProperty(value = "Inventory",name = "库存量",required = true)
+    @ApiModelProperty(name = "Inventory",value = "库存量",required = true)
     private Integer inventory;
     //批号
-    @ApiModelProperty(value = "batchNo",name = "批号",required = true)
+    @ApiModelProperty(name = "batchNo",value = "批号",required = true)
     private String batchNo;
     //采购价
-    @ApiModelProperty(value = "purchasePrice",name = "采购价",required = true)
+    @ApiModelProperty(name = "purchasePrice",value = "采购价",required = true)
     private Double purchasePrice;
     //原零售价
-    @ApiModelProperty(value = "originalZeroPrice",name = "原零售价",required = true)
+    @ApiModelProperty(name = "originalZeroPrice",value = "原零售价",required = true)
     private Double originalZeroPrice;
     //现零售价
-    @ApiModelProperty(value = "spotSellingPrice",name = "现零售价",required = true)
+    @ApiModelProperty(name = "spotSellingPrice",value = "现零售价",required = true)
     private Double spotSellingPrice;
     //差价
-    @ApiModelProperty(value = "priceDifference",name = "差价",required = true)
+    @ApiModelProperty(name = "priceDifference",value = "差价",required = true)
     private Double priceDifference;
     //比例
-    @ApiModelProperty(value = "proportion",name = "比例",required = true)
+    @ApiModelProperty(name = "proportion",value = "比例",required = true)
     private String proportion;
     //备注
-    @ApiModelProperty(value = "remarks",name = "备注",required = true)
+    @ApiModelProperty(name = "remarks",value = "备注",required = true)
     private String remarks;
     //操作时间
-    @ApiModelProperty(value = "operationTime",name = "操作时间",required = true)
+    @ApiModelProperty(name = "operationTime",value = "操作时间",required = true)
     private String operationTime;
     //操作员
-    @ApiModelProperty(value = "operator",name = "操作员",required = true)
+    @ApiModelProperty(name = "operator",value = "操作员",required = true)
     private String operator;
 }
