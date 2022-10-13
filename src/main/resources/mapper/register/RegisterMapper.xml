@@ -85,6 +85,15 @@
            <if test="patientName !=null and patientName !=''">
                and p.patientName=#{patientName}
            </if>
+           <if test="visitStatus !=null and visitStatus !=''">
+                and r.就诊状态=#{visitStatus}
+           </if>
+           <if test="startTime != null and startTime !=''">
+                and r.挂号日期>#{startTime}
+           </if>
+           <if test="endTime != null and endTime !=''">
+               and #{endTime}>r.挂号日期
+           </if>
         </where>>
     </select>
     <select id="toUpdate" resultMap="registerUpdateMsg" parameterType="string">
