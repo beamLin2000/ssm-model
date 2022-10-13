@@ -25,7 +25,7 @@ public class PatientController {
     @GetMapping("/patient")
     @ResponseBody
     @ApiOperation(value = "查找接口",notes = "查找患者",httpMethod = "GET")
-    public R patientList(){
+    public R patientList(Patients patients){
         Date date = new Date();
         long time = date.getTime();
         date.setTime(time);
@@ -44,8 +44,21 @@ public class PatientController {
     @ResponseBody
     @ApiOperation(value = "查找接口",notes = "电话查找患者",httpMethod = "GET")
     public R patientPhoneList(@ApiParam(name = "电话查找患者信息", value = "patientPhone")String patientPhone){
+        Date date = new Date();
+        long time = date.getTime();
+        date.setTime(time);
         R r = new R();
-        return r;
+        Patients patient = new Patients(1,100130,"李四",12,"男","17754138769",date,"李四");
+        Patients patient1 = new Patients(1,100130,"李四",12,"男","17754138755",date,"李四");
+        Patients patient2 = new Patients(1,100130,"李四",12,"男","17754138768",date,"李四");
+        List<Patients> list = new ArrayList<>();
+        list.add(patient);
+        list.add(patient1);
+        list.add(patient2);
+        Map map = new HashMap();
+        map.put("patient",list);
+
+        return r.ok(map);
     }
 
 
@@ -53,10 +66,18 @@ public class PatientController {
     @ResponseBody
     @ApiOperation(value = "添加接口",notes = "患者添加",httpMethod = "POST")
     public R patientAdd(@ApiParam(name = "患者添加信息", value = "patientAdd")Patients patients){
+        Date date = new Date();
+        long time = date.getTime();
+        date.setTime(time);
         R r = new R();
-        this.patientService.patientAdd(patients);
-        R.ok("success");
-        return r;
+        Patients patient2 = new Patients(1,100130,"李四",12,"男","17754138768",date,"李四");
+        List<Patients> list = new ArrayList<>();
+
+        list.add(patient2);
+        Map map = new HashMap();
+        map.put("patient",list);
+
+        return r.ok(map);
     }
 
     @GetMapping("/patient/updatePre")
@@ -73,10 +94,21 @@ public class PatientController {
     @ResponseBody
     @ApiOperation(value = "修改接口",notes = "患者修改",httpMethod = "PUT")
     public R patientUpdate(@ApiParam(name = "患者修改",value = "patients") Patients patients){
+        Date date = new Date();
+        long time = date.getTime();
+        date.setTime(time);
         R r = new R();
-        this.patientService.patientUpdate(patients);
-        R.ok("success");
-        return r;
+        Patients patient = new Patients(1,100130,"李四",12,"男","17754138769",date,"李四");
+        Patients patient1 = new Patients(1,100130,"李四",12,"男","17754138755",date,"李四");
+        Patients patient2 = new Patients(1,100130,"李四",12,"男","17754138768",date,"李四");
+        List<Patients> list = new ArrayList<>();
+        list.add(patient);
+        list.add(patient1);
+        list.add(patient2);
+        Map map = new HashMap();
+        map.put("patient",list);
+
+        return r.ok(map);
     }
 
 
@@ -84,7 +116,10 @@ public class PatientController {
     @ResponseBody
     @ApiOperation(value = "删除接口",notes = "患者删除",httpMethod = "DELETE")
     public R patientDelete(@ApiParam(name = "患者删除条件",value = "patientId") Integer patientId){
-        return null;
+        R r = new R();
+        this.patientService.tpPatientUpdate(patientId);
+        R.ok("success");
+        return r;
     }
 
 
@@ -103,8 +138,10 @@ public class PatientController {
 //        map.put("drugs",familyList);
 //        R r = new R();
 //        return r.ok(map);
-     R r = new R();
-     return r;
+        R r = new R();
+        this.patientService.tpPatientUpdate(patientNumber);
+        R.ok("success");
+        return r;
 
     }
 
@@ -144,6 +181,9 @@ public class PatientController {
     @ResponseBody
     @ApiOperation(value = "删除接口",notes = "家庭删除",httpMethod = "DELETE")
     public R delete(@ApiParam(name = "患者删除条件",value = "familyId") Integer familyId){
-       return null;
+        R r = new R();
+        this.familyService.tpFamilyUpdate(familyId);
+        R.ok("success");
+        return r;
     }
 }
