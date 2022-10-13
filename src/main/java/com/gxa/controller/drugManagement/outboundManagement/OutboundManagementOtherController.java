@@ -1,4 +1,4 @@
-package com.gxa.controller.drugmanagement.outboundManagement;
+package com.gxa.controller.drugManagement.outboundManagement;
 
 import com.gxa.entity.drugManagement.basicInfo.BasicInfo;
 import com.gxa.entity.drugManagement.outboundManagement.OutboundInfo;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/outboundManagementOther")
-@Api(value = "OutboundManagementOtherController",description = "新增出库管理中下拉框和添加药品")
+@Api(tags = {"出库管理新增功能中的增删改查接口"})
 public class OutboundManagementOtherController {
 
     @Autowired

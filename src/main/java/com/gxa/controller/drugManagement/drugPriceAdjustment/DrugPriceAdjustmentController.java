@@ -1,6 +1,5 @@
-package com.gxa.controller.drugmanagement.drugPriceAdjustment;
+package com.gxa.controller.drugManagement.drugPriceAdjustment;
 
-import com.gxa.entity.drugManagement.basicInfo.BasicInfo;
 import com.gxa.entity.drugManagement.drugPriceAdjustment.DrugPriceAdjustInfo;
 import com.gxa.result.Result;
 import com.gxa.result.ResultUtils;
@@ -20,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/drugPriceAdjustment")
-@Api(value = "DrugPriceAdjustmentController",description = "药品调价的增删改查")
+@Api(tags = {"药品调价接口"})
 public class DrugPriceAdjustmentController {
 
     @Autowired

@@ -1,7 +1,6 @@
-package com.gxa.controller.drugmanagement.inboundManagement;
+package com.gxa.controller.drugManagement.inboundManagement;
 
 import com.gxa.entity.drugManagement.basicInfo.BasicInfo;
-import com.gxa.entity.drugManagement.drugInformationTenance.DrugInfo;
 import com.gxa.entity.drugManagement.inboundManagement.InboundInfo;
 import com.gxa.entity.drugManagement.inboundManagement.InboundInfoAddArray;
 import com.gxa.result.Result;
@@ -10,16 +9,13 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import jdk.nashorn.internal.objects.annotations.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,7 +24,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/inboundManagerOther")
-@Api(value = "InboundManagerOtherController",description = "入库管理新增功能中的小功能")
+@Api(tags = {"入库管理新增功能中的小功能"})
 public class InboundManagerOtherController {
     //入库库人员
     private List<BasicInfo> lbPerson = new ArrayList<>();

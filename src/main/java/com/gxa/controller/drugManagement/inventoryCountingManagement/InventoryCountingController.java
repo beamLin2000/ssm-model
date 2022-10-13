@@ -1,6 +1,5 @@
-package com.gxa.controller.drugmanagement.inventoryCountingManagement;
+package com.gxa.controller.drugManagement.inventoryCountingManagement;
 
-import com.gxa.entity.drugManagement.basicInfo.BasicInfo;
 import com.gxa.entity.drugManagement.inventoryCountingManagement.InventoryCountingInfo;
 import com.gxa.result.Result;
 import com.gxa.result.ResultUtils;
@@ -20,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/InventoryCounting")
-@Api(value = "InventoryCountingController",description = "库存盘点")
+@Api(tags = {"库存盘点接口"})
 public class InventoryCountingController {
 
     @Autowired
