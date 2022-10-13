@@ -16,28 +16,28 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @ApiModel(value = "OutboundInfoAddArray",description = "编辑或新增中的添加药品功能数据列表")
 public class OutboundInfoAddArray {
-    @ApiModelProperty(value = "id",name = "主键id",required = true)
+    @ApiModelProperty(name = "id",value = "主键id",required = true)
     private Integer id;
-    @ApiModelProperty(value = "code",name = "药品编码",required = true)
+    @ApiModelProperty(name = "code",value = "药品编码",required = true)
     private String code;
-    @ApiModelProperty(value = "medicalName",name = "药品名称",required = true)
+    @ApiModelProperty(name = "medicalName",value = "药品名称",required = true)
     private String medicalName;
-    @ApiModelProperty(value = "manufacturer",name = "生产厂家",required = true)
+    @ApiModelProperty(name = "manufacturer",value = "生产厂家",required = true)
     private String manufacturer;
-    @ApiModelProperty(value = "medicalNumber",name = "数量",required = true)
+    @ApiModelProperty(name = "medicalNumber",value = "数量",required = true)
     private Integer medicalNumber;
-    @ApiModelProperty(value = "unit",name = "单位",required = true)
+    @ApiModelProperty(name = "unit",value = "单位",required = true)
     private String unit;
-    @ApiModelProperty(value = "purchasePrice",name = "采购价（元）",required = true)
+    @ApiModelProperty(name = "purchasePrice",value = "采购价（元）",required = true)
     private Double purchasePrice;
-    @ApiModelProperty(value = "retailPrice",name = "零售加（元）",required = true)
+    @ApiModelProperty(name = "retailPrice",value = "零售加（元）",required = true)
     private Double retailPrice;
-    @ApiModelProperty(value = "batchNo",name = "批号",required = true)
+    @ApiModelProperty(name = "batchNo",value = "批号",required = true)
     private String batchNo;
-    @ApiModelProperty(value = "expiryDrugsDate",name = "药品有效期",required = true)
+    @ApiModelProperty(name = "expiryDrugsDate",value = "药品有效期",required = true)
     private String expiryDrugsDate;
-    @ApiModelProperty(value = "purchaseAmount",name = "采购金额",required = true)
+    @ApiModelProperty(name = "purchaseAmount",value = "采购金额",required = true)
     private Double purchaseAmount;
-    @ApiModelProperty(value = "retailAmount",name = "零售金额",required = true)
+    @ApiModelProperty(name = "retailAmount",value = "零售金额",required = true)
     private Double retailAmount;
 }

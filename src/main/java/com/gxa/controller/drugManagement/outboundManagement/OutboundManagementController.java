@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/outboundManagement")
-@Api(value = "OutboundManagementController",description = "出库管理的增删改查")
+@Api(tags={"出库管理增删改查"})
 public class OutboundManagementController {
 
     @Autowired

@@ -19,21 +19,21 @@ import java.util.List;
 public class InventoryCountingInfo {
 
     //主键id
-    @ApiModelProperty(value = "id",name = "主键id",required = true)
+    @ApiModelProperty(name = "id",value = "主键id",required = true)
     private Integer id;
     //盘点单号
-    @ApiModelProperty(value = "countSheetNo",name = "盘点单号",required = true)
+    @ApiModelProperty(name = "countSheetNo",value = "盘点单号",required = true)
     private String countSheetNo;
     //盘点日期
-    @ApiModelProperty(value = "countDate",name = "盘点日期",required = true)
+    @ApiModelProperty(name = "countDate",value = "盘点日期",required = true)
     private String countDate;
     //制单人
-    @ApiModelProperty(value = "voucherPreparer",name = "制单人",required = true)
+    @ApiModelProperty(name = "voucherPreparer",value = "制单人",required = true)
     private String voucherPreparer;
     //盘点状态
-    @ApiModelProperty(value = "countingStatus",name = "盘点状态",required = true)
+    @ApiModelProperty(name = "countingStatus",value = "盘点状态",required = true)
     private Integer countingStatus;
     //
-    @ApiModelProperty(value = "inventoryCountingInfoArray",name = "新增盘点的list",required = true)
+    @ApiModelProperty(name = "inventoryCountingInfoArray",value = "新增盘点的list",required = true)
     private List<InventoryCountingInfoArray> inventoryCountingInfoArray;
 }

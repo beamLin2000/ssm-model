@@ -15,18 +15,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Api(value = "AfficacyDescription",description = "功效说明")
 public class AfficacyDescription {
-    @ApiModelProperty(value = "主键id",notes = "主键id")
+    @ApiModelProperty(name = "id",value = "主键id")
     private Integer id;
-    @ApiModelProperty(value = "useMethod",notes = "使用方法",required = true)
+    @ApiModelProperty(name = "useMethod",value = "使用方法",required = true)
     private String useMethod;
-    @ApiModelProperty(value = "singleUsage",notes = "单次用量",required = true)
+    @ApiModelProperty(name = "singleUsage",value = "单次用量",required = true)
     private Integer singleUsage;
-    @ApiModelProperty(value = "frequency",notes = "频度",required = true)
+    @ApiModelProperty(name = "frequency",value = "频度",required = true)
     private String frequency;
-    @ApiModelProperty(value = "days",notes = "天",required = true)
+    @ApiModelProperty(name = "days",value = "天",required = true)
     private String days;
-    @ApiModelProperty(value = "consumption",notes = "用量",required = true)
+    @ApiModelProperty(name = "consumption",value = "用量",required = true)
     private Integer consumption;
-    @ApiModelProperty(value = "unit",notes = "单位",required = true)
+    @ApiModelProperty(name = "unit",value = "单位",required = true)
     private String unit;
 }
