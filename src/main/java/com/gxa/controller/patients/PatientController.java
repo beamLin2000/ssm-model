@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -25,18 +26,23 @@ public class PatientController {
     @GetMapping("/patient")
     @ResponseBody
     @ApiOperation(value = "查找接口",notes = "查找患者",httpMethod = "GET")
-    public R patientList(Patients patients){
-        Date date = new Date();
-        long time = date.getTime();
-        date.setTime(time);
-
-        Patients patient = new Patients(1,100130,"李四",12,"男","17754138769",date,"李四");
-        List<Patients> list = new ArrayList<>();
-        list.add(patient);
-
-        Map map = new HashMap();
-        map.put("drugs",list);
+    public R patientList(ModelMap map){
+//        Date date = new Date();
+//        long time = date.getTime();
+//        date.setTime(time);
+//
+//        Patients patient = new Patients(1,100130,"李四",12,"男","17754138769",date,"李四");
+//        List<Patients> list = new ArrayList<>();
+//        list.add(patient);
+//
+//        Map map = new HashMap();
+//        map.put("drugs",list);
+//        R r = new R();
+        List<Patients> patients = this.patientService.queryAll();
+        System.out.println(patients);
+        map.addAttribute("patients",patients);
         R r = new R();
+        System.out.println(map);
         return r.ok(map);
     }
 

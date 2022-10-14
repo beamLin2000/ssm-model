@@ -1,10 +1,12 @@
 package com.gxa.entity.patients;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.util.Date;
 @Data
+@TableName(value = "patients")
 public class Patients {
     @ApiModelProperty(name = "patientId",value = "患者序号")
     private Integer patientId;
