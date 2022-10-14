@@ -2,12 +2,14 @@ package com.gxa.form.systemsettings.clinicInformation;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 
 //诊所信息
 @Data
 @ApiModel("诊所信息实体类")
+@AllArgsConstructor
 public class ClinicInformationForm {
     @ApiModelProperty(value = "诊所编号",name = "clinicNo",required = false)
     private Integer clinicNo;
@@ -32,18 +34,8 @@ public class ClinicInformationForm {
 
 
 
-    public ClinicInformationForm(Integer clinicNo, String clinicName, String logo, String clinicOwner, Integer ownerPhone, String ownerEmail, String address, String detailedAddress, String clinicIntroduce, Integer clinicState) {
-        this.clinicNo = clinicNo;
-        this.clinicName = clinicName;
-        this.logo = logo;
-        this.clinicOwner = clinicOwner;
-        this.ownerPhone = ownerPhone;
-        this.ownerEmail = ownerEmail;
-        this.address = address;
-        this.detailedAddress = detailedAddress;
-        this.clinicIntroduce = clinicIntroduce;
-        this.clinicState = clinicState;
-    }
+
+
 
     public ClinicInformationForm() {
     }

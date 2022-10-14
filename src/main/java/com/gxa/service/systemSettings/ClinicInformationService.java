@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface ClinicInformationService {
     List<ClinicInformation>queryAll();
+    void updateClinic(ClinicInformation clinicInformation);
 }

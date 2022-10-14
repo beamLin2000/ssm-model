@@ -1,4 +1,4 @@
-package com.gxa.form.systemSettings;
+package com.gxa.form.systemsettings;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
