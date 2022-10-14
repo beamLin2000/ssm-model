@@ -17,8 +17,8 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 @ApiModel
 public class BasicInfo {
-    @ApiModelProperty(value = "Id",name = "下拉框键",required = true)
+    @ApiModelProperty(name = "id",value = "下拉框键",required = true)
     private Integer id;
-    @ApiModelProperty(value = "name", name = "下拉框值",required = true)
+    @ApiModelProperty(name = "name", value = "下拉框值",required = true)
     private String name;
 }

@@ -36,6 +36,7 @@
         </property>
     </bean>
 
+
 <!--    将mapper 交给spring管理-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.gxa.mapper"></property>
