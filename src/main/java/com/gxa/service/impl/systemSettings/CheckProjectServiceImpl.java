@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CheckProject_ServiceImpl implements CheckProjectSetService {
+public class CheckProjectServiceImpl implements CheckProjectSetService {
     @Autowired
     private CheckProjectSetMapper checkProjectSet_mapper;
     @Override

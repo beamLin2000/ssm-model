@@ -1,7 +1,7 @@
 package com.gxa.controller.systemSettings;
 
 import com.gxa.entity.systemSettings.ClinicInformation;
-import com.gxa.form.clinicInformation.clinicInformation.ClinicInformationForm;
+import com.gxa.form.systemSettings.clinicInformation.clinicInformation.ClinicInformationForm;
 import com.gxa.service.systemSettings.ClinicInformationService;
 import com.gxa.utils.systemSettings.Result;
 import io.swagger.annotations.ApiOperation;

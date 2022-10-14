@@ -1,4 +1,4 @@
-package com.gxa.form.clinicInformation.clinicInformation;
+package com.gxa.form.systemSettings.clinicInformation.clinicInformation;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

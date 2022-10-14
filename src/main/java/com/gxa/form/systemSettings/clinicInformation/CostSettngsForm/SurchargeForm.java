@@ -1,4 +1,4 @@
-package com.gxa.form.clinicInformation.CostSettngsForm;
+package com.gxa.form.systemSettings.clinicInformation.CostSettngsForm;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

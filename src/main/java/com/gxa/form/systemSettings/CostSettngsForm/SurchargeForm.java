@@ -1,4 +1,4 @@
-package com.gxa.form.CostSettngsForm;
+package com.gxa.form.systemSettings.CostSettngsForm;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

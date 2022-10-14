@@ -3,11 +3,13 @@ package com.gxa.controller.systemSettings;
 import com.gxa.entity.systemSettings.CPSMainTable;
 import com.gxa.entity.systemSettings.CPSViceTable;
 import com.gxa.entity.systemSettings.EMEmployeeTable;
-import com.gxa.entity.systemSettings.RolesTable;
+import com.gxa.entity.systemSettings.Role;
 import com.gxa.form.systemSettings.CPSEdit;
 import com.gxa.form.systemSettings.EMEdit;
 import com.gxa.form.systemSettings.EMSelect;
+import com.gxa.form.systemSettings.RolesEdit;
 import com.gxa.service.systemSettings.CheckProjectSetService;
+import com.gxa.service.systemSettings.EmployeeManagementService;
 import com.gxa.service.systemSettings.RolesSetService;
 import com.gxa.utils.systemSettings.Result;
 import io.swagger.annotations.Api;
@@ -26,6 +28,8 @@ public class SystemSettingsController {
     private CheckProjectSetService checkProjectSet_service;
     @Autowired
     private RolesSetService rolesSetService;
+    @Autowired
+    private EmployeeManagementService employeeManagementService;
 
 
     @GetMapping("/CheckProjectSet/List")//查询所有
@@ -94,26 +98,26 @@ public class SystemSettingsController {
 
 
     @GetMapping("/Roles/List")//查询所有
-    @ApiOperation(value = "角色列表-查询所有数据" ,notes = "",httpMethod = "Get",response = RolesTable.class)
+    @ApiOperation(value = "角色列表-查询所有数据" ,notes = "",httpMethod = "Get",response = Role.class)
     public Result Roles_List(){
-        List<RolesTable> rolesTables = rolesSetService.selectAll();
+        List<Role> roles = rolesSetService.selectAll();
 
-        Result result = new Result(1,"seccess",rolesTables);
+        Result result = new Result(1,"seccess", roles);
         return result;
     }
 
     @PostMapping("/Roles/Edit")//编辑
     @ApiOperation(value = "角色列表-编辑数据" ,notes = "",httpMethod = "Post")
-    public Result Roles_Edit(@RequestBody EMEdit em_edit){
-
+    public Result Roles_Edit(@RequestBody RolesEdit rolesEdit){
+        rolesSetService.update(rolesEdit);
         Result result = new Result(2,"成功","hello");
         return result;
     }
 
     @PostMapping("/Roles/Insert")//添加
     @ApiOperation(value = "角色列表-添加数据" ,notes = "",httpMethod = "Post")
-    public Result Roles_Insert(@RequestBody EMEdit em_edit){
-
+    public Result Roles_Insert(@RequestBody RolesEdit rolesEdit){
+//        rolesSetService.insert(rolesEdit);
         Result result = new Result(2,"成功","hello");
         return result;
     }
@@ -128,23 +132,16 @@ public class SystemSettingsController {
 
     @GetMapping("/Roles/Select")//根据条件搜索
     @ApiOperation(value = "角色列表-根据条件查询数据" ,notes = "",httpMethod = "get")
-    public Result Roles_Select(@RequestBody EMSelect em_select){
+    public Result Roles_Select(@RequestParam ("nameRole") String nameRole){
 
-        Date date = new Date(2000 - 2 - 2);
-        RolesTable roles_table = new RolesTable(1,1,"1","1",date,"1","1");
+        rolesSetService.select(nameRole);
         Result result = new Result();
         return result;
     }
 
-    @GetMapping("/Roles/Drop")//查询下拉框
-    @ApiOperation(value = "角色列表-下拉框的数据" ,notes = "",httpMethod = "Get")
-    public Result Roles_Drop(){
 
-        Date date = new Date(2000 - 2 - 2);
-        RolesTable roles_table = new RolesTable(1,1,"1","1",date,"1","1");
-        Result result = new Result();
-        return result;
-    }
+
+
 
 
 
@@ -157,13 +154,9 @@ public class SystemSettingsController {
     @GetMapping("/EmployeeManagement/List")//查询所有
     @ApiOperation(value = "员工列表-查询所有数据" ,notes = "",httpMethod = "Get",response = EMEmployeeTable.class)
     public Result EmployeeManagement_List(){
+        List<EMEmployeeTable> emEmployeeTables = employeeManagementService.selectAll();
 
-//        List<CheckProjectSet> checkProjectSets = checkProjectSet_service.selectAll();
-//        map.put("checkProjectSets",checkProjectSets);
-
-        Date date = new Date(2000 - 2 - 2);
-        EMEmployeeTable emEmployeeTable = new EMEmployeeTable(1, 1, "1", "1", "1", 1, "1", "1", date, "1", "1");
-        Result result = new Result();
+       Result result = new Result(1,"seccess",emEmployeeTables);
         return result;
     }
 

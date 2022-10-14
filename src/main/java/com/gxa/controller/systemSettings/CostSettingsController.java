@@ -1,6 +1,6 @@
 package com.gxa.controller.systemSettings;
 
-import com.gxa.form.clinicInformation.clinicInformation.ClinicInformationForm;
+import com.gxa.form.systemSettings.clinicInformation.clinicInformation.ClinicInformationForm;
 import com.gxa.utils.systemSettings.Result;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
