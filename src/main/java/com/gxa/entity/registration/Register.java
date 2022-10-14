@@ -14,7 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class Register {
     @ApiModelProperty(name = "registrationForm",value = "挂号单号")
-    private Integer registrationForm;
+    private String registrationForm;
 //    @ApiModelProperty(name = "department",value = "科室",required = true)
 //    private String department;
     @ApiModelProperty(name = "receptionType",value = "接诊类型",required = true)

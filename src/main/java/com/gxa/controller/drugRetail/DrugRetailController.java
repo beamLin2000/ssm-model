@@ -5,11 +5,10 @@ import com.gxa.entity.drugRetail.DrugMsg;
 import com.gxa.entity.drugRetail.DrugQueryCondition;
 import com.gxa.entity.drugRetail.DrugRetail;
 import com.gxa.entity.registration.RegisterMsg;
+import com.gxa.entity.registration.RegisterMsgUpdate;
 import com.gxa.service.drugRetail.DrugRetailService;
 import com.gxa.utils.R;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +27,7 @@ public class DrugRetailController {
     @PostMapping("/drugRetail/add")
     @ApiOperation(value = "保存接口",notes = "药品零售页保存",httpMethod = "POST")
     public R add(@ApiParam(name = "drugRetail", value = "药品零售添加信息")@RequestBody DrugRetail drugRetail){
+        System.out.println(drugRetail);
         R r = new R();
         this.drugRetailService.add(drugRetail);
         return r.ok("success");
@@ -35,6 +35,7 @@ public class DrugRetailController {
     @GetMapping("/drugRetail/query")
     @ApiOperation(value = "查询药品接口",notes = "查询药品",httpMethod = "GET")
     public R queryAllDrug(@ApiParam(name = "drugQueryCondition",value = "药品查询条件")@RequestBody DrugQueryCondition drugQueryCondition){
+        System.out.println(drugQueryCondition);
         R r = new R();
         DrugMsg drugMsg = new DrugMsg("1000001","阿莫西林","西/成药","\n" +
                 "6g*14袋/盒","山东罗欣药业股份有限公司","112盒",5.00);
@@ -51,9 +52,13 @@ public class DrugRetailController {
         map.put("drugMsg",list);
         return r.ok(map);
     }
-    @GetMapping("/drugRetail/query/{name}")
+    @GetMapping("/drugRetail/queryDetailed")
     @ApiOperation(value = "查询接口",notes = "项目明细",httpMethod = "GET")
-    public R queryByName(@ApiParam(name = "name", value = "姓名查找项目明细")@PathVariable("name") String name){
+    @ApiResponses({
+            @ApiResponse(code = 0,message = "ok",response = DrugDetailed.class)
+    })
+    public R queryByName(@ApiParam(name = "name", value = "姓名查找项目明细") String name){
+        System.out.println(name);
         R r = new R();
         DrugDetailed drugDetailed = new DrugDetailed("肾宝糖浆",15.00,2,"瓶",30.00);
         DrugDetailed drugDetailed1 = new DrugDetailed("阿莫西林分散片",25.00,12,"盒",25.00);

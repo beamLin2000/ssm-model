@@ -22,7 +22,7 @@ public class RegisterController {
     @PostMapping("/register/add")
     @ApiOperation(value = "添加接口",notes = "挂号添加",httpMethod = "POST")
     public R add(@ApiParam(name = "register", value = "挂号添加信息")@RequestBody Register register){
-//        System.out.println(register);
+        System.out.println(register);
         R r = new R();
         Date date = new Date();
         long time = date.getTime();
@@ -39,7 +39,7 @@ public class RegisterController {
             @ApiResponse(code = 0,message = "ok",response = RegisterMsg.class)
     })
     public R queryByCondition(@ApiParam(name = "registerQueryCondition",value = "挂号记录查询条件")@RequestBody RegisterQueryCondition registerQueryCondition){
-//        System.out.println(registerQueryCondition);
+        System.out.println(registerQueryCondition);
 //        RegisterMsg query = this.registerService.query(registerQueryCondition);
 //        Integer count = this.registerService.count(registerQueryCondition);
 
@@ -69,7 +69,7 @@ public class RegisterController {
             @ApiResponse(code = 0,message = "ok",response = RegisterMsgUpdate.class)
     })
     public R toUpdate(@ApiParam(name = "registrationForm",value = "挂号单号")String registrationForm){
-//        System.out.println(registrationForm);
+        System.out.println(registrationForm);
         R r = new R();
         RegisterMsgUpdate register = this.registerService.toUpdate(registrationForm);
         List<RegisterMsgUpdate> list = new ArrayList<>();
