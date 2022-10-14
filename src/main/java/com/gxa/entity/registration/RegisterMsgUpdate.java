@@ -34,13 +34,11 @@ public class RegisterMsgUpdate {
     @ApiModelProperty(name = "phoneNo",value = "手机号码")
     private String phoneNo;
     @ApiModelProperty(name = "attendingDoctor",value = "接诊医生")
-//    private String department;
     private String attendingDoctor;//接诊医生
     @ApiModelProperty(name = "willPaid",value = "应收金额")
     private Double willPaid;//应收金额
     @ApiModelProperty(name = "amountPaid",value = "实收金额")
     private Double amountPaid;//实收金额
-//    private BigDecimal discountPaid;//优惠金额
     @ApiModelProperty(name = "insurancePayment",value = "医保支付")
     private Double insurancePayment;//医保支付
     @ApiModelProperty(name = "payMethod",value = "支付方式")

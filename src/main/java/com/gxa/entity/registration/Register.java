@@ -15,8 +15,6 @@ import java.util.Date;
 public class Register {
     @ApiModelProperty(name = "registrationForm",value = "挂号单号")
     private String registrationForm;
-//    @ApiModelProperty(name = "department",value = "科室",required = true)
-//    private String department;
     @ApiModelProperty(name = "receptionType",value = "接诊类型",required = true)
     private String receptionType;
     @ApiModelProperty(name = "attendingDoctor",value = "接诊医生",required = true)

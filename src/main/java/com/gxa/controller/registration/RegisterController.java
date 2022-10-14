@@ -6,6 +6,7 @@ import com.gxa.entity.registration.RegisterMsgUpdate;
 import com.gxa.entity.registration.RegisterQueryCondition;
 import com.gxa.service.register.RegisterService;
 import com.gxa.utils.R;
+import com.hazelcast.util.JsonUtil;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -38,8 +39,9 @@ public class RegisterController {
     @ApiResponses({
             @ApiResponse(code = 0,message = "ok",response = RegisterMsg.class)
     })
-    public R queryByCondition(@ApiParam(name = "registerQueryCondition",value = "挂号记录查询条件")@RequestBody RegisterQueryCondition registerQueryCondition){
-        System.out.println(registerQueryCondition);
+    public R queryByCondition(){
+//        System.out.println(registerQueryCondition);
+//        @ApiParam(name = "registerQueryCondition",value = "挂号记录查询条件")  @RequestBody RegisterQueryCondition registerQueryCondition)
 //        RegisterMsg query = this.registerService.query(registerQueryCondition);
 //        Integer count = this.registerService.count(registerQueryCondition);
 
@@ -72,6 +74,7 @@ public class RegisterController {
         System.out.println(registrationForm);
         R r = new R();
         RegisterMsgUpdate register = this.registerService.toUpdate(registrationForm);
+        System.out.println(register);
         List<RegisterMsgUpdate> list = new ArrayList<>();
         list.add(register);
         Map map = new HashMap();
