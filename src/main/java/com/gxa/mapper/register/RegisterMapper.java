@@ -10,7 +10,11 @@ public interface RegisterMapper {
     void saveCharge(Register register);
     void savePatient(Register register);
     RegisterMsgUpdate toUpdate(String registrationForm);
-    void update(RegisterMsgUpdate registerMsgUpdate);
+    void updateRegister(RegisterMsgUpdate registerMsgUpdate);
+    void updatePatient(RegisterMsgUpdate registerMsgUpdate);
     RegisterMsg query(RegisterQueryCondition registerQueryCondition);
-    void delete(String registrationForm);
+    void deleteCharge(String registrationForm);
+    void deletePatient(String registrationForm);
+    void deleteRegister(String registrationForm);
+    Integer count(RegisterQueryCondition registerQueryCondition);
 }

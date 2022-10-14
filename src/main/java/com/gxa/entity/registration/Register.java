@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 @ApiModel("挂号实体")
@@ -31,11 +30,11 @@ public class Register {
     @ApiModelProperty(name = "registrationClerk",value = "挂号员")
     private String registrationClerk;
     @ApiModelProperty(name = "medicalInsurancePayment",value = "医保支付")
-    private BigDecimal medicalInsurancePayment;
+    private Double medicalInsurancePayment;
     @ApiModelProperty(name = "amountPaid",value = "实收金额")
-    private BigDecimal amountPaid;
+    private Double amountPaid;
     @ApiModelProperty(name = "changeMoney",value = "找零")
-    private BigDecimal changeMoney;
+    private Double changeMoney;
     @ApiModelProperty(name = "paymentMethod",value = "支付方式")
     private String paymentMethod;
     @ApiModelProperty(name = "collectionRemarks",value = "收款备注")
@@ -59,4 +58,5 @@ public class Register {
     @ApiModelProperty(name = "remarks",value = "备注")
     private String remarks;
     private Date registrationDateTime;//收费日期
+    private String status;//就诊状态
 }

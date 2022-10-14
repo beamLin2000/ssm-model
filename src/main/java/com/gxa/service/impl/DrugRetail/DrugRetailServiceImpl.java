@@ -1,4 +1,4 @@
-package com.gxa.service.impl;
+package com.gxa.service.impl.DrugRetail;
 
 import com.gxa.entity.drugRetail.DrugMsg;
 import com.gxa.entity.drugRetail.DrugQueryCondition;
