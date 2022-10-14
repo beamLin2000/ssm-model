@@ -1,9 +1,11 @@
 package com.gxa.entity.patients;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.util.Date;
+@TableName(value = "patients")
 @Data
 public class Patients {
     @ApiModelProperty(name = "patientId",value = "患者序号")
@@ -48,6 +50,7 @@ public class Patients {
     private Date patientCreatTime;
     @ApiModelProperty(name = "operators",value = "操作人员")
     private String operators;
+    private Integer patientStart;
 
     public Patients(Integer patientId, Integer patientNumber, String patientName, Integer patientAge, String patientGender, String patientPhone, Date patientCreatTime, String operators) {
         this.patientId = patientId;

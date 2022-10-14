@@ -47,7 +47,7 @@ public class Register {
     private Date birthDay;
     @ApiModelProperty(name = "gender",value = "性别",required = true)
     private String gender;
-    @ApiModelProperty(name = "phoneNo",value = "手机号码")
+    @ApiModelProperty(name = "phoneNo",value = "手机号码",required = true)
     private String phoneNo;
     @ApiModelProperty(name = "idNo",value = "证件号码")
     private String idNo;

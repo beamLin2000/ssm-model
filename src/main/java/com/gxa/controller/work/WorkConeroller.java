@@ -1,8 +1,11 @@
 package com.gxa.controller.work;
 
+import com.gxa.dto.PatientDto;
+import com.gxa.dto.WorkPatientDto;
 import com.gxa.entity.patients.Patients;
 import com.gxa.entity.work.*;
-import com.gxa.service.work.Patient1Service;
+import com.gxa.service.work.PatientDtoService;
+import com.gxa.service.work.WorkPatientDtoService;
 import com.gxa.utils.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -22,7 +25,10 @@ import java.util.*;
 public class WorkConeroller {
 
     @Autowired
-    private Patient1Service patient1Service;
+    private PatientDtoService patientService;
+
+    @Autowired
+    private WorkPatientDtoService workPatientDtoService;
 
     //工作台list
     @GetMapping("/work/list")
@@ -31,41 +37,13 @@ public class WorkConeroller {
     @ApiResponses({
             @ApiResponse(code = 0,message = "ok",response = Patient1.class)
     })
-    public R workList(Integer page,Integer limit){
-        Date date = new Date();
-        long time = date.getTime();
-        date.setTime(time);
-        Patient1 patient = new Patient1(1,"李四","18","nan","已就诊",date,"beam","13256485216");
-        Patient1 patient1 = new Patient1(2,"ww","18","nan","已就诊",date,"beam","13256485216");
-        Patient1 patient2 = new Patient1(3,"zn","18","nan","已就诊",date,"beam","13256485216");
-        Patient1 patient3 = new Patient1(4,"zs","18","nan","已就诊",date,"beam","13256485216");
-        Patient1 patient4 = new Patient1(5,"qq","18","nan","已就诊",date,"beam","13256485216");
-        Patient1 patient5 = new Patient1(6,"ht","18","nan","已就诊",date,"beam","13256485216");
-        Patient1 patient6 = new Patient1(6,"44","18","nan","已就诊",date,"beam","13256485216");
-        Patient1 patient7 = new Patient1(6,"33ht","18","nan","已就诊",date,"beam","13256485216");
-        Patient1 patient8 = new Patient1(6,"22","18","nan","已就诊",date,"beam","13256485216");
-        Patient1 patient9 = new Patient1(6,"11","18","nan","已就诊",date,"beam","13256485216");
-        Patient1 patient10 = new Patient1(6,"66","18","nan","已就诊",date,"beam","13256485216");
-        Patient1 patient11 = new Patient1(6,"77","18","nan","已就诊",date,"beam","13256485216");
-        List<Patient1> list = new ArrayList<>();
-        list.add(patient);
-        list.add(patient1);
-        list.add(patient2);
-        list.add(patient3);
-        list.add(patient4);
-        list.add(patient5);
-        list.add(patient6);
-        list.add(patient7);
-        list.add(patient8);
-        list.add(patient9);
-        list.add(patient10);
-        list.add(patient11);
+    public R workList(){
 
         Map map = new HashMap();
 
-//        List<Patients> patient1s = this.patient1Service.queryAllPatient1();
+        List<PatientDto> patientDtos = this.patientService.queryAllPatientDto();
 
-        map.put("drugs",list);
+        map.put("drugs",patientDtos);
         R r = new R();
         return r.ok(map);
     }
@@ -76,16 +54,12 @@ public class WorkConeroller {
     @ApiResponses({
             @ApiResponse(code = 0,message = "ok",response = WorkPatient.class)
     })
-    public R patientList(Integer id){
-        Date date = new Date();
-        long time = date.getTime();
-        date.setTime(time);
-        Address address = new Address("四川省","成都市","武侯区大石西路");
-        WorkPatient workPatient = new WorkPatient(1,"ZS","21542121","20",date,"男","123115464","510**************000","复诊",address,"流行性感冒","少吃肉");
-        List<WorkPatient> list = new ArrayList<>();
-        list.add(workPatient);
+    public R patientList(String phoneNum,String status){
+
+        WorkPatientDto workPatientDto = this.workPatientDtoService.queryWorkPatientDtoByPhoneNum(phoneNum,status);
+
         Map map = new HashMap();
-        map.put("drugs",list);
+        map.put("drugs",workPatientDto);
         R r = new R();
         return r.ok(map);
     }

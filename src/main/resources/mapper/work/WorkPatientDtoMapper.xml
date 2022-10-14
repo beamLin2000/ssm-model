@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxa.mapper.work.WorkPatientDtoMapper">
+    <resultMap id="workPatientDto" type="com.gxa.dto.WorkPatientDto">
+        <result property="name" column="patient_name"></result>
+        <result property="card" column="patient_card"></result>
+        <result property="age" column="patient_age"></result>
+        <result property="brith" column="patient_birthday"></result>
+        <result property="gender" column="patient_gender"></result>
+        <result property="phone" column="patient_phone"></result>
+        <result property="idcard" column="patient_documents"></result>
+        <result property="type" column="reception_type"></result>
+        <result property="address" column="patient_detailed_address"></result>
+    </resultMap>
+
+    <select id="queryWorkPatientDtoByPhoneNum" resultMap="workPatientDto">
+        SELECT p.patient_name,p.patient_card,p.patient_age,p.patient_birthday,p.patient_gender,p.patient_phone,p.patient_documents,r.reception_type,p.patient_detailed_address
+        FROM register r ,patients p
+        WHERE r.registration_form=p.registration_form AND p.patient_phone=#{phoneNum} AND reception_type=#{status}
+    </select>
+</mapper>
