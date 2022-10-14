@@ -59,4 +59,5 @@ public class Register {
     @ApiModelProperty(name = "remarks",value = "备注")
     private String remarks;
     private Date registrationDateTime;//收费日期
+    private String status;//就诊状态
 }

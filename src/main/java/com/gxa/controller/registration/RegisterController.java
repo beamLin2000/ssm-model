@@ -30,7 +30,8 @@ public class RegisterController {
         date.setTime(time);
         register.setRegistrationDateTime(date);
         register.setRegistrationDate(date);
-//        this.registerService.add(register);
+        register.setStatus("未就诊");
+        this.registerService.add(register);
         return r.ok("success");
     }
     @GetMapping("/register/query")
@@ -58,7 +59,7 @@ public class RegisterController {
         R r = new R();
         return r.ok(map);
     }
-    @GetMapping("/register/update")
+    @GetMapping("/register/toUpdate")
     @ApiOperation(value = "数据回显接口",notes = "挂号信息回显",httpMethod = "GET")
     @ApiResponses({
             @ApiResponse(code = 0,message = "ok",response = RegisterMsgUpdate.class)

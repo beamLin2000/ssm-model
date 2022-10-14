@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxa.mapper.systemSettings.RolesSetMapper">
+<!--    <insert id="insert">-->
+<!--        insert into CPSMainTable(itemNumber,projectName,costPrice,retailPrice,unit,projectCategory,invoiceItem,part,projectStatus,remarks)-->
+<!--        values(#{itemNumber},#{projectName},#{costPrice},#{retailPrice},#{unit},#{projectCategory},#{invoiceItem},#{part},#{projectStatus},#{remarks})-->
+<!--    </insert>-->
+
+<!--    <update id="update">-->
+<!--        update CPSMainTable-->
+<!--        set itemNumber=#{itemNumber},projectName=#{projectName},costPrice=#{costPrice},retailPrice=#{retailPrice},unit=#{unit},projectCategory=#{projectCategory},invoiceItem=#{invoiceItem},part=#{part},projectStatus=#{projectStatus},remarks=#{remarks}-->
+<!--        where id=#{id}-->
+<!--    </update>-->
+
+<!--    <delete id="delete">-->
+<!--        delete from CPSMainTable-->
+<!--        where id=#{id}-->
+<!--    </delete>-->
+
+    <select id="selectAll" resultType="com.gxa.entity.systemSettings.RolesTable">
+        select * from RolesTable
+    </select>
+
+    <!--    <select id="select" resultType="com.gxa.entity.systemSettings.CPSMainTable">-->
+<!--        select * from CPSMainTable-->
+<!--        <where>-->
+<!--            <if test="projectStatus!=null">-->
+<!--                and projectStatus=#{projectStatus}-->
+<!--            </if>-->
+<!--            <if test="projectName!=null">-->
+<!--                and projectName=#{projectName}-->
+<!--            </if>-->
+<!--            <if test="itemNumber!=null">-->
+<!--                and itemNumber=#{itemNumber}-->
+<!--            </if>-->
+<!--        </where>-->
+<!--    </select>-->
+
+<!--    <select id="drop" resultType="com.gxa.entity.systemSettings.CPSViceTable">-->
+<!--        select * from CPSViceTableCheckProjectSetMapper.xml-->
+<!--    </select>-->
+</mapper>
