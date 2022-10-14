@@ -19,6 +19,10 @@ public class TollDrugs {
     private Double tollDrugsDiscount;
     @ApiModelProperty(name = "tollDrugsAllMoney",value = "折扣金额")
     private Double tollDrugsAllMoney;
+    @ApiModelProperty(name = "tollDrugsDispose",value = "处理费")
+    private Double tollDrugsDispose;
+    @ApiModelProperty(name = "tollDrugsInjection",value = "注射费")
+    private Double tollDrugsInjection;
     @ApiModelProperty(name = "patientId",value = "患者ID")
     private Integer patientId;
 }
