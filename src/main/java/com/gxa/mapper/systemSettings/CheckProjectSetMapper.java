@@ -2,7 +2,7 @@ package com.gxa.mapper.systemSettings;
 
 import com.gxa.entity.systemSettings.CPSMainTable;
 import com.gxa.entity.systemSettings.CPSViceTable;
-import com.gxa.form.systemsettings.CPSEdit;
+import com.gxa.entity.form.systemsettings.CPSEdit;
 
 import java.util.List;
 

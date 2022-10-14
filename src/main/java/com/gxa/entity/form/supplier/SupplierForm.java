@@ -1,4 +1,4 @@
-package com.gxa.form.supplier;
+package com.gxa.entity.form.supplier;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

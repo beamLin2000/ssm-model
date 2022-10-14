@@ -3,7 +3,7 @@ package com.gxa.service.impl.systemSettings;
 import com.gxa.entity.systemSettings.CPSMainTable;
 import com.gxa.entity.systemSettings.CPSViceTable;
 
-import com.gxa.form.systemsettings.CPSEdit;
+import com.gxa.entity.form.systemsettings.CPSEdit;
 import com.gxa.mapper.systemSettings.CheckProjectSetMapper;
 import com.gxa.service.systemSettings.CheckProjectSetService;
 import org.springframework.beans.factory.annotation.Autowired;
