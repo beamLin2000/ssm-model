@@ -16,20 +16,7 @@ public class RegisterServiceImpl implements RegisterService {
     @Override
     public void add(Register register) {
         this.registerMapper.saveRegister(register);
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        this.registerMapper.savePatient(register);
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        this.registerMapper.saveCharge(register);
     }
-
     @Override
     public RegisterMsgUpdate toUpdate(String registrationForm) {
         return this.registerMapper.toUpdate(registrationForm);

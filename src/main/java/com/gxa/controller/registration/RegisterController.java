@@ -4,6 +4,8 @@ import com.gxa.entity.registration.Register;
 import com.gxa.entity.registration.RegisterMsg;
 import com.gxa.entity.registration.RegisterMsgUpdate;
 import com.gxa.entity.registration.RegisterQueryCondition;
+import com.gxa.service.register.ChargeService;
+import com.gxa.service.register.PatientService;
 import com.gxa.service.register.RegisterService;
 import com.gxa.utils.R;
 import com.hazelcast.util.JsonUtil;
@@ -19,6 +21,10 @@ import java.util.*;
 public class RegisterController {
     @Autowired
     private RegisterService registerService;
+    @Autowired
+    private ChargeService chargeService;
+    @Autowired
+    private PatientService patientService;
 
     @PostMapping("/register/add")
     @ApiOperation(value = "添加接口",notes = "挂号添加",httpMethod = "POST")
@@ -32,6 +38,8 @@ public class RegisterController {
         register.setRegistrationDate(date);
         register.setStatus("未就诊");
         this.registerService.add(register);
+        this.chargeService.add(register);
+        this.patientService.add(register);
         return r.ok("success");
     }
     @GetMapping("/register/query")
