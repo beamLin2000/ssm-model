@@ -30,9 +30,9 @@ public class RegisterMsg {
     @ApiModelProperty(name = "receptionTime",value = "接诊时间")
     private Date receptionTime;
     @ApiModelProperty(name = "willPaid",value = "应收金额")
-    private BigDecimal willPaid;
+    private Double willPaid;
     @ApiModelProperty(name = "amountPaid",value = "实收金额")
-    private BigDecimal amountPaid;
+    private Double amountPaid;
     @ApiModelProperty(name = "status",value = "就诊状态")
     private String status;
 }

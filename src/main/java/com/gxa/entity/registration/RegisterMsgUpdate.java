@@ -38,16 +38,16 @@ public class RegisterMsgUpdate {
 //    private String department;
     private String attendingDoctor;//接诊医生
     @ApiModelProperty(name = "willPaid",value = "应收金额")
-    private BigDecimal willPaid;//应收金额
+    private Double willPaid;//应收金额
     @ApiModelProperty(name = "amountPaid",value = "实收金额")
-    private BigDecimal amountPaid;//实收金额
+    private Double amountPaid;//实收金额
 //    private BigDecimal discountPaid;//优惠金额
     @ApiModelProperty(name = "insurancePayment",value = "医保支付")
-    private BigDecimal insurancePayment;//医保支付
+    private Double insurancePayment;//医保支付
     @ApiModelProperty(name = "payMethod",value = "支付方式")
     private String payMethod;//支付方式
     @ApiModelProperty(name = "changeMoney",value = "找零")
-    private BigDecimal changeMoney;//找零
+    private Double changeMoney;//找零
     @ApiModelProperty(name = "registrationDateTime",value = "收费日期")
     private Date registrationDateTime;//收费日期
     @ApiModelProperty(name = "tolCollector",value = "收费员")

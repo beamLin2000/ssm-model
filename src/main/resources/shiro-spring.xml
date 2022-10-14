@@ -30,7 +30,7 @@
             <value>
                 / = anon
                 /index.html = anon
-                /user/login = anon
+                /login = anon
                 /logout = anon
                 /** = anon
             </value>
