@@ -4,7 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.gxa.entity.systemSettings.*;
 import com.gxa.form.systemSettings.CPSEdit;
-import com.gxa.form.systemSettings.CostSettngsForm.RegisterFeeForm;
+import com.gxa.form.CostSettngsForm.RegisterFeeForm;
 import com.gxa.form.systemSettings.CostSettngsForm.SurchargeFeeForm;
 import com.gxa.form.systemSettings.CostSettngsForm.TreatmentFeeForm;
 import com.gxa.form.systemSettings.EMEdit;
