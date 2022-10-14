@@ -1,5 +1,6 @@
 package com.gxa.controller.patients;
 
+import com.gxa.entity.patients.Family;
 import com.gxa.entity.patients.FamilyAdd;
 import com.gxa.entity.patients.Patients;
 import com.gxa.service.patient.FamilyService;
@@ -27,169 +28,141 @@ public class PatientController {
     @ResponseBody
     @ApiOperation(value = "查找接口",notes = "查找患者",httpMethod = "GET")
     public R patientList(ModelMap map){
-//        Date date = new Date();
-//        long time = date.getTime();
-//        date.setTime(time);
-//
-//        Patients patient = new Patients(1,100130,"李四",12,"男","17754138769",date,"李四");
-//        List<Patients> list = new ArrayList<>();
-//        list.add(patient);
-//
-//        Map map = new HashMap();
-//        map.put("drugs",list);
-//        R r = new R();
         List<Patients> patients = this.patientService.queryAll();
         System.out.println(patients);
         map.addAttribute("patients",patients);
         R r = new R();
-        System.out.println(map);
+//        System.out.println(map);
         return r.ok(map);
+
     }
 
     @GetMapping("/patient/phone")
     @ResponseBody
     @ApiOperation(value = "查找接口",notes = "电话查找患者",httpMethod = "GET")
-    public R patientPhoneList(@ApiParam(name = "电话查找患者信息", value = "patientPhone")String patientPhone){
-        Date date = new Date();
-        long time = date.getTime();
-        date.setTime(time);
-        R r = new R();
-        Patients patient = new Patients(1,100130,"李四",12,"男","17754138769",date,"李四");
-        Patients patient1 = new Patients(1,100130,"李四",12,"男","17754138755",date,"李四");
-        Patients patient2 = new Patients(1,100130,"李四",12,"男","17754138768",date,"李四");
-        List<Patients> list = new ArrayList<>();
-        list.add(patient);
-        list.add(patient1);
-        list.add(patient2);
-        Map map = new HashMap();
-        map.put("patient",list);
+    public R patientPhoneList(@ApiParam(name = "电话查找患者信息", value = "patientPhone")@RequestParam("patientPhone") String patientPhone){
+        System.out.println(patientPhone);
+        List<Patients> patients = this.patientService.queryByPhone(patientPhone);
+       Map map = new HashMap();
+       map.put("patients",patients);
 
-        return r.ok(map);
+//        System.out.println(patients);
+        return R.ok(map);
     }
 
 
     @PostMapping("/patient/add")
     @ResponseBody
     @ApiOperation(value = "添加接口",notes = "患者添加",httpMethod = "POST")
-    public R patientAdd(@ApiParam(name = "患者添加信息", value = "patientAdd")Patients patients){
-        Date date = new Date();
-        long time = date.getTime();
-        date.setTime(time);
-        R r = new R();
-        Patients patient2 = new Patients(1,100130,"李四",12,"男","17754138768",date,"李四");
-        List<Patients> list = new ArrayList<>();
+    public R patientAdd(@ApiParam(name = "患者添加信息", value = "patientAdd")@RequestBody Patients patients){
 
-        list.add(patient2);
-        Map map = new HashMap();
-        map.put("patient",list);
+        try {
+            this.patientService.add(patients);
 
-        return r.ok(map);
+        } catch (Exception e) {
+            e.printStackTrace();
+            R.ok("fale");
+        }
+        return R.ok("succes");
     }
 
     @GetMapping("/patient/updatePre")
     @ResponseBody
     @ApiOperation(value = "查询接口",notes = "患者修改查询",httpMethod = "GET")
-    public R tpPatientUpdate(@ApiParam(name = "患者修改条件",value = "patientId") Integer patientId){
-        R r = new R();
-        this.patientService.tpPatientUpdate(patientId);
-        R.ok("success");
-        return r;
+    public R tpPatientUpdate(@ApiParam(name = "患者修改条件",value = "patientId")@RequestParam("patientId") Integer patientId){
+        Patients patients = this.patientService.queryById(patientId);
+        Map map = new HashMap();
+        map.put("patients",patients);
+        return R.ok(map);
     }
 
     @PutMapping("/patient/update")
     @ResponseBody
     @ApiOperation(value = "修改接口",notes = "患者修改",httpMethod = "PUT")
-    public R patientUpdate(@ApiParam(name = "患者修改",value = "patients") Patients patients){
-        Date date = new Date();
-        long time = date.getTime();
-        date.setTime(time);
-        R r = new R();
-        Patients patient = new Patients(1,100130,"李四",12,"男","17754138769",date,"李四");
-        Patients patient1 = new Patients(1,100130,"李四",12,"男","17754138755",date,"李四");
-        Patients patient2 = new Patients(1,100130,"李四",12,"男","17754138768",date,"李四");
-        List<Patients> list = new ArrayList<>();
-        list.add(patient);
-        list.add(patient1);
-        list.add(patient2);
-        Map map = new HashMap();
-        map.put("patient",list);
-
-        return r.ok(map);
+    public R patientUpdate(@ApiParam(name = "患者修改",value = "patients")@RequestBody Patients patients){
+        try {
+            this.patientService.update(patients);
+        } catch (Exception e) {
+            e.printStackTrace();
+            R.ok("fale");
+        }
+        return R.ok("succes");
     }
 
 
     @DeleteMapping("/patient/delete")
     @ResponseBody
     @ApiOperation(value = "删除接口",notes = "患者删除",httpMethod = "DELETE")
-    public R patientDelete(@ApiParam(name = "患者删除条件",value = "patientId") Integer patientId){
-        R r = new R();
-        this.patientService.tpPatientUpdate(patientId);
-        R.ok("success");
-        return r;
+    public R patientDelete(@ApiParam(name = "患者删除条件",value = "patientId")@RequestParam("patientId") Integer patientId){
+        try {
+            this.patientService.delete(patientId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            R.ok("fale");
+        }
+        return R.ok("success");
     }
 
 
     @GetMapping("/family/list")
     @ApiOperation(value = "查找接口",notes = "查找家庭",httpMethod = "GET")
-    public R familyList(@ApiParam(name = "患者编号查询条件",value = "patientNumber") Integer patientNumber){
-//       Date date = new Date();
-//        long time = date.getTime();
-//        date.setTime(time);
-//
-//
-//        Family family = new Family(1,"父子","李四","国企",date,"男","12354689",date);
-//        List<Family> familyList= new ArrayList<>();
-//        familyList.add(family);
-//        Map map = new HashMap();
-//        map.put("drugs",familyList);
-//        R r = new R();
-//        return r.ok(map);
-        R r = new R();
-        this.patientService.tpPatientUpdate(patientNumber);
-        R.ok("success");
-        return r;
+    @ResponseBody
+    public R familyList(@ApiParam(name = "患者编号查询条件",value = "patientNumber")@RequestParam("patientId") Integer patientId){
+        List<Family> family = this.familyService.queryByFamilyId(patientId);
+        Map map = new HashMap();
+        map.put("family",family);
+        return R.ok(map);
 
     }
 
     @GetMapping("/family/updatePre")
     @ResponseBody
     @ApiOperation(value = "查询接口",notes = "家庭修改条件",httpMethod = "GET")
-    public R tpFamilyUpdate(@ApiParam(name = "家庭修改条件",value = "familyId") Integer familyId){
-        R r = new R();
-        this.familyService.tpFamilyUpdate(familyId);
-        R.ok("success");
-        return r;
+    public R tpFamilyUpdate(@ApiParam(name = "家庭修改条件",value = "familyId")@RequestParam("familyId") Integer familyId){
+       Family family = this.familyService.queryById(familyId);
+        Map map = new HashMap();
+        map.put("family",family);
+        return R.ok(map);
     }
 
 
     @PutMapping("/family/update")
     @ResponseBody
     @ApiOperation(value = "修改接口",notes = "家庭修改",httpMethod = "PUT")
-    public R familyAddUpdate(@ApiParam(name = "患者修改",value = "familyAdd") FamilyAdd familyAdd){
-        R r = new R();
-        this.familyService.familyAddUpdate(familyAdd);
-        R.ok("success");
-        return r;
+    public R familyAddUpdate(@ApiParam(name = "患者修改",value = "familyAdd")@RequestBody Family family){
+        try {
+            this.familyService.update(family);
+        } catch (Exception e) {
+            e.printStackTrace();
+            R.ok("fale");
+        }
+        return R.ok("success");
     }
 
 
     @PostMapping("/family/add")
     @ResponseBody
     @ApiOperation(value = "添加接口",notes = "家庭添加",httpMethod = "POST")
-    public R add(@ApiParam(name = "家庭添加信息", value = "familyAdd")FamilyAdd familyAdd){
-        R r = new R();
-        this.familyService.add(familyAdd);
-        R.ok("success");
-        return r;
+    public R add(@ApiParam(name = "家庭添加信息", value = "familyAdd")@RequestBody Family family){
+        try {
+            this.familyService.add(family);
+        } catch (Exception e) {
+            e.printStackTrace();
+            R.ok("fale");
+        }
+        return R.ok("success");
     }
 
     @DeleteMapping("/family/delete")
     @ResponseBody
     @ApiOperation(value = "删除接口",notes = "家庭删除",httpMethod = "DELETE")
-    public R delete(@ApiParam(name = "患者删除条件",value = "familyId") Integer familyId){
-        R r = new R();
-        this.familyService.tpFamilyUpdate(familyId);
-        R.ok("success");
-        return r;
+    public R delete(@ApiParam(name = "患者删除条件",value = "familyId")@RequestParam("familyId") Integer familyId){
+        try {
+            this.familyService.delete(familyId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            R.ok("fale");
+        }
+        return R.ok("success");
     }
 }

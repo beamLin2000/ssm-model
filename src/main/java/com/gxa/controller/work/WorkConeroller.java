@@ -1,11 +1,14 @@
 package com.gxa.controller.work;
 
+import com.gxa.entity.patients.Patients;
 import com.gxa.entity.work.*;
+import com.gxa.service.work.Patient1Service;
 import com.gxa.utils.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +20,10 @@ import java.util.*;
 @Controller
 @Api(tags = {"工作台接口"})
 public class WorkConeroller {
+
+    @Autowired
+    private Patient1Service patient1Service;
+
     //工作台list
     @GetMapping("/work/list")
     @ResponseBody
@@ -26,24 +33,26 @@ public class WorkConeroller {
     })
     public R workList(Integer page,Integer limit){
         Date date = new Date();
-        long time = date.getTime();
-        date.setTime(time);
-        Patient1 patient = new Patient1(1,"李四","18","nan","已就诊",date,"beam","13256485216");
-        Patient1 patient1 = new Patient1(2,"ww","18","nan","已就诊",date,"beam","13256485216");
-        Patient1 patient2 = new Patient1(3,"zn","18","nan","已就诊",date,"beam","13256485216");
-        Patient1 patient3 = new Patient1(4,"zs","18","nan","已就诊",date,"beam","13256485216");
-        Patient1 patient4 = new Patient1(5,"qq","18","nan","已就诊",date,"beam","13256485216");
-        Patient1 patient5 = new Patient1(6,"ht","18","nan","已就诊",date,"beam","13256485216");
-        List<Patient1> list = new ArrayList<>();
-        list.add(patient);
-        list.add(patient1);
-        list.add(patient2);
-        list.add(patient3);
-        list.add(patient4);
-        list.add(patient5);
+//        long time = date.getTime();
+//        date.setTime(time);
+//        Patient1 patient = new Patient1(1,"李四","18","nan","已就诊",date,"beam","13256485216");
+//        Patient1 patient1 = new Patient1(2,"ww","18","nan","已就诊",date,"beam","13256485216");
+//        Patient1 patient2 = new Patient1(3,"zn","18","nan","已就诊",date,"beam","13256485216");
+//        Patient1 patient3 = new Patient1(4,"zs","18","nan","已就诊",date,"beam","13256485216");
+//        Patient1 patient4 = new Patient1(5,"qq","18","nan","已就诊",date,"beam","13256485216");
+//        Patient1 patient5 = new Patient1(6,"ht","18","nan","已就诊",date,"beam","13256485216");
+//        List<Patient1> list = new ArrayList<>();
+//        list.add(patient);
+//        list.add(patient1);
+//        list.add(patient2);
+//        list.add(patient3);
+//        list.add(patient4);
+//        list.add(patient5);
+
+        List<Patients> patient1s = this.patient1Service.queryAllPatient1();
 
         Map map = new HashMap();
-        map.put("drugs",list);
+        map.put("drugs",patient1s);
         map.put("username","username");
         R r = new R();
         return r.ok(map);

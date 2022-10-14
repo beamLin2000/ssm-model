@@ -1,9 +1,15 @@
 package com.gxa.service.patient;
 
+import com.gxa.entity.patients.Family;
 import com.gxa.entity.patients.FamilyAdd;
 
+import java.util.List;
+
 public interface FamilyService {
-    void add(FamilyAdd familyAdd);
-    void tpFamilyUpdate(Integer family_id);
-    void familyAddUpdate(FamilyAdd familyAdd);
+    List<Family> queryByFamilyId(Integer patientId);
+    Family queryById(Integer familyId);
+    void add(Family family);
+    void update(Family family);
+    void delete(Integer familyId);
+
 }

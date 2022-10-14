@@ -1,8 +1,11 @@
 package com.gxa.service.impl.patient;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.gxa.entity.patients.Patients;
 import com.gxa.mapper.patients.PatientsMapper;
 import com.gxa.service.patient.PatientService;
+import com.gxa.utils.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,22 +17,54 @@ public class PatientServiceImpl implements PatientService {
     private PatientsMapper patientsMapper;
     @Override
     public List<Patients> queryAll() {
-        List<Patients> patients = this.patientsMapper.queryAll();
+//        List<Patients> patients = this.patientsMapper.queryAll();
+//        return patients;
+
+
+        List<Patients> patients = this.patientsMapper.selectList(null);
         return patients;
     }
 
     @Override
-    public void patientAdd(Patients patients) {
+    public List<Patients> queryByPhone(String patientPhone) {
+//        Patients patients = this.patientsMapper.queryByPhone(patientPhone);
 
+        QueryWrapper<Patients> wrapper = new QueryWrapper<>();
+        wrapper.eq("patient_phone",patientPhone);
+
+        List<Patients> patients = this.patientsMapper.selectList(wrapper);
+        System.out.println(patientPhone);
+
+        return patients;
     }
 
     @Override
-    public void tpPatientUpdate(Integer patient_id) {
 
+    public void add(Patients patients) {
+        patientsMapper.insert(patients);
     }
 
     @Override
-    public void patientUpdate(Patients patients) {
-
+    public Patients queryById(Integer patientId) {
+        QueryWrapper<Patients> wrapper = new QueryWrapper<>();
+        wrapper.eq("patient_Id",patientId);
+        Patients patients = this.patientsMapper.selectOne(wrapper);
+        return patients;
     }
+
+    @Override
+    public void update(Patients patients) {
+        UpdateWrapper<Patients> updateWrapper = new UpdateWrapper<>();
+        updateWrapper.eq("patient_id",patients.getPatientId());
+        patientsMapper.update(patients,updateWrapper);
+    }
+
+    @Override
+    public void delete(Integer patientId) {
+        QueryWrapper<Patients> wrapper = new QueryWrapper<>();
+        wrapper.eq("patient_Id",patientId);
+        patientsMapper.delete(wrapper);
+    }
+
+
 }

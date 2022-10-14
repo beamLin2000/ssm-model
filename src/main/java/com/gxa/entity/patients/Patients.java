@@ -50,6 +50,8 @@ public class Patients {
     private Date patientCreatTime;
     @ApiModelProperty(name = "operators",value = "操作人员")
     private String operators;
+    @ApiModelProperty(name = "patientStart",value = "状态")
+    private Integer patientStart;
 
     public Patients(Integer patientId, Integer patientNumber, String patientName, Integer patientAge, String patientGender, String patientPhone, Date patientCreatTime, String operators) {
         this.patientId = patientId;
