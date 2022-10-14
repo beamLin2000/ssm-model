@@ -1,6 +1,5 @@
 package com.gxa.service.impl.systemSettings;
 
-import com.gxa.entity.systemSettings.EMEmployeeTable;
 import com.gxa.entity.systemSettings.RolesTable;
 import com.gxa.mapper.systemSettings.RolesSetMapper;
 import com.gxa.service.systemSettings.RolesSetService;

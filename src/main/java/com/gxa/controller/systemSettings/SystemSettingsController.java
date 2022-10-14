@@ -5,10 +5,10 @@ import com.gxa.entity.systemSettings.CPSMainTable;
 import com.gxa.entity.systemSettings.CPSViceTable;
 import com.gxa.entity.systemSettings.EMEmployeeTable;
 import com.gxa.entity.systemSettings.RolesTable;
-import com.gxa.form.systemSettings.CPSEdit;
-import com.gxa.form.systemSettings.EMEdit;
+import com.gxa.form.systemsettings.CPSEdit;
+import com.gxa.form.systemsettings.EMEdit;
 
-import com.gxa.form.systemSettings.EMSelect;
+import com.gxa.form.systemsettings.EMSelect;
 import com.gxa.service.systemSettings.CheckProjectSetService;
 import com.gxa.service.systemSettings.RolesSetService;
 import com.gxa.utils.systemSettings.Result;
