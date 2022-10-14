@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface BusinessService {
     List<Business> queryAll();
-    void queryCountByToday(Date date);
-    void queryCountByToday(@Param("date") Date date, @Param("status") String status);
+    Integer queryCountByToday(Date date);
+    Integer queryCountByToday(@Param("date") Date date, @Param("status") String status);
 }

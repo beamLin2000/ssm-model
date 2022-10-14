@@ -1,4 +1,4 @@
-package com.gxa.form.systemsettings.CostSettngsForm;
+package com.gxa.form.CostSettngsForm;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

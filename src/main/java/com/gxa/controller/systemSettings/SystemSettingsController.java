@@ -1,11 +1,13 @@
 package com.gxa.controller.systemSettings;
 
+
 import com.gxa.entity.systemSettings.CPSMainTable;
 import com.gxa.entity.systemSettings.CPSViceTable;
 import com.gxa.entity.systemSettings.EMEmployeeTable;
 import com.gxa.entity.systemSettings.RolesTable;
 import com.gxa.form.systemSettings.CPSEdit;
 import com.gxa.form.systemSettings.EMEdit;
+
 import com.gxa.form.systemSettings.EMSelect;
 import com.gxa.service.systemSettings.CheckProjectSetService;
 import com.gxa.service.systemSettings.RolesSetService;
@@ -18,8 +20,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Date;
 import java.util.List;
 
-@Api(tags = {"系统设置接口"})
+
 @RestController
+@Api(tags = {"系统设置接口"})
 public class SystemSettingsController {
 
     @Autowired

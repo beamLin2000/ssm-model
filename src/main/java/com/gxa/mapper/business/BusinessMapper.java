@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Param;
 import java.util.Date;
 
 public interface BusinessMapper extends BaseMapper<Business> {
-    void queryCountByToday(Date date);
+    Integer queryCountByToday(Date date);
     Integer queryCountByToday(@Param("date") Date date,@Param("status") String status);
+
+    Double queryTodayRevenue (Date date);
 }

@@ -10,4 +10,7 @@
             <if test="status !=null and status !='' ">AND 就诊状态=#{status}</if>
         </where>
     </select>
+    <select id="queryTodayRevenue" resultType="java.lang.Double">
+        SELECT
+    </select>
 </mapper>

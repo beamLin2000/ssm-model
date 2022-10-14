@@ -2,6 +2,7 @@ package com.gxa.service.impl.systemSettings;
 
 import com.gxa.entity.systemSettings.CPSMainTable;
 import com.gxa.entity.systemSettings.CPSViceTable;
+
 import com.gxa.form.systemSettings.CPSEdit;
 import com.gxa.mapper.systemSettings.CheckProjectSetMapper;
 import com.gxa.service.systemSettings.CheckProjectSetService;
@@ -20,12 +21,10 @@ public class CheckProject_ServiceImpl implements CheckProjectSetService {
         return CPSMainTables;
     }
 
-    @Override
     public void update(CPSEdit cpsEdit) {
         checkProjectSet_mapper.update(cpsEdit);
     }
 
-    @Override
     public void insert(CPSEdit cpsEdit) {
         checkProjectSet_mapper.insert(cpsEdit);
     }
@@ -35,7 +34,6 @@ public class CheckProject_ServiceImpl implements CheckProjectSetService {
         checkProjectSet_mapper.delete(id);
     }
 
-    @Override
     public CPSMainTable select(CPSEdit cpsEdit) {
         CPSMainTable select = checkProjectSet_mapper.select(cpsEdit);
         return select;

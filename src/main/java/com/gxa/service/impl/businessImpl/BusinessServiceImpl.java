@@ -23,12 +23,14 @@ public class BusinessServiceImpl implements BusinessService {
     }
 
     @Override
-    public void queryCountByToday(Date date) {
-        this.businessMapper.queryCountByToday(date);
+    public Integer queryCountByToday(Date date) {
+        Integer integer = this.businessMapper.queryCountByToday(date);
+        return integer;
     }
 
     @Override
-    public void queryCountByToday(Date date, String status) {
-
+    public Integer queryCountByToday(Date date, String status) {
+        Integer integer = this.businessMapper.queryCountByToday(date, status);
+        return integer;
     }
 }
