@@ -16,7 +16,7 @@
         <result property="status" column="status"></result>
     </resultMap>
     <resultMap id="registerUpdateMsg" type="com.gxa.entity.registration.RegisterMsgUpdate">
-        <id property="registrationForm" column="registration_form" jdbcType="VARCHAR"></id>
+        <result property="registrationForm" column="registration_form" jdbcType="VARCHAR"></result>
         <result property="willPaid" column="amount_paid" jdbcType="DOUBLE"></result>
         <result property="insurancePayment" column="insurance_payment" jdbcType="DOUBLE"></result>
         <result property="amountPaid" column="amount_paid" jdbcType="DOUBLE"></result>
