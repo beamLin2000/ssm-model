@@ -16,10 +16,10 @@
     </bean>
     <mvc:cors>
         <mvc:mapping path="/**"
-                     allowed-origins="172.16.*.*,localhost"
+                     allowed-origins="*"
                      allowed-methods="GET,POST,PUT,DELETE,OPTIONS"
                      allowed-headers="*"
-                     allow-credentials="true"
+                     allow-credentials="false"
                      max-age="3600" />
     </mvc:cors>
     <context:component-scan base-package="com.gxa.controller,com.gxa.config"/>

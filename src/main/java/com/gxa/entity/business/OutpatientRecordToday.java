@@ -12,8 +12,6 @@ import java.util.Date;
 @NoArgsConstructor
 @ApiModel("返回对象实体")
 public class OutpatientRecordToday {
-    @ApiModelProperty("序号")
-    private Integer id;
     @ApiModelProperty("就诊状态")
     private String status;
     @ApiModelProperty("患者编号")

@@ -1,6 +1,5 @@
 package com.gxa.controller.business;
 
-import com.gxa.entity.business.Business;
 import com.gxa.entity.business.OutpatientRecordToday;
 import com.gxa.entity.work.MedicalRecord;
 import com.gxa.service.business.BusinessService;
@@ -11,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
@@ -22,49 +23,75 @@ public class BusinessController {
     @ResponseBody
     @ApiOperation(value = "经营状况",notes = "")
     @ApiResponses({
-            @ApiResponse(code = 0,message = "ok",response = Business.class)
+            @ApiResponse(code = 0,message = "ok")
     })
-    public R contrast(@ApiParam("传入天数") Integer days,@ApiParam("今天的日期到天就行")Date todayTime){
-
-        Integer integer = this.service.queryCountByToday(todayTime);
-        Integer integer1 = this.service.queryCountByToday(todayTime, "已就诊");
+    public R contrast(@ApiParam("今天的日期到天就行")String todayTime){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date time = null;
+        try {
+             time = simpleDateFormat.parse(todayTime);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println(time);
+        Integer integer = this.service.queryCountByToday(time,null);
+        System.out.println(integer);
+        Integer integer1 = this.service.queryCountByToday(time, "已就诊");
+        System.out.println(integer1);
+        Double money = this.service.queryTodayRevenue(time);
         Map map = new HashMap();
         map.put("todayregister",integer);
         map.put("todayregistered",integer1);
+        map.put("money",money);
         R r = new R();
         return r.ok(map);
     }
+
+
+
+
+    @GetMapping("/business/list02")
+    @ResponseBody
+    @ApiOperation(value = "经营状况",notes = "")
+    @ApiResponses({
+            @ApiResponse(code = 0,message = "ok")
+    })
+    public R contrast01(@ApiParam("查多少天的数据")Integer days,@ApiParam("今天的日期到天就行")String todayTime){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date time = null;
+        try {
+            time = simpleDateFormat.parse(todayTime);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        List<Map> list = this.service.queryTotal(time, days);
+        R r = new R();
+        r.put("list",list);
+        return r;
+    }
+
+
+
+
     @GetMapping("/business/list01")
     @ResponseBody
     @ApiOperation(value = "经营状况",notes = "")
     @ApiResponses({
             @ApiResponse(code = 0,message = "ok",response = MedicalRecord.class)
     })
-    public R contrast(){
+    public R contrast02(@ApiParam("今天的日期到天")String todayTime){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date time = null;
+        try {
+            time = simpleDateFormat.parse(todayTime);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        List<OutpatientRecordToday> list = this.service.queryByToday(time);
 
-        Date date = new Date();
-        long time = date.getTime();
-        date.setTime(time);
-        OutpatientRecordToday today0 = new OutpatientRecordToday(1,"就诊中","200","张三","男","18","12345678911","复诊","beam",
-                date);
-        OutpatientRecordToday today1 = new OutpatientRecordToday(2,"就诊中","200","张三","男","18","12345678911","复诊","beam",
-                date);
-        OutpatientRecordToday today2 = new OutpatientRecordToday(3,"就诊中","200","张三","男","18","12345678911","复诊","beam",
-                date);
-        OutpatientRecordToday today3 = new OutpatientRecordToday(4,"就诊中","200","张三","男","18","12345678911","复诊","beam",
-                date);
-        OutpatientRecordToday today4= new OutpatientRecordToday(5,"就诊中","200","张三","男","18","12345678911","复诊","beam",
-                date);
-        List<OutpatientRecordToday> list = new ArrayList<>();
-        list.add(today0);
-        list.add(today1);
-        list.add(today2);
-        list.add(today3);
-        list.add(today4);
-        Map map = new HashMap();
-        map.put("drugs",list);
         R r = new R();
-        return r.ok(map);
+        r.put("todayList",list);
+        return r;
     }
 
 }
