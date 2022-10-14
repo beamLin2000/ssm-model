@@ -1,16 +1,16 @@
 package com.gxa.entity.patients;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
+
 import lombok.Data;
-import lombok.NoArgsConstructor;
+
 
 import java.util.Date;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
+@TableName(value = "family")
 @ApiModel("返回家庭实体")
 public class Family {
     @ApiModelProperty(name = "familyId",value = "家庭序号")
@@ -29,4 +29,6 @@ public class Family {
     private String familyPhone;
     @ApiModelProperty(name = "familyCreatTime",value = "创建时间")
     private Date familyCreatTime;
+    @ApiModelProperty(name = "patientId",value = "患者序号")
+    private Integer patientId;
 }

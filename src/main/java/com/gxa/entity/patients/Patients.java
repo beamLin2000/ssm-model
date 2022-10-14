@@ -5,8 +5,8 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.util.Date;
-@TableName(value = "patients")
 @Data
+@TableName(value = "patients")
 public class Patients {
     @ApiModelProperty(name = "patientId",value = "患者序号")
     private Integer patientId;
@@ -50,6 +50,7 @@ public class Patients {
     private Date patientCreatTime;
     @ApiModelProperty(name = "operators",value = "操作人员")
     private String operators;
+    @ApiModelProperty(name = "patientStart",value = "状态")
     private Integer patientStart;
 
     public Patients(Integer patientId, Integer patientNumber, String patientName, Integer patientAge, String patientGender, String patientPhone, Date patientCreatTime, String operators) {
