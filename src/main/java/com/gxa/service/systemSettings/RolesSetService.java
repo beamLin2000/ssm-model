@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+
 public interface RolesSetService {
     List<Role> selectAll();
     void update(RolesEdit rolesEdit);

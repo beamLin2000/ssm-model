@@ -15,7 +15,7 @@ public class CPSEdit {
     private int id;//序号
 
     @ApiModelProperty(value = "项目编码",name = "itemName",hidden = false,required = false)
-    private int itemNumber;//项目编码
+    private String itemNumber;//项目编码
 
     @ApiModelProperty(value = "项目名称",name = "projectName",hidden = false,required = false)
     private String projectName;//项目名称

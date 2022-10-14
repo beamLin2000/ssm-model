@@ -16,7 +16,7 @@ public class EMEmployeeTable {
     @ApiModelProperty(value = "序号",name = "id",hidden = false,required = false)
     private int id;//序号
     @ApiModelProperty(value = "工号",name = "workNumber",hidden = false,required = false)
-    private int workNumber;//工号
+    private String workNumber;//工号
     @ApiModelProperty(value = "员工姓名",name = "name",hidden = false,required = false)
     private String name;//员工姓名
     @ApiModelProperty(value = "员工性别",name = "sex",hidden = false,required = false)
@@ -29,7 +29,7 @@ public class EMEmployeeTable {
     private String clinic;//所属诊所
 //    @ApiModelProperty(value = "所属科室",name = "所属科室",hidden = false,required = false)
 //    private String offices;//所属科室
-    @ApiModelProperty(value = "角色",name = "roles",hidden = false,required = false)
+    @ApiModelProperty(value = "角色",name = "roles",hidden = false,required = true)
     private String roles;//角色
     @ApiModelProperty(value = "创建时间",name = "creationTime",hidden = false,required = false)
     private Date creationTime;//创建时间
@@ -38,6 +38,27 @@ public class EMEmployeeTable {
     @ApiModelProperty(value = "1启用   0未启用",name = "employeeStatus",hidden = false,required = false)
     private String employeeStatus;//员工状态    停用    启用
 
+    @ApiModelProperty(value = "邮箱",name = "email")
+    private String email;
+    @ApiModelProperty(value = "证件号码",name = "id_num")
+    private String id_num;
+    @ApiModelProperty(value = "地址",name = "address")
+    private String address;
+    @ApiModelProperty(value = "职位",name = "position")
+    private String position;
 
-    //
+    public EMEmployeeTable(int id, String workNumber, String name, String sex, String age, int phoneNumber, String clinic, String roles, Date creationTime, String createPerson, String employeeStatus) {
+        this.id = id;
+        this.workNumber = workNumber;
+        this.name = name;
+        this.sex = sex;
+        this.age = age;
+        this.phoneNumber = phoneNumber;
+        this.clinic = clinic;
+        this.roles = roles;
+        this.creationTime = creationTime;
+        this.createPerson = createPerson;
+        this.employeeStatus = employeeStatus;
+    }
+//
 }

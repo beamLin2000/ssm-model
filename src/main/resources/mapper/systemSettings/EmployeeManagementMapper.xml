@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxa.mapper.systemSettings.EmployeeManagementMapper">
+    <resultMap id="ResultMap" type="EMEmployeeTable">
+        <id property="id" column="id"></id>
+        <result property="workNumber" column="user_name"></result>
+        <result property="name" column="name"></result>
+        <result property="sex" column="sex"></result>
+        <result property="age" column="age"></result>
+        <result property="phoneNumber" column="phone_num"></result>
+        <result property="creationTime" column="creation_time"></result>
+        <result property="createPerson" column="create_person"></result>
+        <result property="employeeStatus" column="status"/>
+        <!--        <association property="dept" javaType="Dept">-->
+        <result property="roles" column="r.name"></result>
+        <result property="clinic" column="clinic_name"></result>
+<!--        </association>-->
+    </resultMap>
+
+<!--    <update id="update">-->
+<!--        update user-->
+<!--        set user_name=#{},name=#{},age=#{hiredate},sex=#{sal},phone_num=#{comm},email=#{dept.deptno},id_num=#{},position=#{},address=#{hiredate},sex=#{sal},phone_num=#{comm},email=#{dept.deptno}-->
+<!--        where empno=#{empno}-->
+<!--    </update>-->
+
+    <select id="selectAll" resultMap="ResultMap">
+        select u.id,u.user_name,u.name,u.sex,u.age,u.phone_num,r.name,u.creation_time,u.create_person,u.status,c.clinic_name
+        from user u,clinic_information c,user_role ur,role r
+        where u.clinic_id = c.clinic_no and ur.user_id = u.id and ur.role_id = r.id
+    </select>
+
+    <!--    <select id="select" resultType="com.gxa.entity.systemSettings.CPSMainTable">-->
+<!--        select * from CPSMainTable-->
+<!--        <where>-->
+<!--            <if test="projectStatus!=null">-->
+<!--                and projectStatus=#{projectStatus}-->
+<!--            </if>-->
+<!--            <if test="projectName!=null">-->
+<!--                and projectName=#{projectName}-->
+<!--            </if>-->
+<!--            <if test="itemNumber!=null">-->
+<!--                and itemNumber=#{itemNumber}-->
+<!--            </if>-->
+<!--        </where>-->
+<!--    </select>-->
+
+<!--    <select id="drop" resultType="com.gxa.entity.systemSettings.CPSViceTable">-->
+<!--        select * from CPSViceTable-->
+<!--    </select>-->
+</mapper>

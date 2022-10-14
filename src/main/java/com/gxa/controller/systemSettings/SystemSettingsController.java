@@ -163,7 +163,7 @@ public class SystemSettingsController {
     @PostMapping("/EmployeeManagement/Edit")//编辑
     @ApiOperation(value = "员工列表-编辑数据" ,notes = "",httpMethod = "Post")
     public Result EmployeeManagement_Edit(@RequestBody EMEdit em_edit){
-
+        employeeManagementService.update(em_edit);
         Result result = new Result(2,"成功","hello");
         return result;
     }
@@ -189,7 +189,7 @@ public class SystemSettingsController {
     public Result EmployeeManagement_Select(@RequestBody EMSelect em_select){
 
         Date date = new Date(2000 - 2 - 2);
-        EMEmployeeTable emEmployeeTable = new EMEmployeeTable(1, 1, "1", "1", "1", 1, "1", "1", date, "1", "1");
+        EMEmployeeTable emEmployeeTable = new EMEmployeeTable(1, "1", "1", "1", "1", 1, "1", "1", date, "1", "1");
         Result result = new Result();
         return result;
     }
@@ -199,7 +199,7 @@ public class SystemSettingsController {
     public Result EmployeeManagement_Drop(){
 
         Date date = new Date(2000 - 2 - 2);
-        EMEmployeeTable emEmployeeTable = new EMEmployeeTable(1, 1, "1", "1", "1", 1, "1", "1", date, "1", "1");
+        EMEmployeeTable emEmployeeTable = new EMEmployeeTable(1, "1", "1", "1", "1", 1, "1", "1", date, "1", "1");
         Result result = new Result();
         return result;
     }
