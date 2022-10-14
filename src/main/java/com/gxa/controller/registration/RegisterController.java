@@ -41,7 +41,7 @@ public class RegisterController {
     })
     public R queryByCondition(){
 //        System.out.println(registerQueryCondition);
-//        @ApiParam(name = "registerQueryCondition",value = "挂号记录查询条件")  @RequestBody RegisterQueryCondition registerQueryCondition)
+//        @ApiParam(name = "registerQueryCondition",value = "挂号记录查询条件")  @RequestBody RegisterQueryCondition registerQueryCondition
 //        RegisterMsg query = this.registerService.query(registerQueryCondition);
 //        Integer count = this.registerService.count(registerQueryCondition);
 
