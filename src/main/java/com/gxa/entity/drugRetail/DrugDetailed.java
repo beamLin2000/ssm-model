@@ -16,7 +16,7 @@ public class DrugDetailed {
     @ApiModelProperty(name = "drugName",value = "收费名称")
     private String drugName;//收费名称
     @ApiModelProperty(name = "price",value = "单价")
-    private BigDecimal price;
+    private Double price;
     @ApiModelProperty(name = "num",value = "总量")
     private Integer num;
     @ApiModelProperty(name = "company",value = "单位")

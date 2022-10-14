@@ -10,8 +10,6 @@ import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 @RestController
@@ -31,7 +29,7 @@ public class RegisterController {
         register.setRegistrationDateTime(date);
         register.setRegistrationDate(date);
         register.setStatus("未就诊");
-        this.registerService.add(register);
+//        this.registerService.add(register);
         return r.ok("success");
     }
     @GetMapping("/register/query")
@@ -45,11 +43,11 @@ public class RegisterController {
         long time = date.getTime();
         date.setTime(time);
         RegisterMsg registerMsg = new RegisterMsg("2022099280001","张三","男",12,
-                "17754138769","王冕",date,new BigDecimal(20.00),new BigDecimal(20.00),"已就诊");
+                "17754138769","王冕",date,20.00,20.00,"已就诊");
         RegisterMsg registerMsg1 = new RegisterMsg("2022099280002","李四","男",20,"17754138769"
-                ,"王冕",date,new BigDecimal(20.00),new BigDecimal(20.00),"未就诊");
+                ,"王冕",date,20.00,20.00,"未就诊");
         RegisterMsg registerMsg2 = new RegisterMsg("2022099280003","张三","男",12,"17754138769"
-                ,"林鹤",date,new BigDecimal(20.00),new BigDecimal(20.00),"已退号");
+                ,"林鹤",date,20.00,20.00,"已退号");
         List<RegisterMsg> list = new ArrayList<>();
         list.add(registerMsg);
         list.add(registerMsg1);
