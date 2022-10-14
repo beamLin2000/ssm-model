@@ -13,10 +13,8 @@ import com.gxa.form.systemSettings.RolesEdit;
 import com.gxa.form.systemSettings.clinicInformation.ClinicInformationForm;
 import com.gxa.form.systemSettings.supplier.SupplierForm;
 import com.gxa.service.impl.systemSettings.SupplierServiceImpl;
-import com.gxa.service.systemSettings.CheckProjectSetService;
-import com.gxa.service.systemSettings.ClinicInformationService;
-import com.gxa.service.systemSettings.EmployeeManagementService;
-import com.gxa.service.systemSettings.RolesSetService;
+import com.gxa.service.impl.systemSettings.SurchargeFeeiServiceImpl;
+import com.gxa.service.systemSettings.*;
 import com.gxa.utils.systemSettings.Result;
 import com.gxa.utils.systemSettings.YResult;
 import io.swagger.annotations.Api;
@@ -76,7 +74,7 @@ public class SystemSettingsController {
 
 
     @Autowired
-    private SupplierServiceImpl supplierService;
+    private SupplierService supplierService;
 //供应商管理
     @GetMapping("/supplier/list")
     @ApiOperation(value = "供应商管理",notes = "查询接口",httpMethod = "Get")
@@ -159,12 +157,14 @@ public class SystemSettingsController {
 
 
 
+    @Autowired
+    private SurchargeFeeiService surchargeFeeiService;
 //附加费用设置
     @GetMapping("/costsettings/list")
     @ApiOperation(value = "费用设置-附加费用",notes = "查询接口",httpMethod = "Get")
     public YResult selectCost(){
-        ClinicInformationForm clinicInformationForm = new ClinicInformationForm(1,"1","1","1",1,"1","1","1","1",1);
-        YResult YResult = new YResult(1,"成功",1,clinicInformationForm);
+        List<SurchargeFee> surchargeFees = this.surchargeFeeiService.queryAll();
+        YResult YResult = new YResult(1,"查询成功",1,surchargeFees);
 
 
         return YResult;
@@ -172,11 +172,11 @@ public class SystemSettingsController {
 
 
     @GetMapping("/costsettings/conditionlist01")
-    @ApiOperation(value = "费用设置-附加费用",notes = "条件查询接口",httpMethod = "Get")
-    public YResult selectBysurchargeName(@RequestParam("surchargeName") String surchargeName){
-        ClinicInformationForm clinicInformationForm = new ClinicInformationForm(1,"1","1","1",1,"1","1","1","1",1);
-        YResult YResult = new YResult(1,"成功",1,clinicInformationForm);
-        System.out.println("surchargeName"+surchargeName);
+    @ApiOperation(value = "费用设置-附加费用",notes = "根据处方查询接口",httpMethod = "Get")
+    public YResult selectBysurchargeName(@RequestParam("prescription") String prescription){
+        List<SurchargeFee> surchargeFees = this.surchargeFeeiService.queryByPrescription(prescription);
+        YResult YResult = new YResult(1,"查询成功",1,surchargeFees);
+        System.out.println("surchargeFees"+surchargeFees);
 
 
         return YResult;
@@ -185,11 +185,11 @@ public class SystemSettingsController {
 
 
     @GetMapping("/costsettings/conditionlist02")
-    @ApiOperation(value = "费用设置-附加费用",notes = "条件查询接口",httpMethod = "Get")
-    public YResult selectByprescription(@RequestParam("prescription") String prescription){
-        ClinicInformationForm clinicInformationForm = new ClinicInformationForm(1,"1","1","1",1,"1","1","1","1",1);
-        YResult YResult = new YResult(1,"成功",1,clinicInformationForm);
-        System.out.println("prescription"+prescription);
+    @ApiOperation(value = "费用设置-附加费用",notes = "根据附加费用名称查询接口",httpMethod = "Get")
+    public YResult selectByprescription(@RequestParam("surchargeName") String surchargeName){
+        List<SurchargeFee> surchargeFees = this.surchargeFeeiService.queryBySurchargeName(surchargeName);
+        YResult YResult = new YResult(1,"查询成功",1,surchargeFees);
+        System.out.println("surchargeFees"+surchargeFees);
 
 
         return YResult;
@@ -200,8 +200,11 @@ public class SystemSettingsController {
     @PostMapping("/costsettings/add")
     @ApiOperation(value = "费用设置-附加费用",notes = "添加接口",httpMethod = "Post")
     public YResult addCost(@RequestBody SurchargeFeeForm surchargeForm){
-        ClinicInformationForm clinicInformationForm = new ClinicInformationForm(1,"1","1","1",1,"1","1","1","1",1);
-        YResult YResult = new YResult(1,"成功",1,clinicInformationForm);
+        Date timeing = new Date();
+        timeing.setTime(timeing.getTime());
+        SurchargeFee surchargeFee = new SurchargeFee(surchargeForm.getSurchargeName(),surchargeForm.getPrescription(),surchargeForm.getPrice(),surchargeForm.getCost(),timeing,surchargeForm.getFoundPerson(),surchargeForm.getCostState());
+        this.surchargeFeeiService.addSurchargeFee(surchargeFee);
+        YResult YResult = new YResult(1,"添加成功",1);
         System.out.println("附加费用添加"+surchargeForm);
 
         return YResult;
@@ -210,8 +213,11 @@ public class SystemSettingsController {
     @PutMapping("/costsettings/edit")
     @ApiOperation(value = "费用设置-附加费用",notes = "修改接口",httpMethod = "Put")
     public YResult editCost(@RequestBody SurchargeFeeForm surchargeForm){
-        ClinicInformationForm clinicInformationForm = new ClinicInformationForm(1,"1","1","1",1,"1","1","1","1",1);
-        YResult YResult = new YResult(1,"成功",1,clinicInformationForm);
+        Date timeing = new Date();
+        timeing.setTime(timeing.getTime());
+        SurchargeFee surchargeFee = new SurchargeFee(surchargeForm.getId(),surchargeForm.getSurchargeName(),surchargeForm.getPrescription(),surchargeForm.getPrice(),surchargeForm.getCost(),timeing,surchargeForm.getFoundPerson(),surchargeForm.getCostState());
+        this.surchargeFeeiService.updateSurchargeFee(surchargeFee);
+        YResult YResult = new YResult(1,"修改成功",1);
         System.out.println("附加费用修改"+surchargeForm);
 
         return  YResult;
@@ -220,8 +226,9 @@ public class SystemSettingsController {
     @DeleteMapping("/costsettings/delete")
     @ApiOperation(value = "费用设置-附加费用",notes = "删除接口",httpMethod = "Delete")
     public YResult deleteCost(@RequestParam("id") int id){
-        ClinicInformationForm clinicInformationForm = new ClinicInformationForm(1,"1","1","1",1,"1","1","1","1",1);
-        YResult YResult = new YResult(1,"成功",1,clinicInformationForm);
+        this.surchargeFeeiService.deleteById(id);
+
+        YResult YResult = new YResult(1,"成功",1);
         System.out.println("附加费用删除"+id);
 
         return YResult;
@@ -230,13 +237,13 @@ public class SystemSettingsController {
     /*--------------------------------------------------------------------------------------------------------------------------*/
 
 
-
+    private TreatmentFeeService treatmentFeeService;
 //诊疗费设置
     @GetMapping("/treatment/list")
     @ApiOperation(value = "费用设置-诊疗费",notes = "查询接口",httpMethod = "Get")
     public YResult selectTreatment(){
-        ClinicInformationForm clinicInformationForm = new ClinicInformationForm(1,"1","1","1",1,"1","1","1","1",1);
-        YResult YResult = new YResult(1,"成功",1,clinicInformationForm);
+        List<TreatmentFee> treatmentFees = this.treatmentFeeService.queryAll();
+        YResult YResult = new YResult(1,"成功",1,treatmentFees);
 
 
         return YResult;

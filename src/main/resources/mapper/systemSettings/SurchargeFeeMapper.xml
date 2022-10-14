@@ -5,20 +5,46 @@
 <mapper namespace="com.gxa.mapper.systemSettings.SurchargeFeeMapper">
     <resultMap id="surchargeFee" type="SurchargeFee">
         <id property="id" column="id"></id>
-        <id property="surchargeName" column="surchargename"></id>
-        <id property="prescription" column=""></id>
-        <id property="price" column="price"></id>
-        <id property="cost" column="cost"></id>
-        <id property="timeing" column="timeing"></id>
-        <id property="foundPerson" column="foundperson"></id>
-        <id property="costState" column="coststate"></id>
+        <result property="surchargeName" column="surchargename"></result>
+        <result property="prescription" column="prescription"></result>
+        <result property="price" column="price"></result>
+        <result property="cost" column="cost"></result>
+        <result property="timeing" column="timeing"></result>
+        <result property="foundPerson" column="foundperson"></result>
+        <result property="costState" column="coststate"></result>
+
+
 
     </resultMap>
+    <insert id="addSurchargeFee" parameterType="surchargeFee">
+        INSERT INTO surcharge_fee(surchargename,prescription,price,cost,timeing,foundperson,coststate)
+        VALUE (#{surchargeName},#{prescription},#{price},#{cost},#{timeing},#{foundPerson},#{costState})
+    </insert>
+    <update id="updateSurchargeFee" >
+        UPDATE surcharge_fee
+        SET surchargename=#{surchargeName},prescription=#{prescription},price=#{price},cost=#{cost},timeing=#{timeing},foundperson=#{foundPerson},coststate=#{costState}
+        WHERE id=#{id}
+    </update>
+    <delete id="deleteById">
+        DELETE FROM surcharge_fee
+        WHERE id=#{id}
+    </delete>
 
 
-    <select id="queryAll" resultType="com.gxa.entity.systemSettings.SurchargeFee">
+    <select id="queryAll" resultMap="surchargeFee">
         SELECT *
-        FROM surchargefee
+        FROM surcharge_fee
 
+    </select>
+    <select id="queryBySurchargeName" resultMap="surchargeFee">
+        SELECT *
+        FROM surcharge_fee
+        WHERE surchargename=#{surchargeName}
+    </select>
+
+    <select id="queryByPrescription" resultMap="surchargeFee">
+        SELECT *
+        FROM surcharge_fee
+        WHERE prescription=#{prescription}
     </select>
 </mapper>
