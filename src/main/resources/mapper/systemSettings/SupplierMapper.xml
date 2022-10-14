@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gxa.mapper.systemSettings.SupplierMapper">
-    <resultMap id="supplier" type="com.gxa.entity.systemSettings.SupplierAdministration">
+    <resultMap id="supplier" type="SupplierAdministration">
         <id property="id" column="id"></id>
         <result property="supplierno" column="supplierno"></result>
         <result property="suppliername" column="suppliername"></result>
@@ -15,33 +15,33 @@
 
     </resultMap>
     <insert id="addSupplier">
-        INSERT INTO supplieradministration(supplierno,suppliername,contacts,phone,timeing,foundperson,supplierstate)
+        INSERT INTO supplier_administration(supplierno,suppliername,contacts,phone,timeing,foundperson,supplierstate)
         VALUE (#{supplierno},#{suppliername},#{contacts},#{phone},#{timeing},#{foundperson},#{supplierstate})
 
     </insert>
-    <update id="updateSupplier" parameterType="com.gxa.entity.systemSettings.SupplierAdministration">
-        UPDATE supplieradministration
+    <update id="updateSupplier" parameterType="SupplierAdministration">
+        UPDATE supplier_administration
         SET suppliername=#{suppliername},contacts=#{contacts},timeing=#{timeing},phone=#{phone},foundperson=#{foundperson},supplierstate=#{supplierstate}
         WHERE supplierno=#{supplierno}
     </update>
     <delete id="deleteBySupplierNo" parameterType="int">
-        DELETE FROM supplieradministration WHERE supplierno=#{supplierno}
+        DELETE FROM supplier_administration WHERE supplierno=#{supplierno}
     </delete>
 
     <select id="selectSupplier" resultMap="supplier">
         SELECT *
-        FROM supplieradministration
+        FROM supplier_administration
 
     </select>
     <select id="selectBySuppliername" resultMap="supplier">
         SELECT *
-        FROM supplieradministration
+        FROM supplier_administration
         WHERE suppliername=#{suppliername}
 
     </select>
     <select id="selectBySupplierNo" resultMap="supplier">
         SELECT *
-        FROM supplieradministration
+        FROM supplier_administration
         WHERE supplierno=#{supplierno}
     </select>
 </mapper>

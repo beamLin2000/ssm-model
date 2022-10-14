@@ -3,28 +3,28 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gxa.mapper.systemSettings.ClinicInformationMapper">
-<resultMap id="clinicinformation" type="com.gxa.entity.systemSettings.ClinicInformation">
-    <id property="clinicNo" column="clinicno"></id>
-    <result property="clinicName" column="clinicname"></result>
+<resultMap id="clinicinformation" type="Clinicinformation">
+    <id property="clinicNo" column="clinic_no"></id>
+    <result property="clinicName" column="clinic_name"></result>
     <result property="logo" column="logo"></result>
-    <result property="clinicOwner" column="clinicowner"></result>
-    <result property="ownerPhone" column="ownerphone"></result>
-    <result property="ownerEmail" column="owneremail"></result>
+    <result property="clinicOwner" column="clinic_owner"></result>
+    <result property="ownerPhone" column="owner_phone"></result>
+    <result property="ownerEmail" column="owner_email"></result>
     <result property="address" column="address"></result>
-    <result property="detailedAddress" column="detailedaddress"></result>
-    <result property="clinicIntroduce" column="clinicintroduce"></result>
-    <result property="clinicState" column="clinicstate"></result>
+    <result property="detailedAddress" column="detailed_address"></result>
+    <result property="clinicIntroduce" column="clinic_introduce"></result>
+    <result property="clinicState" column="clinic_state"></result>
 </resultMap>
-    <update id="updateClinic" parameterType="com.gxa.entity.systemSettings.ClinicInformation">
-        UPDATE clinitinformation
-        SET clinicno=#{clinicNo},clinicname=#{clinicName},logo=#{logo},clinicowner=#{clinicOwner},ownerphone=#{ownerPhone},owneremail=#{ownerEmail},
-        address=#{address},detailedaddress=#{detailedAddress},clinicintroduce=#{clinicIntroduce},clinicstate=#{clinicState}
+    <update id="updateClinic" parameterType="clinicInformation">
+        UPDATE clinic_information
+        SET clinic_no=#{clinicNo},clinic_name=#{clinicName},logo=#{logo},clinic_owner=#{clinicOwner},owner_phone=#{ownerPhone},owner_email=#{ownerEmail},
+        address=#{address},detailed_address=#{detailedAddress},clinic_introduce=#{clinicIntroduce},clinic_state=#{clinicState}
 
     </update>
 
     <select id="queryAll" resultMap="clinicinformation">
         SELECT *
-        FROM clinitinformation
+        FROM clinic_information
 
     </select>
 </mapper>

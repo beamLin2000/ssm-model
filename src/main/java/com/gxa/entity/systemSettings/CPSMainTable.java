@@ -20,7 +20,7 @@ public class CPSMainTable {
     @ApiModelProperty(value = "序号",name = "id",hidden = false,required = false)
     private int id;//序号
     @ApiModelProperty(value = "项目编码",name = "itemNumber",hidden = false,required = false)
-    private int itemNumber;//项目编码
+    private String itemNumber;//项目编码
     @ApiModelProperty(value = "项目名称",name = "projectName",hidden = false,required = false)
     private String projectName;//项目名称
     @ApiModelProperty(value = "项目类别",name = "projectCategory",hidden = false,required = false)
@@ -51,7 +51,7 @@ public class CPSMainTable {
 
     private CPSViceTable cps_viceTable;
 
-    public CPSMainTable(int serialNumber, int itemNumber, String projectName, String projectCategory, String invoiceItem, double retailPrice, double costPrice, String unit, String projectStatus, Date creationTime, String remarks, String part) {
+    public CPSMainTable(int serialNumber, String itemNumber, String projectName, String projectCategory, String invoiceItem, double retailPrice, double costPrice, String unit, String projectStatus, Date creationTime, String remarks, String part) {
         this.id = serialNumber;
         this.itemNumber = itemNumber;
         this.projectName = projectName;
