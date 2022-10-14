@@ -55,9 +55,9 @@ public class DrugRetailController {
     @ApiOperation(value = "查询接口",notes = "项目明细",httpMethod = "GET")
     public R queryByName(@ApiParam(name = "name", value = "姓名查找项目明细")@PathVariable("name") String name){
         R r = new R();
-        DrugDetailed drugDetailed = new DrugDetailed("肾宝糖浆",new BigDecimal(15.00),2,"瓶",new BigDecimal(30.00));
-        DrugDetailed drugDetailed1 = new DrugDetailed("阿莫西林分散片",new BigDecimal(25.00),12,"盒",new BigDecimal(25.00));
-        DrugDetailed drugDetailed2 = new DrugDetailed("肾宝糖浆",new BigDecimal(20.00),1,"盒",new BigDecimal(20.00));
+        DrugDetailed drugDetailed = new DrugDetailed("肾宝糖浆",15.00,2,"瓶",30.00);
+        DrugDetailed drugDetailed1 = new DrugDetailed("阿莫西林分散片",25.00,12,"盒",25.00);
+        DrugDetailed drugDetailed2 = new DrugDetailed("肾宝糖浆",20.00,1,"盒",20.00);
         List<DrugDetailed> list = new ArrayList<>();
         list.add(drugDetailed);
         list.add(drugDetailed1);

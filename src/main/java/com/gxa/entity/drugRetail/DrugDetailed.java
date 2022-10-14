@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
 
 @Data
 @AllArgsConstructor
@@ -22,5 +21,5 @@ public class DrugDetailed {
     @ApiModelProperty(name = "company",value = "单位")
     private String company;//单位
     @ApiModelProperty(name = "totalPrice",value = "零售金额")
-    private BigDecimal totalPrice;//零售金额
+    private Double totalPrice;//零售金额
 }
