@@ -1,17 +1,21 @@
 package com.gxa.controller.systemSettings;
 
-import com.gxa.entity.systemSettings.CPSMainTable;
-import com.gxa.entity.systemSettings.CPSViceTable;
-import com.gxa.entity.systemSettings.EMEmployeeTable;
-import com.gxa.entity.systemSettings.Role;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.gxa.entity.systemSettings.*;
 import com.gxa.form.systemSettings.CPSEdit;
+import com.gxa.form.systemSettings.CostSettngsForm.RegisterFeeForm;
+import com.gxa.form.systemSettings.CostSettngsForm.SurchargeFeeForm;
+import com.gxa.form.systemSettings.CostSettngsForm.TreatmentFeeForm;
 import com.gxa.form.systemSettings.EMEdit;
 import com.gxa.form.systemSettings.EMSelect;
 import com.gxa.form.systemSettings.RolesEdit;
-import com.gxa.service.systemSettings.CheckProjectSetService;
-import com.gxa.service.systemSettings.EmployeeManagementService;
-import com.gxa.service.systemSettings.RolesSetService;
+
+import com.gxa.form.systemSettings.clinicInformation.ClinicInformationForm;
+import com.gxa.form.systemSettings.supplier.SupplierForm;
+import com.gxa.service.systemSettings.*;
 import com.gxa.utils.systemSettings.Result;
+import com.gxa.utils.systemSettings.YResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -207,6 +211,385 @@ public class SystemSettingsController {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @Autowired
+    private ClinicInformationService clinicInformationService;
+
+//诊所信息维护
+
+    @GetMapping("/clinicinformation/list")
+    @ApiOperation(value = "诊所维护信息",notes = "查询接口",httpMethod = "Get")
+    public YResult selectClinic(){
+        List<ClinicInformation> clinicInformations = this.clinicInformationService.queryAll();
+        YResult yResult = new YResult(1, "修改成功", 1,clinicInformations );
+
+
+        return yResult;
+    }
+
+    @GetMapping("/clinicinformation/list01")
+    @ApiOperation(value = "诊所维护信息",notes = "分页查询接口",httpMethod = "Get")
+    public PageInfo<ClinicInformation> qrall(@RequestParam("page") int page, @RequestParam("size")int size){
+        PageHelper.startPage(page,size);
+        List<ClinicInformation>list = this.clinicInformationService.queryAll();
+        PageInfo<ClinicInformation>pageInfo = new PageInfo<>(list);
+
+        return pageInfo;
+
+    }
+    //
+    @PutMapping("/clinicinformation/edit")
+    @ApiOperation(value = "诊所维护信息",notes = "修改接口",httpMethod = "Put")
+    public void updateClinic(@RequestBody ClinicInformationForm clinicInformationForm){
+        ClinicInformation clinicInformation = new ClinicInformation(clinicInformationForm.getClinicNo(),clinicInformationForm.getClinicName(),clinicInformationForm.getLogo(),clinicInformationForm.getClinicOwner(),clinicInformationForm.getOwnerPhone(),clinicInformationForm.getOwnerEmail(),clinicInformationForm.getAddress(),clinicInformationForm.getDetailedAddress(),clinicInformationForm.getClinicIntroduce(),clinicInformationForm.getClinicState());
+        this.clinicInformationService.updateClinic(clinicInformation);
+        YResult YResult = new YResult(1,"修改成功",1,clinicInformation);
+        System.out.println("诊所维护信息修改"+clinicInformationForm);
+        System.out.println(clinicInformation);
+
+
+    }
+    /*--------------------------------------------------------------------------------------------------------------------------*/
+
+
+
+    @Autowired
+    private SupplierService supplierService;
+    //供应商管理
+    @GetMapping("/supplier/list")
+    @ApiOperation(value = "供应商管理",notes = "查询接口",httpMethod = "Get")
+    public YResult selectSupplier(){
+        List<SupplierAdministration> supplierAdministrations = this.supplierService.selectSupplier();
+        YResult YResult = new YResult(0,"查询成功",1,supplierAdministrations);
+
+        return YResult;
+    }
+
+
+
+    @GetMapping("/supplier/conditionlist")
+    @ApiOperation(value = "供应商管理",notes = "条件查询接口",httpMethod = "Get")
+    public YResult selectBysupplierName(@RequestParam("supplierName") String supplierName){
+        List<SupplierAdministration> supplierAdministrations = this.supplierService.selectBySuppliername(supplierName);
+        YResult YResult = new YResult(0,"查询成功",1,supplierAdministrations);
+
+        return YResult;
+    }
+
+
+
+
+    @PostMapping("/supplier/add")
+    @ApiOperation(value = "供应商管理",notes = "添加接口",httpMethod = "Post")
+    public void addSupplier(@RequestBody SupplierForm supplierForm){
+        Date date = new Date();
+        date.setTime(date.getTime());
+
+        SupplierAdministration supplierAdministration = new SupplierAdministration(supplierForm.getSupplierNo(),supplierForm.getSupplierName(),supplierForm.getContacts(),supplierForm.getPhone(),date,supplierForm.getFoundPerson(),supplierForm.getSupplierState());
+        this.supplierService.addSupplier(supplierAdministration);
+
+        YResult YResult = new YResult(1,"添加成功",1,supplierAdministration);
+        System.out.println("供应商添加"+supplierForm);
+
+
+    }
+
+
+    @GetMapping("/supplier/echolist")
+    @ApiOperation(value = "供应商管理",notes = "数据回显查询接口",httpMethod = "Get")
+    public YResult selectBysupplierNo(@RequestParam("supplierNo") String supplierNo){
+        List<SupplierAdministration> supplierAdministrations = this.supplierService.selectBySuppliername(supplierNo);
+        YResult YResult = new YResult(0,"查询成功",1,supplierAdministrations);
+
+        return YResult;
+    }
+
+
+    @PutMapping("/supplier/edit")
+    @ApiOperation(value = "供应商管理",notes = "修改接口",httpMethod = "Put")
+    public YResult supplierEdit (@RequestBody SupplierForm supplierForm){
+        Date timeing = new Date();
+        timeing.setTime(timeing.getTime());
+        System.out.println("shijian"+timeing);
+        SupplierAdministration supplierAdministration = new SupplierAdministration(supplierForm.getSupplierNo(),supplierForm.getSupplierName(),supplierForm.getContacts(),supplierForm.getPhone(),timeing,supplierForm.getFoundPerson(),supplierForm.getSupplierState());
+        System.out.println("number-----------"+supplierAdministration.getSupplierno());
+
+        this.supplierService.updateSupplier(supplierAdministration);
+        YResult YResult = new YResult(1,"修改成功",1);
+        System.out.println("供应商修改"+supplierAdministration);
+        return YResult;
+    }
+
+
+
+
+
+    @DeleteMapping("/supplier/delete")
+    @ApiOperation(value = "供应商管理",notes = "删除接口",httpMethod = "Delete")
+    public YResult deleteSupplier(@RequestParam("supplierNo") Integer supplierNo){
+        System.out.println("supplierNo-------"+supplierNo);
+        this.supplierService.deleteBySupplierNo(supplierNo);
+        YResult YResult = new YResult(1,"删除成功",1);
+
+        return YResult;
+    }
+    /*--------------------------------------------------------------------------------------------------------------------------*/
+
+
+
+    @Autowired
+    private SurchargeFeeiService surchargeFeeiService;
+    //附加费用设置
+    @GetMapping("/costsettings/list")
+    @ApiOperation(value = "费用设置-附加费用",notes = "查询接口",httpMethod = "Get")
+    public YResult selectCost(){
+        List<SurchargeFee> surchargeFees = this.surchargeFeeiService.queryAll();
+        YResult YResult = new YResult(1,"查询成功",1,surchargeFees);
+
+
+        return YResult;
+    }
+
+
+    @GetMapping("/costsettings/conditionlist01")
+    @ApiOperation(value = "费用设置-附加费用",notes = "根据处方查询接口",httpMethod = "Get")
+    public YResult selectBysurchargeName(@RequestParam("prescription") String prescription){
+        List<SurchargeFee> surchargeFees = this.surchargeFeeiService.queryByPrescription(prescription);
+        YResult YResult = new YResult(1,"查询成功",1,surchargeFees);
+        System.out.println("surchargeFees"+surchargeFees);
+
+
+        return YResult;
+    }
+
+
+
+    @GetMapping("/costsettings/conditionlist02")
+    @ApiOperation(value = "费用设置-附加费用",notes = "根据附加费用名称查询接口",httpMethod = "Get")
+    public YResult selectByprescription(@RequestParam("surchargeName") String surchargeName){
+        List<SurchargeFee> surchargeFees = this.surchargeFeeiService.queryBySurchargeName(surchargeName);
+        YResult YResult = new YResult(1,"查询成功",1,surchargeFees);
+        System.out.println("surchargeFees"+surchargeFees);
+
+
+        return YResult;
+    }
+
+
+
+    @PostMapping("/costsettings/add")
+    @ApiOperation(value = "费用设置-附加费用",notes = "添加接口",httpMethod = "Post")
+    public YResult addCost(@RequestBody SurchargeFeeForm surchargeForm){
+        Date timeing = new Date();
+        timeing.setTime(timeing.getTime());
+        SurchargeFee surchargeFee = new SurchargeFee(surchargeForm.getSurchargeName(),surchargeForm.getPrescription(),surchargeForm.getPrice(),surchargeForm.getCost(),timeing,surchargeForm.getFoundPerson(),surchargeForm.getCostState());
+        this.surchargeFeeiService.addSurchargeFee(surchargeFee);
+        YResult YResult = new YResult(1,"添加成功",1);
+        System.out.println("附加费用添加"+surchargeForm);
+
+        return YResult;
+    }
+
+    @PutMapping("/costsettings/edit")
+    @ApiOperation(value = "费用设置-附加费用",notes = "修改接口",httpMethod = "Put")
+    public YResult editCost(@RequestBody SurchargeFeeForm surchargeForm){
+        Date timeing = new Date();
+        timeing.setTime(timeing.getTime());
+        SurchargeFee surchargeFee = new SurchargeFee(surchargeForm.getId(),surchargeForm.getSurchargeName(),surchargeForm.getPrescription(),surchargeForm.getPrice(),surchargeForm.getCost(),timeing,surchargeForm.getFoundPerson(),surchargeForm.getCostState());
+        this.surchargeFeeiService.updateSurchargeFee(surchargeFee);
+        YResult YResult = new YResult(1,"修改成功",1);
+        System.out.println("附加费用修改"+surchargeForm);
+
+        return  YResult;
+    }
+
+    @DeleteMapping("/costsettings/delete")
+    @ApiOperation(value = "费用设置-附加费用",notes = "删除接口",httpMethod = "Delete")
+    public YResult deleteCost(@RequestParam("id") int id){
+        this.surchargeFeeiService.deleteById(id);
+
+        YResult YResult = new YResult(1,"删除成功",1);
+        System.out.println("附加费用删除"+id);
+
+        return YResult;
+    }
+
+    /*--------------------------------------------------------------------------------------------------------------------------*/
+
+    @Autowired
+    private TreatmentFeeService treatmentFeeService;
+    //诊疗费设置
+    @GetMapping("/treatment/list")
+    @ApiOperation(value = "费用设置-诊疗费",notes = "查询接口",httpMethod = "Get")
+    public YResult selectTreatment(){
+        List<TreatmentFee> treatmentFees = this.treatmentFeeService.queryAll();
+        YResult YResult = new YResult(1,"查询成功",1,treatmentFees);
+
+
+        return YResult;
+    }
+
+
+    @GetMapping("/treatment/conditionlist")
+    @ApiOperation(value = "费用设置-附加费用",notes = "费用名称查询接口",httpMethod = "Get")
+    public YResult selectByTreatment(@RequestParam("Treatment") String Treatment){
+        ClinicInformationForm clinicInformationForm = new ClinicInformationForm(1,"1","1","1",1,"1","1","1","1",1);
+        YResult YResult = new YResult(1,"查询成功",1,clinicInformationForm);
+        System.out.println("surchargeName"+Treatment);
+
+
+        return YResult;
+    }
+
+
+
+    @PostMapping("/treatment/add")
+    @ApiOperation(value = "费用设置-诊疗费",notes = "添加接口",httpMethod = "Post")
+    public YResult treatmentAdd(@RequestBody TreatmentFeeForm treatmentForm){
+        ClinicInformationForm clinicInformationForm = new ClinicInformationForm(1,"1","1","1",1,"1","1","1","1",1);
+        YResult YResult = new YResult(1,"成功",1,clinicInformationForm);
+        System.out.println("诊疗费添加"+treatmentForm);
+
+        return YResult;
+    }
+
+
+    @PutMapping("/treatment/edit")
+    @ApiOperation(value = "费用设置-诊疗费",notes = "修改接口",httpMethod = "Put")
+    public YResult treatmentEdit(@RequestBody TreatmentFeeForm treatmentForm){
+        ClinicInformationForm clinicInformationForm = new ClinicInformationForm(1,"1","1","1",1,"1","1","1","1",1);
+        YResult YResult = new YResult(1,"成功",1,clinicInformationForm);
+        System.out.println("诊疗费修改"+treatmentForm);
+
+        return YResult;
+    }
+
+    @DeleteMapping("/treatment/delete")
+    @ApiOperation(value = "费用设置-诊疗费",notes = "删除接口",httpMethod = "Delete")
+    public YResult treatmentDelete(@RequestParam("id") int id){
+        ClinicInformationForm clinicInformationForm = new ClinicInformationForm(1,"1","1","1",1,"1","1","1","1",1);
+        YResult YResult = new YResult(1,"成功",1,clinicInformationForm);
+        System.out.println("诊疗费删除"+id);
+
+        return YResult;
+    }
+
+
+
+
+    /*--------------------------------------------------------------------------------------------------------------------------*/
+
+
+
+
+
+    //挂号费设置
+    @GetMapping("/register/select1")
+    @ApiOperation(value = "费用设置-挂号费",notes = "查询接口",httpMethod = "Get")
+    public YResult registerSelect(){
+        ClinicInformationForm clinicInformationForm = new ClinicInformationForm(1,"1","1","1",1,"1","1","1","1",1);
+        YResult YResult = new YResult(1,"成功",1,clinicInformationForm);
+
+        return YResult;
+    }
+
+    @GetMapping("/register/conditionlist")
+    @ApiOperation(value = "费用设置-附加费用",notes = "查询接口",httpMethod = "Get")
+    public YResult selectByRegisterFee(@RequestParam("RegisterFee") String RegisterFee){
+        ClinicInformationForm clinicInformationForm = new ClinicInformationForm(1,"1","1","1",1,"1","1","1","1",1);
+        YResult YResult = new YResult(1,"成功",1,clinicInformationForm);
+        System.out.println("surchargeName"+RegisterFee);
+
+
+        return YResult;
+    }
+
+
+    @PostMapping("/register/add1")
+    @ApiOperation(value = "费用设置-挂号费",notes = "添加接口",httpMethod = "Post")
+    public YResult registerAdd(RegisterFeeForm registerFeeForm){
+        ClinicInformationForm clinicInformationForm = new ClinicInformationForm(1,"1","1","1",1,"1","1","1","1",1);
+        YResult YResult = new YResult(1,"成功",1,clinicInformationForm);
+        System.out.println("挂号费查询"+registerFeeForm);
+
+        return YResult;
+    }
+
+    @PutMapping("/register/edit1")
+    @ApiOperation(value = "费用设置-挂号费",notes = "修改接口",httpMethod = "Put")
+    public YResult registerEdit(RegisterFeeForm registerFeeForm){
+        ClinicInformationForm clinicInformationForm = new ClinicInformationForm(1,"1","1","1",1,"1","1","1","1",1);
+        YResult YResult = new YResult(1,"成功",1,clinicInformationForm);
+        System.out.println("挂号费xuugai"+registerFeeForm);
+
+        return YResult;
+    }
+
+    @DeleteMapping("/register/delete1")
+    @ApiOperation(value = "费用设置-挂号费",notes = "删除接口",httpMethod = "Delete")
+    public YResult registerDelete(@RequestParam("id") int id){
+        ClinicInformationForm clinicInformationForm = new ClinicInformationForm(1,"1","1","1",1,"1","1","1","1",1);
+        YResult YResult = new YResult(1,"成功",1,clinicInformationForm);
+        System.out.println("挂号费shanchu"+id);
+
+        return YResult;
+    }
 
 
 
