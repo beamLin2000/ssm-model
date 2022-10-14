@@ -1,6 +1,5 @@
 package com.gxa.dto;
 
-import com.gxa.entity.work.Address;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -33,7 +32,7 @@ public class WorkPatientDto {
     @ApiModelProperty("接诊类型")
     private String type;
     @ApiModelProperty("地址")
-    private Address address;
+    private String address;
     @ApiModelProperty("诊断")
     private String diagnosis;
     @ApiModelProperty("医嘱")
