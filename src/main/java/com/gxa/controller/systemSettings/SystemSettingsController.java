@@ -57,7 +57,7 @@ public class SystemSettingsController {
         return pageInfo;
 
     }
-
+//
     @PutMapping("/clinicinformation/edit")
     @ApiOperation(value = "诊所维护信息",notes = "修改接口",httpMethod = "Put")
     public void updateClinic(@RequestBody ClinicInformationForm clinicInformationForm){
