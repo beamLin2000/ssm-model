@@ -39,9 +39,9 @@ public class DrugRetail {
     @ApiModelProperty(name = "company",value = "单位")
     private String company;
     @ApiModelProperty(name = "price",value = "单价")
-    private BigDecimal price;
+    private Double price;
     @ApiModelProperty(name = "totalPrice",value = "总价")
-    private BigDecimal totalPrice;
+    private Double totalPrice;
     @ApiModelProperty(name = "operator",value = "操作员")
     private String operator;
 }

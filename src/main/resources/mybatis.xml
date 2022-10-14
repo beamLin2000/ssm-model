@@ -8,7 +8,7 @@
         <setting name="logImpl" value="STDOUT_LOGGING"/>
     </settings>
     <typeAliases>
-        <package name="com.gxa.entity"/>
+        <package name="com.gxa.entity.*,com.gxa.form.*.*"/>
     </typeAliases>
 
 </configuration>

@@ -1,11 +1,14 @@
 package com.gxa.controller.work;
 
+import com.gxa.entity.patients.Patients;
 import com.gxa.entity.work.*;
+import com.gxa.service.work.Patient1Service;
 import com.gxa.utils.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +20,10 @@ import java.util.*;
 @Controller
 @Api(tags = {"工作台接口"})
 public class WorkConeroller {
+
+    @Autowired
+    private Patient1Service patient1Service;
+
     //工作台list
     @GetMapping("/work/list")
     @ResponseBody
@@ -34,6 +41,12 @@ public class WorkConeroller {
         Patient1 patient3 = new Patient1(4,"zs","18","nan","已就诊",date,"beam","13256485216");
         Patient1 patient4 = new Patient1(5,"qq","18","nan","已就诊",date,"beam","13256485216");
         Patient1 patient5 = new Patient1(6,"ht","18","nan","已就诊",date,"beam","13256485216");
+        Patient1 patient6 = new Patient1(6,"44","18","nan","已就诊",date,"beam","13256485216");
+        Patient1 patient7 = new Patient1(6,"33ht","18","nan","已就诊",date,"beam","13256485216");
+        Patient1 patient8 = new Patient1(6,"22","18","nan","已就诊",date,"beam","13256485216");
+        Patient1 patient9 = new Patient1(6,"11","18","nan","已就诊",date,"beam","13256485216");
+        Patient1 patient10 = new Patient1(6,"66","18","nan","已就诊",date,"beam","13256485216");
+        Patient1 patient11 = new Patient1(6,"77","18","nan","已就诊",date,"beam","13256485216");
         List<Patient1> list = new ArrayList<>();
         list.add(patient);
         list.add(patient1);
@@ -41,8 +54,17 @@ public class WorkConeroller {
         list.add(patient3);
         list.add(patient4);
         list.add(patient5);
+        list.add(patient6);
+        list.add(patient7);
+        list.add(patient8);
+        list.add(patient9);
+        list.add(patient10);
+        list.add(patient11);
 
         Map map = new HashMap();
+
+//        List<Patients> patient1s = this.patient1Service.queryAllPatient1();
+
         map.put("drugs",list);
         R r = new R();
         return r.ok(map);

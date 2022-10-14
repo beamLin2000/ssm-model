@@ -18,8 +18,10 @@ public class RegisterQueryCondition {
 //    private String department;
     @ApiModelProperty(name = "attendingDoctor",value = "挂号医生")
     private String attendingDoctor;
-    @ApiModelProperty(name = "visitTime",value = "就诊时间")
-    private Date visitTime;
+    @ApiModelProperty(name = "startTime",value = "开始时间")
+    private Date startTime;
+    @ApiModelProperty(name = "endTime",value = "结束时间")
+    private Date endTime;
     @ApiModelProperty(name = "patientName",value = "患者姓名")
     private String patientName;
 }

@@ -15,33 +15,32 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@ApiModel
+@ApiModel(value = "DrugPriceAdjustInfo",description = "药品调价table表")
 public class DrugPriceAdjustInfo {
-    @ApiModelProperty(value = "id",name = "主键id",required = true)
-    //主键id
+    @ApiModelProperty(name = "id",value = "主键id")
     private Integer id;
     //药品编码
-    @ApiModelProperty(value = "code",name = "药品编码",required = true)
+    @ApiModelProperty(name = "code",value = "药品编码",required = true)
     private String code;
     //药品名称
-    @ApiModelProperty(value = "drugName",name = "药品名称",required = true)
+    @ApiModelProperty(name = "drugName",value = "药品名称",required = true)
     private String drugName;
     //处方类型
-    @ApiModelProperty(value = "drugType",name = "处方类型",required = true)
+    @ApiModelProperty(name = "drugType",value = "处方类型",required = true)
     private String drugType;
     //规格
-    @ApiModelProperty(value = "specifications",name = "规格",required = true)
+    @ApiModelProperty(name = "specifications",value = "规格",required = true)
     private String specifications;
     //剂型
-    @ApiModelProperty(value = "pharmaceuticalDosage",name = "剂型",required = true)
+    @ApiModelProperty(name = "pharmaceuticalDosage",value = "剂型",required = true)
     private String pharmaceuticalDosage;
     //生产厂家
-    @ApiModelProperty(value = "manufacture",name = "生产厂家",required = true)
+    @ApiModelProperty(name = "manufacture",value = "生产厂家",required = true)
     private String manufacture;
     //调价次数
-    @ApiModelProperty(value = "priceAdjustmentTimes",name = "调价次数",required = true)
+    @ApiModelProperty(name = "priceAdjustmentTimes",value = "调价次数",required = true)
     private Integer priceAdjustmentTimes;
 
-    @ApiModelProperty(value = "drugPriceAdjustInfoLists",name = "查看调价详情，调价的历史",required = true)
+    @ApiModelProperty(name = "drugPriceAdjustInfoLists",value = "查看调价详情，调价的历史",required = true)
     private List<DrugPriceAdjustInfoList> drugPriceAdjustInfoLists;
 }

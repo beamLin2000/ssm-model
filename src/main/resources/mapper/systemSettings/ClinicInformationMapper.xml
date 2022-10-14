@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gxa.mapper.systemSettings.ClinicInformationMapper">
-<resultMap id="clinicinformation" type="Clinicinformation">
+<resultMap id="clinicinformation" type="com.gxa.entity.systemSettings.ClinicInformation">
     <id property="clinicNo" column="clinicno"></id>
     <result property="clinicName" column="clinicname"></result>
     <result property="logo" column="logo"></result>
@@ -15,7 +15,7 @@
     <result property="clinicIntroduce" column="clinicintroduce"></result>
     <result property="clinicState" column="clinicstate"></result>
 </resultMap>
-    <update id="updateClinic" parameterType="clinicInformation">
+    <update id="updateClinic" parameterType="com.gxa.entity.systemSettings.ClinicInformation">
         UPDATE clinitinformation
         SET clinicno=#{clinicNo},clinicname=#{clinicName},logo=#{logo},clinicowner=#{clinicOwner},ownerphone=#{ownerPhone},owneremail=#{ownerEmail},
         address=#{address},detailedaddress=#{detailedAddress},clinicintroduce=#{clinicIntroduce},clinicstate=#{clinicState}

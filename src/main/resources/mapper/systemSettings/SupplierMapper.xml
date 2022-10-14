@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gxa.mapper.systemSettings.SupplierMapper">
-    <resultMap id="supplier" type="SupplierAdministration">
+    <resultMap id="supplier" type="com.gxa.entity.systemSettings.SupplierAdministration">
         <id property="id" column="id"></id>
         <result property="supplierno" column="supplierno"></result>
         <result property="suppliername" column="suppliername"></result>
@@ -19,7 +19,7 @@
         VALUE (#{supplierno},#{suppliername},#{contacts},#{phone},#{timeing},#{foundperson},#{supplierstate})
 
     </insert>
-    <update id="updateSupplier" parameterType="SupplierAdministration">
+    <update id="updateSupplier" parameterType="com.gxa.entity.systemSettings.SupplierAdministration">
         UPDATE supplieradministration
         SET suppliername=#{suppliername},contacts=#{contacts},timeing=#{timeing},phone=#{phone},foundperson=#{foundperson},supplierstate=#{supplierstate}
         WHERE supplierno=#{supplierno}

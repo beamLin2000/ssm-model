@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxa.mapper.business.BusinessMapper">
+
+    <select id="queryCountByToday" resultType="int">
+        SELECT count(id) AS total FROM register WHERE 挂号日期=#{date}
+        <where>
+            <if test="status !=null and status !='' ">AND 就诊状态=#{status}</if>
+        </where>
+    </select>
+    <select id="queryTodayRevenue" resultType="java.lang.Double">
+        SELECT
+    </select>
+</mapper>
