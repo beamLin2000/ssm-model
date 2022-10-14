@@ -16,4 +16,6 @@ public interface RegisterMapper {
     void deleteCharge(String registrationForm);
     void deletePatient(String registrationForm);
     void deleteRegister(String registrationForm);
+    Integer count(RegisterQueryCondition registerQueryCondition);
+
 }

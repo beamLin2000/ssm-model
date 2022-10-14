@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 @ApiModel("药品零售实体")
@@ -44,4 +43,6 @@ public class DrugRetail {
     private Double totalPrice;
     @ApiModelProperty(name = "operator",value = "操作员")
     private String operator;
+    @ApiModelProperty(name = "surChargeFee",value = "附加费用")
+    private SurChargeFee surChargeFee;
 }

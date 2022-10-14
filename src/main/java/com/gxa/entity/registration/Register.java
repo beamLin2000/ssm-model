@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 @ApiModel("挂号实体")
@@ -15,9 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class Register {
     @ApiModelProperty(name = "registrationForm",value = "挂号单号")
-    private Integer registrationForm;
-//    @ApiModelProperty(name = "department",value = "科室",required = true)
-//    private String department;
+    private String registrationForm;
     @ApiModelProperty(name = "receptionType",value = "接诊类型",required = true)
     private String receptionType;
     @ApiModelProperty(name = "attendingDoctor",value = "接诊医生",required = true)

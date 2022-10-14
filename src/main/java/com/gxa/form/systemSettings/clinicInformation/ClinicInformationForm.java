@@ -1,4 +1,4 @@
-package com.gxa.form.clinicInformation;
+package com.gxa.form.systemSettings.clinicInformation;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

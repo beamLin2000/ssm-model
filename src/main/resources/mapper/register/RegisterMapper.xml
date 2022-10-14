@@ -5,104 +5,128 @@
 <mapper namespace="com.gxa.mapper.register.RegisterMapper">
 
     <resultMap id="registerCondition" type="com.gxa.entity.registration.RegisterMsg">
-        <id property="registrationForm" column="挂号单号"></id>
-        <result property="name" column="patientName"></result>
-        <result property="gender" column="patientGender"></result>
-        <result property="phoneNo" column="patientPhone"></result>
-        <result property="attendingDoctor" column="接诊医生"></result>
-        <result property="receptionTime" column="接诊时间"></result>
-        <result property="willPaid" column="实收金额"></result>
-        <result property="amountPaid" column="实收金额"></result>
-        <result property="status" column="就诊状态"></result>
+        <id property="registrationForm" column="registration_form"></id>
+        <result property="name" column="patient_name"></result>
+        <result property="gender" column="patient_gender"></result>
+        <result property="phoneNo" column="patient_phone"></result>
+        <result property="attendingDoctor" column="attending_doctor"></result>
+        <result property="receptionTime" column="reception_time"></result>
+        <result property="willPaid" column="amount_paid"></result>
+        <result property="amountPaid" column="amount_paid"></result>
+        <result property="status" column="status"></result>
     </resultMap>
     <resultMap id="registerUpdateMsg" type="com.gxa.entity.registration.RegisterMsgUpdate">
-        <id property="registrationForm" column="挂号单号"></id>
-        <result property="willPaid" column="实收金额"></result>
-        <result property="insurancePayment" column="医保支付" ></result>
-        <result property="amountPaid" column="实收金额" ></result>
-        <result property="payMethod" column="支付方式" ></result>
-        <result property="changeMoney" column="找零" ></result>
-        <result property="registrationDateTime" column="创建时间" ></result>
-        <result property="receptionType" column="接诊类型" ></result>
-        <result property="attendingDoctor" column="接诊医生" ></result>
-        <result property="registrationFee" column="挂号费" ></result>
-        <result property="consultationFee" column="诊疗费" ></result>
-        <result property="name" column="patientName" ></result>
-        <result property="cardNo" column="patientCard" ></result>
-        <result property="age" column="patientAge" ></result>
-        <result property="birthDay" column="patientBirthday" ></result>
-        <result property="gender" column="patientGender" ></result>
-        <result property="phoneNo" column="patientPhone" ></result>
-        <result property="idNo" column="patientDocuments" ></result>
-        <result property="loc" column="patientAddress" ></result>
-        <result property="remarks" column="patientRemark" ></result>
+        <result property="registrationForm" column="registration_form" jdbcType="VARCHAR"></result>
+        <result property="willPaid" column="amount_paid" jdbcType="DOUBLE"></result>
+        <result property="insurancePayment" column="insurance_payment" jdbcType="DOUBLE"></result>
+        <result property="amountPaid" column="amount_paid" jdbcType="DOUBLE"></result>
+        <result property="payMethod" column="pay_method" jdbcType="VARCHAR"></result>
+        <result property="changeMoney" column="change_money" jdbcType="DOUBLE"></result>
+        <result property="registrationDateTime" column="registration_dateTime" jdbcType="TIMESTAMP"></result>
+        <result property="receptionType" column="reception_type" jdbcType="VARCHAR"></result>
+        <result property="attendingDoctor" column="attending_doctor" jdbcType="VARCHAR"></result>
+        <result property="tolCollector" column="attending_doctor" jdbcType="VARCHAR"></result>
+        <result property="registrationFee" column="registration_fee" jdbcType="DOUBLE"></result>
+        <result property="consultationFee" column="consultation_fee" jdbcType="DOUBLE"></result>
+        <result property="name" column="patient_name" jdbcType="VARCHAR"></result>
+        <result property="cardNo" column="patient_card" jdbcType="VARCHAR"></result>
+        <result property="age" column="patient_age" jdbcType="INTEGER"></result>
+        <result property="birthDay" column="patient_birthday" jdbcType="TIMESTAMP"></result>
+        <result property="gender" column="patient_gender" jdbcType="VARCHAR"></result>
+        <result property="phoneNo" column="patient_phone" jdbcType="VARCHAR"></result>
+        <result property="idNo" column="patient_documents" jdbcType="VARCHAR"></result>
+        <result property="loc" column="patient_address" jdbcType="VARCHAR"></result>
+        <result property="remarks" column="patient_remark" jdbcType="VARCHAR"></result>
     </resultMap>
-    <insert id="saveRegister" parameterType="com.gxa.entity.registration.Register">
-        insert into register(挂号单号,接诊类型,接诊医生,挂号费,诊疗费,挂号日期,挂号员)
-        values (#{registrationForm},#{receptionType},#{attendingDoctor},#{registrationFee},#{consultationFee},
-                #{registrationDate},#{registrationClerk})
-    </insert>
     <insert id="saveCharge" parameterType="com.gxa.entity.registration.Register">
-        insert into charge(挂号单号,优惠金额,折扣,医保支付,实收金额,找零,支付方式,收款备注,收费日期)
-        values (#{registrationForm},#{discountAmount},#{discount},#{medicalInsurancePayment},#{amountPaid},#{changeMoney},#{paymentMethod},
-                #{collectionRemarks},#{registrationDateTime})
+        insert into charge(registration_form,insurance_payment,amount_paid,change_money,pay_method,collection_remarks,registration_dateTime)
+        values (#{registrationForm},#{medicalInsurancePayment},#{amountPaid},#{changeMoney},#{paymentMethod},
+            #{collectionRemarks},#{registrationDateTime})
+    </insert>
+    <insert id="saveRegister" parameterType="com.gxa.entity.registration.Register">
+        insert into register(registration_form,reception_type,attending_doctor,registration_fee,consultation_fee,registration_date,registration_clerk,status)
+        values (#{registrationForm},#{receptionType},#{attendingDoctor},#{registrationFee},#{consultationFee},
+                #{registrationDate},#{registrationClerk},#{status})
     </insert>
     <insert id="savePatient" parameterType="com.gxa.entity.registration.Register">
-        insert into patient(patientRegistration,patientName,patientCard,patientAge,patientBirthday,patientGender,patientPhone,patientDocuments,
-                            patientAddress,patientRemark)
+        insert into patients(registration_form,patient_name,patient_card,patient_age,patient_birthday,patient_gender,patient_phone,patient_documents,
+                            patient_address,patient_remark)
         values (#{registrationForm},#{name},#{cardNo},#{age},#{birthDay},#{gender},#{phoneNo},#{idNo},#{loc},#{remarks})
     </insert>
     <update id="updateRegister" parameterType="com.gxa.entity.registration.RegisterMsgUpdate">
         UPDATE register
-        SET 接诊类型=#{receptionType},接诊医生=#{attendingDoctor}
-        WHERE 挂号单号=#{registrationForm}
+        SET reception_type=#{receptionType},attending_doctor=#{attendingDoctor}
+        WHERE registration_form=#{registrationForm}
     </update>
     <update id="updatePatient" parameterType="com.gxa.entity.registration.RegisterMsgUpdate">
-        UPDATE patient
-        SET patientAge=#{age},patientBirthday=#{birthDay},patientGender=#{gender},
-            patientPhone=#{phoneNo},patientDocuments=#{idNo},patientAddress=#{loc},
-            patientRemark=#{remarks}
-        WHERE patientRegistration=#{registrationForm}
+        UPDATE patients
+        SET patient_age=#{age},patient_birthday=#{birthDay},patient_gender=#{gender},
+            patient_phone=#{phoneNo},patient_documents=#{idNo},patient_address=#{loc},
+            patient_remark=#{remarks}
+        WHERE registration_form=#{registrationForm}
 
     </update>
     <delete id="deleteCharge">
-        DELETE FROM charge WHERE 挂号单号=#{registrationForm}
+        DELETE FROM charge WHERE registration_form=#{registrationForm}
     </delete>
     <delete id="deleteRegister">
-        DELETE FROM register WHERE 挂号单号=#{registrationForm}
+        DELETE FROM register WHERE registration_form=#{registrationForm}
     </delete>
     <delete id="deletePatient">
-        DELETE FROM patient WHERE patientRegistration=#{registrationForm}
+        DELETE FROM patients WHERE registration_form=#{registrationForm}
     </delete>
     <select id="query" resultMap="registerCondition" parameterType="com.gxa.entity.registration.RegisterQueryCondition">
-        select c.实收金额,p.patientName,p.patientGender,p.patientAge,p.patientPhone,r.接诊医生,r.挂号单号
-        from charge c,patient p,register r
+        select c.amount_paid,p.patient_name,p.patient_gender,p.patient_age,p.patient_phone,r.attending_doctor,r.registration_form
+        from charge c,patients p,register r
         <where>
-            c.挂号单号 = p.patientRegistration and p.patientRegistration = r.挂号单号
+            c.registration_form = p.registration_form and p.registration_form = r.registration_form
             <if test="attendingDoctor != null and attendingDoctor !=''">
-            and r.接诊医生=#{attendingDoctor}
+            and r.attending_doctor=#{attendingDoctor}
             </if>
            <if test="patientName !=null and patientName !=''">
-               and p.patientName=#{patientName}
+               and p.patient_name=#{patientName}
            </if>
            <if test="visitStatus !=null and visitStatus !=''">
-                and r.就诊状态=#{visitStatus}
+                and r.status=#{visitStatus}
            </if>
            <if test="startTime != null and startTime !=''">
-                and r.挂号日期>#{startTime}
+                and r.registration_date>#{startTime}
            </if>
            <if test="endTime != null and endTime !=''">
-               and #{endTime}>r.挂号日期
+               and #{endTime}>r.registration_date
            </if>
-        </where>>
+        </where>
+        limit 10
     </select>
     <select id="toUpdate" resultMap="registerUpdateMsg" parameterType="string">
-        select r.挂号单号,c.实收金额,c.医保支付,c.支付方式,c.找零,c.创建时间,r.接诊类型,
-               r.接诊医生,r.挂号费,r.诊疗费,p.patientName,p.patientCard,p.patientAge
-                ,p.patientBirthday,p.patientGender,p.patientPhone,p.patientDocuments
-                ,p.patientAddress,p.patientRemark
-        from charge c,patient p,register r
-        where c.挂号单号 = p.patientRegistration
-          and p.patientRegistration = r.挂号单号 and r.挂号单号=#{registrationForm}
+        select r.registration_form,c.amount_paid,c.insurance_payment,c.pay_method,c.change_money,c.registration_dateTime,r.reception_type,
+               r.attending_doctor,r.registration_fee,r.consultation_fee,p.patient_name,p.patient_card,p.patient_age
+                ,p.patient_birthday,p.patient_gender,p.patient_phone,p.patient_documents
+                ,p.patient_address,p.patient_remark
+        from charge c,patients p,register r
+        where c.registration_form = p.registration_form
+          and p.registration_form = r.registration_form and r.registration_form=#{registrationForm}
+    </select>
+    <select id="count" resultType="java.lang.Integer" parameterType="com.gxa.entity.registration.RegisterQueryCondition">
+        SELECT COUNT(c.registration_form)
+        FROM charge c,patients p,register r
+        <where>
+            c.registration_form = p.registration_form and p.registration_form = r.registration_form
+            <if test="attendingDoctor != null and attendingDoctor !=''">
+                and r.attending_doctor=#{attendingDoctor}
+            </if>
+            <if test="patientName !=null and patientName !=''">
+                and p.patient_name=#{patientName}
+            </if>
+            <if test="visitStatus !=null and visitStatus !=''">
+                and r.status=#{visitStatus}
+            </if>
+            <if test="startTime != null and startTime !=''">
+                and r.registration_date>#{startTime}
+            </if>
+            <if test="endTime != null and endTime !=''">
+                and #{endTime}>r.registration_date
+            </if>
+        </where>
     </select>
 </mapper>
