@@ -10,7 +10,7 @@ import java.util.Date;
 @ToString
 @Data
 @ApiModel("附加费实体类")
-public class SurchargeForm {
+public class SurchargeFeeForm {
     @ApiModelProperty(value = "id",name = "序号",required = false)
     private Integer id;
     @ApiModelProperty(value = "surchargeName",name = "附加费名称",required = false)
@@ -28,7 +28,7 @@ public class SurchargeForm {
     @ApiModelProperty(value = "costState",name = "费用状态",required = false)
     private String costState;
 
-    public SurchargeForm(Integer id, String surchargeName, String prescription, Double price, Double cost, Date time, String foundPerson, String costState) {
+    public SurchargeFeeForm(Integer id, String surchargeName, String prescription, Double price, Double cost, Date time, String foundPerson, String costState) {
         this.id = id;
         this.surchargeName = surchargeName;
         this.prescription = prescription;
@@ -39,7 +39,7 @@ public class SurchargeForm {
         this.costState = costState;
     }
 
-    public SurchargeForm() {
+    public SurchargeFeeForm() {
     }
 
 

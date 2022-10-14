@@ -14,7 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @ApiModel("诊疗费实体类")
-public class TreatmentForm {
+public class TreatmentFeeForm {
     @ApiModelProperty(value = "id",name = "序号",required = false)
     private Integer id;
     @ApiModelProperty(value = "treatment",name = "附加费名称",required = false)
