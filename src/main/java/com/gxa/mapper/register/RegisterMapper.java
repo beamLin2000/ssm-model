@@ -1,6 +1,5 @@
 package com.gxa.mapper.register;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.gxa.entity.registration.Register;
 import com.gxa.entity.registration.RegisterMsg;
 import com.gxa.entity.registration.RegisterMsgUpdate;

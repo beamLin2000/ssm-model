@@ -6,7 +6,6 @@ import com.gxa.entity.registration.RegisterMsgUpdate;
 import com.gxa.entity.registration.RegisterQueryCondition;
 import com.gxa.service.register.RegisterService;
 import com.gxa.utils.R;
-import com.hazelcast.util.JsonUtil;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +19,7 @@ public class RegisterController {
     @Autowired
     private RegisterService registerService;
 
+
     @PostMapping("/register/add")
     @ApiOperation(value = "添加接口",notes = "挂号添加",httpMethod = "POST")
     public R add(@ApiParam(name = "register", value = "挂号添加信息")@RequestBody Register register){
@@ -32,6 +32,7 @@ public class RegisterController {
         register.setRegistrationDate(date);
         register.setStatus("未就诊");
         this.registerService.add(register);
+
         return r.ok("success");
     }
     @GetMapping("/register/query")
@@ -41,7 +42,7 @@ public class RegisterController {
     })
     public R queryByCondition(){
 //        System.out.println(registerQueryCondition);
-//        @ApiParam(name = "registerQueryCondition",value = "挂号记录查询条件") @RequestBody RegisterQueryCondition registerQueryCondition)
+//        @ApiParam(name = "registerQueryCondition",value = "挂号记录查询条件") @RequestBody RegisterQueryCondition registerQueryCondition
 //        RegisterMsg query = this.registerService.query(registerQueryCondition);
 //        Integer count = this.registerService.count(registerQueryCondition);
 
