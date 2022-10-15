@@ -47,4 +47,8 @@
         FROM surcharge_fee
         WHERE prescription=#{prescription}
     </select>
+    <select id="queryPrescription01" resultType="com.gxa.entity.systemSettings.PrescriptionTable">
+        SELECT *
+        FROM prescriptiontable
+    </select>
 </mapper>

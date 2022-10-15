@@ -2,14 +2,18 @@ package com.gxa.form.systemSettings.CostSettngsForm;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.util.Date;
 //附加费
-@ToString
+
 @Data
 @ApiModel("附加费实体类")
+@AllArgsConstructor
+@NoArgsConstructor
 public class SurchargeFeeForm {
 
     private Integer id;
@@ -26,19 +30,7 @@ public class SurchargeFeeForm {
     @ApiModelProperty(value = "costState",name = "费用状态",required = false)
     private String costState;
 
-    public SurchargeFeeForm(Integer id, String surchargeName, String prescription, Double price, Double cost, String foundPerson, String costState) {
-        this.id = id;
-        this.surchargeName = surchargeName;
-        this.prescription = prescription;
-        this.price = price;
-        this.cost = cost;
 
-        this.foundPerson = foundPerson;
-        this.costState = costState;
-    }
-
-    public SurchargeFeeForm() {
-    }
 
 
 }

@@ -2,11 +2,15 @@ package com.gxa.form.systemSettings.supplier;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @ApiModel
 public class SupplierForm {
     @ApiModelProperty(value = "id",name = "id",required = false)
@@ -25,6 +29,8 @@ public class SupplierForm {
     private String foundPerson;//创建人员
     @ApiModelProperty(value = "供应商状态",name = "供应商状态",required = false)
     private String supplierState;//供应商状态
+    @ApiModelProperty(value = "备注",name = "remarks",required = false)
+    private String remarks;
 
 
 

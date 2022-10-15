@@ -10,13 +10,14 @@ import lombok.NoArgsConstructor;
 public class YResult {
     private Integer code;
     private String msg ;
-    private Integer count;
     private Object data;
 
 
-    public YResult(Integer code, String msg, Integer count) {
+    public YResult(Integer code, String msg) {
         this.code = code;
         this.msg = msg;
-        this.count = count;
+
     }
+
+
 }

@@ -22,21 +22,10 @@ public class SupplierAdministration {
     private Date timeing;//创建时间
     private String foundperson;//创建人员
     private String supplierstate;//供应商状态
+    private String remarks;
 
-    @Override
-    public String toString() {
-        return "SupplierAdministration{" +
-                "supplierno=" + supplierno +
-                ", suppliername='" + suppliername + '\'' +
-                ", contacts='" + contacts + '\'' +
-                ", phone=" + phone +
-                ", time=" + timeing +
-                ", foundperson='" + foundperson + '\'' +
-                ", supplierstate='" + supplierstate + '\'' +
-                '}';
-    }
 
-    public SupplierAdministration(Integer supplierno, String suppliername, String contacts, Integer phone, Date timeing, String foundperson, String supplierstate) {
+    public SupplierAdministration(Integer supplierno, String suppliername, String contacts, Integer phone, Date timeing, String foundperson, String supplierstate, String remarks) {
         this.supplierno = supplierno;
         this.suppliername = suppliername;
         this.contacts = contacts;
@@ -44,5 +33,6 @@ public class SupplierAdministration {
         this.timeing = timeing;
         this.foundperson = foundperson;
         this.supplierstate = supplierstate;
+        this.remarks = remarks;
     }
 }
