@@ -1,14 +1,11 @@
 package com.gxa.controller.patients;
 
 import com.gxa.entity.patients.Family;
-import com.gxa.entity.patients.FamilyAdd;
 import com.gxa.entity.patients.Patients;
 import com.gxa.service.patient.FamilyService;
 import com.gxa.service.patient.PatientService;
 import com.gxa.utils.R;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -27,19 +24,23 @@ public class PatientController {
     @GetMapping("/patient")
     @ResponseBody
     @ApiOperation(value = "查找接口",notes = "查找患者",httpMethod = "GET")
+    @ApiResponses({
+            @ApiResponse(code = 0,message = "ok",response = Patients.class)
+    })
     public R patientList(ModelMap map){
         List<Patients> patients = this.patientService.queryAll();
         System.out.println(patients);
         map.addAttribute("patients",patients);
-        R r = new R();
-//        System.out.println(map);
-        return r.ok(map);
+        return R.ok(map);
 
     }
 
     @GetMapping("/patient/phone")
     @ResponseBody
     @ApiOperation(value = "查找接口",notes = "电话查找患者",httpMethod = "GET")
+    @ApiResponses({
+            @ApiResponse(code = 0,message = "ok",response = Patients.class)
+    })
     public R patientPhoneList(@ApiParam(name = "电话查找患者信息", value = "patientPhone")@RequestParam("patientPhone") String patientPhone){
         System.out.println(patientPhone);
         List<Patients> patients = this.patientService.queryByPhone(patientPhone);
@@ -54,6 +55,9 @@ public class PatientController {
     @PostMapping("/patient/add")
     @ResponseBody
     @ApiOperation(value = "添加接口",notes = "患者添加",httpMethod = "POST")
+    @ApiResponses({
+            @ApiResponse(code = 0,message = "ok")
+    })
     public R patientAdd(@ApiParam(name = "患者添加信息", value = "patientAdd")@RequestBody Patients patients){
 
         try {
@@ -69,6 +73,9 @@ public class PatientController {
     @GetMapping("/patient/updatePre")
     @ResponseBody
     @ApiOperation(value = "查询接口",notes = "患者修改查询",httpMethod = "GET")
+    @ApiResponses({
+            @ApiResponse(code = 0,message = "ok",response = Patients.class)
+    })
     public R tpPatientUpdate(@ApiParam(name = "患者修改条件",value = "patientId")@RequestParam("patientId") Integer patientId){
         Patients patients = this.patientService.queryById(patientId);
         Map map = new HashMap();
@@ -79,6 +86,9 @@ public class PatientController {
     @PutMapping("/patient/update")
     @ResponseBody
     @ApiOperation(value = "修改接口",notes = "患者修改",httpMethod = "PUT")
+    @ApiResponses({
+            @ApiResponse(code = 0,message = "ok")
+    })
     public R patientUpdate(@ApiParam(name = "患者修改",value = "patients")@RequestBody Patients patients){
         try {
             this.patientService.update(patients);
@@ -93,6 +103,9 @@ public class PatientController {
     @DeleteMapping("/patient/delete")
     @ResponseBody
     @ApiOperation(value = "删除接口",notes = "患者删除",httpMethod = "DELETE")
+    @ApiResponses({
+            @ApiResponse(code = 0,message = "ok")
+    })
     public R patientDelete(@ApiParam(name = "患者删除条件",value = "patientId")@RequestParam("patientId") Integer patientId){
         try {
             this.patientService.delete(patientId);
@@ -107,6 +120,9 @@ public class PatientController {
     @GetMapping("/family/list")
     @ApiOperation(value = "查找接口",notes = "查找家庭",httpMethod = "GET")
     @ResponseBody
+    @ApiResponses({
+            @ApiResponse(code = 0,message = "ok",response = Family.class)
+    })
     public R familyList(@ApiParam(name = "患者编号查询条件",value = "patientNumber")@RequestParam("patientId") Integer patientId){
         List<Family> family = this.familyService.queryByFamilyId(patientId);
         Map map = new HashMap();
@@ -118,6 +134,9 @@ public class PatientController {
     @GetMapping("/family/updatePre")
     @ResponseBody
     @ApiOperation(value = "查询接口",notes = "家庭修改条件",httpMethod = "GET")
+    @ApiResponses({
+            @ApiResponse(code = 0,message = "ok",response = Family.class)
+    })
     public R tpFamilyUpdate(@ApiParam(name = "家庭修改条件",value = "familyId")@RequestParam("familyId") Integer familyId){
        Family family = this.familyService.queryById(familyId);
         Map map = new HashMap();
@@ -129,6 +148,9 @@ public class PatientController {
     @PutMapping("/family/update")
     @ResponseBody
     @ApiOperation(value = "修改接口",notes = "家庭修改",httpMethod = "PUT")
+    @ApiResponses({
+            @ApiResponse(code = 0,message = "ok")
+    })
     public R familyAddUpdate(@ApiParam(name = "患者修改",value = "familyAdd")@RequestBody Family family){
         try {
             this.familyService.update(family);
@@ -143,6 +165,9 @@ public class PatientController {
     @PostMapping("/family/add")
     @ResponseBody
     @ApiOperation(value = "添加接口",notes = "家庭添加",httpMethod = "POST")
+    @ApiResponses({
+            @ApiResponse(code = 0,message = "ok")
+    })
     public R add(@ApiParam(name = "家庭添加信息", value = "familyAdd")@RequestBody Family family){
         try {
             this.familyService.add(family);
@@ -156,6 +181,9 @@ public class PatientController {
     @DeleteMapping("/family/delete")
     @ResponseBody
     @ApiOperation(value = "删除接口",notes = "家庭删除",httpMethod = "DELETE")
+    @ApiResponses({
+            @ApiResponse(code = 0,message = "ok")
+    })
     public R delete(@ApiParam(name = "患者删除条件",value = "familyId")@RequestParam("familyId") Integer familyId){
         try {
             this.familyService.delete(familyId);
