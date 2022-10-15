@@ -56,9 +56,6 @@ public class InventoryInfo {
     //收费类别
     @ApiModelProperty(name = "chargeCategory",value = "收费类型",required = true)
     private String chargeCategory;
-    //库存数量
-    @ApiModelProperty(name = "stockNum",value = "库存数量",required = true)
-    private Integer stockNum;
 
 
     //库存明细

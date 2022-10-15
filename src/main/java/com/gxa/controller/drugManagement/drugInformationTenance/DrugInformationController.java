@@ -3,8 +3,11 @@ package com.gxa.controller.drugManagement.drugInformationTenance;
 import com.gxa.entity.drugManagement.drugInformationTenance.*;
 import com.gxa.result.Result;
 import com.gxa.result.ResultUtils;
+import com.gxa.service.drugManagement.drugInformationTenance.DrugInformationService;
 import io.swagger.annotations.*;
+import io.swagger.models.auth.In;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -20,8 +23,8 @@ import java.util.List;
 @Api(tags = {"药品信息维护的接口"})
 public class DrugInformationController {
 
-//    @Autowired
-//    private DrugManagementService drugManagementService;
+    @Autowired
+    private DrugInformationService drugInformationService;
 
     //列表
     @GetMapping(value = "/list")
@@ -29,7 +32,7 @@ public class DrugInformationController {
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok",response = DrugBasicInformation.class )
     })
-    public Result list(){
+    public Result list(Integer page){
         //创建DrugBasicInformation
         List<DrugBasicInformation> drugBasicInformation = new ArrayList<>();
         //添加列表
@@ -42,6 +45,9 @@ public class DrugInformationController {
         drugBasicInformation.add(new DrugBasicInformation(7,"mnvfgh","asdfzc","阿莫西林7","AMoXiLin","注射类","32","片剂",1,"西药费","qwasd123","昆明制药",1,"西/成药",23.1,56.2,"2022-10-21",null,null,null));
         drugBasicInformation.add(new DrugBasicInformation(9,"sdfzxcv","fcnb","阿莫西林9","AMoXiLin","注射类","32","片剂",1,"西药费","qwasd123","昆明制药",1,"西/成药",23.1,56.2,"2022-10-21",null,null,null));
         drugBasicInformation.add(new DrugBasicInformation(10,"asdfzc","fdgtrhfnchn","阿莫西林0","AMoXiLin","注射类","32","片剂",1,"西药费","qwasd123","昆明制药",1,"西/成药",23.1,56.2,"2022-10-21",null,null,null));
+
+        drugInformationService.list((page-1)*5);
+        //service查询
         return ResultUtils.buildFail(200,"ok",2L,drugBasicInformation);
     }
 

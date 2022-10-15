@@ -20,7 +20,7 @@
 <!--        读取mybatis总配置文件-->
         <property name="configLocation" value="classpath:mybatis.xml"/>
 <!--        读取mapper映射文件-->
-        <property name="mapperLocations" value="classpath:mapper/*/*.xml"></property>
+        <property name="mapperLocations" value="classpath:mapper/**/*.xml"></property>
         <!--配置分页插件-->
         <property name="plugins">
             <array>
@@ -66,7 +66,7 @@
 
 <!--切面-->
     <aop:config>
-        <aop:pointcut id="pc" expression="execution(* com.gxa.service.impl.*.*(..))"/>
+        <aop:pointcut id="pc" expression="execution(* com.gxa.service.*.impl.*.*(..))"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="pc"></aop:advisor>
     </aop:config>
 
