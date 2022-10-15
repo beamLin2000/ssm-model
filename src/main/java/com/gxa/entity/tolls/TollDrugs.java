@@ -1,7 +1,11 @@
 package com.gxa.entity.tolls;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
+@Data
+@TableName(value = "toll_drugs")
 public class TollDrugs {
     @ApiModelProperty(name = "tollDrugsId",value = "序号")
     private Integer tollDrugsId;
@@ -19,6 +23,6 @@ public class TollDrugs {
     private Double tollDrugsDiscount;
     @ApiModelProperty(name = "tollDrugsAllMoney",value = "折扣金额")
     private Double tollDrugsAllMoney;
-    @ApiModelProperty(name = "patientId",value = "患者ID")
-    private Integer patientId;
+    @ApiModelProperty(name = "tollId",value = "序号")
+    private Integer tollId;
 }

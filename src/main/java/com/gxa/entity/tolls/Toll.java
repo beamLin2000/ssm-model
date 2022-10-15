@@ -1,9 +1,12 @@
 package com.gxa.entity.tolls;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 import java.util.Date;
-
+@Data
+@TableName(value = "toll")
 public class Toll {
     @ApiModelProperty(name = "tollId",value = "序号")
     private Integer tollId;

@@ -7,6 +7,9 @@ import com.gxa.entity.tolls.TollDrugs;
 import com.gxa.entity.tolls.TollPatient;
 import com.gxa.entity.work.Drug;
 import com.gxa.entity.work.WorkPatient;
+import com.gxa.service.toll.PatientDrugsService;
+import com.gxa.service.toll.TollDrugsService;
+import com.gxa.service.toll.TollPatientService;
 import com.gxa.service.toll.TollService;
 import com.gxa.utils.R;
 import com.gxa.utils.systemSettings.Result;
@@ -15,11 +18,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @Controller
 @Api(tags = {"收费管理"})
 public class TollController {
     @Autowired
     private TollService tollService;
+    @Autowired
+    private PatientDrugsService patientDrugsService;
+    @Autowired
+    private TollDrugsService tollDrugsService;
+    @Autowired
+    private TollPatientService tollPatientService;
 
     @GetMapping("/toll/state")
     @ResponseBody
@@ -27,10 +40,11 @@ public class TollController {
     @ApiResponses({
             @ApiResponse(code = 0,message = "ok",response = Toll.class)
     })
-    public R tollStateList(@ApiParam(name = "状态查找信息", value = "tollState")Integer tollState){
-        System.out.println(tollState);
-        R r = new R();
-        return r.ok();
+    public R tollStateList(@ApiParam(name = "状态查找信息", value = "tollState")@RequestParam("tollState") Integer tollState){
+        List<Toll> tolls = this.tollService.queryByTollState(tollState);
+        Map map = new HashMap();
+        map.put("tolls",tolls);
+        return R.ok(map);
     }
 
     @GetMapping("/toll/name")
@@ -40,28 +54,72 @@ public class TollController {
             @ApiResponse(code = 0,message = "ok",response = Toll.class)
     })
     public R tollNameList(@ApiParam(name = "姓名查找信息", value = "tollName")String tollName){
-        System.out.println(tollName);
-        R r = new R();
-        return r.ok();
+        List<Toll> tolls = this.tollService.queryByTollName(tollName);
+        Map map = new HashMap();
+        map.put("tolls",tolls);
+        return R.ok(map);
     }
 
     @DeleteMapping("/toll/delete")
     @ResponseBody
     @ApiOperation(value = "删除接口",notes = "缴费删除",httpMethod = "DELETE")
-    public Result tollDelete(@ApiParam(name = "缴费删除条件",value = "tollId") Integer tollId){
-        System.out.println(tollId);
-        Result result = new Result(1,"成功",1,tollId);
-        this.tollService.delete(tollId);
-        return result;
+    public R tollDelete(@ApiParam(name = "缴费删除条件",value = "tollId") Integer tollId){
+        try {
+            this.tollService.delete(tollId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            R.ok("fale");
+        }
+        return R.ok("success");
     }
 
-    @PutMapping("/toll/update_state")
+
+//    @PutMapping("/toll/update_state")
+//    @ResponseBody
+//    @ApiOperation(value = "修改接口",notes = "状态修改",httpMethod = "PUT")
+//    public R tollState(@ApiParam(name = "状态修改信息", value = "tollId")String tollId){
+//        System.out.println(tollId);
+//        R r = new R();
+//        return r.ok();
+//    }
+
+    @GetMapping("/toll/PatientDrugs")
     @ResponseBody
-    @ApiOperation(value = "修改接口",notes = "状态修改",httpMethod = "PUT")
-    public R tollState(@ApiParam(name = "状态修改信息", value = "tollId")String tollId){
-        System.out.println(tollId);
-        R r = new R();
-        return r.ok();
+    @ApiOperation(value = "查询人员信息",notes = "人员信息",httpMethod = "GET")
+    @ApiResponses({
+            @ApiResponse(code = 0,message = "ok",response = PatientDrugs.class)
+    })
+    public R PatientDrugs(@ApiParam(name = "人员id", value = "tollId")Integer tollId){
+        PatientDrugs patientDrugs = this.patientDrugsService.queryByTollId(tollId);
+        Map map = new HashMap();
+        map.put("patientDrugs",patientDrugs);
+        return R.ok(map);
+    }
+
+    @GetMapping("/toll/TollDrugs")
+    @ResponseBody
+    @ApiOperation(value = "查询项目明细",notes = "项目明细",httpMethod = "GET")
+    @ApiResponses({
+            @ApiResponse(code = 0,message = "ok",response = TollDrugs.class)
+    })
+    public R TollDrugs(@ApiParam(name = "人员id", value = "tollId")Integer tollId){
+        TollDrugs tollDrugs = this.tollDrugsService.queryByTollId(tollId);
+        Map map = new HashMap();
+        map.put("tollDrugs",tollDrugs);
+        return R.ok(map);
+    }
+
+    @GetMapping("/toll/TollPatient")
+    @ResponseBody
+    @ApiOperation(value = "查询接诊信息",notes = "接诊信息",httpMethod = "GET")
+    @ApiResponses({
+            @ApiResponse(code = 0,message = "ok",response = TollPatient.class)
+    })
+    public R TollPatient(@ApiParam(name = "人员id", value = "patientId")Integer patientId){
+        TollPatient tollPatient = this.tollPatientService.queryByTollId(patientId);
+        Map map = new HashMap();
+        map.put("tollPatient",tollPatient);
+        return R.ok(map);
     }
 
     @GetMapping("/toll/update_prescriptionPre")
@@ -102,42 +160,6 @@ public class TollController {
     @ApiOperation(value = "修改药品",notes = "药品修改",httpMethod = "PUT")
     public R tollPharmaceuticals(@ApiParam(name = "处方修改信息", value = "toll")Toll toll){
         System.out.println(toll);
-        R r = new R();
-        return r.ok();
-    }
-
-    @GetMapping("/toll/PatientDrugs")
-    @ResponseBody
-    @ApiOperation(value = "查询人员信息",notes = "人员信息",httpMethod = "GET")
-    @ApiResponses({
-            @ApiResponse(code = 0,message = "ok",response = PatientDrugs.class)
-    })
-    public R PatientDrugs(@ApiParam(name = "人员id", value = "patientId")Integer patientId){
-        System.out.println(patientId);
-        R r = new R();
-        return r.ok();
-    }
-
-    @GetMapping("/toll/TollDrugs")
-    @ResponseBody
-    @ApiOperation(value = "查询项目明细",notes = "项目明细",httpMethod = "GET")
-    @ApiResponses({
-            @ApiResponse(code = 0,message = "ok",response = TollDrugs.class)
-    })
-    public R TollDrugs(@ApiParam(name = "人员id", value = "patientId")Integer patientId){
-        System.out.println(patientId);
-        R r = new R();
-        return r.ok();
-    }
-
-    @GetMapping("/toll/TollPatient")
-    @ResponseBody
-    @ApiOperation(value = "查询接诊信息",notes = "接诊信息",httpMethod = "GET")
-    @ApiResponses({
-            @ApiResponse(code = 0,message = "ok",response = TollPatient.class)
-    })
-    public R TollPatient(@ApiParam(name = "人员id", value = "patientId")Integer patientId){
-        System.out.println(patientId);
         R r = new R();
         return r.ok();
     }
