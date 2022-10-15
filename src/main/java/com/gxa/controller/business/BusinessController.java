@@ -9,10 +9,7 @@ import com.gxa.utils.R;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -23,7 +20,7 @@ import java.util.*;
 public class BusinessController {
     @Autowired
     private BusinessService service;
-    @GetMapping("/business/list")
+    @PostMapping("/business/list")
     @ResponseBody
     @ApiOperation(value = "经营状况",notes = "")
     @ApiResponses({
@@ -78,7 +75,7 @@ public class BusinessController {
 
 
 
-    @GetMapping("/business/list01")
+    @PostMapping("/business/list01")
     @ResponseBody
     @ApiOperation(value = "经营状况",notes = "")
     @ApiResponses({
