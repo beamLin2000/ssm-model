@@ -1,5 +1,6 @@
 package com.gxa.controller.work;
 
+import com.alibaba.fastjson.JSON;
 import com.gxa.dto.PatientDto;
 import com.gxa.dto.WorkPatientDto;
 import com.gxa.entity.patients.Patients;
@@ -7,6 +8,7 @@ import com.gxa.entity.work.*;
 import com.gxa.service.work.PatientDtoService;
 import com.gxa.service.work.WorkPatientDtoService;
 import com.gxa.utils.R;
+import com.hazelcast.internal.json.Json;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -66,11 +68,13 @@ public class WorkConeroller {
     //处方list  传一个string
     @GetMapping("/work/durglist")
     @ResponseBody
-    @ApiOperation(value = "工作台的数据接口",notes = "西，成处方,中药处方")
+    @ApiOperation(value = "工作台的数据接口",notes = "西,中药处方")
     @ApiResponses({
             @ApiResponse(code = 0,message = "ok",response = Drug.class)
     })
     public R durgList(String prescriptionName){
+        System.out.println(prescriptionName
+        );
         Drug drug = new Drug(1,"阿莫西林","1g*1","1000","0.16");
         Drug drug1 = new Drug(2,"减肥药复合袋","1g*1","1000","0.15");
         Drug drug2 = new Drug(3,"阿莫西林","1g*1","1000","0.18");
@@ -123,8 +127,19 @@ public class WorkConeroller {
     //保存患者信息
     @PostMapping("/work/savePatient")
     @ResponseBody
-    public R savePatient(@RequestBody Patient1 patient1){
+    public R savePatient(@RequestBody String patient1){
+
         System.out.println(patient1);
+        Patient1 patient = JSON.parseObject(patient1, Patient1.class);
+        Drug drug = JSON.parseObject(patient1, Drug.class);
+        Inspect inspect = JSON.parseObject(patient1, Inspect.class);
+        CDrug cDrug = JSON.parseObject(patient1, CDrug.class);
+        Physical physical = JSON.parseObject(patient1, Physical.class);
+        MedicalRecord medicalRecord = JSON.parseObject(patient1, MedicalRecord.class);
+
+        System.out.println(patient);
+        System.out.println(drug);
+//        System.out.println(drug);
         R r = new R();
 
         return r.ok();

@@ -3,39 +3,39 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gxa.mapper.patients.PatientsMapper">
-<!--    <resultMap id="patientResultMap" type="com.gxa.entity.patients.Patients">-->
-<!--        <id property="patientId" column="patientId"/>-->
-<!--        <result property="patientNumber" column="patientNumber"/>-->
-<!--        <result property="patientName" column="patientName"/>-->
-<!--        <result property="patientAge" column="patientAge"/>-->
-<!--        <result property="patientBirthday" column="patientBirthday"/>-->
-<!--        <result property="patientGender" column="patientGender"/>-->
-<!--        <result property="patientPhone" column="patientPhone"/>-->
-<!--        <result property="patientDocuments" column="patientDocuments"/>-->
-<!--        <result property="patientSource" column="patientSource"/>-->
-<!--        <result property="patientExpiry" column="patientExpiry"/>-->
-<!--        <result property="patientGroup" column="patientGroup"/>-->
-<!--        <result property="patientMarriage" column="patientMarriage"/>-->
-<!--        <result property="patientAddress" column="patientAddress"/>-->
-<!--        <result property="patientDetailedAddress" column="patientDetailedAddress"/>-->
-<!--        <result property="patientDegree" column="patientDegree"/>-->
-<!--        <result property="patientOccupation" column="patientOccupation"/>-->
-<!--        <result property="patientJob" column="patientJob"/>-->
-<!--        <result property="patientRemark" column="patientRemark"/>-->
-<!--        <result property="patientCreatTime" column="patientCreatTime"/>-->
-<!--        <result property="operators" column="operators"/>-->
-<!--    </resultMap>-->
+    <resultMap id="patientResultMap" type="com.gxa.entity.patients.Patients">
+        <id property="patientId" column="patientId"/>
+        <result property="patientNumber" column="patientNumber"/>
+        <result property="patientName" column="patientName"/>
+        <result property="patientAge" column="patientAge"/>
+        <result property="patientBirthday" column="patientBirthday"/>
+        <result property="patientGender" column="patientGender"/>
+        <result property="patientPhone" column="patientPhone"/>
+        <result property="patientDocuments" column="patientDocuments"/>
+        <result property="patientSource" column="patientSource"/>
+        <result property="patientExpiry" column="patientExpiry"/>
+        <result property="patientGroup" column="patientGroup"/>
+        <result property="patientMarriage" column="patientMarriage"/>
+        <result property="patientAddress" column="patientAddress"/>
+        <result property="patientDetailedAddress" column="patientDetailedAddress"/>
+        <result property="patientDegree" column="patientDegree"/>
+        <result property="patientOccupation" column="patientOccupation"/>
+        <result property="patientJob" column="patientJob"/>
+        <result property="patientRemark" column="patientRemark"/>
+        <result property="patientCreatTime" column="patientCreatTime"/>
+        <result property="operators" column="operators"/>
+    </resultMap>
 
-<!--    <select id="queryAll" resultMap="patientResultMap">-->
-<!--        SELECT patientId,patientNumber,patientName,patientGender,patientAge,patientPhone,patientCreatTime,operators-->
-<!--        FROM patients-->
-<!--    </select>-->
+    <select id="queryAll" resultMap="patientResultMap">
+        SELECT patientId,patientNumber,patientName,patientGender,patientAge,patientPhone,patientCreatTime,operators
+        FROM patients
+    </select>
 
 
 
-<!--    <select id="queryByPhone" resultMap="patientResultMap" parameterType="string">-->
-<!--        SELECT patientId,patientNumber,patientName,patientGender,patientAge,patientPhone,patientCreatTime,operators-->
-<!--        FROM patients-->
-<!--        WHERE patientPhone=${patientPhone}-->
-<!--    </select>-->
+    <select id="queryByPhone" resultMap="patientResultMap" parameterType="string">
+        SELECT patientId,patientNumber,patientName,patientGender,patientAge,patientPhone,patientCreatTime,operators
+        FROM patients
+        WHERE patientPhone=${patientPhone}
+    </select>
 </mapper>

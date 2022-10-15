@@ -1,5 +1,7 @@
 package com.gxa.controller.business;
 
+import com.alibaba.fastjson.JSON;
+import com.gxa.entity.business.BusinessReceiveInfo;
 import com.gxa.entity.business.OutpatientRecordToday;
 import com.gxa.entity.work.MedicalRecord;
 import com.gxa.service.business.BusinessService;
@@ -8,6 +10,8 @@ import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.text.ParseException;
@@ -25,11 +29,11 @@ public class BusinessController {
     @ApiResponses({
             @ApiResponse(code = 0,message = "ok")
     })
-    public R contrast(@ApiParam("今天的日期到天就行")String todayTime){
+    public R contrast(@RequestBody @ApiParam("今天的日期") BusinessReceiveInfo info){
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date time = null;
         try {
-             time = simpleDateFormat.parse(todayTime);
+             time = simpleDateFormat.parse(info.getTodayTime());
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
@@ -50,21 +54,22 @@ public class BusinessController {
 
 
 
-    @GetMapping("/business/list02")
+    @PostMapping("/business/list02")
     @ResponseBody
     @ApiOperation(value = "经营状况",notes = "")
     @ApiResponses({
             @ApiResponse(code = 0,message = "ok")
     })
-    public R contrast01(@ApiParam("查多少天的数据")Integer days,@ApiParam("今天的日期到天就行")String todayTime){
+    public R contrast01(@RequestBody @ApiParam("今天的日期and要多少天的数据") BusinessReceiveInfo info){
+
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date time = null;
         try {
-            time = simpleDateFormat.parse(todayTime);
+            time = simpleDateFormat.parse(info.getTodayTime());
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
-        List<Map> list = this.service.queryTotal(time, days);
+        List<Map> list = this.service.queryTotal(time, info.getDays());
         R r = new R();
         r.put("list",list);
         return r;
@@ -79,16 +84,15 @@ public class BusinessController {
     @ApiResponses({
             @ApiResponse(code = 0,message = "ok",response = MedicalRecord.class)
     })
-    public R contrast02(@ApiParam("今天的日期到天")String todayTime){
+    public R contrast02(@RequestBody @ApiParam("今天的日期") BusinessReceiveInfo info){
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date time = null;
         try {
-            time = simpleDateFormat.parse(todayTime);
+            time = simpleDateFormat.parse(info.getTodayTime());
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
         List<OutpatientRecordToday> list = this.service.queryByToday(time);
-
         R r = new R();
         r.put("todayList",list);
         return r;

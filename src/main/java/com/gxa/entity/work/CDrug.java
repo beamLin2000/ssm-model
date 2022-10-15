@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @ApiModel("返回对象实体")
-public class Drug {
+public class CDrug {
     @ApiModelProperty(name = "id",value ="药品id")
     private Integer id;
     @ApiModelProperty(name = "name",value ="名字")

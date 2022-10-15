@@ -16,4 +16,34 @@ public class WorkPatientDtoServiceImpl implements WorkPatientDtoService {
         WorkPatientDto workPatientDto = this.workPatientDtoMapper.queryWorkPatientDtoByPhoneNum(phoneNum,status);
         return workPatientDto;
     }
+
+    @Override
+    public void addPatientInfo() {
+
+    }
+
+    @Override
+    public void addPatientPhyInfo() {
+
+    }
+
+    @Override
+    public void addPatientMedInfo() {
+
+    }
+
+    @Override
+    public void addPatientInsInfo() {
+
+    }
+
+    @Override
+    public void addPatientDrugInfo() {
+
+    }
+
+    @Override
+    public void addPatientCDrugInfo() {
+
+    }
 }

@@ -33,11 +33,11 @@ public class BusinessServiceImpl implements BusinessService {
     public List<Map> queryTotal(Date date, Integer days) {
         List<Map> list = new ArrayList<>();
         for (int i=0;i<days;i++){
+            Map<String, Object> map = this.businessMapper.queryTotal(date, days);
+            list.add(map);
             long time = date.getTime();
             long time1 = time-24*60*60*1000;
             date.setTime(time1);
-            Map<String, Object> map = this.businessMapper.queryTotal(date, days);
-            list.add(map);
         }
 
         return list;
