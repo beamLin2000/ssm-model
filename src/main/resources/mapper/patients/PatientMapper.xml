@@ -3,28 +3,28 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gxa.mapper.patients.PatientsMapper">
-<!--    <resultMap id="patientResultMap" type="com.gxa.entity.patients.Patients">-->
-<!--        <id property="patientId" column="patientId"/>-->
-<!--        <result property="patientNumber" column="patientNumber"/>-->
-<!--        <result property="patientName" column="patientName"/>-->
-<!--        <result property="patientAge" column="patientAge"/>-->
-<!--        <result property="patientBirthday" column="patientBirthday"/>-->
-<!--        <result property="patientGender" column="patientGender"/>-->
-<!--        <result property="patientPhone" column="patientPhone"/>-->
-<!--        <result property="patientDocuments" column="patientDocuments"/>-->
-<!--        <result property="patientSource" column="patientSource"/>-->
-<!--        <result property="patientExpiry" column="patientExpiry"/>-->
-<!--        <result property="patientGroup" column="patientGroup"/>-->
-<!--        <result property="patientMarriage" column="patientMarriage"/>-->
-<!--        <result property="patientAddress" column="patientAddress"/>-->
-<!--        <result property="patientDetailedAddress" column="patientDetailedAddress"/>-->
-<!--        <result property="patientDegree" column="patientDegree"/>-->
-<!--        <result property="patientOccupation" column="patientOccupation"/>-->
-<!--        <result property="patientJob" column="patientJob"/>-->
-<!--        <result property="patientRemark" column="patientRemark"/>-->
-<!--        <result property="patientCreatTime" column="patientCreatTime"/>-->
-<!--        <result property="operators" column="operators"/>-->
-<!--    </resultMap>-->
+    <resultMap id="patientResultMap" type="com.gxa.entity.patients.Patients">
+        <id property="patientId" column="patient_id"/>
+        <result property="patientNumber" column="patient_number"/>
+        <result property="patientName" column="patient_name"/>
+        <result property="patientAge" column="patient_age"/>
+        <result property="patientBirthday" column="patient_birthday"/>
+        <result property="patientGender" column="patient_gender"/>
+        <result property="patientPhone" column="patient_phone"/>
+        <result property="patientDocuments" column="patient_documents"/>
+        <result property="patientSource" column="patient_source"/>
+        <result property="patientExpiry" column="patient_expiry"/>
+        <result property="patientGroup" column="patient_group"/>
+        <result property="patientMarriage" column="patient_marriage"/>
+        <result property="patientAddress" column="patient_address"/>
+        <result property="patientDetailedAddress" column="patient_detailed_address"/>
+        <result property="patientDegree" column="patient_degree"/>
+        <result property="patientOccupation" column="patient_occupation"/>
+        <result property="patientJob" column="patient_job"/>
+        <result property="patientRemark" column="patient_remark"/>
+        <result property="patientCreatTime" column="patient_creat_time"/>
+        <result property="operators" column="operators"/>
+    </resultMap>
 
 <!--    <select id="queryAll" resultMap="patientResultMap">-->
 <!--        SELECT patientId,patientNumber,patientName,patientGender,patientAge,patientPhone,patientCreatTime,operators-->
@@ -38,4 +38,14 @@
 <!--        FROM patients-->
 <!--        WHERE patientPhone=${patientPhone}-->
 <!--    </select>-->
+    <select id="queryByPhone" resultType="com.gxa.entity.patients.Patients">
+            SELECT patient_id,patient_number,patient_name,patient_gender,patient_age,patient_phone,patient_creat_time,operators
+            FROM patients
+            WHERE patient_name=#{patientPhone} OR patient_phone=#{patientPhone}
+    </select>
+    <select id="queryByDateTime" resultType="com.gxa.entity.patients.Patients">
+        SELECT patient_id,patient_number,patient_name,patient_gender,patient_age,patient_phone,patient_creat_time,operators
+        FROM patients
+        WHERE patient_creat_time &gt;= #{firstTime} and patient_creat_time &lt;= #{lastTime}
+    </select>
 </mapper>
