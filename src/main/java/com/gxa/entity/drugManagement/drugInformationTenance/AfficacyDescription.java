@@ -1,5 +1,6 @@
 package com.gxa.entity.drugManagement.drugInformationTenance;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -14,6 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Api(value = "AfficacyDescription",description = "功效说明")
+@TableName("drugManagement_drugInformationTenance_afficacyDescription")
 public class AfficacyDescription {
     @ApiModelProperty(name = "id",value = "主键id")
     private Integer id;

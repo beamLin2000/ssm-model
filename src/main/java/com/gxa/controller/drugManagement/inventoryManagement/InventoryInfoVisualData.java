@@ -31,21 +31,21 @@ public class InventoryInfoVisualData {
     List<InventoryDetails> inventoryDetails1 = new ArrayList<>();
     inventoryDetails1.add(inventoryDetails.get(0));
     inventoryDetails1.add(inventoryDetails.get(1));
-    inventoryInfos.add(new InventoryInfo(1,"1000001","12-1001","超敏","中/成药","6g*10袋/盒","口服","上海医药集团",110,27000.0,270000.0,"账单",210,inventoryDetails1));
+    inventoryInfos.add(new InventoryInfo(1,"1000001","12-1001","超敏","中/成药","6g*10袋/盒","口服","上海医药集团",110,27000.0,270000.0,"账单",inventoryDetails1));
 
     List<InventoryDetails> inventoryDetails2 = new ArrayList<>();
     inventoryDetails2.add(inventoryDetails.get(2));
     inventoryDetails2.add(inventoryDetails.get(1));
-    inventoryInfos.add(new InventoryInfo(2,"1000001","12-1001","超敏","中/成药","6g*10袋/盒","口服","上海医药集团",110,27000.0,270000.0,"账单",210,inventoryDetails2));
+    inventoryInfos.add(new InventoryInfo(2,"1000001","12-1001","超敏","中/成药","6g*10袋/盒","口服","上海医药集团",110,27000.0,270000.0,"账单",inventoryDetails2));
 
     List<InventoryDetails> inventoryDetails3 = new ArrayList<>();
     inventoryDetails3.add(inventoryDetails.get(0));
-    inventoryInfos.add(new InventoryInfo(3,"1000001","12-1001","超敏","中/成药","6g*10袋/盒","口服","上海医药集团",110,27000.0,270000.0,"账单",210,inventoryDetails3));
+    inventoryInfos.add(new InventoryInfo(3,"1000001","12-1001","超敏","中/成药","6g*10袋/盒","口服","上海医药集团",110,27000.0,270000.0,"账单",inventoryDetails3));
 
     List<InventoryDetails> inventoryDetails4 = new ArrayList<>();
     inventoryDetails4.add(inventoryDetails.get(2));
     inventoryDetails4.add(inventoryDetails.get(1));
-    inventoryInfos.add(new InventoryInfo(4,"1000001","12-1001","超敏","中/成药","6g*10袋/盒","口服","上海医药集团",110,27000.0,270000.0,"账单",210,inventoryDetails4));
+    inventoryInfos.add(new InventoryInfo(4,"1000001","12-1001","超敏","中/成药","6g*10袋/盒","口服","上海医药集团",110,27000.0,270000.0,"账单",inventoryDetails4));
     //创建查看库存明细
 
 

@@ -1,5 +1,6 @@
 package com.gxa.entity.drugManagement.inventoryManagement;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -17,6 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ApiModel(value = "InventoryInfo",description = "库存管理列表")
+@TableName("drugManagement_inventoryManagement_inventoryDetails")
 public class InventoryInfo {
     //主键
     @ApiModelProperty(name = "id",value = "主键id",required = true)
@@ -57,8 +59,6 @@ public class InventoryInfo {
     @ApiModelProperty(name = "chargeCategory",value = "收费类型",required = true)
     private String chargeCategory;
     //库存数量
-    @ApiModelProperty(name = "stockNum",value = "库存数量",required = true)
-    private Integer stockNum;
 
 
     //库存明细

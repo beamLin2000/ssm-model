@@ -1,5 +1,6 @@
 package com.gxa.entity.drugManagement.drugInformationTenance;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -15,6 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @ApiModel(value = "DrugOtherInformation",description = "其他信息")
+@TableName("drugManagement_drugInformationTenance_drugOtherInformation")
 public class DrugOtherInformation {
     @ApiModelProperty(name = "id",value = "主键id")
     private Integer id;

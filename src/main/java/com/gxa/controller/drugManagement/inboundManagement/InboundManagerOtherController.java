@@ -88,11 +88,11 @@ public class InboundManagerOtherController {
     })
     public Result addPre(){
         System.out.println("addPre");
-        return ResultUtils.buildFail(200,"addPre",0L,inboundManagerVisualData.getInboundInfos().get(1));
+        return ResultUtils.buildFail(200,"addPre",0L,inboundManagerVisualData.getInboundInfos());
     }
     //搜索药品
     @GetMapping("/search")
-    @ApiOperation(value = "search",notes = "添加药品中的查询列表")
+    @ApiOperation(value = "search",notes = "添加药品中的搜索功能")
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok",response = InboundInfoAddArray.class )
     })

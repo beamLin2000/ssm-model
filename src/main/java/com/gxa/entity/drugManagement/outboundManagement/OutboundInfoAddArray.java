@@ -1,5 +1,6 @@
 package com.gxa.entity.drugManagement.outboundManagement;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -15,6 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @ApiModel(value = "OutboundInfoAddArray",description = "编辑或新增中的添加药品功能数据列表")
+@TableName("drugManagement_outboundManagement_outboundInfoAddArray")
 public class OutboundInfoAddArray {
     @ApiModelProperty(name = "id",value = "主键id",required = true)
     private Integer id;

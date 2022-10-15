@@ -1,5 +1,6 @@
 package com.gxa.entity.drugManagement.drugPriceAdjustment;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -16,6 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @ApiModel(value = "DrugPriceAdjustInfo",description = "药品调价table表")
+@TableName("drugManagement_drugPriceAdjustment_drugPriceAdjustInfo")
 public class DrugPriceAdjustInfo {
     @ApiModelProperty(name = "id",value = "主键id")
     private Integer id;

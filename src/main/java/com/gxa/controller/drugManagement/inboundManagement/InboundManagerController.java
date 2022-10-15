@@ -41,7 +41,7 @@ public class InboundManagerController {
     })
     public Result queryById(@ApiParam("再次入库与查询功能所需id")Integer id){
         System.out.println(id);
-        return ResultUtils.buildFail(200,"ok",30L,InboundManagerVisualData.getInboundInfos().get(0));
+        return ResultUtils.buildFail(200,"ok",30L,InboundManagerVisualData.getInboundInfos().get(2));
     }
     //删除
     @PostMapping("/delete")
@@ -53,16 +53,6 @@ public class InboundManagerController {
         System.out.println(id);
         return ResultUtils.buildFail(200,"ok",30L,null);
     }
-//    //再次入库
-//    @PostMapping("/queryById")
-//    @ApiOperation(value = "queryById",notes = "再次入库")
-//    @ApiResponses({
-//            @ApiResponse(code = 200,message = "ok",response = InboundInfo.class )
-//    })
-//    public Result queryById(){
-//        System.out.println("inboundAgain");
-//        return ResultUtils.buildFail(200,"ok",30L,InboundManagerVisualData.getInboundInfos().get(0));
-//    }
     //搜索
     @GetMapping("/search")
     @ApiOperation(value = "search",notes = "搜索功能")
@@ -71,10 +61,10 @@ public class InboundManagerController {
     })
     public Result search(@ApiParam("审核状态")String auditStatus,@ApiParam("入库类型")String receiptType,@ApiParam("入库单号/供应商")String rules){
         System.out.println(auditStatus+","+receiptType+","+rules);
-        return ResultUtils.buildFail(200,"ok",30L,InboundManagerVisualData.getInboundInfos().get(0));
+        return ResultUtils.buildFail(200,"ok",3L,InboundManagerVisualData.getInboundInfos());
     }
     //提交审核
-    @PostMapping("/save")
+    @GetMapping("/save")
     @ApiOperation(value = "save",notes = "审核提交(审核通过与不通过)")
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok" )

@@ -1,5 +1,6 @@
 package com.gxa.entity.drugManagement.inboundManagement;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -16,6 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ApiModel(value = "InboundInfo",description = "出库管理table表")
+@TableName("drugManagement_inboundManagement_inboundInfo")
 public class InboundInfo {
     @ApiModelProperty(name = "id",value = "主键id",required = true)
     private Integer id;

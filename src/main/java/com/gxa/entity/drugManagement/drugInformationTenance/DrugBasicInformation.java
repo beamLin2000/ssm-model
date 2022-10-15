@@ -1,5 +1,7 @@
 package com.gxa.entity.drugManagement.drugInformationTenance;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -16,6 +18,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @ApiModel(value = "DrugBasicInformation",description = "适用于药品信息以及药品信息新增中的所有信息")
+@TableName("drugManagement_drugInformationTenance_drugBasicInformation")
 public class DrugBasicInformation {
   @ApiModelProperty(name = "id",value = "主键id")
   private Integer id;
@@ -23,20 +26,20 @@ public class DrugBasicInformation {
   private String code;
   @ApiModelProperty(name = "barcode",value = "药品条形码",required = true)
   private String barcode;
-  @ApiModelProperty(name = "commonNameDrug",value = "药品通用名",required = true)
+  @ApiModelProperty(name = "commonNameDrug",value = "药品通用名/药品名",required = true)
   private String commonNameDrug;
   @ApiModelProperty(name = "pinyinCode",value = "拼音码",required = true)
   private String pinyinCode;
   @ApiModelProperty(name = "drugType",value = "药品分类/收费类别",required = true)
   private String drugType;
-  @ApiModelProperty(name = "drugSpecifications",value = "药品规格",required = true)
+  @ApiModelProperty(name = "drugSpecifications",value = "药品规格/规格",required = true)
   private String drugSpecifications;
   @ApiModelProperty(name = "pharmaceuticalDosage",value = "药品剂型",required = true)
   private String pharmaceuticalDosage;
   @ApiModelProperty(name = "OTC",value = "OTC药品",required = true)
   private Integer OTC;
-  @ApiModelProperty(name = "InvoiceItems",value = "发票项目",required = true)
-  private String InvoiceItems;
+  @ApiModelProperty(name = "invoiceItems",value = "发票项目",required = true)
+  private String invoiceItems;
   @ApiModelProperty(name = "approvalNo",value = "批准文号",required = true)
   private String approvalNo;
   @ApiModelProperty(name = "manufacturer",value = "生产厂家",required = true)
@@ -53,10 +56,14 @@ public class DrugBasicInformation {
   @ApiModelProperty(name = "createTime",value = "创建时间",required = true)
   private String createTime;
 
+
   @ApiModelProperty(name = "drugPackageInformation",value = "包装信息数据集")
   private DrugPackageInformation drugPackageInformation;
+
+
   @ApiModelProperty(name = "afficacyDescription",value = "功效说明数据集")
   private AfficacyDescription afficacyDescription;
+
   @ApiModelProperty(name = "drugOtherInformation",value = "其他信息数据集")
   private DrugOtherInformation drugOtherInformation;
 }
