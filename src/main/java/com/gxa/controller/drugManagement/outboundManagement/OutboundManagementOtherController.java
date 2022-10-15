@@ -55,16 +55,6 @@ public class OutboundManagementOtherController {
         System.out.println("addPre");
         return ResultUtils.buildFail(200,"addPre",0L,outboundManagerVisualData.getLoArray());
     }
-    //添加药品
-//    @PostMapping("/add")
-//    @ApiOperation(value = "add",notes = "添加药品")
-//    @ApiResponses({
-//            @ApiResponse(code = 200,message = "ok")
-//    })
-//    public Result add(){
-//        System.out.println("add");
-//        return ResultUtils.buildFail(200,"add",0L,null);
-//    }
     //搜索药品
     @GetMapping("/search")
     @ApiOperation(value = "search",notes = "搜索药品")
@@ -74,7 +64,7 @@ public class OutboundManagementOtherController {
     public Result search(@ApiParam(name = "drugType",value = "处方类别") String drugType,
                          @ApiParam(name = "rule",value = "药品编码/药品名称") String rule){
         System.out.println("search");
-        return ResultUtils.buildFail(200,"search",0L,outboundManagerVisualData.getLoArray().get(0));
+        return ResultUtils.buildFail(200,"search",0L,outboundManagerVisualData.getLoArray());
     }
 
 }

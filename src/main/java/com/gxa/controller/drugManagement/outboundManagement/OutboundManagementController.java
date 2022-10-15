@@ -43,7 +43,7 @@ public class OutboundManagementController {
                          @ApiParam(name = "deliveryOrderNo",value = "出库单号") String deliveryOrderNo){
         System.out.println("search");
         System.out.println("审核状态"+auditStatus + "出库类型" + deliveryType + "出库单号" + deliveryOrderNo);
-        return ResultUtils.buildFail(200,"search",0L,outboundManagerVisualData.getLos().get(0));
+        return ResultUtils.buildFail(200,"search",0L,outboundManagerVisualData.getLos());
     }
     //再次出库
     @PostMapping("/outboundAgain")

@@ -39,7 +39,7 @@ public class InventoryCountingController {
     })
     public Result search(@ApiParam("创建时间")String createTime,@ApiParam("盘点单号")String countSheetNo){
         System.out.println(createTime+","+countSheetNo);
-        return ResultUtils.buildFail(200,"ok",0L,inventoryCountingVisualData.getInventoryCountingInfo().get(2));
+        return ResultUtils.buildFail(200,"ok",0L,inventoryCountingVisualData.getInventoryCountingInfo());
     }
 
     @PostMapping("/delete")

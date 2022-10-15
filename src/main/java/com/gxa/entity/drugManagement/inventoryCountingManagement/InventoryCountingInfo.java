@@ -1,5 +1,6 @@
 package com.gxa.entity.drugManagement.inventoryCountingManagement;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -16,6 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @ApiModel(value = "InventoryCountingInfo",description = "库存盘点列表")
+@TableName("drugManagement_inventoryCountingManagement_inventoryCountingInfo")
 public class InventoryCountingInfo {
 
     //主键id

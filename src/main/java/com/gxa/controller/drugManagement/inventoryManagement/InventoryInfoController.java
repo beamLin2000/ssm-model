@@ -39,7 +39,7 @@ public class InventoryInfoController {
   })
   public Result search(@ApiParam("处方类别")String drugType,@ApiParam("药品名称/编码/生产厂家")String rules){
     System.out.println(drugType+","+rules);
-    return ResultUtils.buildFail(200,"查询所有",2L,inventoryInfoVisualData.getInventoryDetails().get(1));
+    return ResultUtils.buildFail(200,"查询所有",2L,inventoryInfoVisualData.getInventoryDetails());
   }
 
   @GetMapping("/queryDetails")

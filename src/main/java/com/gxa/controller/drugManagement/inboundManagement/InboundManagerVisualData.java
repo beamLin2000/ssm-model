@@ -37,13 +37,14 @@ public class InboundManagerVisualData {
         InboundInfoAddArray1.add(InboundInfoAddArray.get(0));
         InboundInfoAddArray1.add(InboundInfoAddArray.get(1));
         //第二条list
-        inboundInfos.add(new InboundInfo(2,"asdadsadsa","采购入库","白云制药厂","lx",2100.0,2400.0,"lx","2016-5-8",0,"2019-2-3","白云代理部","2019-9-9","666",
+        inboundInfos.add(new InboundInfo(2,"asdadsadsa","采购入库","白云制药厂","lx",2100.0,2400.0,"lx","2016-5-8",1,"2019-2-3","白云代理部","2019-9-9","666",
                 InboundInfoAddArray1));
 
         //初始化新增药品
         InboundInfoAddArray2.add(InboundInfoAddArray.get(1));
         //第三条list
-        inboundInfos.add(new InboundInfo(3,"asdadsadsa","采购入库","白云制药厂","lx",2100.0,2400.0,"lx","2016-5-8",0,"2019-2-3","白云代理部","2019-9-9","666",
+        inboundInfos.add(new InboundInfo(3,"asdadsadsa","采购入库","白云制药厂","lx",2100.0,2400.0,"lx","2016-5-8",2,"2019-2-3","白云代理部","2019-9-9","666",
                 InboundInfoAddArray2));
+
     }
 }

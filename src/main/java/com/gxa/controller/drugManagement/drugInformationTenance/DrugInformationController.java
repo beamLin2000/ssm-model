@@ -32,23 +32,10 @@ public class DrugInformationController {
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok",response = DrugBasicInformation.class )
     })
-    public Result list(Integer page){
-        //创建DrugBasicInformation
-        List<DrugBasicInformation> drugBasicInformation = new ArrayList<>();
-        //添加列表
-        drugBasicInformation.add(new DrugBasicInformation(1,"dsadsa","asdasdasdas","阿莫西林1","AMoXiLin","注射类","32","片剂",1,"西药费","qwasd123","昆明制药",1,"西/成药",23.1,56.2,"2022-10-21",null,null,null));
-        drugBasicInformation.add(new DrugBasicInformation(2,"eqw","safdzc","阿莫西林2","AMoXiLin","口服","32","片剂",1,"西药费","qwasd123","昆明制药",1,"西/成药",23.1,56.2,"2022-10-21",null,null,null));
-        drugBasicInformation.add(new DrugBasicInformation(3,"fasd","dgfcb","阿莫西林3","AMoXiLin","外敷","32","片剂",1,"西药费","qwasd123","昆明制药",1,"西/成药",23.1,56.2,"2022-10-21",null,null,null));
-        drugBasicInformation.add(new DrugBasicInformation(4,"zcvcz","fhvn","阿莫西林4","AMoXiLin","注射类","32","片剂",1,"西药费","qwasd123","昆明制药",1,"西/成药",23.1,56.2,"2022-10-21",null,null,null));
-        drugBasicInformation.add(new DrugBasicInformation(5,"dasfzc","kjmbfj","阿莫西林5","AMoXiLin","注射类","32","片剂",1,"西药费","qwasd123","昆明制药",1,"西/成药",23.1,56.2,"2022-10-21",null,null,null));
-        drugBasicInformation.add(new DrugBasicInformation(6,"xcvbhg","sfdxvcas","阿莫西林6","AMoXiLin","注射类","32","片剂",1,"西药费","qwasd123","昆明制药",1,"西/成药",23.1,56.2,"2022-10-21",null,null,null));
-        drugBasicInformation.add(new DrugBasicInformation(7,"mnvfgh","asdfzc","阿莫西林7","AMoXiLin","注射类","32","片剂",1,"西药费","qwasd123","昆明制药",1,"西/成药",23.1,56.2,"2022-10-21",null,null,null));
-        drugBasicInformation.add(new DrugBasicInformation(9,"sdfzxcv","fcnb","阿莫西林9","AMoXiLin","注射类","32","片剂",1,"西药费","qwasd123","昆明制药",1,"西/成药",23.1,56.2,"2022-10-21",null,null,null));
-        drugBasicInformation.add(new DrugBasicInformation(10,"asdfzc","fdgtrhfnchn","阿莫西林0","AMoXiLin","注射类","32","片剂",1,"西药费","qwasd123","昆明制药",1,"西/成药",23.1,56.2,"2022-10-21",null,null,null));
-
-        drugInformationService.list((page-1)*5);
-        //service查询
-        return ResultUtils.buildFail(200,"ok",2L,drugBasicInformation);
+    public Result list(){
+        List<DrugBasicInformation> list = drugInformationService.list();
+        System.out.println(list+"list");
+        return ResultUtils.buildFail(200,"ok",2L,list);
     }
 
     //搜索功能
@@ -62,10 +49,8 @@ public class DrugInformationController {
                          @ApiParam(name = "createTime",value = "创建时间") String createTime,
                          @ApiParam(name = "rules",value = "药品名称/编码/生成厂家") String rules){
         System.out.println(prescriptionCategory+","+status+","+createTime+","+rules);
-        //创建DrugBasicInformation
-        List<DrugBasicInformation> drugBasicInformation = new ArrayList<>();
-        drugBasicInformation.add(new DrugBasicInformation(1,"dsadsa","asdasdasdas","阿莫西林","AMoXiLin","注射类","32","片剂",1,"西药费","qwasd123","昆明制药",1,"西/成药",23.1,56.2,"2022-10-21",null,null,null));
-        return ResultUtils.buildFail(200,"ok",2L,drugBasicInformation);
+        List<DrugBasicInformation> search = drugInformationService.search(prescriptionCategory, status, createTime, rules);
+        return ResultUtils.buildFail(200,"ok",2L,search);
     }
 
     //修改状态
@@ -78,17 +63,6 @@ public class DrugInformationController {
         System.out.println("editStatus success");
         return ResultUtils.buildFail(200,"ok",2L,null);
     }
-
-//    //新增成功
-//    @PostMapping("/add")
-//    @ApiOperation(value = "add",notes = "药品信息数据新增")
-//    @ApiResponses({
-//            @ApiResponse(code = 200,message = "ok")
-//    })
-//    public Result add(@ApiParam(value = "药品新增需要提供的数据",name = "DrugBasicInformation") DrugBasicInformation drugBasicInformation){
-//        System.out.println("add success");
-//        return ResultUtils.buildFail(200,"ok",2L,null);
-//    }
 
     //新增之前,首先需要查询信息
     @PostMapping("/queryById")
@@ -117,8 +91,8 @@ public class DrugInformationController {
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok")
     })
-    public Result editSave(@ApiParam(value = "药品信息提交接口")DrugBasicInformation drugBasicInformation){
-        System.out.println("editSave");
+    public Result save(@ApiParam(value = "药品信息提交接口")DrugBasicInformation drugBasicInformation){
+        System.out.println("drugBasicInformation");
         return ResultUtils.buildFail(200,"ok",2L,null);
     }
 

@@ -31,7 +31,7 @@ public class DrugPriceAdjustmentController {
     public Result search(@ApiParam(value = "处方类别")String drugType,
                          @ApiParam(value = "药品名称/编码/生产厂家")String rules){
         System.out.println(drugType+","+rules);
-        return ResultUtils.buildFail(200,"drugPriceAdjustment",0L,drugPriceAdjustmentVisualData.getDrugPriceAdjustInfos().get(0));
+        return ResultUtils.buildFail(200,"drugPriceAdjustment",0L,drugPriceAdjustmentVisualData.getDrugPriceAdjustInfos());
     }
     //调价pre
     @PostMapping("/queryById")
@@ -41,7 +41,7 @@ public class DrugPriceAdjustmentController {
     })
     public Result queryById(@ApiParam(value = "需要调价信息的id")Integer id){
         System.out.println(id);
-        return ResultUtils.buildFail(200,"updatePre",0L,drugPriceAdjustmentVisualData.getDrugPriceAdjustInfos().get(1));
+        return ResultUtils.buildFail(200,"updatePre",0L,drugPriceAdjustmentVisualData.getDrugPriceAdjustInfos());
     }
     //调价保存
     @PostMapping("/save")
@@ -71,7 +71,7 @@ public class DrugPriceAdjustmentController {
     })
     public Result detail(@ApiParam(value="调价记录查看详情")Integer id){
         System.out.println(id);
-        return ResultUtils.buildFail(200,"updatePre",0L,drugPriceAdjustmentVisualData.getDrugPriceAdjustInfos().get(1));
+        return ResultUtils.buildFail(200,"updatePre",0L,drugPriceAdjustmentVisualData.getDrugPriceAdjustInfos());
     }
 
 }

@@ -1,5 +1,6 @@
 package com.gxa.entity.drugManagement.drugInformationTenance;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -15,11 +16,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @ApiModel(value = "DrugPackageInformation",description = "包装信息")
+@TableName("drugManagement_drugInformationTenance_drugPackageInformation")
 public class DrugPackageInformation {
     @ApiModelProperty(name = "id",value = "主键id")
     private Integer id;
-    @ApiModelProperty(name = "unit",value = "包装单位", required = true)
-    private String packingUnit;
+    @ApiModelProperty(name = "Unit",value = "包装单位", required = true)
+    private String Unit;
     @ApiModelProperty(name = "basicUnit",value = "基本系数", required = true)
     private String basicUnit;
     @ApiModelProperty(name = "baseUnit",value = "基本单位", required = true)

@@ -1,5 +1,6 @@
 package com.gxa.entity.drugManagement.inventoryManagement;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -15,6 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @ApiModel(value = "InventoryDetails",description = "库存明细")
+@TableName("drugManagement_inventoryManagement_inventoryDetail")
 public class InventoryDetails {
   //序号
   @ApiModelProperty(name = "id",value = "主键id",required = true)
