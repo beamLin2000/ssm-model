@@ -2,6 +2,7 @@ package com.gxa.controller.patients;
 
 import com.gxa.entity.patients.Family;
 import com.gxa.entity.patients.Patients;
+import com.gxa.entity.patients.PatientsDateTime;
 import com.gxa.service.patient.FamilyService;
 import com.gxa.service.patient.PatientService;
 import com.gxa.utils.R;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
+
 import java.util.*;
 
 @Controller
@@ -62,11 +63,14 @@ public class PatientController {
             @ApiResponse(code = 0,message = "ok",response = Patients.class)
     })
     public R patientDateTimeList(
-            @ApiParam(name = "开始时间", value = "firstDateTime") @RequestBody String firstDateTime ,
-            @ApiParam(name = "结束时间", value = "lastDateTime")  String lastDateTime
+            @ApiParam(name = "开始时间", value = "firstDateTime") @RequestBody PatientsDateTime patientsDateTime
+
     ){
+        String firstDateTime = patientsDateTime.getFirstDateTime();
+        String lastDateTime = patientsDateTime.getLastDateTime();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try {
+
             Date firstTime = simpleDateFormat.parse(firstDateTime);
             Date lastTime = simpleDateFormat.parse(lastDateTime);
             List<Patients> patients = this.patientService.queryByDateTime(firstTime,lastTime);
