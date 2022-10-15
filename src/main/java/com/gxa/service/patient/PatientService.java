@@ -1,8 +1,9 @@
 package com.gxa.service.patient;
 
 import com.gxa.entity.patients.Patients;
-import com.gxa.utils.R;
 
+
+import java.util.Date;
 import java.util.List;
 
 public interface PatientService {
@@ -12,6 +13,7 @@ public interface PatientService {
     Patients queryById(Integer patientId);
     void update(Patients patients);
     void delete(Integer patientId);
+    List<Patients> queryByDateTime(Date firstTime,Date lastTime);
 
 
 }

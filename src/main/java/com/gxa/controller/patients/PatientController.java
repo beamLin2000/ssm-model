@@ -8,9 +8,11 @@ import com.gxa.utils.R;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Controller
@@ -27,28 +29,55 @@ public class PatientController {
     @ApiResponses({
             @ApiResponse(code = 0,message = "ok",response = Patients.class)
     })
-    public R patientList(ModelMap map){
+    public R patientList(){
         List<Patients> patients = this.patientService.queryAll();
-        System.out.println(patients);
-        map.addAttribute("patients",patients);
+        Map map = new HashMap();
+        map.put("patients",patients);
         return R.ok(map);
 
     }
 
+//    @GetMapping("/patient/time")
+//    @
+
     @GetMapping("/patient/phone")
     @ResponseBody
-    @ApiOperation(value = "查找接口",notes = "电话查找患者",httpMethod = "GET")
+    @ApiOperation(value = "查找接口",notes = "电话或姓名查找患者",httpMethod = "GET")
     @ApiResponses({
             @ApiResponse(code = 0,message = "ok",response = Patients.class)
     })
-    public R patientPhoneList(@ApiParam(name = "电话查找患者信息", value = "patientPhone")@RequestParam("patientPhone") String patientPhone){
-        System.out.println(patientPhone);
+    public R patientPhoneList(@ApiParam(name = "电话或姓名查找患者信息", value = "patientPhone")@RequestParam("patientPhone") String patientPhone){
         List<Patients> patients = this.patientService.queryByPhone(patientPhone);
        Map map = new HashMap();
        map.put("patients",patients);
 
 //        System.out.println(patients);
         return R.ok(map);
+    }
+
+    @GetMapping("/patient/datetime")
+    @ResponseBody
+    @ApiOperation(value = "查找日期",notes = "用开始日期和结束日期查找",httpMethod = "GET")
+    @ApiResponses({
+            @ApiResponse(code = 0,message = "ok",response = Patients.class)
+    })
+    public R patientDateTimeList(
+            @ApiParam(name = "开始时间", value = "firstDateTime") @RequestBody String firstDateTime ,
+            @ApiParam(name = "结束时间", value = "lastDateTime")  String lastDateTime
+    ){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date firstTime = simpleDateFormat.parse(firstDateTime);
+            Date lastTime = simpleDateFormat.parse(lastDateTime);
+            List<Patients> patients = this.patientService.queryByDateTime(firstTime,lastTime);
+            Map map = new HashMap();
+            map.put("patients",patients);
+            return R.ok(map);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return R.ok("fale");
+        }
+
     }
 
 
