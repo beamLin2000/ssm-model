@@ -1,4 +1,4 @@
-package com.gxa.mapper.systemSettings;
+ package com.gxa.mapper.systemSettings;
 
 import com.gxa.entity.systemSettings.CPSMainTable;
 import com.gxa.entity.systemSettings.CPSViceTable;

@@ -72,7 +72,7 @@ public class SystemSettingsController {
         return result;
     }
 
-    @GetMapping("/CheckProjectSet/Select")//根据条件搜索
+    @PostMapping("/CheckProjectSet/Select")//根据条件搜索
     @ApiOperation(value = "检查项目设置-根据条件查询数据" ,notes = "",httpMethod = "get")
     public Result CheckProjectSet_Select(@RequestBody CPSEdit cpsEdit){
 
@@ -190,7 +190,7 @@ public class SystemSettingsController {
         return result;
     }
 
-    @GetMapping("/EmployeeManagement/Select")//根据条件搜索
+    @PostMapping("/EmployeeManagement/Select")//根据条件搜索
     @ApiOperation(value = "员工列表-根据条件查询数据" ,notes = "",httpMethod = "get")
     public Result EmployeeManagement_Select(@RequestBody EMSelect em_select){
 

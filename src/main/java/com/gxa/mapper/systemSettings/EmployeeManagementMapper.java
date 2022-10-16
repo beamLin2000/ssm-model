@@ -11,7 +11,7 @@ public interface EmployeeManagementMapper {
     void update(EMEdit emEdit);
     void update1(EMEdit emEdit);
     void update2(EMEdit emEdit);
-    void update3(EMEdit emEdit);
+//    void update3(EMEdit emEdit);
     void insert(EMEdit emEdit);
     void insert1(EMEdit emEdit);
     void insert2(EMEdit emEdit);
