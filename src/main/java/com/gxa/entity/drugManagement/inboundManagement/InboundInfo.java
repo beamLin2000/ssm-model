@@ -16,7 +16,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(value = "InboundInfo",description = "出库管理table表")
+@ApiModel(value = "InboundInfo",description = "入库管理")
 @TableName("drugManagement_inboundManagement_inboundInfo")
 public class InboundInfo {
     @ApiModelProperty(name = "id",value = "主键id",required = true)
@@ -53,15 +53,22 @@ public class InboundInfo {
     @ApiModelProperty(name = "receiptTime",value = "入库日期",required = true)
     private String receiptTime;
     //供应商
-    @ApiModelProperty(name = "supplier",value = "供应商",required = true)
-    private String supplier;
+//    @ApiModelProperty(name = "supplier",value = "供应商",required = true)
+//    private String supplier;
     //制单日期
     @ApiModelProperty(name = "preparationDate",value = "制单日期",required = true)
     private String preparationDate;
-    //备注
-    @ApiModelProperty(name = "remarks",value = "备注",required = true)
+    //入库备注
+    @ApiModelProperty(name = "remarks",value = "入库备注",required = true)
     private String remarks;
-    //添加药品
+
+    //审核人员
+    @ApiModelProperty(name = "reviewer",value = "审核人员",required = true)
+    private String reviewer;
+    //审核日期
+    @ApiModelProperty(name = "auditDate",value = "审核日期",required = true)
+    private String auditDate;
+    // 添加药品
     @ApiModelProperty(name = "InboundInfoAddArray",value = "添加药品",required = true)
     private List<InboundInfoAddArray> InboundInfoAddArray;
 

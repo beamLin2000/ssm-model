@@ -39,16 +39,22 @@ public class DrugInformationOtherController {
 
     //基本单位特征码
     private final Integer BASIC_UNIT_ID = 6;
+
     //剂量单位特征码
     private final Integer DOSAGE_UNIT_ID = 7;
+
     //用法特征码
     private final Integer USE_METHOD_ID = 8;
+
     //频度特征码
     private final Integer FREQUENCY_ID = 9;
+
     //天数特征码
     private final Integer DAYS = 10;
+
     //单位特征码
     private final Integer UNIT = 11;
+
     @Autowired
     private DrugInformationOtherService drugInformationOtherService;
     /**
@@ -307,8 +313,10 @@ public class DrugInformationOtherController {
         List<BasicInfo> units = drugInformationOtherService.queryAllType(UNIT);
         return ResultUtils.buildFail(200,"ok",0L,units);
     }
-    @RequestMapping("/candyi")
+
+    @GetMapping("/candyi")
     public Result candyi(){
-        return ResultUtils.buildFail(200,"this is ok!",13L,"you can found me! 菇雅萍");
+        return ResultUtils.buildFail(200,"ok",0L,"you can found me! 菇砸 !");
     }
+
 }

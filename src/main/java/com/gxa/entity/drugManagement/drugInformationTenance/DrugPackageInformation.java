@@ -20,8 +20,8 @@ import lombok.NoArgsConstructor;
 public class DrugPackageInformation {
     @ApiModelProperty(name = "id",value = "主键id")
     private Integer id;
-    @ApiModelProperty(name = "Unit",value = "包装单位", required = true)
-    private String Unit;
+    @ApiModelProperty(name = "unit",value = "包装单位", required = true)
+    private String unit;
     @ApiModelProperty(name = "basicUnit",value = "基本系数", required = true)
     private String basicUnit;
     @ApiModelProperty(name = "baseUnit",value = "基本单位", required = true)
@@ -37,6 +37,7 @@ public class DrugPackageInformation {
     @ApiModelProperty(name = "splitZero",value = "允许拆零", required = true)
     private Integer splitZero;
     @ApiModelProperty(name = "MemberDiscount",value = "允许会员折扣", required = true)
-    private Integer MemberDiscount;
+    private Integer memberDiscount;
+    private Integer drugInfoId;
 
 }

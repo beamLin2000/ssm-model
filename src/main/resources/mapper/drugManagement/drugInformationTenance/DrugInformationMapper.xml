@@ -36,6 +36,7 @@
         set `status`=#{status}
         where id = #{id}
     </update>
+<!--    搜索功能-->
     <select id="search" resultMap="queryList">
         select `id`,`code`,`drug_name`,`specs`,`drug_type`,`purchase_price`,`sales_price`,`manufacturer`,`status`,`create_time`
         from `drugManagement_drugInformationTenance_drugBasicInformation`
@@ -46,16 +47,130 @@
             <if test="status != null and status !=''">
                 status = #{start} and
             </if>
-
+            <if test="(start != null and start !='') or (end =null and end ='')">
+                create_time between #{start} and #{end} and
+            </if>
         </trim>
         <trim prefix="(" suffix=")">
-            <if test="(start != null and start !='') or (end =null and end ='')">
-                create_time between #{start} and #{end}
-            </if>
             <if test="rules != null and rules !=''">
-                drug_name = concat('%',#{rules},'%') or
+                drug_name like concat('%',#{rules},'%') or
+                code like concat('%',#{rules},'%') or
+                manufacturer like concat('%',#{rules},'%')
             </if>
         </trim>
+    </select>
+
+
+<!--    根据主表id查询基本信息-->
+    <resultMap id="queryDrugBasicInformationById" type="com.gxa.entity.drugManagement.drugInformationTenance.DrugBasicInformation">
+        <id property="id" column="id"/>
+        <result property="code" column="code"/>
+        <result property="commonNameDrug" column="drug_name"/>
+        <result property="drugSpecifications" column="specs"/>
+        <result property="drugType" column="drug_type"/>
+        <result property="purchasePrice" column="purchase_price"/>
+        <result property="salesPrice" column="sales_price"/>
+        <result property="manufacturer" column="manufacturer"/>
+        <result property="status" column="status"/>
+        <result property="createTime" column="create_time"/>
+        <result property="barcode" column="barcode"/>
+        <result property="pinyinCode" column="pinyin_code"/>
+        <result property="pharmaceuticalDosage" column="pharmaceutical_dosage"/>
+        <result property="OTC" column="OTC"/>
+        <result property="invoiceItems" column="invoice_items"/>
+        <result property="approvalNo" column="approval_no"/>
+    </resultMap>
+    <select id="queryDrugBasicInformationById"
+            resultMap="queryDrugBasicInformationById">
+        select * from "drugManagement_drugInformationTenance_drugBasicInformation"
+        where id = #{id}
+    </select>
+
+    <!--    保存DrugBasicInformation信息-->
+    <insert id="save" parameterType="com.gxa.entity.drugManagement.drugInformationTenance.DrugBasicInformation" >
+        <!--        <selectKey  keyProperty="id" order="AFTER" resultType="int">-->
+        <!--            select LAST_INSERT_ID()-->
+        <!--        </selectKey>-->
+        INSERT INTO `drugManagement_drugInformationTenance_drugBasicInformation`
+        (`code`,`drug_name`,`specs`,`drug_type`,`purchase_price`,`sales_price`,`manufacturer`,`status`,`create_time`,`barcode`,`pinyin_code`,`pharmaceutical_dosage`,`OTC`,`invoice_items`,`approval_no`)
+        VALUES
+        (#{code},#{commonNameDrug},#{drugSpecifications},#{drugType},#{purchasePrice},#{salesPrice},#{manufacturer},#{status},#{createTime},#{barcode},#{pinyinCode},#{pharmaceuticalDosage},#{OTC},#{invoiceItems},#{approvalNo})
+    </insert>
+
+    <!--    保存包装信息-->
+    <insert id="saveDrugPackageInformation" parameterType="com.gxa.entity.drugManagement.drugInformationTenance.DrugPackageInformation">
+        INSERT INTO `drugManagement_drugInformationTenance_drugPackageInformation`
+        (`id`,`unit`,`basic_coefficient`,`base_unit`,`dose_coefficient`,`dose_unit`,`purchase_price`,`retail_price`,`split_zero`,`member_discount`,`drug_info_id`)
+        VALUES
+            (null,#{unit},#{basicUnit},#{baseUnit},#{doseCoefficient},#{dosageUnit},#{purchasePrice},#{retailPrice},#{splitZero},#{MemberDiscount},#{drugInfoId})
+    </insert>
+
+    <!--    保存功效说明-->
+    <insert id="saveAfficacyDescription" parameterType="com.gxa.entity.drugManagement.drugInformationTenance.AfficacyDescription">
+        INSERT INTO `drugManagement_drugInformationTenance_afficacyDescription`
+        (`id`,`use_method`,`single_useage`,`frequency`,`days`,`consumption`,`unit`,`drug_info_id`)
+        VALUES
+            (null,#{useMethod},#{singleUsage},#{frequency},#{days},#{consumption},#{unit},#{drugInfoId})
+    </insert>
+
+    <!--    保存其他信息-->
+    <insert id="saveDrugOtherInformation" parameterType="com.gxa.entity.drugManagement.drugInformationTenance.DrugOtherInformation">
+        INSERT INTO `drugManagement_drugInformationTenance_drugOtherInformation`
+        (`id`,`inventory_floor`,`inventory_ceiling`,`locationNo`,`validPeriod_alert`,`drug_description`,`remarks`,`drug_info_id`)
+        VALUES
+            (null,#{inventoryFloor},#{inventoryCeiling},#{locationNo},#{validPeriodAlert},#{drugDescription},#{remarks},#{drugInfoId})
+    </insert>
+
+
+    <!--    根据主表id查询包装信息-->
+    <resultMap id="queryDrugPackageInformationById" type="com.gxa.entity.drugManagement.drugInformationTenance.DrugPackageInformation">
+        <id property="id" column="id"/>
+        <result property="unit" column="unit"/>
+        <result property="basicUnit" column="basic_coefficient"/>
+        <result property="baseUnit" column="base_unit"/>
+        <result property="dosageUnit" column="dose_coefficient"/>
+        <result property="purchasePrice" column="purchase_price"/>
+        <result property="retailPrice" column="retail_price"/>
+        <result property="splitZero" column="split_zero"/>
+        <result property="memberDiscount" column="member_discount"/>
+        <result column="drug_info_id" property="drugInfoId"/>
+    </resultMap>
+    <select id="queryDrugPackageInformationById"
+            resultMap="queryDrugPackageInformationById">
+        select * from  `drugManagement_drugInformationTenance_drugPackageInformation`
+        where `drug_info_id` = #{id}
+    </select>
+<!--    根据id查询功效说明-->
+    <resultMap id="queryAfficacyDescription" type="com.gxa.entity.drugManagement.drugInformationTenance.AfficacyDescription">
+        <id column="id" property="id"/>
+        <result column="use_method" property="useMethod"/>
+        <result column="single_useage" property="singleUsage"/>
+        <result column="frequency" property="frequency"/>
+        <result column="days" property="days"/>
+        <result column="consumption" property="consumption"/>
+        <result column="unit" property="unit"/>
+        <result column="drug_info_id" property="drugInfoId"/>
+    </resultMap>
+    <select id="queryAfficacyDescription"
+            resultMap="queryAfficacyDescription">
+        select * from `drugManagement_drugInformationTenance_afficacyDescription`
+        where `drug_info_id` = #{id}
+    </select>
+<!--    根据id查询其他信息-->
+    <resultMap id="queryDrugOtherInformationById" type="com.gxa.entity.drugManagement.drugInformationTenance.DrugOtherInformation">
+        <id column="id" property="id"/>
+        <result column="inventory_floor" property="inventoryFloor"/>
+        <result column="inventory_ceiling" property="inventoryCeiling"/>
+        <result column="location_no" property="locationNo"/>
+        <result column="valid_period_alert" property="validPeriodAlert"/>
+        <result column="drug_description" property="drugDescription"/>
+        <result column="remarks" property="drugDescription"/>
+        <result column="drug_info_id" property="drugInfoId"/>
+    </resultMap>
+    <select id="queryDrugOtherInformationById"
+            resultMap="queryDrugOtherInformationById">
+        select * from `drugManagement_drugInformationTenance_drugOtherInformation`
+        where `drug_info_id` = #{id}
     </select>
 
 </mapper>

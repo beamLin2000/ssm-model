@@ -59,12 +59,14 @@ public class InboundManagerController {
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok",response = InboundInfo.class )
     })
-    public Result search(@ApiParam("审核状态")String auditStatus,@ApiParam("入库类型")String receiptType,@ApiParam("入库单号/供应商")String rules){
+    public Result search(@ApiParam("审核状态")String auditStatus,
+                         @ApiParam("入库类型")String receiptType,
+                         @ApiParam("入库单号/供应商")String rules){
         System.out.println(auditStatus+","+receiptType+","+rules);
         return ResultUtils.buildFail(200,"ok",3L,InboundManagerVisualData.getInboundInfos());
     }
     //提交审核
-    @GetMapping("/save")
+    @PostMapping("/save")
     @ApiOperation(value = "save",notes = "审核提交(审核通过与不通过)")
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok" )

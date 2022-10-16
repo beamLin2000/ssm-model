@@ -17,4 +17,6 @@
     <insert id="addOneType" parameterType="com.gxa.entity.drugManagement.basicInfo.BasicInfo">
         insert into `drugManagement_basicInfo` values(null,#{name},#{id});
     </insert>
+
+
 </mapper>

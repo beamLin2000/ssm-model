@@ -47,8 +47,8 @@ public class DrugBasicInformation {
   @ApiModelProperty(name = "status",value = "药品状态",required = true)
   private Integer status;
 
-  @ApiModelProperty(name = "prescriptionCategory",value = "收费类别/处方类别",required = true)
-  private String prescriptionCategory;
+//  @ApiModelProperty(name = "prescriptionCategory",value = "收费类别/处方类别",required = true)
+//  private String prescriptionCategory;
   @ApiModelProperty(name = "purchasePrice",value = "采购价格",required = true)
   private Double purchasePrice;
   @ApiModelProperty(name = "salesPrice",value = "售出价",required = true)
