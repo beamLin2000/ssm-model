@@ -14,10 +14,17 @@
         where id=#{id}
     </update>
 
-    <delete id="delete">
-        delete from CPSMainTable
+    <update id="delete" >
+        update CPSMainTable
+        set projectStatus="0"
         where id=#{id}
-    </delete>
+    </update>
+
+    <update id="change">
+        update CPSMainTable
+        set projectStatus="1"
+        where id=#{id}
+    </update>
 
     <select id="selectALl" resultType="com.gxa.entity.systemSettings.CPSMainTable">
         select * from CPSMainTable

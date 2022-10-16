@@ -11,4 +11,5 @@ public interface EmployeeManagementService {
 
     List<EMEmployeeTable> selectAll();
     void update(EMEdit emEdit);
+    void insert(EMEdit emEdit);
 }
