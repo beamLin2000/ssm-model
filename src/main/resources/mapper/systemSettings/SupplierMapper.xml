@@ -12,16 +12,17 @@
         <result property="timeing" column="timeing"></result>
         <result property="foundperson" column="foundperson"></result>
         <result property="supplierstate" column="supplierstate"></result>
+        <result property="remarks" column="remarks"></result>
 
     </resultMap>
     <insert id="addSupplier">
-        INSERT INTO supplier_administration(supplierno,suppliername,contacts,phone,timeing,foundperson,supplierstate)
-        VALUE (#{supplierno},#{suppliername},#{contacts},#{phone},#{timeing},#{foundperson},#{supplierstate})
+        INSERT INTO supplier_administration(supplierno,suppliername,contacts,phone,timeing,foundperson,supplierstate,remarks)
+        VALUE (#{supplierno},#{suppliername},#{contacts},#{phone},#{timeing},#{foundperson},#{supplierstate},#{remarks})
 
     </insert>
     <update id="updateSupplier" parameterType="com.gxa.entity.systemSettings.SupplierAdministration">
         UPDATE supplier_administration
-        SET suppliername=#{suppliername},contacts=#{contacts},timeing=#{timeing},phone=#{phone},foundperson=#{foundperson},supplierstate=#{supplierstate}
+        SET suppliername=#{suppliername},contacts=#{contacts},timeing=#{timeing},phone=#{phone},foundperson=#{foundperson},supplierstate=#{supplierstate},remarks=#{remarks}
         WHERE supplierno=#{supplierno}
     </update>
     <delete id="deleteBySupplierNo" parameterType="int">

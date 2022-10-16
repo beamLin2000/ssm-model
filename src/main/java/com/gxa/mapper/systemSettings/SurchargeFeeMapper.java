@@ -1,5 +1,6 @@
 package com.gxa.mapper.systemSettings;
 
+import com.gxa.entity.systemSettings.PrescriptionTable;
 import com.gxa.entity.systemSettings.SurchargeFee;
 
 import java.util.List;
@@ -11,4 +12,6 @@ public interface SurchargeFeeMapper {
     void addSurchargeFee(SurchargeFee surchargeFee);
     void deleteById(Integer id);
     void updateSurchargeFee(SurchargeFee surchargeFee);
+    List<PrescriptionTable>queryPrescription01();
+
 }

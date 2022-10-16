@@ -3,9 +3,37 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gxa.mapper.systemSettings.TreatmentFeeMapper">
+    <resultMap id="treatmentFee" type="com.gxa.entity.systemSettings.TreatmentFee">
+        <id property="id" column="id"></id>
+        <result property="treatment" column="treatment"></result>
+        <result property="price" column="price"></result>
+        <result property="cost" column="cost"></result>
+        <result property="timeing" column="timeing"></result>
+        <result property="foundPerson" column="foundperson"></result>
+        <result property="costState" column="coststate"></result>
 
-    <select id="queryAll" resultType="com.gxa.entity.systemSettings.TreatmentFee">
+    </resultMap>
+    <insert id="addTreatmentFee">
+        INSERT INTO treatment_fee(treatment,price,cost,timeing,foundperson,coststate)
+        VALUE (#{treatment},#{price},#{cost},#{timeing},#{foundPerson},#{costState})
+    </insert>
+    <update id="updateTreatmentFee">
+        UPDATE treatment_fee
+        SET treatment=#{treatment},price=#{price},cost=#{cost},timeing=#{timeing},foundperson=#{foundPerson},coststate=#{costState}
+        WHERE id=#{id}
+    </update>
+    <delete id="deleteTreatmentFee">
+        DELETE FROM treatment_fee
+        WHERE id=#{id}
+    </delete>
+
+    <select id="queryAll" resultMap="treatmentFee">
         SELECT *
         FROM treatment_fee
+    </select>
+    <select id="queryByTreatment" resultMap="treatmentFee">
+        SELECT *
+        FROM treatment_fee
+        WHERE treatment=#{treatment}
     </select>
 </mapper>

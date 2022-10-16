@@ -1,5 +1,6 @@
 package com.gxa.service.impl.systemSettings;
 
+import com.gxa.entity.systemSettings.PrescriptionTable;
 import com.gxa.entity.systemSettings.SurchargeFee;
 import com.gxa.mapper.systemSettings.SurchargeFeeMapper;
 import com.gxa.service.systemSettings.SurchargeFeeiService;
@@ -47,4 +48,12 @@ public class SurchargeFeeiServiceImpl implements SurchargeFeeiService {
     public void updateSurchargeFee(SurchargeFee surchargeFee) {
         this.surchargeFeeMapper.updateSurchargeFee(surchargeFee);
     }
+
+    @Override
+    public List<PrescriptionTable> queryPrescription01() {
+        List<PrescriptionTable> prescriptionTables = this.surchargeFeeMapper.queryPrescription01();
+        return prescriptionTables;
+    }
+
+
 }

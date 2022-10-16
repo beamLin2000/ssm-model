@@ -2,11 +2,15 @@ package com.gxa.form.systemSettings.clinicInformation;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 //诊所信息
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @ApiModel("诊所信息实体类")
 public class ClinicInformationForm {
     @ApiModelProperty(value = "诊所编号",name = "clinicNo",required = false)
@@ -32,37 +36,4 @@ public class ClinicInformationForm {
 
 
 
-    public ClinicInformationForm(Integer clinicNo, String clinicName, String logo, String clinicOwner, Integer ownerPhone, String ownerEmail, String address, String detailedAddress, String clinicIntroduce, Integer clinicState) {
-        this.clinicNo = clinicNo;
-        this.clinicName = clinicName;
-        this.logo = logo;
-        this.clinicOwner = clinicOwner;
-        this.ownerPhone = ownerPhone;
-        this.ownerEmail = ownerEmail;
-        this.address = address;
-        this.detailedAddress = detailedAddress;
-        this.clinicIntroduce = clinicIntroduce;
-        this.clinicState = clinicState;
-    }
-
-    public ClinicInformationForm() {
-    }
-
-
-
-    @Override
-    public String toString() {
-        return "ClinicInformationForm{" +
-                "clinicNo=" + clinicNo +
-                ", clinicName='" + clinicName + '\'' +
-                ", logo='" + logo + '\'' +
-                ", clinicOwner='" + clinicOwner + '\'' +
-                ", ownerPhone=" + ownerPhone +
-                ", ownerEmail='" + ownerEmail + '\'' +
-                ", address='" + address + '\'' +
-                ", detailedAddress='" + detailedAddress + '\'' +
-                ", clinicIntroduce='" + clinicIntroduce + '\'' +
-                ", clinicState=" + clinicState +
-                '}';
-    }
 }
