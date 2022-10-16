@@ -21,6 +21,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -283,27 +284,18 @@ public class SystemSettingsController {
         return yResult;
     }
 
-    @GetMapping("/clinicinformation/list01")
-    @ApiOperation(value = "诊所维护信息",notes = "分页查询接口",httpMethod = "Get")
-    public PageInfo<ClinicInformation> qrall(@RequestParam("page") int page, @RequestParam("size")int size){
-        PageHelper.startPage(page,size);
-        List<ClinicInformation>list = this.clinicInformationService.queryAll();
-        PageInfo<ClinicInformation>pageInfo = new PageInfo<>(list);
 
-        return pageInfo;
-
-    }
     //
     @PutMapping("/clinicinformation/edit")
     @ApiOperation(value = "诊所维护信息",notes = "修改接口",httpMethod = "Put")
-    public void updateClinic(@RequestBody ClinicInformationForm clinicInformationForm){
+    public YResult updateClinic(@RequestBody ClinicInformationForm clinicInformationForm){
         ClinicInformation clinicInformation = new ClinicInformation(clinicInformationForm.getClinicNo(),clinicInformationForm.getClinicName(),clinicInformationForm.getLogo(),clinicInformationForm.getClinicOwner(),clinicInformationForm.getOwnerPhone(),clinicInformationForm.getOwnerEmail(),clinicInformationForm.getAddress(),clinicInformationForm.getDetailedAddress(),clinicInformationForm.getClinicIntroduce(),clinicInformationForm.getClinicState());
         this.clinicInformationService.updateClinic(clinicInformation);
         YResult YResult = new YResult(0,"修改成功",clinicInformation);
         System.out.println("诊所维护信息修改"+clinicInformationForm);
         System.out.println(clinicInformation);
 
-
+        return YResult;
     }
     /*--------------------------------------------------------------------------------------------------------------------------*/
 
@@ -317,7 +309,7 @@ public class SystemSettingsController {
     public YResult selectSupplier(){
         List<SupplierAdministration> supplierAdministrations = this.supplierService.selectSupplier();
         YResult YResult = new YResult(0,"查询成功",supplierAdministrations);
-
+        System.out.println("supplierAdministrations------------------"+supplierAdministrations);
         return YResult;
     }
 
@@ -329,25 +321,26 @@ public class SystemSettingsController {
         List<SupplierAdministration> supplierAdministrations = this.supplierService.selectBySuppliername(supplierName);
         YResult YResult = new YResult(0,"查询成功",supplierAdministrations);
 
+
         return YResult;
     }
 
 
 
 
+
     @PostMapping("/supplier/add")
     @ApiOperation(value = "供应商管理",notes = "添加接口",httpMethod = "Post")
-    public void addSupplier(@RequestBody SupplierForm supplierForm){
+    public YResult addSupplier(@RequestBody SupplierForm supplierForm){
         Date date = new Date();
         date.setTime(date.getTime());
-
-
         SupplierAdministration supplierAdministration = new SupplierAdministration(supplierForm.getSupplierNo(),supplierForm.getSupplierName(),supplierForm.getContacts(),supplierForm.getPhone(),date,supplierForm.getFoundPerson(),supplierForm.getSupplierState(),supplierForm.getRemarks());
         this.supplierService.addSupplier(supplierAdministration);
 
         YResult YResult = new YResult(0,"添加成功",supplierAdministration);
         System.out.println("供应商添加"+supplierForm);
 
+        return YResult;
 
     }
 

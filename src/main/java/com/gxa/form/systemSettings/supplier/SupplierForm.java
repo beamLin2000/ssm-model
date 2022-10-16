@@ -23,8 +23,6 @@ public class SupplierForm {
     private String contacts;//联系人
     @ApiModelProperty(value = "联系电话",name = "联系电话",required = false)
     private Integer phone;//联系电话
-    @ApiModelProperty(value = "创建时间",name = "创建时间",required = false)
-    private Date time;//创建时间
     @ApiModelProperty(value = "创建人员",name = "创建人员",required = false)
     private String foundPerson;//创建人员
     @ApiModelProperty(value = "供应商状态",name = "供应商状态",required = false)
