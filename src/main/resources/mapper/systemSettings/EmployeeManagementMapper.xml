@@ -14,7 +14,7 @@
         <result property="createPerson" column="create_person"></result>
         <result property="employeeStatus" column="status"/>
         <result property="clinic" column="cn"/>
-        <collection property="role" ofType="role" >
+        <collection property="role" ofType="com.gxa.entity.systemSettings.Role" >
             <result property="name" column="rn"></result>
         </collection>
     </resultMap>
