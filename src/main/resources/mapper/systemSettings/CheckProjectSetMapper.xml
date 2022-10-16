@@ -33,7 +33,7 @@
     <select id="select" resultType="com.gxa.entity.systemSettings.CPSMainTable">
         select * from CPSMainTable
         <where>
-            <if test="projectStatus!=null">
+            <if test="projectStatus!=null" >
                 and projectStatus=#{projectStatus}
             </if>
             <if test="projectName!=null">
