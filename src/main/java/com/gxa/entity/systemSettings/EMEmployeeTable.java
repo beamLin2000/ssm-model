@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @ApiModel
@@ -22,15 +23,15 @@ public class EMEmployeeTable {
     @ApiModelProperty(value = "员工性别",name = "sex",hidden = false,required = false)
     private String sex;//员工性别
     @ApiModelProperty(value = "员工年龄",name = "age",hidden = false,required = false)
-    private String age;//员工年龄
+    private int age;//员工年龄
     @ApiModelProperty(value = "手机号码",name = "phoneNumber",hidden = false,required = false)
-    private int phoneNumber;//手机号码
+    private String phoneNumber;//手机号码
     @ApiModelProperty(value = "所属诊所",name = "clinic",hidden = false,required = false)
     private String clinic;//所属诊所
 //    @ApiModelProperty(value = "所属科室",name = "所属科室",hidden = false,required = false)
 //    private String offices;//所属科室
-    @ApiModelProperty(value = "角色",name = "roles",hidden = false,required = true)
-    private String roles;//角色
+//    @ApiModelProperty(value = "角色",name = "roles",hidden = false,required = true)
+//    private String roles;//角色
     @ApiModelProperty(value = "创建时间",name = "creationTime",hidden = false,required = false)
     private Date creationTime;//创建时间
     @ApiModelProperty(value = "创建人员",name = "createPerson",hidden = false,required = false)
@@ -44,10 +45,13 @@ public class EMEmployeeTable {
     private String id_num;
     @ApiModelProperty(value = "地址",name = "address")
     private String address;
-    @ApiModelProperty(value = "职位",name = "position")
-    private String position;
+//    @ApiModelProperty(value = "职位",name = "position")
+//    private String position;
 
-    public EMEmployeeTable(int id, String workNumber, String name, String sex, String age, int phoneNumber, String clinic, String roles, Date creationTime, String createPerson, String employeeStatus) {
+    @ApiModelProperty(value = "角色,表",name = "role")
+    private List<Role> role;
+
+    public EMEmployeeTable(int id, String workNumber, String name, String sex, int age, String phoneNumber, String clinic,  Date creationTime, String createPerson, String employeeStatus) {
         this.id = id;
         this.workNumber = workNumber;
         this.name = name;
@@ -55,7 +59,7 @@ public class EMEmployeeTable {
         this.age = age;
         this.phoneNumber = phoneNumber;
         this.clinic = clinic;
-        this.roles = roles;
+
         this.creationTime = creationTime;
         this.createPerson = createPerson;
         this.employeeStatus = employeeStatus;

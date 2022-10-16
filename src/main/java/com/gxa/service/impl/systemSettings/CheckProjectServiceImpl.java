@@ -31,13 +31,17 @@ public class CheckProjectServiceImpl implements CheckProjectSetService {
     }
 
     @Override
-    public void delete(int id) {
-        checkProjectSet_mapper.delete(id);
+    public void delete(int id,String projectStatus) {
+        if(projectStatus.equals("0")){
+            checkProjectSet_mapper.change(id);
+        }else {
+            checkProjectSet_mapper.delete(id);
+        }
     }
 
     @Override
-    public CPSMainTable select(CPSEdit cpsEdit) {
-        CPSMainTable select = checkProjectSet_mapper.select(cpsEdit);
+    public List<CPSMainTable> select(CPSEdit cpsEdit) {
+        List<CPSMainTable> select = checkProjectSet_mapper.select(cpsEdit);
         return select;
     }
 

@@ -6,26 +6,29 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @ApiModel
 @AllArgsConstructor
 @NoArgsConstructor
 public class EMEdit {
-
+    @ApiModelProperty(value = "id",name = "id",hidden = false,required = false)
+    private int id;//id
     @ApiModelProperty(value = "员工编号",name = "workNumber",hidden = false,required = false)
-    private int workNumber;//工号
+    private String workNumber;//工号
     @ApiModelProperty(value = "员工姓名",name = "name",hidden = false,required =true)
     private String name;//员工姓名
     @ApiModelProperty(value = "员工年龄",name = "age",hidden = false,required = true)
-    private String age;//员工年龄
+    private int age;//员工年龄
     @ApiModelProperty(value = "员工性别",name = "sex",hidden = false,required = true)
     private String sex;//员工性别
     @ApiModelProperty(value = "手机号码",name = "phoneNumber",hidden = false,required = false)
-    private int phoneNumber;//手机号码
+    private String phoneNumber;//手机号码
 //    @ApiModelProperty(value = "所属科室",name = "所属科室",hidden = false,required = true)
 //    private String offices;//所属科室
-    @ApiModelProperty(value = "角色",name = "roles",hidden = false,required = true)
-    private String roles;//角色
+//    @ApiModelProperty(value = "角色",name = "roles",hidden = false,required = true)
+//    private String roles;//角色
     @ApiModelProperty(value = "员工状态",name = "employeeStatus",hidden = false,required = false)
     private String employeeStatus;//员工状态    停用    启用
 
@@ -43,5 +46,7 @@ public class EMEdit {
     private String password;//密码
 
 
+    @ApiModelProperty(value = "角色表",name = "rolesEdit",hidden = false,required = false)
+    private List<RolesEdit> rolesEdit;
 
 }

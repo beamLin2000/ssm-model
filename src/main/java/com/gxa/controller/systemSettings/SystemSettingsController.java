@@ -64,9 +64,10 @@ public class SystemSettingsController {
     }
 
     @GetMapping("/CheckProjectSet/Delete")//删除
-    @ApiOperation(value = "检查项目设置-删除数据" ,notes = "根据id删除数据",httpMethod = "Get")
-    public Result CheckProjectSet_Delete(@RequestParam("id") int id ){
-        checkProjectSet_service.delete(id);
+    @ApiOperation(value = "检查项目设置-停用,启用数据" ,notes = "根据id,状态停，启用数据",httpMethod = "Get")
+    public Result CheckProjectSet_Delete(@RequestParam("id") int id ,@RequestParam("projectStatus") String projectStatus ){
+        System.out.println(id+"------------------"+projectStatus);
+        checkProjectSet_service.delete(id,projectStatus);
         Result result = new Result(2,"成功","hello");
         return result;
     }
@@ -75,8 +76,8 @@ public class SystemSettingsController {
     @ApiOperation(value = "检查项目设置-根据条件查询数据" ,notes = "",httpMethod = "get")
     public Result CheckProjectSet_Select(@RequestBody CPSEdit cpsEdit){
 
-        System.out.println(cpsEdit);
-        CPSMainTable select = checkProjectSet_service.select(cpsEdit);
+        System.out.println(cpsEdit+"----------------------");
+        List<CPSMainTable> select = checkProjectSet_service.select(cpsEdit);
         Result result = new Result(1,"成功",select);
         return result;
     }
@@ -167,6 +168,7 @@ public class SystemSettingsController {
     @PostMapping("/EmployeeManagement/Edit")//编辑
     @ApiOperation(value = "员工列表-编辑数据" ,notes = "",httpMethod = "Post")
     public Result EmployeeManagement_Edit(@RequestBody EMEdit em_edit){
+        System.out.println(em_edit+"--------------------");
         employeeManagementService.update(em_edit);
         Result result = new Result(2,"成功","hello");
         return result;
@@ -175,7 +177,7 @@ public class SystemSettingsController {
     @PostMapping("/EmployeeManagement/Insert")//添加
     @ApiOperation(value = "员工列表-添加数据" ,notes = "",httpMethod = "Post")
     public Result EmployeeManagement_Insert(@RequestBody EMEdit em_edit){
-
+        employeeManagementService.insert(em_edit);
         Result result = new Result(2,"成功","hello");
         return result;
     }
@@ -193,7 +195,7 @@ public class SystemSettingsController {
     public Result EmployeeManagement_Select(@RequestBody EMSelect em_select){
 
         Date date = new Date(2000 - 2 - 2);
-        EMEmployeeTable emEmployeeTable = new EMEmployeeTable(1, "1", "1", "1", "1", 1, "1", "1", date, "1", "1");
+        EMEmployeeTable emEmployeeTable = new EMEmployeeTable(1, "1", "1", "1", 1, "1", "1",  date, "1", "1");
         Result result = new Result();
         return result;
     }
@@ -203,7 +205,7 @@ public class SystemSettingsController {
     public Result EmployeeManagement_Drop(){
 
         Date date = new Date(2000 - 2 - 2);
-        EMEmployeeTable emEmployeeTable = new EMEmployeeTable(1, "1", "1", "1", "1", 1, "1", "1", date, "1", "1");
+
         Result result = new Result();
         return result;
     }
