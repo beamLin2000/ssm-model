@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.beans.Transient;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class BusinessServiceImpl implements BusinessService {
@@ -34,7 +31,15 @@ public class BusinessServiceImpl implements BusinessService {
         List<Map> list = new ArrayList<>();
         for (int i=0;i<days;i++){
             Map<String, Object> map = this.businessMapper.queryTotal(date, days);
-            list.add(map);
+            System.out.println(map);
+            if (map==null){
+                Map<String, Object> map1 = new HashMap<>();
+                map1.put("date",date);
+                map1.put("money",0);
+                list.add(map1);
+            }else {
+                list.add(map);
+            }
             long time = date.getTime();
             long time1 = time-24*60*60*1000;
             date.setTime(time1);

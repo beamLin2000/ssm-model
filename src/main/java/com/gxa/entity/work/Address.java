@@ -10,10 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Address {
 
-    @ApiModelProperty(name = "province",value = "省")
+    @ApiModelProperty(name = "province",value = "粗略地址")
     private String province;
-    @ApiModelProperty(name = "city",value ="市")
-    private String city;
     @ApiModelProperty(name = "detailedAddress",value ="详细地址")
     private String detailedAddress;
 }

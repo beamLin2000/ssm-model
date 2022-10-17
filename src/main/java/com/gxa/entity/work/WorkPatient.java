@@ -15,26 +15,26 @@ import java.util.Date;
 public class WorkPatient {
     @ApiModelProperty("id")
     private Integer id;
-    @ApiModelProperty("名字")
+    @ApiModelProperty(value = "名字",required = true)
     private String name;
-    @ApiModelProperty("患者卡号")
+    @ApiModelProperty(value = "患者卡号",required = true)
     private String card;
-    @ApiModelProperty("年龄")
+    @ApiModelProperty(value = "年龄",required = true)
     private String age;
-    @ApiModelProperty("出生日期")
+    @ApiModelProperty(value = "出生日期",required = true)
     private Date brith;
-    @ApiModelProperty("性别")
+    @ApiModelProperty(value = "性别",required = true)
     private String gender;
-    @ApiModelProperty("电话")
+    @ApiModelProperty(value = "电话",required = true)
     private String phone;
-    @ApiModelProperty("证件号码")
-    private String idcard;
-    @ApiModelProperty("接诊类型")
+    @ApiModelProperty(value = "证件号码",required = true)
+    private String idCard;
+    @ApiModelProperty(value = "接诊类型",required = true)
     private String type;
-    @ApiModelProperty("地址")
+    @ApiModelProperty(value = "地址",required = true)
     private Address address;
-    @ApiModelProperty("诊断")
+    @ApiModelProperty(value = "诊断",required = true)
     private String diagnosis;
-    @ApiModelProperty("医嘱")
+    @ApiModelProperty(value = "医嘱",required = true)
     private String order;
 }

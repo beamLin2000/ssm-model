@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel("返回对象实体")
+@ApiModel("返回中药对象实体")
+
 public class CDrug {
     @ApiModelProperty(name = "id",value ="药品id")
     private Integer id;

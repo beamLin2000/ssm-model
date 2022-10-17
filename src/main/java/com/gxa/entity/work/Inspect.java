@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel("返回对象实体")
+@ApiModel("返回检查项目对象实体")
 public class Inspect {
     @ApiModelProperty("检查项目id")
     private Integer id;

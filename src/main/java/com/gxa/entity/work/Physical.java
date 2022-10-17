@@ -22,9 +22,9 @@ public class Physical {
     @ApiModelProperty("血压")
     private String blood;
     @ApiModelProperty("身高")
-    private String height;
+    private Double height;
     @ApiModelProperty("体重")
-    private String weight;
+    private Double weight;
     @ApiModelProperty("血糖")
     private String bloodSugar;
     @ApiModelProperty("血脂")

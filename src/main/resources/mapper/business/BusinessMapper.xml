@@ -24,7 +24,7 @@
     </select>
 
     <select id="queryTodayRevenue" resultType="java.lang.Double">
-        SELECT SUM(registration_fee)+SUM(consultation_fee)+SUM(toll_money) FROM register r,toll t WHERE r.registration_date=#{date} AND t.toll_creat_time=#{date}
+        SELECT SUM(registration_fee)+SUM(consultation_fee)+SUM(toll_money) FROM register r,toll t WHERE r.registration_date=#{date} AND t.toll_creat_time=#{date} AND r.status!='已退号'
     </select>
 
     <select id="queryTotal" resultMap="total">

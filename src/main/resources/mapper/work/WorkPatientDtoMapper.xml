@@ -15,9 +15,47 @@
         <result property="address" column="patient_detailed_address"></result>
     </resultMap>
 
+    <update id="updataPatientIncfo">
+        UPDATE patients SET diagnosis=#{patient1.diagnosis},doctor_advice=#{patient1.order}
+        WHERE patient_card=#{patient1.idCard}
+        AND ISNULL(diagnosis)
+        AND ISNULL(doctor_advice)
+    </update>
+    <insert id="addPatientPhyInfo">
+        INSERT INTO medical_record_physique (sickTime,suit,present,previous,allergy,personalized,familyHistory,
+                                             auxiliary,treatment,notes,temperature,breathe,blood,pulse,height,weight
+                                            ,bloodSugar,bloodFat,id_card,create_time)
+        VALUES (#{medicalRecordPhysical.sickTime},#{medicalRecordPhysical.suit},#{medicalRecordPhysical.present},#{medicalRecordPhysical.previous},
+                #{medicalRecordPhysical.allergy},#{medicalRecordPhysical.personalized},#{medicalRecordPhysical.familyHistory},#{medicalRecordPhysical.sickTime},
+                #{medicalRecordPhysical.auxiliary},#{medicalRecordPhysical.treatment},#{medicalRecordPhysical.notes},#{medicalRecordPhysical.temperature},
+                #{medicalRecordPhysical.breathe},#{medicalRecordPhysical.pulse},#{medicalRecordPhysical.height},#{medicalRecordPhysical.weight},
+                #{medicalRecordPhysical.bloodSugar},#{medicalRecordPhysical.bloodFat},#{medicalRecordPhysical.idCard},#{medicalRecordPhysical.createTime})
+    </insert>
+    <insert id="addPatientMedicalChargeInfo">
+        INSERT INTO drug_use_information (`type`,`name`,singleDose,`usage`,frequency,days,total,price,totalPrice,person_name,person_idcard,create_time)
+        VALUES (#{medicalCharge.type},#{medicalCharge.name},#{medicalCharge.singleDose},#{medicalCharge.usage},
+                #{medicalCharge.frequency},#{medicalCharge.days},#{medicalCharge.total},#{medicalCharge.price},
+                #{medicalCharge.totalPrice},#{medicalCharge.personName},#{medicalCharge.idCard},#{medicalCharge.createTime})
+    </insert>
+    <insert id="addPatientItemInfo">
+        INSERT INTO item_charge (`type`,`name`,notes,num,univalent,totalUnivalent,person_name,person_idCard,create_time)
+        VALUES (#{itemCharge.type},#{itemCharge.name},#{itemCharge.notes},#{itemCharge.num},#{itemCharge.univalent},
+                #{itemCharge.totalUnivalent},#{itemCharge.personName},#{itemCharge.idCard},#{itemCharge.createTime})
+    </insert>
+    <insert id="addSurcharges">
+        INSERT INTO surcharges (`name`,price,person_name,person_idcard,create_time)
+        VALUES (#{surcharges.name},#{surcharges.price},#{surcharges.personName},#{surcharges.idCard},#{surcharges.createTime})
+    </insert>
+    <insert id="addprescriptionsInfo">
+        INSERT INTO prescriptions (doctorName,totalMoney,prescriptionsNum,idCard,personName,createTime)
+        VALUES (#{prescriptions.doctorName},#{prescriptions.totalMoney},#{prescriptions.prescriptionsNum},#{prescriptions.idCard},
+                #{prescriptions.personName},#{prescriptions.createTime})
+    </insert>
+
     <select id="queryWorkPatientDtoByPhoneNum" resultMap="workPatientDto">
         SELECT p.patient_name,p.patient_card,p.patient_age,p.patient_birthday,p.patient_gender,p.patient_phone,p.patient_documents,r.reception_type,p.patient_detailed_address
         FROM register r ,patients p
         WHERE r.registration_form=p.registration_form AND p.patient_phone=#{phoneNum} AND reception_type=#{status}
     </select>
+
 </mapper>

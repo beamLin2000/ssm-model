@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
@@ -96,7 +98,7 @@ public class WorkConeroller {
     })
     public R physicalList(){
 
-        Physical physical  = new Physical(1,"36.50","36.50","36.50","36.50","36.50","36.50","36.50","36.50");
+        Physical physical  = new Physical(1,"36.50","36.50","36.50","36.50",36.50,36.50,"36.50","36.50");
         Map map = new HashMap();
         map.put("physicals",physical);
         R r = new R();
@@ -127,67 +129,30 @@ public class WorkConeroller {
     //保存患者信息
     @PostMapping("/work/savePatient")
     @ResponseBody
-    public R savePatient(@RequestBody String patient1){
+    public R savePatient(@RequestBody PatientAllInfoDto dto){
+        Date date = new Date();
+        long time = date.getTime();
+        date.setTime(time);
+        this.workPatientDtoService.updataPatientIncfo(dto.getPatient());
+        if ("初诊".equals(dto.getPatient().getType())){
+            dto.getMedicalRecordPhysical().setIdCard(dto.getPatient().getIdCard());
+            dto.getMedicalRecordPhysical().setCreateTime(date);
+            this.workPatientDtoService.addPatientPhyInfo(dto.getMedicalRecordPhysical());
+        }
+        this.workPatientDtoService.addPatientMedicalChargeInfo(dto.getMedicalCharges());
+        this.workPatientDtoService.addPatientItemInfo(dto.getItemCharge());
 
-        System.out.println(patient1);
-        Patient1 patient = JSON.parseObject(patient1, Patient1.class);
-        Drug drug = JSON.parseObject(patient1, Drug.class);
-        Inspect inspect = JSON.parseObject(patient1, Inspect.class);
-        CDrug cDrug = JSON.parseObject(patient1, CDrug.class);
-        Physical physical = JSON.parseObject(patient1, Physical.class);
-        MedicalRecord medicalRecord = JSON.parseObject(patient1, MedicalRecord.class);
+        this.workPatientDtoService.addprescriptionsInfo(dto.getPrescriptions());
 
-        System.out.println(patient);
-        System.out.println(drug);
-//        System.out.println(drug);
+
         R r = new R();
+
 
         return r.ok();
     }
+
+
     //保存西、成处方信息
-    @PostMapping("/work/saveDurg")
-    @ResponseBody
-    public R saveDurg(Drug drug){
-        System.out.println(drug);
-        R r = new R();
 
-        return r.ok();
-    }
-    //保存中药处方
- @PostMapping("/work/saveTraditional")
-    @ResponseBody
-    public R saveTraditional (Drug drug){
-     System.out.println(drug);
-        R r = new R();
-
-        return r.ok();
-    }
-    //保存检查项目
-    @PostMapping("/work/saveInspect")
-    @ResponseBody
-    public R saveInspect(Inspect inspect){
-        System.out.println(inspect);
-        R r = new R();
-
-        return r.ok();
-    }
-    //保存体格信息
-@PostMapping("/work/saveMedical")
-    @ResponseBody
-    public R saveMedical(Physical physical){
-    System.out.println(physical);
-        R r = new R();
-
-        return r.ok();
-    }
-    //保存病历信息
-    @PostMapping("/work/saveMedicalRecord")
-    @ResponseBody
-    public R saveMedicalRecord(MedicalRecord medicalRecord){
-        System.out.println(medicalRecord);
-        R r = new R();
-
-        return r.ok();
-    }
 
 }
