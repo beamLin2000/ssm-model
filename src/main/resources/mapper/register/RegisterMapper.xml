@@ -72,10 +72,10 @@
         WHERE registration_form=#{registrationForm}
     </update>
     <select id="query" resultMap="registerCondition" parameterType="com.gxa.entity.registration.RegisterQueryCondition">
-        select c.amount_paid,p.patient_name,p.patient_gender,p.patient_age,p.patient_phone,r.attending_doctor,r.registration_form,r.status,m.create_time
-        from charge c,patients p,register r,medical_record_physique m
+        select c.amount_paid,p.patient_name,p.patient_gender,p.patient_age,p.patient_phone,r.attending_doctor,r.registration_form,r.status,c.registration_dateTime
+        from charge c,patients p,register r
         <where>
-            c.registration_form = p.registration_form and p.registration_form = r.registration_form and m.id_card = p.patient_documents
+            c.registration_form = p.registration_form and p.registration_form = r.registration_form
             <if test="attendingDoctor != null and attendingDoctor !=''">
             and r.attending_doctor=#{attendingDoctor}
             </if>
@@ -105,9 +105,9 @@
     </select>
     <select id="count" resultType="java.lang.Integer" parameterType="com.gxa.entity.registration.RegisterQueryCondition">
         SELECT COUNT(c.registration_form)
-        FROM charge c,patients p,register r,medical_record_physique m
+        FROM charge c,patients p,register r
         <where>
-            c.registration_form = p.registration_form and p.registration_form = r.registration_form and m.id_card = p.patient_documents
+            c.registration_form = p.registration_form and p.registration_form = r.registration_form
             <if test="attendingDoctor != null and attendingDoctor !=''">
                 and r.attending_doctor=#{attendingDoctor}
             </if>
