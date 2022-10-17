@@ -105,9 +105,9 @@
     </select>
     <select id="count" resultType="java.lang.Integer" parameterType="com.gxa.entity.registration.RegisterQueryCondition">
         SELECT COUNT(c.registration_form)
-        FROM charge c,patients p,register r
+        FROM charge c,patients p,register r,medical_record_physique m
         <where>
-            c.registration_form = p.registration_form and p.registration_form = r.registration_form
+            c.registration_form = p.registration_form and p.registration_form = r.registration_form and m.id_card = p.patient_documents
             <if test="attendingDoctor != null and attendingDoctor !=''">
                 and r.attending_doctor=#{attendingDoctor}
             </if>

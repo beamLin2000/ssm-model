@@ -8,6 +8,8 @@ import com.gxa.service.drugRetail.DrugRetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class DrugRetailServiceImpl implements DrugRetailService {
     @Autowired
@@ -17,7 +19,12 @@ public class DrugRetailServiceImpl implements DrugRetailService {
       this.drugRetailMapper.save(drugRetail);
     }
     @Override
-    public DrugMsg query(DrugQueryCondition drugQueryConditiond) {
-        return this.drugRetailMapper.query(drugQueryConditiond);
+    public List<DrugMsg> queryByCode(DrugQueryCondition drugQueryCondition) {
+        return this.drugRetailMapper.queryByCode(drugQueryCondition);
+    }
+
+    @Override
+    public List<DrugMsg> queryByName(DrugQueryCondition drugQueryCondition) {
+        return this.drugRetailMapper.queryByName(drugQueryCondition);
     }
 }

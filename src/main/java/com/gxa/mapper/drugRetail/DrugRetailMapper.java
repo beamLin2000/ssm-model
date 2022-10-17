@@ -4,8 +4,10 @@ import com.gxa.entity.drugRetail.DrugMsg;
 import com.gxa.entity.drugRetail.DrugQueryCondition;
 import com.gxa.entity.drugRetail.DrugRetail;
 
+import java.util.List;
+
 public interface DrugRetailMapper {
     void save(DrugRetail drugRetail);
-
-    DrugMsg query(DrugQueryCondition drugQueryCondition);
+    List<DrugMsg> queryByCode(DrugQueryCondition drugQueryCondition);
+    List<DrugMsg> queryByName(DrugQueryCondition drugQueryCondition);
 }

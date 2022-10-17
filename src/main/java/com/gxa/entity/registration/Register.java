@@ -49,7 +49,7 @@ public class Register {
     private String gender;
     @ApiModelProperty(name = "phoneNo",value = "手机号码")
     private String phoneNo;
-    @ApiModelProperty(name = "idNo",value = "证件号码")
+    @ApiModelProperty(name = "idNo",value = "证件号码",required = true)
     private String idNo;
     @ApiModelProperty(name = "loc",value = "地址")
     private String loc;
