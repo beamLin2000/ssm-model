@@ -13,9 +13,9 @@ public class PatientDrugsServiceImpl implements PatientDrugsService {
     private PatientDrugsMapper patientDrugsMapper;
 
     @Override
-    public PatientDrugs queryByTollId(Integer tollId) {
+    public PatientDrugs queryByTollId(String tollNumber) {
         QueryWrapper<PatientDrugs> wrapper = new QueryWrapper<>();
-        wrapper.eq("toll_id",tollId);
+        wrapper.eq("toll_number",tollNumber);
         PatientDrugs patientDrugs = this.patientDrugsMapper.selectOne(wrapper);
         return patientDrugs;
     }

@@ -42,9 +42,9 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public Patients queryById(Integer patientId) {
+    public Patients queryById(String patientCard) {
         QueryWrapper<Patients> wrapper = new QueryWrapper<>();
-        wrapper.eq("patient_Id",patientId);
+        wrapper.eq("patient_card",patientCard);
         Patients patients = this.patientsMapper.selectOne(wrapper);
         return patients;
     }
@@ -57,15 +57,21 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public void delete(Integer patientId) {
+    public void delete(String patientCard) {
         QueryWrapper<Patients> wrapper = new QueryWrapper<>();
-        wrapper.eq("patient_Id",patientId);
+        wrapper.eq("patient_card",patientCard);
         patientsMapper.delete(wrapper);
     }
 
     @Override
     public List<Patients> queryByDateTime(Date firstTime, Date lastTime) {
         List<Patients> patients = this.patientsMapper.queryByDateTime(firstTime,lastTime);
+        return patients;
+    }
+
+    @Override
+    public List<Patients> queryByDateTimePhone(Date firstTime, Date lastTime, String patientPhone) {
+        List<Patients> patients = this.patientsMapper.queryByDateTimePhone(firstTime,lastTime,patientPhone);
         return patients;
     }
 

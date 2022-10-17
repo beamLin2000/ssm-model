@@ -9,6 +9,8 @@ import lombok.Data;
 public class TollDrugs {
     @ApiModelProperty(name = "tollDrugsId",value = "序号")
     private Integer tollDrugsId;
+    @ApiModelProperty(name = "tollDrugsVer",value = "类型")
+    private String tollDrugsVer;
     @ApiModelProperty(name = "tollDrugsName",value = "收费名称")
     private String tollDrugsName;
     @ApiModelProperty(name = "tollDrugsMoney",value = "单价")
@@ -23,6 +25,10 @@ public class TollDrugs {
     private Double tollDrugsDiscount;
     @ApiModelProperty(name = "tollDrugsAllMoney",value = "折扣金额")
     private Double tollDrugsAllMoney;
-    @ApiModelProperty(name = "tollId",value = "序号")
-    private Integer tollId;
+    @ApiModelProperty(name = "tollNumber",value = "订单号")
+    private String tollNumber;
+    @ApiModelProperty(name = "tollDrugsDispose",value = "处理费")
+    private Double tollDrugsDispose;
+    @ApiModelProperty(name = "tollDrugsInjection",value = "注射费")
+    private Double tollDrugsInjection;
 }

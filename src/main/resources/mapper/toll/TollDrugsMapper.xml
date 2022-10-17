@@ -3,5 +3,22 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gxa.mapper.toll.TollDrugsMapper">
-
+    <resultMap id="tollDrugsResultMap" type="com.gxa.entity.tolls.TollDrugs">
+        <id property="tollDrugsId" column="toll_drugs_id"/>
+        <result property="tollDrugsVer" column="toll_drugs_ver"/>
+        <result property="tollDrugsName" column="toll_drugs_name"/>
+        <result property="tollDrugsMoney" column="toll_drugs_money"/>
+        <result property="tollDrugsQuantity" column="toll_drugs_quantity"/>
+        <result property="tollDrugsUnit" column="toll_drugs_unit"/>
+        <result property="tollDrugsRetail" column="toll_drugs_retail"/>
+        <result property="tollDrugsDiscount" column="toll_drugs_discount"/>
+        <result property="tollDrugsAllMoney" column="toll_drugs_all_money"/>
+        <result property="tollNumber" column="toll_number"/>
+        <result property="tollDrugsDispose" column="toll_drugs_dispose"/>
+        <result property="tollDrugsInjection" column="toll_drugs_injection"/>
+    </resultMap>
+    <select id="queryByTollVer" resultType="com.gxa.entity.tolls.TollDrugs">
+        SELECT * FROM toll_drugs
+        WHERE toll_drugs_ver=#{tollDrugsVer} and toll_number=#{tollNumber}
+    </select>
 </mapper>

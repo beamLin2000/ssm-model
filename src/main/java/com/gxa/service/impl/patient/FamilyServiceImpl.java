@@ -18,17 +18,17 @@ public class FamilyServiceImpl implements FamilyService {
     private FamilyMapper familyMapper;
 
     @Override
-    public List<Family> queryByFamilyId(Integer patientId) {
+    public List<Family> queryByFamilyId(String patientCard) {
         QueryWrapper<Family> wrapper = new QueryWrapper<>();
-        wrapper.eq("patient_id",patientId);
+        wrapper.eq("patient_card",patientCard);
         List<Family> families = this.familyMapper.selectList(wrapper);
         return families;
     }
 
     @Override
-    public Family queryById(Integer familyId) {
+    public Family queryById(String familyName) {
         QueryWrapper<Family> wrapper = new QueryWrapper<>();
-        wrapper.eq("family_id",familyId);
+        wrapper.eq("family_name",familyName);
         Family family = this.familyMapper.selectOne(wrapper);
         return family;
     }
@@ -46,9 +46,9 @@ public class FamilyServiceImpl implements FamilyService {
     }
 
     @Override
-    public void delete(Integer familyId) {
+    public void delete(String familyName) {
         QueryWrapper<Family> wrapper = new QueryWrapper<>();
-        wrapper.eq("family_id",familyId);
+        wrapper.eq("family_name",familyName);
         familyMapper.delete(wrapper);
     }
 

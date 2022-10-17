@@ -11,7 +11,7 @@ public class Toll {
     @ApiModelProperty(name = "tollId",value = "序号")
     private Integer tollId;
     @ApiModelProperty(name = "tollNumber",value = "订单编号")
-    private Integer tollNumber;
+    private String tollNumber;
     @ApiModelProperty(name = "tollType",value = "订单类型")
     private String tollType;
     @ApiModelProperty(name = "tollName",value = "姓名")

@@ -10,12 +10,10 @@ import java.util.Date;
 public class Patients {
     @ApiModelProperty(name = "patientId",value = "患者序号")
     private Integer patientId;
-    @ApiModelProperty(name = "patientNumber",value = "患者编码")
-    private Integer patientNumber;
     @ApiModelProperty(name = "patientName",value = "患者姓名")
     private String patientName;
     @ApiModelProperty(name = "patientCard",value = "患者卡号")
-    private Integer patientCard;
+    private String patientCard;
     @ApiModelProperty(name = "patientAge",value = "患者年龄")
     private Integer patientAge;
     @ApiModelProperty(name = "patientBirthday",value = "出生日期")
@@ -53,9 +51,9 @@ public class Patients {
     @ApiModelProperty(name = "patientStart",value = "状态")
     private Integer patientStart;
 
-    public Patients(Integer patientId, Integer patientNumber, String patientName, Integer patientAge, String patientGender, String patientPhone, Date patientCreatTime, String operators) {
+    public Patients(Integer patientId, String patientCard, String patientName, Integer patientAge, String patientGender, String patientPhone, Date patientCreatTime, String operators) {
         this.patientId = patientId;
-        this.patientNumber = patientNumber;
+        this.patientCard = patientCard;
         this.patientName = patientName;
         this.patientAge = patientAge;
         this.patientGender = patientGender;
