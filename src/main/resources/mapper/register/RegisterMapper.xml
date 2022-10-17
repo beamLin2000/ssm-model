@@ -11,7 +11,7 @@
         <result property="age" column="patient_age"></result>
         <result property="phoneNo" column="patient_phone"></result>
         <result property="attendingDoctor" column="attending_doctor"></result>
-        <result property="receptionTime" column="create_time"></result>
+        <result property="receptionTime" column="registration_dateTime"></result>
         <result property="willPaid" column="amount_paid"></result>
         <result property="amountPaid" column="amount_paid"></result>
         <result property="visitStatus" column="status"></result>
