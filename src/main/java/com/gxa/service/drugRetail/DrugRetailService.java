@@ -6,6 +6,5 @@ import com.gxa.entity.drugRetail.DrugRetail;
 
 public interface DrugRetailService {
     void add(DrugRetail drugRetail);
-
     DrugMsg query(DrugQueryCondition drugQueryCondition);
 }
