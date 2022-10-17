@@ -7,6 +7,7 @@ import com.gxa.service.toll.TollService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -34,5 +35,17 @@ public class TollServiceImpl implements TollService {
         QueryWrapper<Toll> wrapper = new QueryWrapper<>();
         wrapper.eq("toll_id",tollId);
         this.tollMapper.delete(wrapper);
+    }
+
+    @Override
+    public List<Toll> queryByTollNumberName(String tollNumberName,Integer tollState) {
+        List<Toll> tolls = this.tollMapper.queryByTollNumberName(tollNumberName,tollState);
+        return tolls;
+    }
+
+    @Override
+    public List<Toll> queryByDateTime(Date firstTime, Date lastTime) {
+        List<Toll> tolls = this.tollMapper.queryByDateTime(firstTime,lastTime);
+        return tolls;
     }
 }
