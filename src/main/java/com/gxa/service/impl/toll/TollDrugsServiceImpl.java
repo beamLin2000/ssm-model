@@ -7,6 +7,8 @@ import com.gxa.service.toll.TollDrugsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TollDrugsServiceImpl implements TollDrugsService {
 
@@ -14,10 +16,16 @@ public class TollDrugsServiceImpl implements TollDrugsService {
     private TollDrugsMapper tollDrugsMapper;
 
     @Override
-    public TollDrugs queryByTollId(Integer tollId) {
+    public List<TollDrugs> queryByTollId(String tollNumber) {
         QueryWrapper<TollDrugs> wrapper = new QueryWrapper<>();
-        wrapper.eq("toll_id",tollId);
-        TollDrugs tollDrugs = this.tollDrugsMapper.selectOne(wrapper);
+        wrapper.eq("toll_number",tollNumber);
+        List<TollDrugs> tollDrugs = this.tollDrugsMapper.selectList(wrapper);
+        return tollDrugs;
+    }
+
+    @Override
+    public List<TollDrugs> queryByTollVer(String tollDrugsVer,String tollNumber) {
+        List<TollDrugs> tollDrugs = this.tollDrugsMapper.queryByTollVer(tollDrugsVer,tollNumber);
         return tollDrugs;
     }
 }

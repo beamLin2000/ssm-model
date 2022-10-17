@@ -9,8 +9,8 @@ import lombok.Data;
 public class PatientDrugs {
     @ApiModelProperty(name = "patientId",value = "患者ID")
     private Integer patientId;
-    @ApiModelProperty(name = "patientNumber",value = "患者编号")
-    private String patientNumber;
+    @ApiModelProperty(name = "patientCard",value = "患者编号")
+    private String patientCard;
     @ApiModelProperty(name = "patientName",value = "姓名")
     private String patientName;
     @ApiModelProperty(name = "patientAge",value = "年龄")
@@ -19,6 +19,6 @@ public class PatientDrugs {
     private String patientGender;
     @ApiModelProperty(name = "patientPhone",value = "手机")
     private String patientPhone;
-    @ApiModelProperty(name = "tollId",value = "序号")
-    private Integer tollId;
+    @ApiModelProperty(name = "tollNumber",value = "订单编号")
+    private String tollNumber;
 }

@@ -2,10 +2,13 @@ package com.gxa.service.impl.toll;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.gxa.entity.tolls.Toll;
+import com.gxa.entity.tolls.TollFinish;
+import com.gxa.entity.tolls.TollInquire;
 import com.gxa.mapper.toll.TollMapper;
 import com.gxa.service.toll.TollService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import java.util.Date;
 import java.util.List;
@@ -14,38 +17,37 @@ import java.util.List;
 public class TollServiceImpl implements TollService {
     @Autowired
     private TollMapper tollMapper;
+
     @Override
-    public List<Toll> queryByTollState(Integer tollState) {
-        QueryWrapper<Toll> wrapper = new QueryWrapper<>();
-        wrapper.eq("toll_state",tollState);
-        List<Toll> tolls = this.tollMapper.selectList(wrapper);
+    public List<Toll> queryByInquire(Date firstTime, Date lastTime,TollInquire tollInquire) {
+        String tollType = tollInquire.getTollType();
+        Integer tollState = tollInquire.getTollState();
+        String tollDateTime = tollInquire.getTollDateTime();
+        String tollNameCard = tollInquire.getTollNameCard();
+        List<Toll> tolls = this.tollMapper.queryByInquire(firstTime,lastTime,tollType,tollState,tollDateTime,tollNameCard);
         return tolls;
     }
 
     @Override
-    public List<Toll> queryByTollName(String tollName) {
-        QueryWrapper<Toll> wrapper = new QueryWrapper<>();
-        wrapper.eq("toll_name",tollName);
-        List<Toll> tolls = this.tollMapper.selectList(wrapper);
+    public List<Toll> queryByInquires(TollInquire tollInquire) {
+        String tollType = tollInquire.getTollType();
+        Integer tollState = tollInquire.getTollState();
+        String tollNameCard = tollInquire.getTollNameCard();
+        List<Toll> tolls = this.tollMapper.queryByInquires(tollType,tollState,tollNameCard);
         return tolls;
     }
 
+
+
     @Override
-    public void delete(Integer tollId) {
+    public void delete(String tollNumber) {
         QueryWrapper<Toll> wrapper = new QueryWrapper<>();
-        wrapper.eq("toll_id",tollId);
+        wrapper.eq("toll_number",tollNumber);
         this.tollMapper.delete(wrapper);
     }
 
-    @Override
-    public List<Toll> queryByTollNumberName(String tollNumberName,Integer tollState) {
-        List<Toll> tolls = this.tollMapper.queryByTollNumberName(tollNumberName,tollState);
-        return tolls;
-    }
 
-    @Override
-    public List<Toll> queryByDateTime(Date firstTime, Date lastTime) {
-        List<Toll> tolls = this.tollMapper.queryByDateTime(firstTime,lastTime);
-        return tolls;
-    }
+
+
 }
+

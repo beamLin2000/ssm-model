@@ -14,9 +14,9 @@ public class TollPatientServiceImpl implements TollPatientService {
     private TollPatientMapper tollPatientMapper;
 
     @Override
-    public TollPatient queryByTollId(Integer tollId) {
+    public TollPatient queryByTollId(String tollNumber) {
         QueryWrapper<TollPatient> wrapper = new  QueryWrapper<>();
-        wrapper.eq("toll_id",tollId);
+        wrapper.eq("toll_number",tollNumber);
 
         TollPatient tollPatient = this.tollPatientMapper.selectOne(wrapper);
         return tollPatient;

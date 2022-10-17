@@ -16,15 +16,41 @@
         <result property="tollMoney" column="toll_money"/>
         <result property="tollState" column="toll_state"/>
     </resultMap>
+    <update id="updateByState" parameterType="com.gxa.entity.tolls.Toll">
+        UPDATE toll SET toll_state=1 WHERE toll_number=#{tollNumber}
+    </update>
 
-    <select id="queryByTollNumberName" resultType="com.gxa.entity.tolls.Toll">
+    <select id="queryByInquire" resultType="com.gxa.entity.tolls.Toll">
         SELECT toll_id,toll_number,toll_type,toll_name,toll_gender,toll_age,toll_phone,toll_doctor,toll_creat_time,toll_money,toll_state
         FROM toll
-        WHERE toll_state=#{tollState} AND (toll_number=#{tollNumberName} or toll_name=#{tollNumberName})
+        <where>
+            <if test="tollState !=null and tollState !=''" >
+                and  toll_state=#{tollState}
+            </if>
+            <if test="tollNameCard !=null and tollNameCard !=''">
+                and (toll_number=#{tollNameCard} or toll_name=#{tollNameCard})
+            </if>
+            <if test="tollType !=null and tollType !=''" >
+                and  toll_type=#{tollType}
+            </if>
+            <if test="tollDateTime !=null and tollDateTime !=''" >
+               and toll_creat_time &gt;= #{firstTime} and toll_creat_time &lt;= #{lastTime}
+            </if>
+        </where>
     </select>
-    <select id="queryByDateTime" resultType="com.gxa.entity.tolls.Toll">
-        SELECT toll_id,toll_number,toll_name,toll_gender,toll_age,toll_phone,toll_doctor,toll_creat_time,toll_money,toll_state
+    <select id="queryByInquires" resultType="com.gxa.entity.tolls.Toll">
+        SELECT toll_id,toll_number,toll_type,toll_name,toll_gender,toll_age,toll_phone,toll_doctor,toll_creat_time,toll_money,toll_state
         FROM toll
-        WHERE toll_creat_time &gt;= #{firstTime} and toll_creat_time &lt;= #{lastTime}
+        <where>
+            <if test="tollState !=null and tollState !=''" >
+                and  toll_state=#{tollState}
+            </if>
+            <if test="tollNameCard !=null and tollNameCard !=''">
+                and (toll_number=#{tollNameCard} or toll_name=#{tollNameCard})
+            </if>
+            <if test="tollType !=null and tollType !=''" >
+                and  toll_type=#{tollType}
+            </if>
+        </where>
     </select>
 </mapper>
