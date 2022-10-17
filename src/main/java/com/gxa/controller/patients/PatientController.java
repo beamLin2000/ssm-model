@@ -2,13 +2,11 @@ package com.gxa.controller.patients;
 
 import com.gxa.entity.patients.Family;
 import com.gxa.entity.patients.Patients;
-import com.gxa.entity.patients.PatientsDateTime;
 import com.gxa.service.patient.FamilyService;
 import com.gxa.service.patient.PatientService;
 import com.gxa.utils.R;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
@@ -16,7 +14,7 @@ import java.text.SimpleDateFormat;
 
 import java.util.*;
 
-@Controller
+@RestController
 @Api(tags = {"患者管理"})
 public class PatientController {
     @Autowired
@@ -25,7 +23,6 @@ public class PatientController {
     private FamilyService familyService;
 
     @GetMapping("/patient")
-    @ResponseBody
     @ApiOperation(value = "查找接口",notes = "查找患者",httpMethod = "GET")
     @ApiResponses({
             @ApiResponse(code = 0,message = "ok",response = Patients.class)
@@ -42,7 +39,6 @@ public class PatientController {
 //    @
 
     @GetMapping("/patient/phone")
-    @ResponseBody
     @ApiOperation(value = "查找接口",notes = "电话或姓名查找患者",httpMethod = "GET")
     @ApiResponses({
             @ApiResponse(code = 0,message = "ok",response = Patients.class)
@@ -57,30 +53,32 @@ public class PatientController {
     }
 
     @GetMapping("/patient/datetime")
-    @ResponseBody
     @ApiOperation(value = "查找日期",notes = "用开始日期和结束日期查找",httpMethod = "GET")
     @ApiResponses({
             @ApiResponse(code = 0,message = "ok",response = Patients.class)
     })
-    public R patientDateTimeList(
-            @ApiParam(name = "开始时间", value = "firstDateTime") @RequestBody PatientsDateTime patientsDateTime
+    public R patientDateTimeList(@ApiParam(name = "开始时间", value = "firstDateTime") @RequestParam String patientsDateTim){
+        if (patientsDateTim != null && !"null".equals(patientsDateTim)){
+            String firstDateTime =null;
+            String lastDateTime = null;
+            String[] dateTime = patientsDateTim.split(",");
+            firstDateTime = dateTime[0].trim();
+            lastDateTime =  dateTime[1].trim();
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            try {
 
-    ){
-        String firstDateTime = patientsDateTime.getFirstDateTime();
-        String lastDateTime = patientsDateTime.getLastDateTime();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-
-            Date firstTime = simpleDateFormat.parse(firstDateTime);
-            Date lastTime = simpleDateFormat.parse(lastDateTime);
-            List<Patients> patients = this.patientService.queryByDateTime(firstTime,lastTime);
-            Map map = new HashMap();
-            map.put("patients",patients);
-            return R.ok(map);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return R.ok("fale");
+                Date firstTime = simpleDateFormat.parse(firstDateTime);
+                Date lastTime = simpleDateFormat.parse(lastDateTime);
+                List<Patients> patients = this.patientService.queryByDateTime(firstTime,lastTime);
+                Map map = new HashMap();
+                map.put("patients",patients);
+                return R.ok(map);
+            } catch (ParseException e) {
+                e.printStackTrace();
+                return R.ok("fale");
+            }
         }
+        return null;
 
     }
 
@@ -104,7 +102,6 @@ public class PatientController {
     }
 
     @GetMapping("/patient/updatePre")
-    @ResponseBody
     @ApiOperation(value = "查询接口",notes = "患者修改查询",httpMethod = "GET")
     @ApiResponses({
             @ApiResponse(code = 0,message = "ok",response = Patients.class)
@@ -139,7 +136,7 @@ public class PatientController {
     @ApiResponses({
             @ApiResponse(code = 0,message = "ok")
     })
-    public R patientDelete(@ApiParam(name = "患者删除条件",value = "patientId")@RequestParam("patientId") Integer patientId){
+    public R patientDelete(@ApiParam(name = "患者删除条件",value = "patientId")@RequestBody Integer patientId){
         try {
             this.patientService.delete(patientId);
         } catch (Exception e) {
@@ -152,7 +149,6 @@ public class PatientController {
 
     @GetMapping("/family/list")
     @ApiOperation(value = "查找接口",notes = "查找家庭",httpMethod = "GET")
-    @ResponseBody
     @ApiResponses({
             @ApiResponse(code = 0,message = "ok",response = Family.class)
     })
@@ -165,7 +161,6 @@ public class PatientController {
     }
 
     @GetMapping("/family/updatePre")
-    @ResponseBody
     @ApiOperation(value = "查询接口",notes = "家庭修改条件",httpMethod = "GET")
     @ApiResponses({
             @ApiResponse(code = 0,message = "ok",response = Family.class)
