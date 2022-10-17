@@ -21,4 +21,12 @@ public class TreatmentFee {
     private String foundPerson;
     private String costState;
 
+    public TreatmentFee(String treatment, Double price, Double cost, Date timeing, String foundPerson, String costState) {
+        this.treatment = treatment;
+        this.price = price;
+        this.cost = cost;
+        this.timeing = timeing;
+        this.foundPerson = foundPerson;
+        this.costState = costState;
+    }
 }

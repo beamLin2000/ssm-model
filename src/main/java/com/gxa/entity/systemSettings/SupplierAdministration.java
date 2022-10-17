@@ -17,25 +17,16 @@ import java.util.Date;
 
 public class SupplierAdministration {
     private  Integer id;
-    private Integer supplierno;//供应商编号
-    private String suppliername;//供应商名称
+    private Integer supplierNo;//供应商编号
+    private String supplierName;//供应商名称
     private String contacts;//联系人
     private Integer phone;//联系人电话
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date timeing;//创建时间
-    private String foundperson;//创建人员
-    private String supplierstate;//供应商状态
+    private String foundPerson;//创建人员
+    private String supplierState;//供应商状态
     private String remarks;//备注
 
 
-    public SupplierAdministration(Integer supplierno, String suppliername, String contacts, Integer phone, Date timeing, String foundperson, String supplierstate, String remarks) {
-        this.supplierno = supplierno;
-        this.suppliername = suppliername;
-        this.contacts = contacts;
-        this.phone = phone;
-        this.timeing = timeing;
-        this.foundperson = foundperson;
-        this.supplierstate = supplierstate;
-        this.remarks = remarks;
-    }
+
 }

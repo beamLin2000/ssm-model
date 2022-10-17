@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PrescriptionTable {
-    private Integer id;
+    private Integer perscripId;
     private String prescription;
 }

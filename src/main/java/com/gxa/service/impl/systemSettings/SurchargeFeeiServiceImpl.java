@@ -23,18 +23,6 @@ public class SurchargeFeeiServiceImpl implements SurchargeFeeiService {
     }
 
     @Override
-    public List<SurchargeFee> queryBySurchargeName(String surchargeName) {
-        List<SurchargeFee> surchargeFees = this.surchargeFeeMapper.queryBySurchargeName(surchargeName);
-        return surchargeFees;
-    }
-
-    @Override
-    public List<SurchargeFee> queryByPrescription(String prescription) {
-        List<SurchargeFee> surchargeFees = this.surchargeFeeMapper.queryByPrescription(prescription);
-        return surchargeFees;
-    }
-
-    @Override
     public void addSurchargeFee(SurchargeFee surchargeFee) {
         this.surchargeFeeMapper.addSurchargeFee(surchargeFee);
     }
@@ -49,11 +37,15 @@ public class SurchargeFeeiServiceImpl implements SurchargeFeeiService {
         this.surchargeFeeMapper.updateSurchargeFee(surchargeFee);
     }
 
+
+
     @Override
-    public List<PrescriptionTable> queryPrescription01() {
-        List<PrescriptionTable> prescriptionTables = this.surchargeFeeMapper.queryPrescription01();
-        return prescriptionTables;
+    public List<SurchargeFee> queryByTj(String surchargename, String prescription) {
+        List<SurchargeFee> surchargeFees = this.surchargeFeeMapper.queryByTj(surchargename,prescription);
+        return surchargeFees;
     }
+
+
 
 
 }

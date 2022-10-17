@@ -5,28 +5,29 @@
 <mapper namespace="com.gxa.mapper.systemSettings.SupplierMapper">
     <resultMap id="supplier" type="com.gxa.entity.systemSettings.SupplierAdministration">
         <id property="id" column="id"></id>
-        <result property="supplierno" column="supplierno"></result>
-        <result property="suppliername" column="suppliername"></result>
+        <result property="supplierNo" column="supplierno"></result>
+        <result property="supplierName" column="suppliername"></result>
         <result property="contacts" column="contacts"></result>
         <result property="phone" column="phone"></result>
         <result property="timeing" column="timeing"></result>
-        <result property="foundperson" column="foundperson"></result>
-        <result property="supplierstate" column="supplierstate"></result>
+        <result property="foundPerson" column="foundperson"></result>
+        <result property="supplierState" column="supplierstate"></result>
         <result property="remarks" column="remarks"></result>
+
 
     </resultMap>
     <insert id="addSupplier">
         INSERT INTO supplier_administration(supplierno,suppliername,contacts,phone,timeing,foundperson,supplierstate,remarks)
-        VALUE (#{supplierno},#{suppliername},#{contacts},#{phone},#{timeing},#{foundperson},#{supplierstate},#{remarks})
+        VALUE (#{supplierNo},#{supplierName},#{contacts},#{phone},#{timeing},#{foundPerson},#{supplierState},#{remarks})
 
     </insert>
     <update id="updateSupplier" parameterType="com.gxa.entity.systemSettings.SupplierAdministration">
         UPDATE supplier_administration
-        SET suppliername=#{suppliername},contacts=#{contacts},timeing=#{timeing},phone=#{phone},foundperson=#{foundperson},supplierstate=#{supplierstate},remarks=#{remarks}
-        WHERE supplierno=#{supplierno}
+        SET suppliername=#{supplierName},contacts=#{contacts},timeing=#{timeing},phone=#{phone},foundperson=#{foundPerson},supplierstate=#{supplierState},remarks=#{remarks}
+        WHERE supplierno=#{supplierNo}
     </update>
-    <delete id="deleteBySupplierNo" parameterType="int">
-        DELETE FROM supplier_administration WHERE supplierno=#{supplierno}
+    <delete id="deleteBySupplierId" parameterType="int">
+        DELETE FROM supplier_administration WHERE id=#{id}
     </delete>
 
     <select id="selectSupplier" resultMap="supplier">
@@ -37,12 +38,15 @@
     <select id="selectBySuppliername" resultMap="supplier">
         SELECT *
         FROM supplier_administration
-        WHERE suppliername=#{suppliername}
+        WHERE suppliername=#{supplierName}
 
     </select>
     <select id="selectBySupplierNo" resultMap="supplier">
         SELECT *
         FROM supplier_administration
-        WHERE supplierno=#{supplierno}
+        WHERE supplierno=#{supplierNo}
     </select>
+
+
+
 </mapper>
