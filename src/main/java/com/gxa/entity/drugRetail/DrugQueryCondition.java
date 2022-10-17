@@ -13,8 +13,6 @@ import lombok.NoArgsConstructor;
 public class DrugQueryCondition {
     @ApiModelProperty(name = "chargeCategory",value = "类别")
     private String chargeCategory;
-    @ApiModelProperty(name = "drugCode",value = "药品编码")
-    private String drugCode;
-    @ApiModelProperty(name = "drugName",value = "药品名称")
-    private String drugName;
+    @ApiModelProperty(name = "drugCodeOrName",value = "药品编码或名称")
+    private String drugCodeOrName;
 }

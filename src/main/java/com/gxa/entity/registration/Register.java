@@ -40,7 +40,7 @@ public class Register {
     @ApiModelProperty(name = "name",value = "患者姓名",required = true)
     private String name;
     @ApiModelProperty(name = "cardNo",value = "患者卡号")
-    private String cardNo;
+    private Integer cardNo;
     @ApiModelProperty(name = "age",value = "患者年龄",required = true)
     private Integer age;
     @ApiModelProperty(name = "birthday",value = "出生日期",required = true)
@@ -49,7 +49,7 @@ public class Register {
     private String gender;
     @ApiModelProperty(name = "phoneNo",value = "手机号码",required = true)
     private String phoneNo;
-    @ApiModelProperty(name = "idNo",value = "证件号码")
+    @ApiModelProperty(name = "idNo",value = "证件号码",required = true)
     private String idNo;
     @ApiModelProperty(name = "loc",value = "地址")
     private String loc;

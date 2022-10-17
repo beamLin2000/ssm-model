@@ -12,7 +12,7 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel("编辑挂号信息实体")
+@ApiModel("返回挂号信息实体")
 public class RegisterMsgUpdate {
     @ApiModelProperty(name = "registrationForm",value = "订单编号")
     private String registrationForm;//单号
@@ -21,7 +21,7 @@ public class RegisterMsgUpdate {
     @ApiModelProperty(name = "gender",value = "性别")
     private String gender;
     @ApiModelProperty(name = "cardNo",value = "患者卡号")
-    private String cardNo;//患者卡号
+    private Integer cardNo;//患者卡号
     @ApiModelProperty(name = "idNo",value = "证件号码")
     private String idNo;//证件号码
     @ApiModelProperty(name = "loc",value = "地址")

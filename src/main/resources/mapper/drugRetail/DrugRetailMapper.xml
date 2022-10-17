@@ -4,10 +4,31 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gxa.mapper.drugRetail.DrugRetailMapper">
 
+    <resultMap id="drugMsg" type="com.gxa.entity.drugRetail.DrugMsg">
+        <id property="drugCode" column=""></id>
+        <result property="drugName" column=""></result>
+        <result property="chargeCategory" column=""></result>
+        <result property="drugSpecifications" column=""></result>
+        <result property="manuFactor" column=""></result>
+        <result property="stock" column=""></result>
+        <result property="price" column=""></result>
+    </resultMap>
     <insert id="save">
-
+        INSERT INTO
+        values
     </insert>
-    <select id="query" resultType="com.gxa.entity.drugRetail.DrugMsg">
+    <select id="queryByCode" parameterType="com.gxa.entity.drugRetail.DrugQueryCondition" resultMap="drugMsg">
+        select *
+        from
+        <where>
 
+        </where>
+    </select>
+    <select id="queryByName" resultType="com.gxa.entity.drugRetail.DrugMsg">
+        select *
+        from
+        <where>
+
+        </where>
     </select>
 </mapper>

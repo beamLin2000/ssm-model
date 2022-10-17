@@ -33,5 +33,5 @@ public class RegisterMsg {
     @ApiModelProperty(name = "amountPaid",value = "实收金额")
     private Double amountPaid;
     @ApiModelProperty(name = "status",value = "就诊状态")
-    private String status;
+    private String visitStatus;
 }

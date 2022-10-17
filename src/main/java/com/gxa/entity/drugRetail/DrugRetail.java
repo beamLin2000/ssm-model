@@ -13,32 +13,32 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DrugRetail {
-    @ApiModelProperty(name = "name",value = "患者姓名")
-    private String name;
-    @ApiModelProperty(name = "cardId",value = "患者卡号")
-    private String cardId;
-    @ApiModelProperty(name = "age",value = "患者年龄")
-    private Integer age;
-    @ApiModelProperty(name = "birthday",value = "出生日期")
-    private Date birthday;
-    @ApiModelProperty(name = "gender",value = "性别")
-    private String gender;
-    @ApiModelProperty(name = "phoneNo",value = "手机号码")
-    private String phoneNo;
-    @ApiModelProperty(name = "idNo",value = "证件号码")
-    private String idNo;
+    @ApiModelProperty(name = "patientName",value = "患者姓名")
+    private String patientName;
+    @ApiModelProperty(name = "patientCard",value = "患者卡号")
+    private Integer patientCard;
+    @ApiModelProperty(name = "patientAge",value = "患者年龄")
+    private Integer patientAge;
+    @ApiModelProperty(name = "patientBirthday",value = "出生日期")
+    private Date patientBirthday;
+    @ApiModelProperty(name = "patientGender",value = "性别")
+    private String patientGender;
+    @ApiModelProperty(name = "patientPhone",value = "手机号码")
+    private String patientPhone;
+    @ApiModelProperty(name = "patientDocuments",value = "证件号码")
+    private String patientDocuments;
     @ApiModelProperty(name = "drugCode",value = "药品编码")
     private String drugCode;
     @ApiModelProperty(name = "drugName",value = "药品名称")
     private String drugName;
-    @ApiModelProperty(name = "drugSpecifications",value = "药品规格")
-    private String drugSpecifications;
+    @ApiModelProperty(name = "specs",value = "药品规格")
+    private String specs;
     @ApiModelProperty(name = "num",value = "数量")
     private String num;
     @ApiModelProperty(name = "company",value = "单位")
     private String company;
-    @ApiModelProperty(name = "price",value = "单价")
-    private Double price;
+    @ApiModelProperty(name = "salesPrice",value = "单价")
+    private Double salesPrice;
     @ApiModelProperty(name = "totalPrice",value = "总价")
     private Double totalPrice;
     @ApiModelProperty(name = "operator",value = "操作员")
