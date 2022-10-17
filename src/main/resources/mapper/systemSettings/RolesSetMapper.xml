@@ -3,6 +3,20 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gxa.mapper.systemSettings.RolesSetMapper">
+    <resultMap id="resultMap" type="com.gxa.entity.systemSettings.Role">
+        <id property="id" column="id"></id>
+        <result property="roleNumber" column="roleNumber"/>
+        <result property="nameR" column="name"/>
+        <result property="description" column="description"/>
+        <result property="creationTime" column="creationTime"/>
+        <result property="createPerson" column="createPerson"/>
+        <result property="roleStatus" column="roleStatus"/>
+
+    </resultMap>
+    <insert id="insert">
+        insert into role(roleNumber,name,description,creationTime,createPerson,roleStatus)
+        values (#{roleNumber},#{nameR},#{description},#{creationTime},#{createPerson},#{roleStatus})
+    </insert>
 
     <!--    <insert id="insert">-->
 <!--        insert into CPSMainTable(itemNumber,projectName,costPrice,retailPrice,unit,projectCategory,invoiceItem,part,projectStatus,remarks)-->
@@ -11,20 +25,25 @@
 
     <update id="update">
         update role
-        set id=#{id},projectName=#{projectName},costPrice=#{costPrice},retailPrice=#{retailPrice},unit=#{unit},projectCategory=#{projectCategory},invoiceItem=#{invoiceItem},part=#{part},projectStatus=#{projectStatus},remarks=#{remarks}
+        set roleNumber=#{roleNumber},name=#{nameR},description=#{description},creationTime=#{creationTime},createPerson=#{createPerson},roleStatus=#{roleStatus}
         where id=#{id}
     </update>
 
-<!--    <delete id="delete">-->
+    <delete id="delete">
+        delete from role where id = #{id}
+    </delete>
+
+    <!--    <delete id="delete">-->
 <!--        delete from CPSMainTable-->
 <!--        where id=#{id}-->
 <!--    </delete>-->
 
-    <select id="selectAll" resultType="com.gxa.entity.systemSettings.Role">
+    <select id="selectAll" resultMap="resultMap">
         select * from role
     </select>
-    <select id="select" resultType="com.gxa.entity.systemSettings.Role">
 
+    <select id="select" resultMap="resultMap">
+        select * from role where name=#{name}
     </select>
 
     <!--    <select id="select" resultType="com.gxa.entity.systemSettings.CPSMainTable">-->

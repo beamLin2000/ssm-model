@@ -20,13 +20,33 @@ public class RolesSetServiceImpl implements RolesSetService {
     }
 
     @Override
-    public void update(RolesEdit rolesEdit) {
-        rolesSetMapper.update(rolesEdit);
+    public void update(Role role) {
+        int id = role.getId();
+        if (id!=1&&id!=2&&id!=3){
+        rolesSetMapper.update(role);
+        }
     }
 
     @Override
-    public List<Role> select(String nameRoel) {
-        List<Role> select = rolesSetMapper.select(nameRoel);
+    public void insert(Role role) {
+        int id = role.getId();
+        if (id!=1&&id!=2&&id!=3){
+            rolesSetMapper.insert(role);
+        }
+
+    }
+
+    @Override
+    public void delete(int id) {
+
+        if (id!=1&&id!=2&&id!=3){
+            rolesSetMapper.delete(id);
+        }
+    }
+
+    @Override
+    public List<Role> select(String name) {
+        List<Role> select = rolesSetMapper.select(name);
         return select;
     }
 }

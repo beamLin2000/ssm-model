@@ -1,5 +1,6 @@
 package com.gxa.entity.systemSettings;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -26,13 +27,14 @@ public class EMEmployeeTable {
     private int age;//员工年龄
     @ApiModelProperty(value = "手机号码",name = "phoneNumber",hidden = false,required = false)
     private String phoneNumber;//手机号码
-    @ApiModelProperty(value = "所属诊所",name = "clinic",hidden = false,required = false)
-    private String clinic;//所属诊所
+//    @ApiModelProperty(value = "所属诊所",name = "clinic",hidden = false,required = false)
+//    private String clinic;//所属诊所
 //    @ApiModelProperty(value = "所属科室",name = "所属科室",hidden = false,required = false)
 //    private String offices;//所属科室
 //    @ApiModelProperty(value = "角色",name = "roles",hidden = false,required = true)
 //    private String roles;//角色
     @ApiModelProperty(value = "创建时间",name = "creationTime",hidden = false,required = false)
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date creationTime;//创建时间
     @ApiModelProperty(value = "创建人员",name = "createPerson",hidden = false,required = false)
     private String createPerson;//创建人员
@@ -51,14 +53,16 @@ public class EMEmployeeTable {
     @ApiModelProperty(value = "角色,表",name = "role")
     private List<Role> role;
 
-    public EMEmployeeTable(int id, String workNumber, String name, String sex, int age, String phoneNumber, String clinic,  Date creationTime, String createPerson, String employeeStatus) {
+
+
+    public EMEmployeeTable(int id, String workNumber, String name, String sex, int age, String phoneNumber, Date creationTime, String createPerson, String employeeStatus) {
         this.id = id;
         this.workNumber = workNumber;
         this.name = name;
         this.sex = sex;
         this.age = age;
         this.phoneNumber = phoneNumber;
-        this.clinic = clinic;
+
 
         this.creationTime = creationTime;
         this.createPerson = createPerson;

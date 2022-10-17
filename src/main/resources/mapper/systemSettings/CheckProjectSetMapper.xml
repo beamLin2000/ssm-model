@@ -4,13 +4,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gxa.mapper.systemSettings.CheckProjectSetMapper">
     <insert id="insert">
-        insert into CPSMainTable(itemNumber,projectName,costPrice,retailPrice,unit,projectCategory,invoiceItem,part,projectStatus,remarks)
-        values(#{itemNumber},#{projectName},#{costPrice},#{retailPrice},#{unit},#{projectCategory},#{invoiceItem},#{part},#{projectStatus},#{remarks})
+        insert into CPSMainTable(creationTime,itemNumber,projectName,costPrice,retailPrice,unit,projectCategory,invoiceItem,part,projectStatus,remarks)
+        values(#{creationTime},#{itemNumber},#{projectName},#{costPrice},#{retailPrice},#{unit},#{projectCategory},#{invoiceItem},#{part},#{projectStatus},#{remarks})
     </insert>
 
     <update id="update">
         update CPSMainTable
-        set itemNumber=#{itemNumber},projectName=#{projectName},costPrice=#{costPrice},retailPrice=#{retailPrice},unit=#{unit},projectCategory=#{projectCategory},invoiceItem=#{invoiceItem},part=#{part},projectStatus=#{projectStatus},remarks=#{remarks}
+        set creationTime=#{creationTime},itemNumber=#{itemNumber},projectName=#{projectName},costPrice=#{costPrice},retailPrice=#{retailPrice},unit=#{unit},projectCategory=#{projectCategory},invoiceItem=#{invoiceItem},part=#{part},projectStatus=#{projectStatus},remarks=#{remarks}
         where id=#{id}
     </update>
 
@@ -33,7 +33,7 @@
     <select id="select" resultType="com.gxa.entity.systemSettings.CPSMainTable">
         select * from CPSMainTable
         <where>
-            <if test="projectStatus!=null">
+            <if test="projectStatus!=null" >
                 and projectStatus=#{projectStatus}
             </if>
             <if test="projectName!=null">

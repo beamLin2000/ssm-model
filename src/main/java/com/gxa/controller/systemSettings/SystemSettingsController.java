@@ -8,8 +8,6 @@ import com.gxa.form.systemSettings.CostSettngsForm.RegisterFeeForm;
 import com.gxa.form.systemSettings.CostSettngsForm.SurchargeFeeForm;
 import com.gxa.form.systemSettings.CostSettngsForm.TreatmentFeeForm;
 import com.gxa.form.systemSettings.EMEdit;
-import com.gxa.form.systemSettings.EMSelect;
-import com.gxa.form.systemSettings.RolesEdit;
 
 import com.gxa.form.systemSettings.clinicInformation.ClinicInformationForm;
 import com.gxa.form.systemSettings.supplier.SupplierForm;
@@ -73,8 +71,8 @@ public class SystemSettingsController {
         return result;
     }
 
-    @GetMapping("/CheckProjectSet/Select")//根据条件搜索
-    @ApiOperation(value = "检查项目设置-根据条件查询数据" ,notes = "",httpMethod = "get")
+    @PostMapping("/CheckProjectSet/Select")//根据条件搜索
+    @ApiOperation(value = "检查项目设置-根据条件查询数据" ,notes = "",httpMethod = "post")
     public Result CheckProjectSet_Select(@RequestBody CPSEdit cpsEdit){
 
         System.out.println(cpsEdit+"----------------------");
@@ -114,16 +112,16 @@ public class SystemSettingsController {
 
     @PostMapping("/Roles/Edit")//编辑
     @ApiOperation(value = "角色列表-编辑数据" ,notes = "",httpMethod = "Post")
-    public Result Roles_Edit(@RequestBody RolesEdit rolesEdit){
-        rolesSetService.update(rolesEdit);
+    public Result Roles_Edit(@RequestBody Role role){
+        rolesSetService.update(role);
         Result result = new Result(2,"成功","hello");
         return result;
     }
 
     @PostMapping("/Roles/Insert")//添加
     @ApiOperation(value = "角色列表-添加数据" ,notes = "",httpMethod = "Post")
-    public Result Roles_Insert(@RequestBody RolesEdit rolesEdit){
-//        rolesSetService.insert(rolesEdit);
+    public Result Roles_Insert(@RequestBody Role role){
+        rolesSetService.insert(role);
         Result result = new Result(2,"成功","hello");
         return result;
     }
@@ -131,17 +129,17 @@ public class SystemSettingsController {
     @GetMapping("/Roles/Delete")//删除
     @ApiOperation(value = "角色列表-删除数据" ,notes = "根据id删除数据",httpMethod = "Get")
     public Result Roles_Delete(@RequestParam("id") int id){
-
+        rolesSetService.delete(id);
         Result result = new Result(2,"成功","hello");
         return result;
     }
 
     @GetMapping("/Roles/Select")//根据条件搜索
     @ApiOperation(value = "角色列表-根据条件查询数据" ,notes = "",httpMethod = "get")
-    public Result Roles_Select(@RequestParam ("nameRole") String nameRole){
+    public Result Roles_Select(@RequestParam ("name") String name){
 
-        rolesSetService.select(nameRole);
-        Result result = new Result();
+        List<Role> select = rolesSetService.select(name);
+        Result result = new Result(1,"seccess",select);
         return result;
     }
 
@@ -186,28 +184,27 @@ public class SystemSettingsController {
     @GetMapping("/EmployeeManagement/Delete")//删除
     @ApiOperation(value = "员工列表-删除数据" ,notes = "根据ID删除数据",httpMethod = "Get")
     public Result EmployeeManagement_Delete(@RequestParam("id") int id){
-
+        employeeManagementService.delete(id);
         Result result = new Result(2,"成功","hello");
         return result;
     }
 
     @GetMapping("/EmployeeManagement/Select")//根据条件搜索
     @ApiOperation(value = "员工列表-根据条件查询数据" ,notes = "",httpMethod = "get")
-    public Result EmployeeManagement_Select(@RequestBody EMSelect em_select){
+    public Result EmployeeManagement_Select(@RequestParam ("name") String  name){
+        List<EMEmployeeTable> select = employeeManagementService.select(name);
 
-        Date date = new Date(2000 - 2 - 2);
-        EMEmployeeTable emEmployeeTable = new EMEmployeeTable(1, "1", "1", "1", 1, "1", "1",  date, "1", "1");
-        Result result = new Result();
+        Result result = new Result(1,"seccess",select);
         return result;
     }
 
     @GetMapping("/EmployeeManagement/Drop")//查询下拉框
-    @ApiOperation(value = "员工列表-下拉框的数据" ,notes = "",httpMethod = "Get")
+    @ApiOperation(value = "员工列表-角色下拉框的数据" ,notes = "",httpMethod = "Get")
     public Result EmployeeManagement_Drop(){
 
-        Date date = new Date(2000 - 2 - 2);
+        List<Role> drop = employeeManagementService.drop();
 
-        Result result = new Result();
+        Result result = new Result(1,"seccess",drop);
         return result;
     }
 
@@ -236,6 +233,7 @@ public class SystemSettingsController {
 
 
 /*===========================================================================================================================================================*/
+
 
 
 
