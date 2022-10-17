@@ -1,4 +1,4 @@
-package com.gxa.dto;
+package com.gxa.dto.work;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -30,4 +30,6 @@ public class PatientDto {
     private String attendingDoctor;
     @ApiModelProperty("电话")
     private String phoneNo;
+    @ApiModelProperty("身份证号")
+    private String idCard;
 }

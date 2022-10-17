@@ -2,12 +2,11 @@ package com.gxa.service.impl.work;
 
 import com.gxa.dto.WorkPatientDto;
 import com.gxa.entity.work.*;
+import com.gxa.dto.work.WorkPatientDto;
 import com.gxa.mapper.work.WorkPatientDtoMapper;
 import com.gxa.service.work.WorkPatientDtoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class WorkPatientDtoServiceImpl implements WorkPatientDtoService {
@@ -54,4 +53,9 @@ public class WorkPatientDtoServiceImpl implements WorkPatientDtoService {
         this.workPatientDtoMapper.addprescriptionsInfo(prescriptions);
     }
 
+
+    @Override
+    public void updateStatus(String idCard) {
+        this.workPatientDtoMapper.updateStatus(idCard);
+    }
 }

@@ -3,9 +3,8 @@ package com.gxa.mapper.work;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.gxa.dto.WorkPatientDto;
 import com.gxa.entity.work.*;
+import com.gxa.dto.work.WorkPatientDto;
 import org.apache.ibatis.annotations.Param;
-
-import java.util.Date;
 
 public interface WorkPatientDtoMapper extends BaseMapper<WorkPatientDto> {
     WorkPatientDto queryWorkPatientDtoByPhoneNum(@Param("phoneNum") String phoneNum, @Param("status") String status);
@@ -18,4 +17,7 @@ public interface WorkPatientDtoMapper extends BaseMapper<WorkPatientDto> {
     void addSurcharges(@Param("surcharges") Surcharges surcharges);
 
 
+    WorkPatientDto queryWorkPatientDtoByPhoneNum(@Param("idCard") String idCard);
+
+    void updateStatus(String idCard);
 }

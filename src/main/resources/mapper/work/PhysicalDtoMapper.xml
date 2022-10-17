@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxa.mapper.work.PhysicalDtoMapper">
+    <resultMap id="physicalDto" type="com.gxa.dto.work.PhysicalDto">
+        <result property="temperature" column="temperature"></result>
+        <result property="breathe" column="breathe"></result>
+        <result property="pulse" column="pulse"></result>
+        <result property="blood" column="blood"></result>
+        <result property="height" column="height"></result>
+        <result property="weight" column="weight"></result>
+        <result property="bloodSugar" column="bloodSugar"></result>
+        <result property="bloodFat" column="bloodFat"></result>
+    </resultMap>
+    <select id="queryPhysicalDtoByIdCard" resultMap="physicalDto">
+        SELECT m.temperature,m.breathe,m.pulse,m.blood,m.height,m.weight,m.bloodSugar,m.bloodFat
+        FROM medical_record_physique m ,patients p
+        WHERE p.patient_documents=m.id_card AND m.id_card=#{idCard}
+        ORDER BY ABS(NOW() - m.create_time) ASC LIMIT 1
+    </select>
+</mapper>

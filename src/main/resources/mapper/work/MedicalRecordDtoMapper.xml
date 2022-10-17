@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxa.mapper.work.MedicalRecordDtoMapper">
+    <resultMap id="medicalRecordDtoMapper" type="com.gxa.dto.work.MedicalRecordDto">
+        <result property="sickTime" column="sickTime"></result>
+        <result property="suit" column="suit"></result>
+        <result property="present" column="present"></result>
+        <result property="previous" column="previous"></result>
+        <result property="allergy" column="allergy"></result>
+        <result property="personalized" column="personalized"></result>
+        <result property="familyHistory" column="familyHistory"></result>
+        <result property="auxiliary" column="auxiliary"></result>
+        <result property="treatment" column="treatment"></result>
+        <result property="notes" column="notes"></result>
+
+    </resultMap>
+    <select id="queryMedicalRecordDtoByIdCard" resultType="com.gxa.dto.work.MedicalRecordDto">
+        SELECT m.sickTime,m.suit,m.present,m.previous,m.allergy,m.personalized,m.familyHistory,m.auxiliary,m.treatment,m.notes
+        FROM medical_record_physique m ,patients p
+        WHERE p.patient_documents=m.id_card AND m.id_card=#{idCard}
+        ORDER BY ABS(NOW() - m.create_time) ASC LIMIT 1
+    </select>
+</mapper>

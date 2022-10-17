@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxa.mapper.work.DrugDtoMapper">
+    <resultMap id="drugDto" type="com.gxa.dto.work.DrugDto">
+        <result property="name" column="drug_name"></result>
+        <result property="norms" column="specs"></result>
+        <result property="stock" column="stock"></result>
+        <result property="price" column="sales_price"></result>
+    </resultMap>
+
+    <select id="queryAllDrugDto" resultMap="drugDto">
+        SELECT DISTINCT d1.drug_name,d1.specs,d2.stock,d1.sales_price
+        FROM drugManagement_drugInformationTenance_drugBasicInformation d1,drugManagement_inventoryManagement_inventoryInfo d2
+        WHERE d1.drug_name=d2.drug_name AND d1.drug_type=#{prescriptionName}
+    </select>
+</mapper>
