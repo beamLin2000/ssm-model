@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @ApiModel
 @AllArgsConstructor
@@ -46,5 +48,10 @@ public class CPSEdit {
 
     @ApiModelProperty(value = "备注",name = "remarks",hidden = false,required = false)
     private String remarks;//备注
+
+    @ApiModelProperty(value = "创建时间",name = "creationTime",hidden = false,required = false)
+    private Date creationTime;//创建时间
+
+
 
 }

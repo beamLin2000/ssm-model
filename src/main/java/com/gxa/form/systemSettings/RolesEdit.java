@@ -14,7 +14,7 @@ public class RolesEdit {
 
     @ApiModelProperty(value = "角色编号",name = "roleNumber",hidden = false,required = false)
     private String roleNumber;//角色编号
-    @ApiModelProperty(value = "角色名称",name = "nameRole",hidden = false,required = false)
+    @ApiModelProperty(value = "角色名称,10 管理员，20医生，30 财务",name = "nameRole",hidden = false,required = false)
     private String nameRole;//角色名称
     @ApiModelProperty(value = "角色状态",name = "roleStatus",hidden = false,required = false)
     private String roleStatus;//角色状态

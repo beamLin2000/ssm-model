@@ -8,6 +8,7 @@ import com.gxa.service.systemSettings.CheckProjectSetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -22,11 +23,15 @@ public class CheckProjectServiceImpl implements CheckProjectSetService {
 
     @Override
     public void update(CPSEdit cpsEdit) {
+        Date date = new Date();
+        cpsEdit.setCreationTime(date);
         checkProjectSet_mapper.update(cpsEdit);
     }
 
     @Override
     public void insert(CPSEdit cpsEdit) {
+        Date date = new Date();
+        cpsEdit.setCreationTime(date);
         checkProjectSet_mapper.insert(cpsEdit);
     }
 
@@ -51,3 +56,5 @@ public class CheckProjectServiceImpl implements CheckProjectSetService {
         return drop;
     }
 }
+
+

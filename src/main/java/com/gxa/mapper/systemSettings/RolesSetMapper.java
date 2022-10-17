@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface RolesSetMapper {
     List<Role> selectAll();
-    void update(RolesEdit rolesEdit);
-    List<Role> select(String nameRole);
+    void update(Role role);
+    void insert(Role role);
+    void delete(int id);
+    List<Role> select(String name);
 }
