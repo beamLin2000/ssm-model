@@ -23,9 +23,18 @@ public class RegisterFeeForm {
     @ApiModelProperty(value = "cost",name = "成本价",required = false)
     private Double cost;
     @ApiModelProperty(value = "time",name = "创建时间",required = false)
-    private Date time;
+    private Date timeing;
     @ApiModelProperty(value = "foundPerson",name = "创建人员",required = false)
     private String foundPerson;
     @ApiModelProperty(value = "costState",name = "费用状态",required = false)
     private String costState;
+
+    public RegisterFeeForm(String registerName, Double price, Double cost, Date timeing, String foundPerson, String costState) {
+        this.registerName = registerName;
+        this.price = price;
+        this.cost = cost;
+        this.timeing = timeing;
+        this.foundPerson = foundPerson;
+        this.costState = costState;
+    }
 }

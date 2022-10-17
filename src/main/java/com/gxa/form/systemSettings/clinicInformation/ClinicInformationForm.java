@@ -32,7 +32,7 @@ public class ClinicInformationForm {
     @ApiModelProperty(value = "诊所介绍",name = "clinicIntroduce",required = false)
     private String clinicIntroduce;
     @ApiModelProperty(value = "诊所状态",name = "clinicState",required = false)
-    private Integer clinicState;
+    private String clinicState;
 
 
 

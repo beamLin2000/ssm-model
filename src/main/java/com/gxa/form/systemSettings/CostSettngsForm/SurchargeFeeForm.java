@@ -1,5 +1,6 @@
 package com.gxa.form.systemSettings.CostSettngsForm;
 
+import com.gxa.entity.systemSettings.PrescriptionTable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -19,8 +20,6 @@ public class SurchargeFeeForm {
     private Integer id;
     @ApiModelProperty(value = "surchargeName",name = "附加费名称",required = false)
     private String surchargeName;
-    @ApiModelProperty(value = "prescription",name = "处方类型",required = false)
-    private String prescription;
     @ApiModelProperty(value = "price",name = "金额",required = false)
     private Double price;
     @ApiModelProperty(value = "cost",name = "成本价",required = false)
@@ -29,6 +28,10 @@ public class SurchargeFeeForm {
     private String foundPerson;
     @ApiModelProperty(value = "costState",name = "费用状态",required = false)
     private String costState;
+    @ApiModelProperty(value = "prescriptionTable",name = "处方外键",required = false)
+    private Integer perscrip_id;
+    @ApiModelProperty(value = "prescriptionTable",name = "处方对象",required = false)
+    private PrescriptionTable prescriptionTable;
 
 
 

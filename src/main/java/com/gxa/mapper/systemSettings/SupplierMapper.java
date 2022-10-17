@@ -10,5 +10,6 @@ public interface SupplierMapper {
     void addSupplier(SupplierAdministration supplierAdministration);
     void updateSupplier(SupplierAdministration supplierAdministration);
     SupplierAdministration selectBySupplierNo(Integer supplierNo);
-    void deleteBySupplierNo(Integer supplierNo);
+    void deleteBySupplierId(Integer id);
+
 }

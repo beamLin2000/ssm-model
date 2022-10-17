@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxa.mapper.systemSettings.QueryPrescriptionMapper">
+    <resultMap id="prescription" type="com.gxa.entity.systemSettings.PrescriptionTable">
+        <id property="perscripId" column="perscrip_id"></id>
+        <result property="prescription" column="prescription"></result>
+    </resultMap>
+
+    <select id="queryPrescription" resultMap="prescription">
+        SELECT *
+        FROM prescriptiontable
+    </select>
+    <select id="queryPrescriptionBy" resultType="com.gxa.entity.systemSettings.PrescriptionTable">
+        SELECT *
+        FROM prescriptiontable
+        WHERE prescription=#{prescription}
+    </select>
+</mapper>

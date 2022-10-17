@@ -9,17 +9,17 @@
         <result property="price" column="price"></result>
         <result property="cost" column="cost"></result>
         <result property="timeing" column="timeing"></result>
-        <result property="foundPerson" column="foundperson"></result>
-        <result property="costState" column="coststate"></result>
+        <result property="foundPerson" column="found_person"></result>
+        <result property="costState" column="cost_state"></result>
 
     </resultMap>
     <insert id="addTreatmentFee">
-        INSERT INTO treatment_fee(treatment,price,cost,timeing,foundperson,coststate)
+        INSERT INTO treatment_fee(treatment,price,cost,timeing,found_person,cost_state)
         VALUE (#{treatment},#{price},#{cost},#{timeing},#{foundPerson},#{costState})
     </insert>
     <update id="updateTreatmentFee">
         UPDATE treatment_fee
-        SET treatment=#{treatment},price=#{price},cost=#{cost},timeing=#{timeing},foundperson=#{foundPerson},coststate=#{costState}
+        SET treatment=#{treatment},price=#{price},cost=#{cost},timeing=#{timeing},found_person=#{foundPerson},cost_state=#{costState}
         WHERE id=#{id}
     </update>
     <delete id="deleteTreatmentFee">

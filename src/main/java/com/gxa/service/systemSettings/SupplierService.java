@@ -12,5 +12,5 @@ public interface SupplierService {
     void addSupplier(SupplierAdministration supplierAdministration);
     SupplierAdministration selectBySupplierNo(Integer supplierNo);
     void updateSupplier(SupplierAdministration supplierAdministration);
-    void deleteBySupplierNo(Integer supplierNo);
+    void deleteBySupplierId(Integer id);
 }

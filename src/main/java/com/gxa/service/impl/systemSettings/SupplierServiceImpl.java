@@ -42,7 +42,7 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
-    public void deleteBySupplierNo(Integer supplierNo) {
-        this.supplierMapper.deleteBySupplierNo(supplierNo);
+    public void deleteBySupplierId(Integer id) {
+        this.supplierMapper.deleteBySupplierId(id);
     }
 }

@@ -6,23 +6,25 @@
     <resultMap id="surchargeFee" type="com.gxa.entity.systemSettings.SurchargeFee">
         <id property="id" column="id"></id>
         <result property="surchargeName" column="surchargename"></result>
-        <result property="prescription" column="prescription"></result>
         <result property="price" column="price"></result>
         <result property="cost" column="cost"></result>
         <result property="timeing" column="timeing"></result>
         <result property="foundPerson" column="foundperson"></result>
         <result property="costState" column="coststate"></result>
+        <result property="perscripId" column="perscrip_id"></result>
+        <result property="prescriptionTable.perscripId" column="perscrip_id" jdbcType="INTEGER"></result>
+        <result property="prescriptionTable.prescription" column="prescription" jdbcType="VARCHAR"></result>
 
 
 
     </resultMap>
     <insert id="addSurchargeFee" parameterType="com.gxa.entity.systemSettings.SurchargeFee">
-        INSERT INTO surcharge_fee(surchargename,prescription,price,cost,timeing,foundperson,coststate)
-        VALUE (#{surchargeName},#{prescription},#{price},#{cost},#{timeing},#{foundPerson},#{costState})
+        INSERT INTO surcharge_fee(surchargename,price,cost,timeing,foundperson,coststate,perscrip_id)
+        VALUE (#{surchargeName},#{price},#{cost},#{timeing},#{foundPerson},#{costState},#{perscripId})
     </insert>
     <update id="updateSurchargeFee" >
         UPDATE surcharge_fee
-        SET surchargename=#{surchargeName},prescription=#{prescription},price=#{price},cost=#{cost},timeing=#{timeing},foundperson=#{foundPerson},coststate=#{costState}
+        SET surchargename=#{surchargeName},price=#{price},cost=#{cost},timeing=#{timeing},foundperson=#{foundPerson},coststate=#{costState},perscrip_id=#{perscripId}
         WHERE id=#{id}
     </update>
     <delete id="deleteById">
@@ -30,25 +32,28 @@
         WHERE id=#{id}
     </delete>
 
-
     <select id="queryAll" resultMap="surchargeFee">
-        SELECT *
-        FROM surcharge_fee
+        SELECT id,surchargeName,price,cost,timeing,foundperson,coststate,s.perscrip_id,p.perscrip_id,p.prescription
+        FROM prescriptiontable p,surcharge_fee s
+        WHERE s.perscrip_id=p.perscrip_id
 
     </select>
-    <select id="queryBySurchargeName" resultMap="surchargeFee">
-        SELECT *
-        FROM surcharge_fee
-        WHERE surchargename=#{surchargeName}
+
+
+    <select id="queryByTj" resultMap="surchargeFee">
+        SELECT id,surchargeName,price,cost,timeing,foundperson,coststate,s.perscrip_id,p.perscrip_id,p.prescription
+        FROM surcharge_fee s,prescriptiontable p
+        <where>
+            s.perscrip_id=p.perscrip_id
+            <if test="surchargeName != null and surchargeName != ''">
+                AND surchargename=#{surchargeName}
+            </if>
+
+            <if test="prescription != null and prescription != ''">
+                AND prescription=#{prescription}
+            </if>
+
+        </where>
     </select>
 
-    <select id="queryByPrescription" resultMap="surchargeFee">
-        SELECT *
-        FROM surcharge_fee
-        WHERE prescription=#{prescription}
-    </select>
-    <select id="queryPrescription01" resultType="com.gxa.entity.systemSettings.PrescriptionTable">
-        SELECT *
-        FROM prescriptiontable
-    </select>
 </mapper>

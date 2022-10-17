@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxa.mapper.systemSettings.RegisterFeeMapper">
+
+    <resultMap id="register" type="com.gxa.entity.systemSettings.RegisterFee">
+        <id property="id" column="id"></id>
+        <result property="registerName" column="register_name"></result>
+        <result property="price" column="price"></result>
+        <result property="cost" column="cost"></result>
+        <result property="timeing" column="timeing"></result>
+        <result property="foundPerson" column="found_person"></result>
+        <result property="costState" column="cost_state"></result>
+    </resultMap>
+    <insert id="addRegisterFee">
+        INSERT INTO register_fee(register_name,price,cost,timeing,found_person,cost_state)
+        VALUE (#{registerName},#{price},#{cost},#{timeing},#{foundPerson},#{costState})
+    </insert>
+    <update id="updateRegisterFee">
+        UPDATE register_fee
+        SET register_name=#{registerName},price=#{price},cost=#{cost},timeing=#{timeing},found_person=#{foundPerson},cost_state=#{costState}
+        WHERE id=#{id}
+    </update>
+    <delete id="deleteRegisterFee">
+        DELETE FROM register_fee
+        WHERE id=#{id}
+    </delete>
+    <select id="qeryAll" resultMap="register">
+        SELECT *
+        FROM register_fee
+    </select>
+    <select id="queryByRegisterName" resultMap="register">
+        SELECT *
+        FROM register_fee
+        WHERE register_name=#{registerName}
+    </select>
+
+
+</mapper>
