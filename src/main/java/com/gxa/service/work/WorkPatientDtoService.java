@@ -1,7 +1,8 @@
 package com.gxa.service.work;
 
-import com.gxa.dto.WorkPatientDto;
+import com.gxa.dto.work.WorkPatientDto;
 
 public interface WorkPatientDtoService {
-    WorkPatientDto queryWorkPatientDtoByPhoneNum(String phoneNum, String status);
+    WorkPatientDto queryWorkPatientDtoByPhoneNum(String idCard);
+    void updateStatus(String idCard);
 }

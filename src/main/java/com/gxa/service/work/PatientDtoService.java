@@ -1,7 +1,6 @@
 package com.gxa.service.work;
 
-import com.gxa.dto.PatientDto;
-import org.springframework.stereotype.Service;
+import com.gxa.dto.work.PatientDto;
 
 import java.util.List;
 

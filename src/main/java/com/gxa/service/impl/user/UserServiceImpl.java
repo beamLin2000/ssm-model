@@ -1,6 +1,7 @@
 package com.gxa.service.impl.user;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.gxa.entity.login.User;
 import com.gxa.mapper.user.UserMapper;
 import com.gxa.service.user.UserService;
@@ -44,5 +45,23 @@ public class UserServiceImpl implements UserService {
     public Set<String> queryPermsByUserName(String userName) {
         Set<String> perms = this.userMapper.queryPermsByUserName(userName);
         return perms;
+    }
+
+    @Override
+    public String querySaltByUserName(String userName) {
+
+        String salt = this.userMapper.querySaltByUserName(userName);
+
+        return salt;
+    }
+
+    @Override
+    public void updatePwd(String userName,String pwd) {
+        UpdateWrapper<User> userUpdateWrapper = new UpdateWrapper<>();
+        userUpdateWrapper.eq("user_name",userName);
+        User user = new User();
+        user.setUserName(userName);
+        user.setPwd(pwd);
+        this.userMapper.update(user,userUpdateWrapper);
     }
 }

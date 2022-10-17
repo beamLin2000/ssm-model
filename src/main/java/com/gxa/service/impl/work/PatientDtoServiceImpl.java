@@ -1,6 +1,6 @@
 package com.gxa.service.impl.work;
 
-import com.gxa.dto.PatientDto;
+import com.gxa.dto.work.PatientDto;
 import com.gxa.mapper.work.PatientDtoMapper;
 import com.gxa.service.work.PatientDtoService;
 import org.springframework.beans.factory.annotation.Autowired;

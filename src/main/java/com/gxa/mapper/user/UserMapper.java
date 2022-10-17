@@ -13,4 +13,5 @@ public interface UserMapper extends BaseMapper<User> {
     Set<String> queryPermsByUserName(String userName);
 
 
+    String querySaltByUserName(String userName);
 }
