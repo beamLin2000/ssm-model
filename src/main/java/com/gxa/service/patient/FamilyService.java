@@ -6,10 +6,10 @@ import com.gxa.entity.patients.FamilyAdd;
 import java.util.List;
 
 public interface FamilyService {
-    List<Family> queryByFamilyId(Integer patientId);
-    Family queryById(Integer familyId);
+    List<Family> queryByFamilyId(String patientCard);
+    Family queryById(String familyName);
     void add(Family family);
     void update(Family family);
-    void delete(Integer familyId);
+    void delete(String familyName);
 
 }

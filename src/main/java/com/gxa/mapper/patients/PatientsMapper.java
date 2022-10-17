@@ -10,8 +10,9 @@ import java.util.List;
 
 @Mapper
 public interface PatientsMapper extends BaseMapper<Patients> {
-//    List<Patients> queryAll();
-//    Patients queryByPhone(String patientPhone);
+
       List<Patients> queryByPhone(String patientPhone);
       List<Patients> queryByDateTime(@Param("firstTime") Date firstTime,@Param("lastTime") Date lastTime);
+      List<Patients> queryByDateTimePhone(@Param("firstTime") Date firstTime,@Param("lastTime") Date lastTime,@Param("patientPhone") String patientPhone);
+
 }

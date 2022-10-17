@@ -5,7 +5,7 @@
 <mapper namespace="com.gxa.mapper.patients.PatientsMapper">
     <resultMap id="patientResultMap" type="com.gxa.entity.patients.Patients">
         <id property="patientId" column="patient_id"/>
-        <result property="patientNumber" column="patient_number"/>
+        <result property="patientCard" column="patient_card"/>
         <result property="patientName" column="patient_name"/>
         <result property="patientAge" column="patient_age"/>
         <result property="patientBirthday" column="patient_birthday"/>
@@ -39,13 +39,20 @@
 <!--        WHERE patientPhone=${patientPhone}-->
 <!--    </select>-->
     <select id="queryByPhone" resultType="com.gxa.entity.patients.Patients">
-            SELECT patient_id,patient_number,patient_name,patient_gender,patient_age,patient_phone,patient_creat_time,operators
+            SELECT patient_id,patient_card,patient_name,patient_gender,patient_age,patient_phone,patient_creat_time,operators
             FROM patients
             WHERE patient_name=#{patientPhone} OR patient_phone=#{patientPhone}
     </select>
     <select id="queryByDateTime" resultType="com.gxa.entity.patients.Patients">
-        SELECT patient_id,patient_number,patient_name,patient_gender,patient_age,patient_phone,patient_creat_time,operators
+        SELECT patient_id,patient_card,patient_name,patient_gender,patient_age,patient_phone,patient_creat_time,operators
         FROM patients
         WHERE patient_creat_time &gt;= #{firstTime} and patient_creat_time &lt;= #{lastTime}
     </select>
+    <select id="queryByDateTimePhone" resultType="com.gxa.entity.patients.Patients">
+        SELECT patient_id,patient_card,patient_name,patient_gender,patient_age,patient_phone,patient_creat_time,operators
+        FROM patients
+        WHERE patient_creat_time &gt;= #{firstTime} and patient_creat_time &lt;= #{lastTime} and (patient_name=#{patientPhone} OR patient_phone=#{patientPhone})
+    </select>
+
+
 </mapper>
