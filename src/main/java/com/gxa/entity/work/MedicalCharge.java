@@ -32,12 +32,8 @@ public class MedicalCharge {
     private Double price;
     @ApiModelProperty(value = "总价",required = true)
     private Double totalPrice;
-    @ApiModelProperty(value = "身份证号",required = true)
-    private String idCard;
-    @ApiModelProperty(value = "病人名字",required = true)
-    private String personName;
-    @ApiModelProperty(value = "创建时间",required = true)
-    private Date createTime;
     @ApiModelProperty(value = "附加费用",required = true)
     private List<Surcharges> surcharges;
+    @ApiModelProperty(value = "订单编号",required = false,hidden = true)
+    private String orderNum;
 }

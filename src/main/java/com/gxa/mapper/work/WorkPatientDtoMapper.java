@@ -10,17 +10,18 @@ import org.apache.ibatis.annotations.Param;
 public interface WorkPatientDtoMapper extends BaseMapper<WorkPatientDto> {
     WorkPatientDto queryWorkPatientDtoByPhoneNum(@Param("phoneNum") String phoneNum, @Param("status") String status);
     void updataPatientIncfo(@Param("patient1")WorkPatient patient1);
-    void addPatientPhyInfo(@Param("medicalRecordPhysical") MedicalRecordPhysical medicalRecordPhysical);
+    void addPatientPhyInfo(@Param("medicalRecordPhysical") MedicalRecordPhysical medicalRecordPhysical,@Param("relation") Relation relation);
 
-    void addPatientMedicalChargeInfo(@Param("medicalCharge") MedicalCharge medicalCharge);
-    void addPatientItemInfo(@Param("itemCharge") ItemCharge itemCharge);
-    void addprescriptionsInfo(@Param("prescriptions") Prescriptions prescriptions);
-    void addSurcharges(@Param("surcharges") Surcharges surcharges);
+    void addPatientMedicalChargeInfo(@Param("medicalCharge") MedicalCharge medicalCharge,@Param("relation") Relation relation);
+    void addPatientItemInfo(@Param("itemCharge") ItemCharge itemCharge,@Param("relation") Relation relation);
+    void addprescriptionsInfo(@Param("prescriptions") Prescriptions prescriptions,@Param("relation") Relation relation);
+    void addSurcharges(@Param("surcharges") Surcharges surcharges,@Param("relation") Relation relation,@Param("orderNum") String orderNum);
 
 
     WorkPatientDto queryWorkPatientDtoByPhoneNum(@Param("idCard") String idCard);
 
     void updateStatus(String idCard);
-    void addToll(@Param("toll")Toll toll,@Param("idCard")String idCard);
-    void addTollDurgs(@Param("tollDrugs")TollDrugs tollDrugs);
+    void addToll(@Param("toll")Toll toll,@Param("relation") Relation relation);
+    void addTollDurgs(@Param("tollDrugs")TollDrugs tollDrugs,@Param("relation") Relation relation);
+    void addCharge(@Param("charge") Charge charge,@Param("relation") Relation relation);
 }

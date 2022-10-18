@@ -12,9 +12,9 @@ import java.util.Set;
 @Setter
 @Getter
 public class PatientAllInfoDto {
+    private Relation relation;
     private WorkPatient patient;
     private MedicalRecordPhysical medicalRecordPhysical;
-    private List<Charge> charges;
     private List<MedicalCharge> medicalCharges;
     private List<ItemCharge> itemCharge;
     private Prescriptions prescriptions;

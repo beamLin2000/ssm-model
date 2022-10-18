@@ -13,8 +13,6 @@ import java.util.Date;
 @NoArgsConstructor
 @ApiModel("返回的病历信息对象")
 public class MedicalRecord {
-    @ApiModelProperty("病历id")
-    private Integer id;
     @ApiModelProperty("发病时间")
     private Date sickTime;
     @ApiModelProperty("主述")

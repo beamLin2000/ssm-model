@@ -5,6 +5,7 @@ import com.gxa.entity.registration.RegisterMsg;
 import com.gxa.entity.registration.RegisterMsgUpdate;
 import com.gxa.entity.registration.RegisterQueryCondition;
 import com.gxa.entity.systemSettings.EMEmployeeTable;
+import com.gxa.entity.systemSettings.Role;
 import com.gxa.mapper.systemSettings.EmployeeManagementMapper;
 import com.gxa.service.register.RegisterService;
 import com.gxa.utils.R;
@@ -38,8 +39,8 @@ public class RegisterController {
         this.registerService.add(register);
         return r.ok("success");
     }
-    @GetMapping("/register/query")
-    @ApiOperation(value = "查找接口",notes = "查找挂号记录",httpMethod = "GET")
+    @PostMapping("/register/query")
+    @ApiOperation(value = "查找接口",notes = "查找挂号记录",httpMethod = "POST")
     @ApiResponses({
             @ApiResponse(code = 0,message = "ok",response = RegisterMsg.class)
     })
@@ -110,11 +111,18 @@ public class RegisterController {
         List<String> no = new ArrayList<>();
         no.add(generateNo);
         List<EMEmployeeTable> emEmployeeTables = employeeManagementMapper.selectAll();
+        System.out.println(emEmployeeTables.size());
+
         List<String> doctorNames = new ArrayList<>();
         for (int i = 0; i < emEmployeeTables.size(); i++) {
-            if (emEmployeeTables.get(i).getRole().get(i).getNameR().equals("医生")){
-                doctorNames.add(emEmployeeTables.get(i).getName());
-            }
+            List<Role> role = emEmployeeTables.get(i).getRole();
+            for (int j = 0; j < role.size(); j++) {
+                if (role.get(j).getNameR().equals("医生")){
+                    doctorNames.add(emEmployeeTables.get(i).getName());
+                }
+            }//            if (emEmployeeTables.get(i).getRole().get(0).getNameR().equals("医生")){
+//
+//            }else if (emEmployeeTables.get(i).getRole().get(1).getNameR().equals("医生"))
         }
         map.put("generateNo", no);
         map.put("doctorNames",doctorNames);

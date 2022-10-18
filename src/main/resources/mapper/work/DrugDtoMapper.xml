@@ -9,10 +9,18 @@
         <result property="stock" column="stock"></result>
         <result property="price" column="sales_price"></result>
     </resultMap>
-
+    <resultMap id="inspect" type="com.gxa.entity.work.Inspect">
+        <result property="name" column="projectName"></result>
+        <result property="price" column="invoiceItem"></result>
+        <result property="type" column="retailPrice"></result>
+        <result property="unit" column="unit"></result>
+    </resultMap>
     <select id="queryAllDrugDto" resultMap="drugDto">
         SELECT DISTINCT d1.drug_name,d1.specs,d2.stock,d1.sales_price
         FROM drugManagement_drugInformationTenance_drugBasicInformation d1,drugManagement_inventoryManagement_inventoryInfo d2
-        WHERE d1.drug_name=d2.drug_name AND d1.drug_type=#{prescriptionName}
+        WHERE d1.id=d2.drug_info_id AND d1.drug_type=#{prescriptionName}
+    </select>
+    <select id="queryAllInspect" resultMap="inspect">
+        SELECT * FROM CPSMainTable
     </select>
 </mapper>

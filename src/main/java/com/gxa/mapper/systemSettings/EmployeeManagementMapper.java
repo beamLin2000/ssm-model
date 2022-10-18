@@ -2,6 +2,7 @@ package com.gxa.mapper.systemSettings;
 
 import com.gxa.entity.systemSettings.EMEmployeeTable;
 import com.gxa.entity.systemSettings.Role;
+import com.gxa.entity.work.Charge;
 import com.gxa.form.systemSettings.EMEdit;
 import com.gxa.form.systemSettings.RoleTable;
 import com.gxa.form.systemSettings.RolesEdit;

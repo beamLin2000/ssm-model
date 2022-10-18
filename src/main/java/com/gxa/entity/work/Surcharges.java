@@ -17,10 +17,4 @@ public class Surcharges {
     private String name;
     @ApiModelProperty(value = "价格",required = true)
     private Double price;
-    @ApiModelProperty(value = "身份证号",required = true)
-    private String idCard;
-    @ApiModelProperty(value = "病人名字",required = true)
-    private String personName;
-    @ApiModelProperty(value = "创建时间",required = true)
-    private Date createTime;
 }

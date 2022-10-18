@@ -69,7 +69,7 @@ public class WorkConeroller {
         if(!workSelectDto.getStatus().equals("未就诊")){
             return R.error("fail");
         }
-        this.workPatientDtoService.updateStatus(workSelectDto.getIdCard());
+       // this.workPatientDtoService.updateSt.atus(workSelectDto.getIdCard());
         WorkPatientDto workPatientDto = this.workPatientDtoService.queryWorkPatientDtoByPhoneNum(workSelectDto.getIdCard());
         MedicalRecordDto medicalRecordDto = this.medicalRecordDtoService.queryMedicalRecordDtoByIdCard(workSelectDto.getIdCard());
         PhysicalDto physicalDto = this.physicalDtoService.queryPhysicalDtoByIdCard(workSelectDto.getIdCard());
@@ -84,53 +84,76 @@ public class WorkConeroller {
     //处方list  传一个string
     @PostMapping("/work/durglist")
     @ResponseBody
-    @ApiOperation(value = "工作台的数据接口",notes = "西，成处方,中药处方")
+    @ApiOperation(value = "工作台的接诊的药品渲染",notes = "传西/成药或中药或检查项目")
     @ApiResponses({
             @ApiResponse(code = 0,message = "ok",response = Drug.class)
     })
     public R durgList(@RequestBody WorkSelectDto workSelectDto){
-
-        List<DrugDto> drugDtos = this.drugDtoService.queryAllDrugDto(workSelectDto.getPrescriptionName());
         Map map = new HashMap();
-        map.put("drugs",drugDtos);
+        if (workSelectDto.getPrescriptionName().equals("检查项目")){
+            List<Inspect> inspects = this.drugDtoService.queryAllInspect();
+            map.put("inspect/drugs",inspects);
+        }else {
+            List<DrugDto> drugDtos = this.drugDtoService.queryAllDrugDto(workSelectDto.getPrescriptionName());
+            map.put("inspect/drugs",drugDtos);
+        }
         R r = new R();
         return r.ok(map);
     }
-
-
+    @PostMapping("/work/chargeList")
+    @ResponseBody
+    @ApiOperation(value = "工作台的查看患者信息",notes = "收费的渲染")
+    @ApiResponses({
+            @ApiResponse(code = 0,message = "ok",response = Drug.class)
+    })
+    public R chargeList(@RequestBody Relation relation){
+        List<Charge> charges = this.workPatientDtoService.queryChargeList(relation);
+        Map map = new HashMap<>();
+        map.put("list",charges);
+        return R.ok(map);
+    }
 
     //保存患者信息
     @PostMapping("/work/savePatient")
     @ResponseBody
+    @ApiOperation(value = "工作台的接诊里面的",notes = "保存")
+    @ApiResponses({
+            @ApiResponse(code = 0,message = "ok",response = PatientAllInfoDto.class)
+    })
     public R savePatient(@RequestBody PatientAllInfoDto dto){
+        //获取请求时间
         Date date = new Date();
         long time = date.getTime();
         date.setTime(time);
-
+        String orderNum = OrderNo.orderNum();
         //获取保存对象
         WorkPatient patient = dto.getPatient();
         MedicalRecordPhysical medicalRecordPhysical = dto.getMedicalRecordPhysical();
         List<MedicalCharge> medicalCharges = dto.getMedicalCharges();
         List<ItemCharge> itemCharges = dto.getItemCharge();
         Prescriptions prescriptions = dto.getPrescriptions();
-
-
-
-        this.workPatientDtoService.updataPatientIncfo(patient);
-        if ("初诊".equals(patient.getType())){
-            this.workPatientDtoService.addPatientPhyInfo(medicalRecordPhysical);
+        //保存对象的关联信息
+        Relation relation = dto.getRelation();
+        for (MedicalCharge m :
+                medicalCharges) {
+            m.setOrderNum(orderNum);
         }
-        this.workPatientDtoService.addPatientMedicalChargeInfo(medicalCharges);
+        //修改给患者的医嘱，建议
+        this.workPatientDtoService.updataPatientIncfo(patient);
+        //
+            this.workPatientDtoService.addPatientPhyInfo(medicalRecordPhysical,relation);
+
+        this.workPatientDtoService.addPatientMedicalChargeInfo(medicalCharges,relation);
         for (ItemCharge itemCharge :
                 itemCharges) {
-            this.workPatientDtoService.addPatientItemInfo(itemCharge);
+            this.workPatientDtoService.addPatientItemInfo(itemCharge,relation);
         }
 
-        this.workPatientDtoService.addprescriptionsInfo(prescriptions);
-        String orderNum = OrderNo.orderNum();
+        this.workPatientDtoService.addprescriptionsInfo(prescriptions,relation);
+
         Toll toll = new Toll(1,orderNum ,"处方开立",patient.getName(),patient.getGender(),
-                Integer.parseInt(patient.getAge()),patient.getPhone(),prescriptions.getDoctorName(),medicalRecordPhysical.getCreateTime(),prescriptions.getTotalMoney(),0);
-        this.workPatientDtoService.addToll(toll,patient.getIdCard());
+                patient.getAge(),patient.getPhone(),prescriptions.getDoctorName(),relation.getCreateTime(),prescriptions.getTotalMoney(),0);
+        this.workPatientDtoService.addToll(toll,relation);
         List<TollDrugs> tollDrugsList = new ArrayList<>();
         for (ItemCharge itemCharge :
                 itemCharges) {
@@ -145,6 +168,12 @@ public class WorkConeroller {
                     Integer.parseInt(charge.getTotal()),"次",charge.getTotalPrice(),orderNum);
             tollDrugsList.add(tollDrugs);
         }
+        for (TollDrugs drugs :
+                tollDrugsList) {
+            this.workPatientDtoService.addTollDurgs(drugs,relation);
+        }
+        Charge charge = new Charge("处方收费","未收费",orderNum,prescriptions.getTotalMoney(),0.0,"","",null);
+        this.workPatientDtoService.addCharge(charge,relation);
 
         R r = new R();
 

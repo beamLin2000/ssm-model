@@ -19,10 +19,5 @@ public class Prescriptions {
     private Double totalMoney;
     @ApiModelProperty(value = "处方数量",required = true)
     private Integer prescriptionsNum;
-    @ApiModelProperty(value = "身份证号",required = true)
-    private String idCard;
-    @ApiModelProperty(value = "病人名字",required = true)
-    private String personName;
-    @ApiModelProperty(value = "创建时间",required = true)
-    private Date createTime;
+
 }

@@ -35,33 +35,45 @@
                 #{medicalRecordPhysical.allergy},#{medicalRecordPhysical.personalized},#{medicalRecordPhysical.familyHistory},#{medicalRecordPhysical.sickTime},
                 #{medicalRecordPhysical.auxiliary},#{medicalRecordPhysical.treatment},#{medicalRecordPhysical.notes},#{medicalRecordPhysical.temperature},
                 #{medicalRecordPhysical.breathe},#{medicalRecordPhysical.pulse},#{medicalRecordPhysical.height},#{medicalRecordPhysical.weight},
-                #{medicalRecordPhysical.bloodSugar},#{medicalRecordPhysical.bloodFat},#{medicalRecordPhysical.idCard},#{medicalRecordPhysical.createTime})
+                #{medicalRecordPhysical.bloodSugar},#{medicalRecordPhysical.bloodFat},#{relation.idCard},#{relation.createTime})
     </insert>
     <insert id="addPatientMedicalChargeInfo">
         INSERT INTO drug_use_information (`type`,`name`,singleDose,`usage`,frequency,days,total,price,totalPrice,person_name,person_idcard,create_time)
         VALUES (#{medicalCharge.type},#{medicalCharge.name},#{medicalCharge.singleDose},#{medicalCharge.usage},
                 #{medicalCharge.frequency},#{medicalCharge.days},#{medicalCharge.total},#{medicalCharge.price},
-                #{medicalCharge.totalPrice},#{medicalCharge.personName},#{medicalCharge.idCard},#{medicalCharge.createTime})
+                #{medicalCharge.totalPrice},#{relation.personName},#{relation.idCard},#{relation.createTime})
     </insert>
     <insert id="addPatientItemInfo">
         INSERT INTO item_charge (`type`,`name`,notes,num,univalent,totalUnivalent,person_name,person_idCard,create_time)
         VALUES (#{itemCharge.type},#{itemCharge.name},#{itemCharge.notes},#{itemCharge.num},#{itemCharge.univalent},
-                #{itemCharge.totalUnivalent},#{itemCharge.personName},#{itemCharge.idCard},#{itemCharge.createTime})
+                #{itemCharge.totalUnivalent},#{relation.personName},#{relation.idCard},#{relation.createTime})
     </insert>
     <insert id="addSurcharges">
-        INSERT INTO surcharges (`name`,price,person_name,person_idcard,create_time)
-        VALUES (#{surcharges.name},#{surcharges.price},#{surcharges.personName},#{surcharges.idCard},#{surcharges.createTime})
+        INSERT INTO surcharges (`name`,price,person_name,person_idcard,create_time,toll_number)
+        VALUES (#{surcharges.name},#{surcharges.price},#{relation.personName},#{relation.idCard},#{relation.createTime},#{orderNum.})
     </insert>
     <insert id="addprescriptionsInfo">
         INSERT INTO prescriptions (doctorName,totalMoney,prescriptionsNum,idCard,personName,createTime)
-        VALUES (#{prescriptions.doctorName},#{prescriptions.totalMoney},#{prescriptions.prescriptionsNum},#{prescriptions.idCard},
-                #{prescriptions.personName},#{prescriptions.createTime})
+        VALUES (#{prescriptions.doctorName},#{prescriptions.totalMoney},#{prescriptions.prescriptionsNum},#{relation.idCard},
+                #{relation.personName},#{relation.createTime})
     </insert>
     <insert id="addToll">
         INSERT INTO toll (toll_number,toll_type,toll_name,toll_gender,toll_age,toll_phone,toll_doctor
         ,toll_creat_time,toll_money,toll_state,toll_idcard)
         VALUES (#{toll.tollNumber},#{toll.tollType},#{toll.tollName},#{toll.tollGender},#{toll.tollAge},
-                #{toll.tollPhone},#{toll.tollDoctor},#{toll.tollCreatTime},#{toll.tollMoney},#{toll.tollState},#{idCard})
+                #{toll.tollPhone},#{toll.tollDoctor},#{toll.tollCreatTime},#{toll.tollMoney},#{toll.tollState},#{relation.idCard})
+    </insert>
+    <insert id="addTollDurgs">
+        INSERT INTO toll_drugs  (toll_drugs_ver,toll_drugs_name,toll_drugs_money,toll_drugs_quantity,toll_drugs_unit,toll_drugs_retail,toll_number
+        ,person_idcard,person_name,create_time)
+        VALUES (#{tollDrugs.tollDrugsVer},#{tollDrugs.tollDrugsName},#{tollDrugs.tollDrugsMoney},#{tollDrugs.tollDrugsQuantity},#{tollDrugs.tollDrugsUnit},
+                #{tollDrugs.tollDrugsRetail},#{tollDrugs.tollNumber},#{relation.idCard},#{relation.personName},#{relation.createTime})
+    </insert>
+    <insert id="addCharge">
+        INSERT INTO charge_info (charge_type,charge_status,charge_num,amount_receivable,net_receipts,payment_method,charge_person
+        ,charge_time,person_name,person_idcard,create_time)
+        VALUES (#{charge.chargeType},#{charge.chargeStatus},#{charge.chargeNum},#{charge.amountReceivable},#{charge.netReceipts},
+                #{charge.paymentMethod},#{charge.chargePerson},#{charge.chargeTime},#{relation.personName},#{relation.idCard},#{relation.createTime})
     </insert>
 
     <select id="queryWorkPatientDtoByPhoneNum" resultMap="workPatientDto">

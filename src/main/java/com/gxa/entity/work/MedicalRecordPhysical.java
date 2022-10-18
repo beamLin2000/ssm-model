@@ -12,8 +12,6 @@ import java.util.Date;
 @NoArgsConstructor
 @ApiModel("接收的体格病历信息")
 public class MedicalRecordPhysical {
-    @ApiModelProperty("病历id")
-    private Integer id;
     @ApiModelProperty(value = "发病时间",required = true)
     private Date sickTime;
     @ApiModelProperty(value = "主述",required = true)
@@ -50,9 +48,5 @@ public class MedicalRecordPhysical {
     private String bloodSugar;
     @ApiModelProperty(value = "血脂",required = true)
     private String bloodFat;
-    @ApiModelProperty(value = "身份证号",required = true)
-    private String idCard;
-    @ApiModelProperty(value = "创建时间",required = true)
-    private Date createTime;
 
 }

@@ -20,7 +20,7 @@ public class WorkPatient {
     @ApiModelProperty(value = "患者卡号",required = true)
     private String card;
     @ApiModelProperty(value = "年龄",required = true)
-    private String age;
+    private Integer age;
     @ApiModelProperty(value = "出生日期",required = true)
     private Date brith;
     @ApiModelProperty(value = "性别",required = true)
