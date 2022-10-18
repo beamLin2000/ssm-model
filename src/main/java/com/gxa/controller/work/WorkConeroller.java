@@ -1,11 +1,12 @@
 package com.gxa.controller.work;
 
-import com.gxa.dto.PatientDto;
-import com.gxa.dto.WorkPatientDto;
-import com.gxa.entity.patients.Patients;
+
+import com.gxa.dto.work.*;
+import com.gxa.entity.tolls.Toll;
+import com.gxa.entity.tolls.TollDrugs;
 import com.gxa.entity.work.*;
-import com.gxa.service.work.PatientDtoService;
-import com.gxa.service.work.WorkPatientDtoService;
+import com.gxa.service.work.*;
+import com.gxa.utils.OrderNo;
 import com.gxa.utils.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -95,40 +96,7 @@ public class WorkConeroller {
         R r = new R();
         return r.ok(map);
     }
-//    //体格信息
-//    @GetMapping("/work/physicalList")
-//    @ResponseBody
-//    @ApiOperation(value = "工作台的数据接口",notes = "体格信息")
-//    @ApiResponses({
-//            @ApiResponse(code = 0,message = "ok",response = Physical.class)
-//    })
-//    public R physicalList(String idCard){
-//        PhysicalDto physicalDto = this.physicalDtoService.queryPhysicalDtoByIdCard(idCard);
-//
-//        Map map = new HashMap();
-//        map.put("physicals",physicalDto);
-//        R r = new R();
-//        return r.ok(map);
-//    }
-//    //病历信息
-//    @GetMapping("/work/medicalRecordList")
-//    @ResponseBody
-//    @ApiOperation(value = "工作台的数据接口",notes = "病历信息")
-//    @ApiResponses({
-//            @ApiResponse(code = 0,message = "ok",response = MedicalRecord.class)
-//    })
-//    public R medicalRecordList(){
-//        Date date = new Date();
-//        long time = date.getTime();
-//        date.setTime(time);
-//        MedicalRecord medicalRecord = new MedicalRecord(1,date,"头疼","现病史","既往史","过敏史",
-//                "个人史","家族史","辅助检查","治疗意见","备注");
-//        Map map = new HashMap();
-//        map.put("medicalRecords",medicalRecord);
-//        R r = new R();
-//
-//        return r.ok(map);
-//    }
+
 
 
     //保存患者信息
@@ -138,67 +106,48 @@ public class WorkConeroller {
         Date date = new Date();
         long time = date.getTime();
         date.setTime(time);
-        this.workPatientDtoService.updataPatientIncfo(dto.getPatient());
-        if ("初诊".equals(dto.getPatient().getType())){
-            dto.getMedicalRecordPhysical().setIdCard(dto.getPatient().getIdCard());
-            dto.getMedicalRecordPhysical().setCreateTime(date);
-            this.workPatientDtoService.addPatientPhyInfo(dto.getMedicalRecordPhysical());
+
+        //获取保存对象
+        WorkPatient patient = dto.getPatient();
+        MedicalRecordPhysical medicalRecordPhysical = dto.getMedicalRecordPhysical();
+        List<MedicalCharge> medicalCharges = dto.getMedicalCharges();
+        List<ItemCharge> itemCharges = dto.getItemCharge();
+        Prescriptions prescriptions = dto.getPrescriptions();
+
+
+
+        this.workPatientDtoService.updataPatientIncfo(patient);
+        if ("初诊".equals(patient.getType())){
+            this.workPatientDtoService.addPatientPhyInfo(medicalRecordPhysical);
         }
-        this.workPatientDtoService.addPatientMedicalChargeInfo(dto.getMedicalCharges());
-        this.workPatientDtoService.addPatientItemInfo(dto.getItemCharge());
+        this.workPatientDtoService.addPatientMedicalChargeInfo(medicalCharges);
+        for (ItemCharge itemCharge :
+                itemCharges) {
+            this.workPatientDtoService.addPatientItemInfo(itemCharge);
+        }
 
-        this.workPatientDtoService.addprescriptionsInfo(dto.getPrescriptions());
+        this.workPatientDtoService.addprescriptionsInfo(prescriptions);
+        String orderNum = OrderNo.orderNum();
+        Toll toll = new Toll(1,orderNum ,"处方开立",patient.getName(),patient.getGender(),
+                Integer.parseInt(patient.getAge()),patient.getPhone(),prescriptions.getDoctorName(),medicalRecordPhysical.getCreateTime(),prescriptions.getTotalMoney(),0);
+        this.workPatientDtoService.addToll(toll,patient.getIdCard());
+        List<TollDrugs> tollDrugsList = new ArrayList<>();
+        for (ItemCharge itemCharge :
+                itemCharges) {
+            TollDrugs tollDrugs = new TollDrugs(1,itemCharge.getType(),itemCharge.getName(),itemCharge.getTotalUnivalent(),
+                    itemCharge.getNum(),"次",itemCharge.getTotalUnivalent(),orderNum);
+            tollDrugsList.add(tollDrugs);
+        }
 
+        for (MedicalCharge charge :
+                medicalCharges) {
+            TollDrugs tollDrugs = new TollDrugs(1,charge.getType(),charge.getName(),charge.getPrice(),
+                    Integer.parseInt(charge.getTotal()),"次",charge.getTotalPrice(),orderNum);
+            tollDrugsList.add(tollDrugs);
+        }
 
         R r = new R();
 
-
-        return r.ok();
-    }
-
-
-    //保存西、成处方信息
-    @PostMapping("/work/saveDurg")
-    @ResponseBody
-    public R saveDurg(Drug drug){
-        System.out.println(drug);
-        R r = new R();
-
-        return r.ok();
-    }
-    //保存中药处方
- @PostMapping("/work/saveTraditional")
-    @ResponseBody
-    public R saveTraditional (Drug drug){
-     System.out.println(drug);
-        R r = new R();
-
-        return r.ok();
-    }
-    //保存检查项目
-    @PostMapping("/work/saveInspect")
-    @ResponseBody
-    public R saveInspect(Inspect inspect){
-        System.out.println(inspect);
-        R r = new R();
-
-        return r.ok();
-    }
-    //保存体格信息
-@PostMapping("/work/saveMedical")
-    @ResponseBody
-    public R saveMedical(Physical physical){
-    System.out.println(physical);
-        R r = new R();
-
-        return r.ok();
-    }
-    //保存病历信息
-    @PostMapping("/work/saveMedicalRecord")
-    @ResponseBody
-    public R saveMedicalRecord(MedicalRecord medicalRecord){
-        System.out.println(medicalRecord);
-        R r = new R();
 
         return r.ok();
     }

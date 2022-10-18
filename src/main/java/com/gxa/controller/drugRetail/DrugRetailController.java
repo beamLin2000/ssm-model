@@ -52,7 +52,6 @@ public class DrugRetailController {
         list.add(drugMsg);
         list.add(drugMsg1);
         list.add(drugMsg2);
-        Map map = new HashMap();
         map.put("drugMsg",list);
         return r.ok(map);
     }

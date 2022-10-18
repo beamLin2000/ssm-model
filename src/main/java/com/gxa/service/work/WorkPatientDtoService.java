@@ -1,6 +1,7 @@
 package com.gxa.service.work;
 
-import com.gxa.dto.WorkPatientDto;
+import com.gxa.entity.tolls.Toll;
+import com.gxa.entity.tolls.TollDrugs;
 import com.gxa.entity.work.*;
 
 import java.util.List;
@@ -18,4 +19,7 @@ public interface WorkPatientDtoService {
 
     WorkPatientDto queryWorkPatientDtoByPhoneNum(String idCard);
     void updateStatus(String idCard);
+
+    void addToll(Toll toll,String idCard);
+    void addTollDurgs(TollDrugs tollDrugs);
 }

@@ -37,4 +37,6 @@ public class WorkPatient {
     private String diagnosis;
     @ApiModelProperty(value = "医嘱",required = true)
     private String order;
+    @ApiModelProperty(value = "创建时间",required = true)
+    private Date createTime;
 }

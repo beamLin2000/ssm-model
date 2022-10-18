@@ -16,6 +16,6 @@ public class PatientAllInfoDto {
     private MedicalRecordPhysical medicalRecordPhysical;
     private List<Charge> charges;
     private List<MedicalCharge> medicalCharges;
-    private ItemCharge itemCharge;
+    private List<ItemCharge> itemCharge;
     private Prescriptions prescriptions;
 }

@@ -57,6 +57,12 @@
         VALUES (#{prescriptions.doctorName},#{prescriptions.totalMoney},#{prescriptions.prescriptionsNum},#{prescriptions.idCard},
                 #{prescriptions.personName},#{prescriptions.createTime})
     </insert>
+    <insert id="addToll">
+        INSERT INTO toll (toll_number,toll_type,toll_name,toll_gender,toll_age,toll_phone,toll_doctor
+        ,toll_creat_time,toll_money,toll_state,toll_idcard)
+        VALUES (#{toll.tollNumber},#{toll.tollType},#{toll.tollName},#{toll.tollGender},#{toll.tollAge},
+                #{toll.tollPhone},#{toll.tollDoctor},#{toll.tollCreatTime},#{toll.tollMoney},#{toll.tollState},#{idCard})
+    </insert>
 
     <select id="queryWorkPatientDtoByPhoneNum" resultMap="workPatientDto">
         SELECT p.patient_name,p.patient_card,p.patient_age,p.patient_birthday,p.patient_gender,p.patient_phone,p.patient_documents,r.reception_type,p.patient_detailed_address
