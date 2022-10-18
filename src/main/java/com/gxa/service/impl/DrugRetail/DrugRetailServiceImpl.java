@@ -16,7 +16,7 @@ public class DrugRetailServiceImpl implements DrugRetailService {
     private DrugRetailMapper drugRetailMapper;
     @Override
     public void add(DrugRetail drugRetail) {
-      this.drugRetailMapper.save(drugRetail);
+      this.drugRetailMapper.saveDrugMsg(drugRetail);
     }
     @Override
     public List<DrugMsg> queryByCode(DrugQueryCondition drugQueryCondition) {

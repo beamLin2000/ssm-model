@@ -7,7 +7,8 @@ import com.gxa.entity.drugRetail.DrugRetail;
 import java.util.List;
 
 public interface DrugRetailMapper {
-    void save(DrugRetail drugRetail);
+    void saveDrugMsg(DrugRetail drugRetail);
+    void savePatientMsg(DrugRetail drugRetail);
     List<DrugMsg> queryByCode(DrugQueryCondition drugQueryCondition);
     List<DrugMsg> queryByName(DrugQueryCondition drugQueryCondition);
 }

@@ -13,7 +13,11 @@
         <result property="stock" column="stock"></result>
         <result property="salesPrice" column="sales_price"></result>
     </resultMap>
-    <insert id="save">
+    <insert id="saveDrugMsg">
+        INSERT INTO
+        values
+    </insert>
+    <insert id="savePatientMsg">
         INSERT INTO
         values
     </insert>

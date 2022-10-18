@@ -11,7 +11,7 @@
         <result property="age" column="patient_age"></result>
         <result property="phoneNo" column="patient_phone"></result>
         <result property="attendingDoctor" column="attending_doctor"></result>
-        <result property="receptionTime" column="registration_dateTime"></result>
+        <result property="receptionTime" column="registration_date_time"></result>
         <result property="willPaid" column="amount_paid"></result>
         <result property="amountPaid" column="amount_paid"></result>
         <result property="visitStatus" column="status"></result>
@@ -23,7 +23,7 @@
         <result property="amountPaid" column="amount_paid" jdbcType="DOUBLE"></result>
         <result property="payMethod" column="pay_method" jdbcType="VARCHAR"></result>
         <result property="changeMoney" column="change_money" jdbcType="DOUBLE"></result>
-        <result property="registrationDateTime" column="registration_dateTime" jdbcType="TIMESTAMP"></result>
+        <result property="registrationDateTime" column="registration_date_time" jdbcType="TIMESTAMP"></result>
         <result property="receptionType" column="reception_type" jdbcType="VARCHAR"></result>
         <result property="attendingDoctor" column="attending_doctor" jdbcType="VARCHAR"></result>
         <result property="tolCollector" column="attending_doctor" jdbcType="VARCHAR"></result>
@@ -40,7 +40,7 @@
         <result property="remarks" column="patient_remark" jdbcType="VARCHAR"></result>
     </resultMap>
     <insert id="saveCharge" parameterType="com.gxa.entity.registration.Register">
-        insert into charge(registration_form,insurance_payment,amount_paid,change_money,pay_method,collection_remarks,registration_dateTime)
+        insert into charge(registration_form,insurance_payment,amount_paid,change_money,pay_method,collection_remarks,registration_date_time)
         values (#{registrationForm},#{medicalInsurancePayment},#{amountPaid},#{changeMoney},#{paymentMethod},
             #{collectionRemarks},#{registrationDateTime})
     </insert>
@@ -72,7 +72,7 @@
         WHERE registration_form=#{registrationForm}
     </update>
     <select id="query" resultMap="registerCondition" parameterType="com.gxa.entity.registration.RegisterQueryCondition">
-        select distinct c.amount_paid,p.patient_name,p.patient_gender,p.patient_age,p.patient_phone,r.attending_doctor,r.registration_form,r.status,c.registration_dateTime
+        select distinct c.amount_paid,p.patient_name,p.patient_gender,p.patient_age,p.patient_phone,r.attending_doctor,r.registration_form,r.status,c.registration_date_time
         from charge c,patients p,register r
         <where>
             c.registration_form = p.registration_form and p.registration_form = r.registration_form
@@ -86,16 +86,13 @@
                 and r.status=#{visitStatus}
            </if>
            <if test="startTime != null and startTime !=''">
-                and r.registration_date>#{startTime}
-           </if>
-           <if test="endTime != null and endTime !=''">
-               and #{endTime}>r.registration_date
+                and c.registration_date_time between #{startTime} and #{endTime}
            </if>
         </where>
         limit 10
     </select>
     <select id="toUpdate" resultMap="registerUpdateMsg" parameterType="string">
-        select r.registration_form,c.amount_paid,c.insurance_payment,c.pay_method,c.change_money,c.registration_dateTime,r.reception_type,
+        select r.registration_form,c.amount_paid,c.insurance_payment,c.pay_method,c.change_money,c.registration_date_time,r.reception_type,
                r.attending_doctor,r.registration_fee,r.consultation_fee,p.patient_name,p.patient_card,p.patient_age
                 ,p.patient_birthday,p.patient_gender,p.patient_phone,p.patient_documents
                 ,p.patient_address,p.patient_remark
@@ -118,10 +115,7 @@
                 and r.status=#{visitStatus}
             </if>
             <if test="startTime != null and startTime !=''">
-                and r.registration_date>#{startTime}
-            </if>
-            <if test="endTime != null and endTime !=''">
-                and #{endTime}>r.registration_date
+                and c.registration_date_time between #{startTime} and #{endTime}
             </if>
         </where>
     </select>
