@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
@@ -35,6 +37,9 @@ public class WorkConeroller {
 
     @Autowired
     private MedicalRecordDtoService medicalRecordDtoService;
+
+    @Autowired
+    private ConditionSelectService conditionSelectService;
 
     //工作台list
     @GetMapping("/work/list")
@@ -92,40 +97,50 @@ public class WorkConeroller {
         R r = new R();
         return r.ok(map);
     }
-//    //体格信息
-//    @GetMapping("/work/physicalList")
-//    @ResponseBody
-//    @ApiOperation(value = "工作台的数据接口",notes = "体格信息")
-//    @ApiResponses({
-//            @ApiResponse(code = 0,message = "ok",response = Physical.class)
-//    })
-//    public R physicalList(String idCard){
-//        PhysicalDto physicalDto = this.physicalDtoService.queryPhysicalDtoByIdCard(idCard);
-//
-//        Map map = new HashMap();
-//        map.put("physicals",physicalDto);
-//        R r = new R();
-//        return r.ok(map);
-//    }
-//    //病历信息
-//    @GetMapping("/work/medicalRecordList")
-//    @ResponseBody
-//    @ApiOperation(value = "工作台的数据接口",notes = "病历信息")
-//    @ApiResponses({
-//            @ApiResponse(code = 0,message = "ok",response = MedicalRecord.class)
-//    })
-//    public R medicalRecordList(){
-//        Date date = new Date();
-//        long time = date.getTime();
-//        date.setTime(time);
-//        MedicalRecord medicalRecord = new MedicalRecord(1,date,"头疼","现病史","既往史","过敏史",
-//                "个人史","家族史","辅助检查","治疗意见","备注");
-//        Map map = new HashMap();
-//        map.put("medicalRecords",medicalRecord);
-//        R r = new R();
-//
-//        return r.ok(map);
-//    }
+
+
+    @PostMapping("/work/ConditionList")
+    @ResponseBody
+    @ApiOperation(value = "工作台的搜索条件查询数据接口",notes = "搜索条件")
+    @ApiResponses({
+            @ApiResponse(code = 0,message = "ok",response = Drug.class)
+    })
+    public R workListByCondition(@RequestBody ConditionSelectDto conditionSelectDto){
+        String startTime = null;
+        String endTime = null;
+        Date startDate = null;
+        Date endDate = null;
+
+        String selectTime = conditionSelectDto.getSelectTime();
+        String status = conditionSelectDto.getStatus();
+        String patientName = conditionSelectDto.getPatientName();
+
+        if (selectTime != null && !selectTime.equals("")){
+            String[] times = selectTime.split(",");
+            startTime = times[0];
+            endTime = times[1];
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                startDate = sdf.parse(selectTime);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            try {
+                endDate = sdf.parse(endTime);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
+        List<PatientDto> patientDtos = this.conditionSelectService.queryPatientByCondition(startDate,endDate,status,patientName);
+
+        Map map = new HashMap();
+        map.put("patientDtos",patientDtos);
+
+        R r = new R();
+        return r.ok(map);
+    }
 
 
     //保存患者信息
