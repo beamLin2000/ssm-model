@@ -1,16 +1,11 @@
 package com.gxa.controller.tolls;
 
-import com.gxa.entity.patients.Family;
-import com.gxa.entity.patients.Patients;
+
 import com.gxa.entity.tolls.*;
-import com.gxa.entity.work.Drug;
-import com.gxa.entity.work.WorkPatient;
 import com.gxa.service.toll.*;
 import com.gxa.utils.R;
-import com.gxa.utils.systemSettings.Result;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
@@ -53,6 +48,7 @@ public class TollController {
         String lastDateTime = null;
         //if循环查询时间非空，不然前端渲染报错
         if (tollDate !=null && !"".equals(tollDate)){
+
             String tollType = tollInquire.getTollType();
             String[] dateTime = tollDate.split(",");
             firstDateTime = dateTime[0].trim();
@@ -97,7 +93,7 @@ public class TollController {
     @ApiResponses({
             @ApiResponse(code = 0,message = "ok",response = TollDrugs.class)
     })
-    public R TollDrugs(@ApiParam(name = "查询条件", value = "tollNumber")@RequestBody String tollNumber){
+    public R tollDrugs(@ApiParam(name = "查询条件", value = "tollNumber")@RequestBody String tollNumber){
 
         List<TollDrugs> tollDrugs = this.tollDrugsService.queryByTollId(tollNumber);
         PatientDrugs patientDrugs = this.patientDrugsService.queryByTollId(tollNumber);
@@ -121,7 +117,7 @@ public class TollController {
             @ApiResponse(code = 0,message = "ok",response = PatientDrugs.class),
             @ApiResponse(code = 0,message = "ok",response = TollFinish.class)
     })
-    public R TollPatient(@RequestBody String tollNumber){
+    public R tollPatient(@RequestBody String tollNumber){
         List<TollDrugs> tollDrugs = this.tollDrugsService.queryByTollId(tollNumber);
         PatientDrugs patientDrugs = this.patientDrugsService.queryByTollId(tollNumber);
         TollPatient tollPatient = this.tollPatientService.queryByTollId(tollNumber);
@@ -142,7 +138,7 @@ public class TollController {
     @ApiResponses({
             @ApiResponse(code = 0,message = "ok",response = TollFinish.class)
     })
-    public R TollFinsh(@RequestBody TollFinish tollFinish){
+    public R tollFinsh(@RequestBody TollFinish tollFinish){
         try {
             this.tollFinshService.addFinish(tollFinish);
         } catch (Exception e) {
@@ -158,7 +154,7 @@ public class TollController {
     @ApiResponses({
             @ApiResponse(code = 0,message = "ok",response = TollDrugs.class)
     })
-    public R TollDrugsNum(@RequestParam String tollDrugsVer,String tollNumber){
+    public R tollDrugsNum(@RequestParam String tollDrugsVer,String tollNumber){
         List<TollDrugs> tollDrugs= this.tollDrugsService.queryByTollVer(tollDrugsVer,tollNumber);
         Map map = new HashMap();
         map.put("tollDrugs",tollDrugs);
@@ -171,7 +167,7 @@ public class TollController {
     @ApiResponses({
             @ApiResponse(code = 0,message = "ok")
     })
-    public R TollRefunds(@RequestParam String tollNumber){
+    public R tollRefunds(@RequestParam String tollNumber){
         try {
             this.tollService.updateRefunds(tollNumber);
         } catch (Exception e) {

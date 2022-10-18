@@ -21,13 +21,13 @@
     </insert>
 
     <update id="updateByState" parameterType="com.gxa.entity.tolls.Toll">
-        UPDATE toll SET toll_state=1 WHERE toll_number=#{tollNumber}
-    </update>
-    <update id="updateRefunds" parameterType="com.gxa.entity.tolls.Toll">
         UPDATE toll SET toll_state=2 WHERE toll_number=#{tollNumber}
     </update>
+    <update id="updateRefunds" parameterType="com.gxa.entity.tolls.Toll">
+        UPDATE toll SET toll_state=3 WHERE toll_number=#{tollNumber}
+    </update>
 
-    <select id="queryByInquire" resultType="com.gxa.entity.tolls.Toll">
+    <select id="queryByInquire" resultType="com.gxa.entity.tolls.Toll" >
         SELECT toll_id,toll_number,toll_type,toll_name,toll_gender,toll_age,toll_phone,toll_doctor,toll_creat_time,toll_money,toll_state
         FROM toll
         <where>
