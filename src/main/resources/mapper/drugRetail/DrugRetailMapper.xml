@@ -5,30 +5,42 @@
 <mapper namespace="com.gxa.mapper.drugRetail.DrugRetailMapper">
 
     <resultMap id="drugMsg" type="com.gxa.entity.drugRetail.DrugMsg">
-        <id property="drugCode" column=""></id>
-        <result property="drugName" column=""></result>
-        <result property="chargeCategory" column=""></result>
-        <result property="drugSpecifications" column=""></result>
-        <result property="manuFactor" column=""></result>
-        <result property="stock" column=""></result>
-        <result property="price" column=""></result>
+        <id property="drugCode" column="code"></id>
+        <result property="drugName" column="drug_name"></result>
+        <result property="specs" column="specs"></result>
+        <result property="drugType" column="drug_type"></result>
+        <result property="manuFactor" column="manufacturer"></result>
+        <result property="stock" column="stock"></result>
+        <result property="salesPrice" column="sales_price"></result>
     </resultMap>
     <insert id="save">
         INSERT INTO
         values
     </insert>
     <select id="queryByCode" parameterType="com.gxa.entity.drugRetail.DrugQueryCondition" resultMap="drugMsg">
-        select *
-        from
+        select f.code,f.drug_name,f.drug_type,f.specs,f.manufacturer,i.stock ,f.sales_price
+        from drugManagement_drugInformationTenance_drugBasicInformation f,drugManagement_inventoryManagement_inventoryInfo i
         <where>
-
+            f.id=i.drug_info_id
+        <if test="drugType !=null and drugType !='' ">
+            and f.drug_type=#{drugType}
+        </if>
+        <if test="drugCodeOrName !=null and drugCodeOrName !='' ">
+            and f.code=#{drugCodeOrName}
+        </if>
         </where>
     </select>
     <select id="queryByName" parameterType="com.gxa.entity.drugRetail.DrugQueryCondition" resultMap="drugMsg">
-        select *
-        from
+        select f.code,f.drug_name,f.drug_type,f.specs,f.manufacturer,i.stock ,f.sales_price
+        from drugManagement_drugInformationTenance_drugBasicInformation f,drugManagement_inventoryManagement_inventoryInfo i
         <where>
-
+            f.id=i.drug_info_id
+            <if test="drugType !=null and drugType !='' ">
+                and f.drug_type=#{drugType}
+            </if>
+            <if test="drugCodeOrName !=null and drugCodeOrName !='' ">
+                and f.drug_name=#{drugCodeOrName}
+            </if>
         </where>
     </select>
 </mapper>

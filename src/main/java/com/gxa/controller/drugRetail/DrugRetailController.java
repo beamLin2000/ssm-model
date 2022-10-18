@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @RestController
 @Api(tags = {"药品零售接口"})
@@ -26,34 +28,43 @@ public class DrugRetailController {
         this.drugRetailService.add(drugRetail);
         return r.ok("success");
     }
-    @GetMapping("/drugRetail/query")
-    @ApiOperation(value = "查询药品接口",notes = "查询药品",httpMethod = "GET")
+    @PostMapping ("/drugRetail/query")
+    @ApiOperation(value = "查询药品接口",notes = "查询药品",httpMethod = "POST")
     public R queryAllDrug(@ApiParam(name = "drugQueryCondition",value = "药品查询条件")@RequestBody DrugQueryCondition drugQueryCondition){
         System.out.println(drugQueryCondition);
         R r = new R();
         Map map = new HashMap();
-//        if (drugQueryCondition.getDrugCodeOrName().substring(0,1) == "Y"){
-//            List<DrugMsg> drugMsgs = this.drugRetailService.queryByCode(drugQueryCondition);
-//            map.put("drugMsg",drugMsgs);
-//            return r.ok(map);
-//        }else {
-//            List<DrugMsg> drugMsgs = this.drugRetailService.queryByName(drugQueryCondition);
-//            map.put("drugMsg",drugMsgs);
-//            return r.ok(map);
-//        }
-        DrugMsg drugMsg = new DrugMsg("1000001","阿莫西林","西/成药","\n" +
-                "6g*14袋/盒","山东罗欣药业股份有限公司","112盒",5.00);
-        DrugMsg drugMsg1 = new DrugMsg("1000002","氯化钠0.9%","西/成药","\n" +
-                "6g*14袋/盒","山东罗欣药业股份有限公司","110盒",5.00);
-        DrugMsg drugMsg2 = new DrugMsg("1000003","\n" +
-                "青霉素针注射用","中药","\n" +
-                "6g*14袋/盒","山东罗欣药业股份有限公司","112盒",5.00);
-        List<DrugMsg> list = new ArrayList<>();
-        list.add(drugMsg);
-        list.add(drugMsg1);
-        list.add(drugMsg2);
-        map.put("drugMsg",list);
-        return r.ok(map);
+        if (!drugQueryCondition.getDrugCodeOrName().equals(null) && !drugQueryCondition.getDrugCodeOrName().equals("")){
+            Pattern pattern = Pattern.compile("[0-9].*");//一定记住加“.”
+            Matcher isNum = pattern.matcher(drugQueryCondition.getDrugCodeOrName().charAt(0)+"");
+            if (isNum.matches()) {//判断是以药品编码查询
+                List<DrugMsg> drugMsgs = this.drugRetailService.queryByCode(drugQueryCondition);
+                map.put("drugMsg",drugMsgs);
+                return r.ok(map);
+            }else {//药品名称查询
+                List<DrugMsg> drugMsgs = this.drugRetailService.queryByName(drugQueryCondition);
+                map.put("drugMsg",drugMsgs);
+                return r.ok(map);
+            }
+        }else {
+            List<DrugMsg> drugMsgs = this.drugRetailService.queryByName(drugQueryCondition);
+            map.put("drugMsg",drugMsgs);
+            return r.ok(map);
+        }
+
+//        DrugMsg drugMsg = new DrugMsg("1000001","阿莫西林","西/成药","\n" +
+//                "6g*14袋/盒","山东罗欣药业股份有限公司","112盒",5.00);
+//        DrugMsg drugMsg1 = new DrugMsg("1000002","氯化钠0.9%","西/成药","\n" +
+//                "6g*14袋/盒","山东罗欣药业股份有限公司","110盒",5.00);
+//        DrugMsg drugMsg2 = new DrugMsg("1000003","\n" +
+//                "青霉素针注射用","中药","\n" +
+//                "6g*14袋/盒","山东罗欣药业股份有限公司","112盒",5.00);
+//        List<DrugMsg> list = new ArrayList<>();
+//        list.add(drugMsg);
+//        list.add(drugMsg1);
+//        list.add(drugMsg2);
+//        map.put("drugMsg",list);
+//        return r.ok(map);
     }
 //    @GetMapping("/drugRetail/queryDetailed")
 //    @ApiOperation(value = "查询接口",notes = "项目明细",httpMethod = "GET")
