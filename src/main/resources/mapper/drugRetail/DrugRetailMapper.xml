@@ -24,7 +24,7 @@
 
         </where>
     </select>
-    <select id="queryByName" resultType="com.gxa.entity.drugRetail.DrugMsg">
+    <select id="queryByName" parameterType="com.gxa.entity.drugRetail.DrugQueryCondition" resultMap="drugMsg">
         select *
         from
         <where>
