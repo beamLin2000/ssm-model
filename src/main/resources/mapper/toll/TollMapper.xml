@@ -16,8 +16,15 @@
         <result property="tollMoney" column="toll_money"/>
         <result property="tollState" column="toll_state"/>
     </resultMap>
+    <insert id="add" parameterType="com.gxa.entity.tolls.Toll">
+        UPDATE toll SET toll_finish_manner=#{tollFinishManner} WHERE toll_number=#{tollNumber}
+    </insert>
+
     <update id="updateByState" parameterType="com.gxa.entity.tolls.Toll">
         UPDATE toll SET toll_state=1 WHERE toll_number=#{tollNumber}
+    </update>
+    <update id="updateRefunds" parameterType="com.gxa.entity.tolls.Toll">
+        UPDATE toll SET toll_state=2 WHERE toll_number=#{tollNumber}
     </update>
 
     <select id="queryByInquire" resultType="com.gxa.entity.tolls.Toll">

@@ -46,7 +46,10 @@ public class TollServiceImpl implements TollService {
         this.tollMapper.delete(wrapper);
     }
 
-
+    @Override
+    public void updateRefunds(String tollNumber) {
+        this.tollMapper.updateRefunds(tollNumber);
+    }
 
 
 }

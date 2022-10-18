@@ -21,7 +21,9 @@ public class TollFinshServiceImpl implements TollFinshService {
     public void addFinish(TollFinish tollFinish) {
 
         String  tollNumber = tollFinish.getTollNumber();
+        String tollFinishManner = tollFinish.getTollFinishManner();
         this.tollFinshMapper.insert(tollFinish);
+        this.tollMapper.add(tollNumber,tollFinishManner);
         this.tollMapper.updateByState(tollNumber);
 
     }

@@ -27,8 +27,10 @@ public class Toll {
     @ApiModelProperty(name = "tollCreatTime",value = "创建时间")
     private Date tollCreatTime;
     @ApiModelProperty(name = "tollMoney",value = "应收金额")
-    private Integer tollMoney;
+    private Double tollMoney;
     @ApiModelProperty(name = "tollState",value = "收费状态")
     private Integer tollState;
+    @ApiModelProperty(name = "tollFinishManner",value = "收费方式")
+    private String tollFinishManner;
 
 }

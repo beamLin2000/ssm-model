@@ -26,4 +26,6 @@ public class TollFinish {
     private Date tollFinishDate;
     @ApiModelProperty(name = "tollFinishName",value = "收费员")
     private String tollFinishName;
+    @ApiModelProperty(name = "tollFinishManner",value = "收费方式")
+    private String tollFinishManner;
 }

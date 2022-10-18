@@ -33,6 +33,8 @@ public class TollController {
     private TollPatientService tollPatientService;
     @Autowired
     private TollFinshService tollFinshService;
+    @Autowired
+    private SurchargesService surchargesService;
 
     @PostMapping("/toll/tollInquire")
     @ApiOperation(value = "查找接口",notes = "查找缴费",httpMethod = "POST")
@@ -48,6 +50,7 @@ public class TollController {
         String firstDateTime =null;
         String lastDateTime = null;
         if (tollDate !=null && !"".equals(tollDate)){
+            String tollType = tollInquire.getTollType();
             String[] dateTime = tollDate.split(",");
             firstDateTime = dateTime[0].trim();
             lastDateTime =  dateTime[1].trim();
@@ -108,38 +111,48 @@ public class TollController {
 //        return R.ok(map);
 //    }
 
-    @GetMapping("/toll/TollDrugs")
-    @ApiOperation(value = "查询项目明细",notes = "项目明细",httpMethod = "GET")
+    @PostMapping("/toll/TollDrugs")
+    @ResponseBody
+    @ApiOperation(value = "查询项目明细",notes = "项目明细",httpMethod = "POST")
     @ApiResponses({
             @ApiResponse(code = 0,message = "ok",response = TollDrugs.class)
     })
-    public R TollDrugs(@ApiParam(name = "查询条件", value = "tollNumber")@RequestParam("tollNumber")String tollNumber){
+    public R TollDrugs(@ApiParam(name = "查询条件", value = "tollNumber")@RequestBody String tollNumber){
+
         List<TollDrugs> tollDrugs = this.tollDrugsService.queryByTollId(tollNumber);
         PatientDrugs patientDrugs = this.patientDrugsService.queryByTollId(tollNumber);
         TollPatient tollPatient = this.tollPatientService.queryByTollId(tollNumber);
+        List<Surcharges> surcharges = this.surchargesService.queryByTollId(tollNumber);
         Map map = new HashMap();
 
         map.put("tollDrugs",tollDrugs);
         map.put("patientDrugs",patientDrugs);
         map.put("tollPatient",tollPatient);
+        map.put("surcharges",surcharges);
         return R.ok(map);
     }
 
-    @GetMapping("/toll/TollPatient")
-    @ApiOperation(value = "查询退费查看信息",notes = "退费信息",httpMethod = "GET")
+    @PostMapping("/toll/TollPatient")
+    @ResponseBody
+    @ApiOperation(value = "查询退费查看信息",notes = "退费信息",httpMethod = "POST")
     @ApiResponses({
-            @ApiResponse(code = 0,message = "ok",response = TollPatient.class)
+            @ApiResponse(code = 0,message = "ok",response = TollPatient.class),
+            @ApiResponse(code = 0,message = "ok",response = TollDrugs.class),
+            @ApiResponse(code = 0,message = "ok",response = PatientDrugs.class),
+            @ApiResponse(code = 0,message = "ok",response = TollFinish.class)
     })
-    public R TollPatient(@ApiParam(name = "查询条件", value = "tollNumber")@RequestParam("tollNumber") String tollNumber){
+    public R TollPatient(@RequestBody String tollNumber){
         List<TollDrugs> tollDrugs = this.tollDrugsService.queryByTollId(tollNumber);
         PatientDrugs patientDrugs = this.patientDrugsService.queryByTollId(tollNumber);
         TollPatient tollPatient = this.tollPatientService.queryByTollId(tollNumber);
         TollFinish tollFinish = this.tollFinshService.queryByTollId(tollNumber);
+        List<Surcharges> surcharges = this.surchargesService.queryByTollId(tollNumber);
         Map map = new HashMap();
         map.put("tollDrugs",tollDrugs);
         map.put("patientDrugs",patientDrugs);
         map.put("tollPatient",tollPatient);
         map.put("tollFinish",tollFinish);
+        map.put("surcharges",surcharges);
         return R.ok(map);
     }
 
@@ -159,9 +172,9 @@ public class TollController {
         return R.ok("succes");
     }
 
-    @GetMapping("/toll/TollDrugsNum")
+    @PostMapping("/toll/TollDrugsNum")
     @ResponseBody
-    @ApiOperation(value = "类型/订单查询信息",notes = "查询信息",httpMethod = "GET")
+    @ApiOperation(value = "类型/订单查询信息",notes = "查询信息",httpMethod = "POST")
     @ApiResponses({
             @ApiResponse(code = 0,message = "ok",response = TollDrugs.class)
     })
@@ -171,6 +184,23 @@ public class TollController {
         map.put("tollDrugs",tollDrugs);
         return R.ok(map);
     }
+
+    @PutMapping("/toll/TollRefunds")
+    @ResponseBody
+    @ApiOperation(value = "退费修改",notes = "患者信息",httpMethod = "PUT")
+    @ApiResponses({
+            @ApiResponse(code = 0,message = "ok")
+    })
+    public R TollRefunds(@RequestParam String tollNumber){
+        try {
+            this.tollService.updateRefunds(tollNumber);
+        } catch (Exception e) {
+            e.printStackTrace();
+            R.ok("fale");
+        }
+        return R.ok("succes");
+    }
+
 
 //    @GetMapping("/toll/tollTime")
 //    @ApiOperation(value = "时间查询信息",notes = "时间信息",httpMethod = "GET")

@@ -10,7 +10,7 @@ public interface TollService {
     List<Toll> queryByInquire(Date firstTime, Date lastTime,TollInquire tollInquire);
     List<Toll> queryByInquires(TollInquire tollInquire);
     void delete(String tollNumber);
-
+    void updateRefunds(String tollNumber);
 
 
 

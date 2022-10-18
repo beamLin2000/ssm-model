@@ -21,14 +21,7 @@ public class TollDrugs {
     private String tollDrugsUnit;
     @ApiModelProperty(name = "tollDrugsRetail",value = "销售额度")
     private Double tollDrugsRetail;
-    @ApiModelProperty(name = "tollDrugsDiscount",value = "折扣")
-    private Double tollDrugsDiscount;
-    @ApiModelProperty(name = "tollDrugsAllMoney",value = "折扣金额")
-    private Double tollDrugsAllMoney;
     @ApiModelProperty(name = "tollNumber",value = "订单号")
     private String tollNumber;
-    @ApiModelProperty(name = "tollDrugsDispose",value = "处理费")
-    private Double tollDrugsDispose;
-    @ApiModelProperty(name = "tollDrugsInjection",value = "注射费")
-    private Double tollDrugsInjection;
+
 }
