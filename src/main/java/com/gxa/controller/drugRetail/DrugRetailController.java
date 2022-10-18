@@ -2,6 +2,7 @@ package com.gxa.controller.drugRetail;
 
 import com.gxa.entity.drugRetail.*;
 import com.gxa.service.drugRetail.DrugRetailService;
+import com.gxa.utils.OrderNo;
 import com.gxa.utils.R;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ public class DrugRetailController {
     public R add(@ApiParam(name = "drugRetail", value = "药品零售添加信息")@RequestBody DrugRetail drugRetail){
         System.out.println(drugRetail);
         R r = new R();
+        drugRetail.setTollNum(OrderNo.orderNum());
         this.drugRetailService.add(drugRetail);
         return r.ok("success");
     }

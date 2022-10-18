@@ -16,7 +16,7 @@ public class DrugRetail {
     @ApiModelProperty(name = "patientName",value = "患者姓名")
     private String patientName;
     @ApiModelProperty(name = "patientCard",value = "患者卡号")
-    private Integer patientCard;
+    private String patientCard;
     @ApiModelProperty(name = "patientAge",value = "患者年龄")
     private Integer patientAge;
     @ApiModelProperty(name = "patientBirthday",value = "出生日期")
@@ -27,14 +27,12 @@ public class DrugRetail {
     private String patientPhone;
     @ApiModelProperty(name = "patientDocuments",value = "证件号码")
     private String patientDocuments;
-    @ApiModelProperty(name = "drugCode",value = "药品编码")
-    private String drugCode;
     @ApiModelProperty(name = "drugName",value = "药品名称")
     private String drugName;
-    @ApiModelProperty(name = "specs",value = "药品规格")
-    private String specs;
+//    @ApiModelProperty(name = "specs",value = "药品规格")
+//    private String specs;
     @ApiModelProperty(name = "num",value = "数量")
-    private String num;
+    private Integer num;
     @ApiModelProperty(name = "company",value = "单位")
     private String company;
     @ApiModelProperty(name = "salesPrice",value = "单价")
@@ -45,4 +43,5 @@ public class DrugRetail {
     private String operator;
     @ApiModelProperty(name = "surChargeFee",value = "附加费用")
     private SurChargeFee surChargeFee;
+    private String tollNum;//编号
 }

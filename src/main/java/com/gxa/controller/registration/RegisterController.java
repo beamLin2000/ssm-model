@@ -37,18 +37,7 @@ public class RegisterController {
     })
     public R queryByCondition(@ApiParam(name = "registerQueryCondition",value = "挂号记录查询条件") @RequestBody RegisterQueryCondition registerQueryCondition){
         System.out.println(registerQueryCondition);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        if (registerQueryCondition.getStartTime() !=null && registerQueryCondition.getStartTime() != ""){
-            Date startDate=new Date(Long.parseLong(registerQueryCondition.getStartTime()));
-            registerQueryCondition.setStartTime(simpleDateFormat.format(startDate));
-            System.out.println("start"+simpleDateFormat.format(startDate));
-            Date endDate=new Date(Long.parseLong(registerQueryCondition.getEndTime()));
-            registerQueryCondition.setEndTime(simpleDateFormat.format(endDate));
-            System.out.println("end"+simpleDateFormat.format(endDate));
-
-        }
         List<RegisterMsg> query = this.registerService.query(registerQueryCondition);
-        Date receptionTime = query.get(0).getReceptionTime();
         Integer count = this.registerService.count(registerQueryCondition);
         Map map = new HashMap();
         map.put("allRegisterMsg",query);
