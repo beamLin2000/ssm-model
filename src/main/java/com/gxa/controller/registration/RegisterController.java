@@ -46,7 +46,6 @@ public class RegisterController {
     })
     public R queryByCondition(@ApiParam(name = "registerQueryCondition",value = "挂号记录查询条件") @RequestBody RegisterQueryCondition registerQueryCondition){
         System.out.println(registerQueryCondition);
-
         List<RegisterMsg> query = this.registerService.query(registerQueryCondition);
         Integer count = this.registerService.count(registerQueryCondition);
         Map map = new HashMap();
@@ -87,7 +86,7 @@ public class RegisterController {
         return r.ok("success");
     }
     @DeleteMapping("/register/delete")
-    @ApiOperation(value = "删除接口",notes = "删除订单",httpMethod = "DELETE")
+    @ApiOperation(value = "删除接口",notes = "退号",httpMethod = "DELETE")
     public R delete(@ApiParam(name = "registrationForm", value = "订单编号") String registrationForm){
         System.out.println(registrationForm);
         R r = new R();

@@ -5,30 +5,51 @@
 <mapper namespace="com.gxa.mapper.drugRetail.DrugRetailMapper">
 
     <resultMap id="drugMsg" type="com.gxa.entity.drugRetail.DrugMsg">
-        <id property="drugCode" column=""></id>
-        <result property="drugName" column=""></result>
-        <result property="chargeCategory" column=""></result>
-        <result property="drugSpecifications" column=""></result>
-        <result property="manuFactor" column=""></result>
-        <result property="stock" column=""></result>
-        <result property="price" column=""></result>
+        <id property="drugCode" column="code"></id>
+        <result property="drugName" column="drug_name"></result>
+        <result property="specs" column="specs"></result>
+        <result property="drugType" column="drug_type"></result>
+        <result property="manuFactor" column="manufacturer"></result>
+        <result property="stock" column="stock"></result>
+        <result property="salesPrice" column="sales_price"></result>
     </resultMap>
-    <insert id="save">
-        INSERT INTO
-        values
+    <insert id="saveDrugMsg" parameterType="com.gxa.entity.drugRetail.DrugRetail">
+        INSERT INTO toll_drugs(toll_drugs_name,toll_drugs_money,toll_drugs_quantity,toll_drugs_unit,toll_drugs_retail,
+                               person_idcard,person_name,toll_number)
+        values (#{drugName},#{salesPrice},#{num},#{company},#{totalPrice},#{patientDocuments},#{patientName},#{tollNum})
+    </insert>
+    <insert id="savePatientMsg" parameterType="com.gxa.entity.drugRetail.DrugRetail">
+        INSERT INTO patient_drugs(patient_card,patient_name,patient_age,patient_gender,patient_phone,patient_documents,patient_birthday,toll_number,operator)
+        values (#{patientCard},#{patientName},#{patientAge},#{patientGender},#{patientPhone},#{patientDocuments},#{patientBirthday},#{tollNum},#{operator})
+    </insert>
+    <insert id="saveSurchargeMsg" parameterType="com.gxa.entity.drugRetail.DrugRetail">
+        INSERT INTO surcharges(name,price,num,person_name,person_idcard,toll_number)
+        values (#{surChargeFee.surChargeName},#{surChargeFee.price},#{surChargeFee.num},#{patientName},#{patientDocuments},#{tollNum})
     </insert>
     <select id="queryByCode" parameterType="com.gxa.entity.drugRetail.DrugQueryCondition" resultMap="drugMsg">
-        select *
-        from
+        select f.code,f.drug_name,f.drug_type,f.specs,f.manufacturer,i.stock ,f.sales_price
+        from drugManagement_drugInformationTenance_drugBasicInformation f,drugManagement_inventoryManagement_inventoryInfo i
         <where>
-
+            f.id=i.drug_info_id
+        <if test="drugType !=null and drugType !='' ">
+            and f.drug_type=#{drugType}
+        </if>
+        <if test="drugCodeOrName !=null and drugCodeOrName !='' ">
+            and f.code=#{drugCodeOrName}
+        </if>
         </where>
     </select>
-    <select id="queryByName" resultType="com.gxa.entity.drugRetail.DrugMsg">
-        select *
-        from
+    <select id="queryByName" parameterType="com.gxa.entity.drugRetail.DrugQueryCondition" resultMap="drugMsg">
+        select f.code,f.drug_name,f.drug_type,f.specs,f.manufacturer,i.stock ,f.sales_price
+        from drugManagement_drugInformationTenance_drugBasicInformation f,drugManagement_inventoryManagement_inventoryInfo i
         <where>
-
+            f.id=i.drug_info_id
+            <if test="drugType !=null and drugType !='' ">
+                and f.drug_type=#{drugType}
+            </if>
+            <if test="drugCodeOrName !=null and drugCodeOrName !='' ">
+                and f.drug_name=#{drugCodeOrName}
+            </if>
         </where>
     </select>
 </mapper>
