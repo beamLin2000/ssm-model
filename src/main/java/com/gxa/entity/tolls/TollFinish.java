@@ -6,24 +6,24 @@ import lombok.Data;
 
 import java.util.Date;
 @Data
-@TableName(value = "toll_finish")
+@TableName(value = "charge")
 public class TollFinish {
-    @ApiModelProperty(name = "tollFinishId",value = "序号")
-    private Integer tollFinishId;
-    @ApiModelProperty(name = "tollNumber",value = "订单编号")
-    private String tollNumber;
-    @ApiModelProperty(name = "tollFinishReceivables",value = "应收金额")
-    private Double tollFinishReceivables;
-    @ApiModelProperty(name = "tollFinishReceived",value = "实收金额")
-    private Double tollFinishReceived;
-    @ApiModelProperty(name = "tollFinishPreferential",value = "优惠金额")
-    private Integer tollFinishPreferential;
-    @ApiModelProperty(name = "tollFinishHealth",value = "医保支付")
-    private Integer tollFinishHealth;
-    @ApiModelProperty(name = "tollFinishChange",value = "找零")
-    private Double tollFinishChange;
-    @ApiModelProperty(name = "tollFinishDate",value = "收费日期")
-    private Date tollFinishDate;
-    @ApiModelProperty(name = "tollFinishName",value = "收费员")
-    private String tollFinishName;
+    @ApiModelProperty(name = "Id",value = "序号")
+    private Integer Id;
+    @ApiModelProperty(name = "insurancePayment",value = "医保支付")
+    private Integer insurancePayment;
+    @ApiModelProperty(name = "amountPaid",value = "应收金额")
+    private Double amountPaid;
+    @ApiModelProperty(name = "payMethod",value = "收费方式")
+    private String payMethod;
+    @ApiModelProperty(name = "collectionRemarks",value = "收费员")
+    private String collectionRemarks;
+    @ApiModelProperty(name = "changeMoney",value = "找零")
+    private Double changeMoney;
+    @ApiModelProperty(name = "registrationForm",value = "订单编号")
+    private String registrationForm;
+    @ApiModelProperty(name = "registrationDateTime",value = "收费日期")
+    private Date registrationDateTime;
+
+
 }

@@ -1,8 +1,6 @@
 package com.gxa.service.impl.toll;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.gxa.entity.tolls.PatientDrugs;
-import com.gxa.entity.tolls.Toll;
 import com.gxa.entity.tolls.TollFinish;
 import com.gxa.mapper.toll.TollFinshMapper;
 import com.gxa.mapper.toll.TollMapper;
@@ -20,16 +18,17 @@ public class TollFinshServiceImpl implements TollFinshService {
     @Override
     public void addFinish(TollFinish tollFinish) {
 
-        String  tollNumber = tollFinish.getTollNumber();
+        String  tollNumber = tollFinish.getRegistrationForm();
+        String tollFinishManner = tollFinish.getPayMethod();
         this.tollFinshMapper.insert(tollFinish);
+        this.tollMapper.add(tollNumber,tollFinishManner);
         this.tollMapper.updateByState(tollNumber);
-
     }
 
     @Override
     public TollFinish queryByTollId(String tollNumber) {
         QueryWrapper<TollFinish> wrapper = new QueryWrapper<>();
-        wrapper.eq("toll_number",tollNumber);
+        wrapper.eq("registration_form",tollNumber);
         TollFinish tollFinish = this.tollFinshMapper.selectOne(wrapper);
         return tollFinish;
     }

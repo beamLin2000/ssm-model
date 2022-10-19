@@ -2,7 +2,6 @@ package com.gxa.service.impl.toll;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.gxa.entity.tolls.Toll;
-import com.gxa.entity.tolls.TollFinish;
 import com.gxa.entity.tolls.TollInquire;
 import com.gxa.mapper.toll.TollMapper;
 import com.gxa.service.toll.TollService;
@@ -46,7 +45,10 @@ public class TollServiceImpl implements TollService {
         this.tollMapper.delete(wrapper);
     }
 
-
+    @Override
+    public void updateRefunds(String tollNumber) {
+        this.tollMapper.updateRefunds(tollNumber);
+    }
 
 
 }

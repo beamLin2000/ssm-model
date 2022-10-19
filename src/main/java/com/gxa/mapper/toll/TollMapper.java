@@ -17,4 +17,7 @@ public interface TollMapper extends BaseMapper<Toll> {
     List<Toll> queryByInquires(@Param("tollType")String tollType,@Param("tollState")Integer tollState,
                                @Param("tollNameCard")String tollNameCard);
     void updateByState(@Param("tollNumber")String tollNumber);
+    void add(@Param("tollNumber")String tollNumber,@Param("tollFinishManner")String tollFinishManner);
+
+    void updateRefunds(String tollNumber);
 }

@@ -11,11 +11,7 @@
         <result property="tollDrugsQuantity" column="toll_drugs_quantity"/>
         <result property="tollDrugsUnit" column="toll_drugs_unit"/>
         <result property="tollDrugsRetail" column="toll_drugs_retail"/>
-        <result property="tollDrugsDiscount" column="toll_drugs_discount"/>
-        <result property="tollDrugsAllMoney" column="toll_drugs_all_money"/>
         <result property="tollNumber" column="toll_number"/>
-        <result property="tollDrugsDispose" column="toll_drugs_dispose"/>
-        <result property="tollDrugsInjection" column="toll_drugs_injection"/>
     </resultMap>
     <select id="queryByTollVer" resultType="com.gxa.entity.tolls.TollDrugs">
         SELECT * FROM toll_drugs

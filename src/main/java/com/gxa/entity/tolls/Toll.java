@@ -2,14 +2,10 @@ package com.gxa.entity.tolls;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.Date;
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @TableName(value = "toll")
 public class Toll {
     @ApiModelProperty(name = "tollId",value = "序号")
@@ -31,8 +27,10 @@ public class Toll {
     @ApiModelProperty(name = "tollCreatTime",value = "创建时间")
     private Date tollCreatTime;
     @ApiModelProperty(name = "tollMoney",value = "应收金额")
-    private double tollMoney;
-    @ApiModelProperty(name = "tollState",value = "收费状态")
+    private Double tollMoney;
+    @ApiModelProperty(name = "tollState",value = "收费状态(1：未收费 2：已收费 3.退费)")
     private Integer tollState;
+    @ApiModelProperty(name = "tollFinishManner",value = "收费方式")
+    private String tollFinishManner;
 
 }
