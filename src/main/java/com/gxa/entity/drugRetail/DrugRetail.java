@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @ApiModel("药品零售实体")
 @Data
@@ -27,21 +28,11 @@ public class DrugRetail {
     private String patientPhone;
     @ApiModelProperty(name = "patientDocuments",value = "证件号码")
     private String patientDocuments;
-    @ApiModelProperty(name = "drugName",value = "药品名称")
-    private String drugName;
-//    @ApiModelProperty(name = "specs",value = "药品规格")
-//    private String specs;
-    @ApiModelProperty(name = "num",value = "数量")
-    private Integer num;
-    @ApiModelProperty(name = "company",value = "单位")
-    private String company;
-    @ApiModelProperty(name = "salesPrice",value = "单价")
-    private Double salesPrice;
-    @ApiModelProperty(name = "totalPrice",value = "总价")
-    private Double totalPrice;
+    @ApiModelProperty(name = "drugMsg",value = "药品信息")
+    private List<DrugMsg> drugMsg;
     @ApiModelProperty(name = "operator",value = "操作员")
     private String operator;
     @ApiModelProperty(name = "surChargeFee",value = "附加费用")
-    private SurChargeFee surChargeFee;
+    private List<SurChargeFee> surChargeFee;
     private String tollNum;//编号
 }
