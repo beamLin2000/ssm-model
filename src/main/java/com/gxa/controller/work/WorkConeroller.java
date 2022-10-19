@@ -1,6 +1,7 @@
 package com.gxa.controller.work;
 
 
+import com.alibaba.fastjson.JSON;
 import com.gxa.dto.work.*;
 import com.gxa.entity.tolls.Toll;
 import com.gxa.entity.tolls.TollDrugs;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.swing.*;
 import java.util.*;
 
 @Controller
@@ -49,13 +51,11 @@ public class WorkConeroller {
     })
     public R workList(){
 
-        Map map = new HashMap();
-
-        List<PatientDto> patientDtos = this.patientService.queryAllPatientDto();
-
-        map.put("drugs",patientDtos);
-        R r = new R();
-        return r.ok(map);
+            Map map = new HashMap();
+            List<PatientDto> patientDtos = this.patientService.queryAllPatientDto();
+            map.put("drugs",patientDtos);
+            R r = new R();
+            return r.ok(map);
     }
     //处方患者信息
     @PostMapping("/work/patientList")
@@ -69,7 +69,7 @@ public class WorkConeroller {
         if(!workSelectDto.getStatus().equals("未就诊")){
             return R.error("fail");
         }
-       // this.workPatientDtoService.updateSt.atus(workSelectDto.getIdCard());
+        this.workPatientDtoService.updateStatus(workSelectDto.getIdCard());
         WorkPatientDto workPatientDto = this.workPatientDtoService.queryWorkPatientDtoByPhoneNum(workSelectDto.getIdCard());
         MedicalRecordDto medicalRecordDto = this.medicalRecordDtoService.queryMedicalRecordDtoByIdCard(workSelectDto.getIdCard());
         PhysicalDto physicalDto = this.physicalDtoService.queryPhysicalDtoByIdCard(workSelectDto.getIdCard());

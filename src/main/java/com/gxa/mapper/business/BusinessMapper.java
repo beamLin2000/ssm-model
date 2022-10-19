@@ -14,5 +14,5 @@ public interface BusinessMapper {
     Double queryTodayRevenue (Date date);
 
     Map<String,Object> queryTotal(@Param("date") Date date, @Param("days") Integer days);
-    List<OutpatientRecordToday> queryByToday(Date date);
+    List<OutpatientRecordToday> queryByToday(@Param("date")  Date date);
 }

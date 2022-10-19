@@ -16,6 +16,7 @@
         WHERE u.id=ur.user_id AND ur.role_id=r.id AND r.id=rm.role_id AND rm.menu_id=m.id
         AND u.user_name=#{userName}
     </select>
+
     <select id="querySaltByUserName" resultType="java.lang.String">
         SELECT salt
         FROM user

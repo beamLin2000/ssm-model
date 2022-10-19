@@ -31,7 +31,9 @@
         SELECT SUM(registration_fee)+SUM(consultation_fee)+SUM(toll_money) AS total,registration_date FROM register r,toll t WHERE r.registration_date=#{date} AND t.toll_creat_time=#{date}
     </select>
     <select id="queryByToday" resultMap="todayRecord">
-        SELECT patient_card,patient_age,patient_gender,reception_type,attending_doctor,registration_date,patient_name,status,patient_phone FROM register r,patients p WHERE r.registration_form = p.registration_form
+        SELECT patient_card,patient_age,patient_gender,reception_type,attending_doctor,registration_date,patient_name,status,patient_phone FROM register r,patients p
+        WHERE r.registration_form = p.registration_form AND r.registration_date=#{date
+        }
     </select>
 
 </mapper>
