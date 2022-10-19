@@ -1,13 +1,11 @@
 package com.gxa.controller.user;
-
-import com.gxa.dto.user.UserUpdateDto;
+import com.gxa.dto.user.UserUpdatePwdDto;
 import com.gxa.entity.login.User;
 import com.gxa.service.user.UserService;
 import com.gxa.utils.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.crypto.hash.SimpleHash;
-import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,7 +21,7 @@ public class UserController {
     @ResponseBody
     @PostMapping("/userUpdatePwd")
     @ApiOperation(value = "更改密码接口",notes = "账户密码",httpMethod = "POST")
-    public R userData(@RequestBody UserUpdateDto userUpdateDto){
+    public R userDataPwd(@RequestBody UserUpdatePwdDto userUpdateDto){
 
         String userName = userUpdateDto.getUserName();
         String oldPwd = userUpdateDto.getOldPwd();
@@ -43,5 +41,19 @@ public class UserController {
         //原密码错误
             return R.error(1,"旧密码输入错误");
         }
+
+    @ResponseBody
+    @PostMapping("/userUpdate")
+    @ApiOperation(value = "更改账户资料接口",notes = "账户资料信息",httpMethod = "POST")
+    public R userData(@RequestBody User user){
+
+        try {
+            this.userService.updateUserByUser(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+            R.ok("账户资料更新成功");
+        }
+        return R.error(1,"账户资料更新失败");
+    }
 
 }
