@@ -64,4 +64,11 @@ public class UserServiceImpl implements UserService {
         user.setPwd(pwd);
         this.userMapper.update(user,userUpdateWrapper);
     }
+
+    @Override
+    public void updateUserByUser(User user) {
+        UpdateWrapper updateWrapper = new UpdateWrapper();
+        updateWrapper.eq("user_name",user.getUserName());
+        this.userMapper.update(user,updateWrapper);
+    }
 }

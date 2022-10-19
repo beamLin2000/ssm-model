@@ -11,4 +11,5 @@ public interface UserService {
     Set<String> queryPermsByUserName(String userName);
     String querySaltByUserName(String userName);
     void updatePwd(String userName,String pwd);
+    void updateUserByUser(User user);
 }

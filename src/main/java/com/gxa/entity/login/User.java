@@ -7,13 +7,13 @@ import lombok.Data;
 @Data
 @TableName(value = "user")
 public class User {
-    @ApiModelProperty(name = "id",value = "id")
+    @ApiModelProperty(name = "id",value = "id",hidden = true)
     private int id;
     @ApiModelProperty(name = "userName",value = "用户名,工号")
     private String userName;
     @ApiModelProperty(name = "pwd",value = "密码")
     private String pwd;
-    @ApiModelProperty(name = "salt",value = "盐值")
+    @ApiModelProperty(name = "salt",value = "盐值",hidden = true)
     private String salt;
     @ApiModelProperty(name = "name",value = "用户姓名")
     private String name;
@@ -31,8 +31,8 @@ public class User {
     private String position;
     @ApiModelProperty(name = "address",value = "地址")
     private String address;
-    @ApiModelProperty(name = "status",value = "状态")
+    @ApiModelProperty(name = "status",value = "状态",hidden = true)
     private String status;
-    @ApiModelProperty(name = "imgUrl",value = "头像地址")
+    @ApiModelProperty(name = "imgUrl",value = "头像地址",hidden = true)
     private String imgUrl;
 }
