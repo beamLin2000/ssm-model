@@ -93,8 +93,9 @@ public class TollController {
     @ApiResponses({
             @ApiResponse(code = 0,message = "ok",response = TollDrugs.class)
     })
-    public R tollDrugs(@ApiParam(name = "查询条件", value = "tollNumber")@RequestBody String tollNumber){
-
+    public R tollDrugs(@ApiParam(name = "查询条件", value = "tollNumber")@RequestBody TollNumbers tollNumbers){
+        String tollNumber= tollNumbers.getTollNumber();
+//        System.out.println(tollNumber);
         List<TollDrugs> tollDrugs = this.tollDrugsService.queryByTollId(tollNumber);
         PatientDrugs patientDrugs = this.patientDrugsService.queryByTollId(tollNumber);
         TollPatient tollPatient = this.tollPatientService.queryByTollId(tollNumber);
@@ -117,7 +118,8 @@ public class TollController {
             @ApiResponse(code = 0,message = "ok",response = PatientDrugs.class),
             @ApiResponse(code = 0,message = "ok",response = TollFinish.class)
     })
-    public R tollPatient(@RequestBody String tollNumber){
+    public R tollPatient(@RequestBody TollNumbers tollNumbers){
+        String tollNumber= tollNumbers.getTollNumber();
         List<TollDrugs> tollDrugs = this.tollDrugsService.queryByTollId(tollNumber);
         PatientDrugs patientDrugs = this.patientDrugsService.queryByTollId(tollNumber);
         TollPatient tollPatient = this.tollPatientService.queryByTollId(tollNumber);
@@ -167,7 +169,8 @@ public class TollController {
     @ApiResponses({
             @ApiResponse(code = 0,message = "ok")
     })
-    public R tollRefunds(@RequestParam String tollNumber){
+    public R tollRefunds(@RequestParam TollNumbers tollNumbers){
+        String tollNumber= tollNumbers.getTollNumber();
         try {
             this.tollService.updateRefunds(tollNumber);
         } catch (Exception e) {
