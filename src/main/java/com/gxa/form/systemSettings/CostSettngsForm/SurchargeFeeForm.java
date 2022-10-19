@@ -28,8 +28,8 @@ public class SurchargeFeeForm {
     private String foundPerson;
     @ApiModelProperty(value = "costState",name = "费用状态",required = false)
     private String costState;
-    @ApiModelProperty(value = "prescriptionTable",name = "处方外键",required = false)
-    private Integer perscrip_id;
+    @ApiModelProperty(value = "perscripId",name = "处方外键",required = false)
+    private Integer perscripId;
     @ApiModelProperty(value = "prescriptionTable",name = "处方对象",required = false)
     private PrescriptionTable prescriptionTable;
 

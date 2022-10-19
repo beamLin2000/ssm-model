@@ -2,6 +2,7 @@ package com.gxa.controller.systemSettings;
 
 import com.gxa.entity.systemSettings.*;
 import com.gxa.form.systemSettings.CPSEdit;
+import com.gxa.form.systemSettings.CostSettngsForm.PaymentMethodForm;
 import com.gxa.form.systemSettings.CostSettngsForm.RegisterFeeForm;
 import com.gxa.form.systemSettings.CostSettngsForm.SurchargeFeeForm;
 import com.gxa.form.systemSettings.CostSettngsForm.TreatmentFeeForm;
@@ -444,7 +445,7 @@ public class SystemSettingsController {
     public YResult addCost(@RequestBody SurchargeFeeForm surchargeForm){
         Date timeing = new Date();
         timeing.setTime(timeing.getTime());
-        SurchargeFee surchargeFee = new SurchargeFee(surchargeForm.getId(),surchargeForm.getSurchargeName(),surchargeForm.getPrice(),surchargeForm.getCost(),timeing,surchargeForm.getFoundPerson(),surchargeForm.getCostState(),surchargeForm.getPerscrip_id(),surchargeForm.getPrescriptionTable());
+        SurchargeFee surchargeFee = new SurchargeFee(surchargeForm.getId(),surchargeForm.getSurchargeName(),surchargeForm.getPrice(),surchargeForm.getCost(),timeing,surchargeForm.getFoundPerson(),surchargeForm.getCostState(),surchargeForm.getPerscripId(),surchargeForm.getPrescriptionTable());
         this.surchargeFeeiService.addSurchargeFee(surchargeFee);
         YResult YResult = new YResult(0,"添加成功",surchargeFee);
         System.out.println("附加费用添加"+surchargeForm);
@@ -457,7 +458,7 @@ public class SystemSettingsController {
     public YResult editCost(@RequestBody SurchargeFeeForm surchargeForm){
         Date timeing = new Date();
         timeing.setTime(timeing.getTime());
-        SurchargeFee surchargeFee = new SurchargeFee(surchargeForm.getId(),surchargeForm.getSurchargeName(),surchargeForm.getPrice(),surchargeForm.getCost(),timeing,surchargeForm.getFoundPerson(),surchargeForm.getCostState(),surchargeForm.getPerscrip_id(),surchargeForm.getPrescriptionTable());
+        SurchargeFee surchargeFee = new SurchargeFee(surchargeForm.getId(),surchargeForm.getSurchargeName(),surchargeForm.getPrice(),surchargeForm.getCost(),timeing,surchargeForm.getFoundPerson(),surchargeForm.getCostState(),surchargeForm.getPerscripId(),surchargeForm.getPrescriptionTable());
         this.surchargeFeeiService.updateSurchargeFee(surchargeFee);
         YResult YResult = new YResult(0,"修改成功",surchargeFee);
         System.out.println("附加费用修改"+surchargeForm);
@@ -614,6 +615,90 @@ public class SystemSettingsController {
         return YResult;
     }
 
+
+    //支付方式
+    //------------------------------------------------------------------------------------------------------------
+    @Autowired
+    private PaymentMethodService paymentMethodService;
+    @GetMapping("/paymentMethod/tianjia")
+    @ApiOperation(value = "支付方式设置",notes = "查询接口",httpMethod = "Get")
+    public YResult selectPaymentMethodAll(){
+        List<PaymentMethod> paymentMethods = this.paymentMethodService.queryAll();
+        YResult YResult = new YResult(0,"查询成功",paymentMethods);
+
+
+        return YResult;
+    }
+
+
+    @PutMapping("/paymentMethod/xiugai")
+    @ApiOperation(value = "支付方式设置",notes = "修改接口",httpMethod = "Put")
+    public YResult updatePaymentMethod(@RequestBody PaymentMethodForm paymentMethodForm){
+        PaymentMethod paymentMethod = new PaymentMethod(paymentMethodForm.getId(),paymentMethodForm.getPaymentMethod(),paymentMethodForm.getState());
+        this.paymentMethodService.updateById(paymentMethod);
+        YResult YResult = new YResult(0,"修改成功",paymentMethod);
+
+
+        return YResult;
+    }
+
+
+
+
+    @Autowired
+    private ClinicInformationPlusService clinicInformationPlusService;
+    @GetMapping("/Test/select01")
+    @ApiOperation(value = "测试",notes = "查询",httpMethod = "Get")
+    public YResult PlusSelect01(){
+        List<ClinicInformation> list = this.clinicInformationPlusService.queryAll();
+        System.out.println("registerFees"+list);
+        YResult YResult = new YResult(0,"查询成功",list);
+
+        return YResult;
+    }
+
+
+
+    @GetMapping("/Test/select02")
+    @ApiOperation(value = "测试",notes = "查询",httpMethod = "Get")
+    public YResult PlusSelect02(@RequestParam("id") Integer id){
+        ClinicInformation clinicInformation = this.clinicInformationPlusService.queryById(id);
+        System.out.println("clinicInformation"+clinicInformation);
+        YResult YResult = new YResult(0,"查询成功",clinicInformation);
+
+        return YResult;
+    }
+
+    @GetMapping("/Test/select03")
+    @ApiOperation(value = "测试",notes = "查询",httpMethod = "Get")
+    public YResult PlusSelect03(@RequestParam("clinicName") String clinicName){
+        List<ClinicInformation> list = this.clinicInformationPlusService.queryByClinicName(clinicName);
+        System.out.println("前端传的clinicName"+clinicName);
+        YResult YResult = new YResult(0,"查询成功",list);
+
+        return YResult;
+    }
+
+    @PutMapping("/Test/update")
+    @ApiOperation(value = "测试",notes = "修改",httpMethod = "Put")
+    public YResult PlusUpdate(@RequestBody ClinicInformation clinicInformation){
+        this.clinicInformationPlusService.updateById(clinicInformation);
+        System.out.println("传过来的修改的clinicInformation"+clinicInformation);
+        YResult YResult = new YResult(0,"修改成功");
+
+        return YResult;
+    }
+
+
+    @DeleteMapping("/Test/delete")
+    @ApiOperation(value = "测试",notes = "删除",httpMethod = "Delete")
+    public YResult PlusDelete(@RequestParam("id") Integer id){
+        this.clinicInformationPlusService.deleteById(id);
+        System.out.println("传过来的id"+id);
+        YResult YResult = new YResult(0,"删除成功");
+
+        return YResult;
+    }
 
 
 }
