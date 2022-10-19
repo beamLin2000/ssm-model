@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxa.mapper.work.ElectMedicalRecordDtoMapper">
+    <resultMap id="physicalDto" type="com.gxa.dto.work.PhysicalDto">
+        <result property="temperature" column="temperature"></result>
+        <result property="breathe" column="breathe"></result>
+        <result property="pulse" column="pulse"></result>
+        <result property="blood" column="blood"></result>
+        <result property="height" column="height"></result>
+        <result property="weight" column="weight"></result>
+        <result property="bloodSugar" column="bloodSugar"></result>
+        <result property="bloodFat" column="bloodFat"></result>
+    </resultMap>
+
+    <resultMap id="medicalRecordDto" type="com.gxa.dto.work.MedicalRecordDto">
+        <result property="sickTime" column="sickTime"></result>
+        <result property="suit" column="suit"></result>
+        <result property="present" column="present"></result>
+        <result property="previous" column="previous"></result>
+        <result property="allergy" column="allergy"></result>
+        <result property="personalized" column="personalized"></result>
+        <result property="familyHistory" column="familyHistory"></result>
+        <result property="auxiliary" column="auxiliary"></result>
+        <result property="treatment" column="treatment"></result>
+        <result property="notes" column="notes"></result>
+    </resultMap>
+
+
+    <resultMap id="eMRDto" type="com.gxa.dto.work.ElectMedicalRecordDto">
+        <result property="creatTime" column="create_time"></result>
+        <result property="attendingDoctor" column="attending_doctor"></result>
+        <result property="doctorOrder" column="doctor_advice"></result>
+        <association property="physicalDto" javaType="com.gxa.dto.work.PhysicalDto" resultMap="physicalDto"></association>
+        <association property="medicalRecordDto" javaType="com.gxa.dto.work.MedicalRecordDto" resultMap="medicalRecordDto"></association>
+        <collection property="prescriptionInfos" ofType="com.gxa.entity.work.PrescriptionInfo">
+            <result property="type" column="type"></result>
+            <result property="name" column="name"></result>
+            <result property="singleDose" column="singleDose"></result>
+            <result property="usage" column="usage"></result>
+            <result property="frequency" column="frequency"></result>
+            <result property="days" column="days"></result>
+        </collection>
+    </resultMap>
+    <select id="queryAllMedicalRecord" resultMap="eMRDto">
+        SELECT *
+        FROM patients p,register r,medical_record_physique m,drug_use_information d
+        WHERE r.registration_form=p.registration_form AND p.patient_documents=m.id_card
+        AND p.patient_documents=d.person_idcard AND p.patient_documents=#{idCard}
+    </select>
+</mapper>

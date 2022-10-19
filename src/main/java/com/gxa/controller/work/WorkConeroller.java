@@ -41,12 +41,15 @@ public class WorkConeroller {
     @Autowired
     private ConditionSelectService conditionSelectService;
 
+    @Autowired
+    private ElectMedicalRecordDtoService electMedicalRecordDtoService;
+
     //工作台list
     @GetMapping("/work/list")
     @ResponseBody
     @ApiOperation(value = "工作台的数据接口",notes = "工作台list")
     @ApiResponses({
-            @ApiResponse(code = 0,message = "ok",response = Patient1.class)
+            @ApiResponse(code = 0,message = "ok",response = PatientDto.class)
     })
     public R workList(){
 
@@ -63,14 +66,14 @@ public class WorkConeroller {
     @ResponseBody
     @ApiOperation(value = "点击接诊后的显示该病人所有数据的接口",notes = "就诊人信息")
     @ApiResponses({
-            @ApiResponse(code = 0,message = "ok",response = WorkPatient.class)
+            @ApiResponse(code = 0,message = "ok",response = WorkPatientDto.class)
     })
     public R patientList(@RequestBody WorkSelectDto workSelectDto){
 
         if(!workSelectDto.getStatus().equals("未就诊")){
             return R.error("fail");
         }
-        this.workPatientDtoService.updateStatus(workSelectDto.getIdCard());
+      this.workPatientDtoService.updateStatus(workSelectDto.getIdCard());
         WorkPatientDto workPatientDto = this.workPatientDtoService.queryWorkPatientDtoByPhoneNum(workSelectDto.getIdCard());
         MedicalRecordDto medicalRecordDto = this.medicalRecordDtoService.queryMedicalRecordDtoByIdCard(workSelectDto.getIdCard());
         PhysicalDto physicalDto = this.physicalDtoService.queryPhysicalDtoByIdCard(workSelectDto.getIdCard());
@@ -87,7 +90,7 @@ public class WorkConeroller {
     @ResponseBody
     @ApiOperation(value = "工作台的数据接口",notes = "西，成处方,中药处方")
     @ApiResponses({
-            @ApiResponse(code = 0,message = "ok",response = Drug.class)
+            @ApiResponse(code = 0,message = "ok",response = DrugDto.class)
     })
     public R durgList(@RequestBody WorkSelectDto workSelectDto){
 
@@ -103,7 +106,7 @@ public class WorkConeroller {
     @ResponseBody
     @ApiOperation(value = "工作台的搜索条件查询数据接口",notes = "搜索条件")
     @ApiResponses({
-            @ApiResponse(code = 0,message = "ok",response = Drug.class)
+            @ApiResponse(code = 0,message = "ok",response = PatientDto.class)
     })
     public R workListByCondition(@RequestBody ConditionSelectDto conditionSelectDto){
         String startTime = null;
@@ -141,6 +144,22 @@ public class WorkConeroller {
         R r = new R();
         return r.ok(map);
     }
+
+    @PostMapping("/work/medicalRecordList")
+    @ResponseBody
+    @ApiOperation(value = "电子病历病历的数据接口",notes = "电子病历左边病历")
+    @ApiResponses({
+            @ApiResponse(code = 0,message = "ok",response = Drug.class)
+    })
+    public R medicalRecordList(@RequestBody WorkSelectDto workSelectDto){
+
+        List<ElectMedicalRecordDto> electMedicalRecordDtos = this.electMedicalRecordDtoService.queryAllMedicalRecord(workSelectDto.getIdCard());
+        Map map = new HashMap();
+        map.put("electMedicalRecordDtos",electMedicalRecordDtos);
+        R r = new R();
+        return r.ok(map);
+    }
+
 
 
     //保存患者信息

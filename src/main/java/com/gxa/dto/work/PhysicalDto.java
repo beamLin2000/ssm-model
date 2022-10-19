@@ -11,22 +11,22 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @ApiModel("返回的体格对象")
 public class PhysicalDto {
-    @ApiModelProperty("id")
+    @ApiModelProperty(value = "id",hidden = true)
     private Integer id;
-    @ApiModelProperty("体温")
+    @ApiModelProperty(name ="temperature" ,value = "体温")
     private String temperature;
-    @ApiModelProperty("呼吸")
+    @ApiModelProperty(name ="breathe" ,value ="呼吸")
     private String breathe;
-    @ApiModelProperty("脉搏")
+    @ApiModelProperty(name ="pulse" ,value ="脉搏")
     private String pulse;
-    @ApiModelProperty("血压")
+    @ApiModelProperty(name ="blood" ,value ="血压")
     private String blood;
-    @ApiModelProperty("身高")
+    @ApiModelProperty(name ="height" ,value ="身高")
     private String height;
-    @ApiModelProperty("体重")
+    @ApiModelProperty(name ="weight" ,value ="体重")
     private String weight;
-    @ApiModelProperty("血糖")
+    @ApiModelProperty(name ="bloodSugar" ,value ="血糖")
     private String bloodSugar;
-    @ApiModelProperty("血脂")
+    @ApiModelProperty(name ="bloodFat" ,value ="血脂")
     private String bloodFat;
 }

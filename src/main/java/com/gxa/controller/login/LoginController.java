@@ -1,5 +1,8 @@
 package com.gxa.controller.login;
 
+import com.alibaba.fastjson.JSON;
+import com.gxa.dto.user.Data;
+import com.gxa.dto.user.Menu;
 import com.gxa.entity.login.User;
 import com.gxa.service.impl.user.UserServiceImpl;
 import com.gxa.utils.DBMenu;
@@ -16,7 +19,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -41,7 +47,10 @@ public class LoginController {
             String userName = user.getUserName();
             Map map = new HashMap();
             String menu = this.userService.queryMenuByUserName(userName);
-            map.put("menu",menu);
+            List<Menu> menus = JSON.parseArray(menu,Menu.class);
+            System.out.println(menus);
+
+            map.put("menu",menus);
             User user1 = this.userService.queryByUserName(userName);
             map.put("user",user1);
             return R.ok(map);
@@ -53,4 +62,5 @@ public class LoginController {
 
         return R.ok("fail");
     }
+
 }

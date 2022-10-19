@@ -13,27 +13,27 @@ import java.util.Date;
 @NoArgsConstructor
 @ApiModel("返回的病历信息对象")
 public class MedicalRecordDto {
-    @ApiModelProperty("病历id")
+    @ApiModelProperty(name ="id" ,value = "病历id",hidden = true)
     private Integer id;
-    @ApiModelProperty("发病时间")
+    @ApiModelProperty(name ="sickTime" ,value = "发病时间")
     private Date sickTime;
-    @ApiModelProperty("主述")
+    @ApiModelProperty(name ="suit" ,value = "主述")
     private String suit;
-    @ApiModelProperty("现病史")
+    @ApiModelProperty(name ="present" ,value = "现病史")
     private String present;
-    @ApiModelProperty("既往史")
+    @ApiModelProperty(name ="previous" ,value = "既往史")
     private String previous;
-    @ApiModelProperty("过敏史")
+    @ApiModelProperty(name ="allergy" ,value = "过敏史")
     private String allergy;
-    @ApiModelProperty("个人史")
+    @ApiModelProperty(name ="personalized" ,value = "个人史")
     private String personalized;
-    @ApiModelProperty("家族史")
+    @ApiModelProperty(name ="familyHistory" ,value = "家族史")
     private String familyHistory;
-    @ApiModelProperty("辅助检查")
+    @ApiModelProperty(name ="auxiliary" ,value = "辅助检查")
     private String auxiliary;
-    @ApiModelProperty("治疗意见")
+    @ApiModelProperty(name ="treatment" ,value = "治疗意见")
     private String treatment;
-    @ApiModelProperty("备注")
+    @ApiModelProperty(name ="notes" ,value = "备注")
     private String notes;
 
 }
