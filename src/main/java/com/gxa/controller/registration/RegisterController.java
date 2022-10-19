@@ -1,5 +1,6 @@
 package com.gxa.controller.registration;
 
+import com.gxa.entity.dto.rgister.ToUpdate;
 import com.gxa.entity.registration.*;
 import com.gxa.service.register.RegisterService;
 import com.gxa.utils.R;
@@ -50,10 +51,10 @@ public class RegisterController {
     @ApiResponses({
             @ApiResponse(code = 0,message = "ok",response = RegisterMsgUpdate.class)
     })
-    public R toUpdate(@ApiParam(name = "registrationForm",value = "挂号单号")String registrationForm){
-        System.out.println(registrationForm);
+    public R toUpdate(@ApiParam(name = "registrationForm",value = "挂号单号") ToUpdate toUpdate){
+        System.out.println(toUpdate.getRegistrationForm());
         R r = new R();
-        RegisterMsgUpdate register = this.registerService.toUpdate(registrationForm);
+        RegisterMsgUpdate register = this.registerService.toUpdate(toUpdate.getRegistrationForm());
         System.out.println(register);
         List<RegisterMsgUpdate> list = new ArrayList<>();
         list.add(register);
@@ -71,10 +72,10 @@ public class RegisterController {
     }
     @DeleteMapping("/register/delete")
     @ApiOperation(value = "删除接口",notes = "退号",httpMethod = "DELETE")
-    public R delete(@ApiParam(name = "registrationForm", value = "订单编号") String registrationForm){
-        System.out.println(registrationForm);
+    public R delete(@ApiParam(name = "registrationForm", value = "订单编号") ToUpdate toUpdate){
+        System.out.println(toUpdate.getRegistrationForm());
         R r = new R();
-        this.registerService.delete(registrationForm);
+        this.registerService.delete(toUpdate.getRegistrationForm());
         return r.ok("success");
     }
     @GetMapping("/register/generateNo")

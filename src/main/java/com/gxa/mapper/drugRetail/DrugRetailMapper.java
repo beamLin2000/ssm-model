@@ -1,16 +1,15 @@
 package com.gxa.mapper.drugRetail;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.gxa.entity.drugRetail.DrugMsg;
-import com.gxa.entity.drugRetail.DrugQueryCondition;
-import com.gxa.entity.drugRetail.DrugRetail;
+import com.gxa.entity.drugRetail.*;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 public interface DrugRetailMapper{
-    void saveDrugMsg(DrugRetail drugRetail);
+    void saveDrugMsg(@Param("drugRetail") DrugRetail drugRetail,@Param("drugMsg")DrugMsg drugMsgs);
     void savePatientMsg(DrugRetail drugRetail);
-    void saveSurchargeMsg(DrugRetail drugRetail);
-    List<DrugMsg> queryByCode(DrugQueryCondition drugQueryCondition);
-    List<DrugMsg> queryByName(DrugQueryCondition drugQueryCondition);
+    void saveSurchargeMsg(@Param("drugRetail") DrugRetail drugRetail,@Param("surChargeFee")SurChargeFee surChargeFees);
+    void updateStock(DrugMsg drugMsgs);
+    List<DrugChooseMsg> queryByCode(DrugQueryCondition drugQueryCondition);
+    List<DrugChooseMsg> queryByName(DrugQueryCondition drugQueryCondition);
 }

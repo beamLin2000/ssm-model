@@ -1,8 +1,6 @@
 package com.gxa.service.impl.DrugRetail;
 
-import com.gxa.entity.drugRetail.DrugMsg;
-import com.gxa.entity.drugRetail.DrugQueryCondition;
-import com.gxa.entity.drugRetail.DrugRetail;
+import com.gxa.entity.drugRetail.*;
 import com.gxa.mapper.drugRetail.DrugRetailMapper;
 import com.gxa.service.drugRetail.DrugRetailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,17 +17,25 @@ public class DrugRetailServiceImpl implements DrugRetailService {
     @Override
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void add(DrugRetail drugRetail) {
-      this.drugRetailMapper.saveDrugMsg(drugRetail);
+            List<DrugMsg> drugMsgs = drugRetail.getDrugMsg();
+            for (int i = 0; i < drugMsgs.size(); i++) {
+                this.drugRetailMapper.saveDrugMsg(drugRetail,drugMsgs.get(i));
+                this.drugRetailMapper.updateStock(drugMsgs.get(i));
+            }
         this.drugRetailMapper.savePatientMsg(drugRetail);
-        this.drugRetailMapper.saveSurchargeMsg(drugRetail);
+        if (drugRetail.getSurChargeFee().size() > 0){
+            List<SurChargeFee> surChargeFees = drugRetail.getSurChargeFee();
+            for (int i = 0; i < drugRetail.getSurChargeFee().size(); i++) {
+                this.drugRetailMapper.saveSurchargeMsg(drugRetail,surChargeFees.get(i));
+            }
+        }
     }
     @Override
-    public List<DrugMsg> queryByCode(DrugQueryCondition drugQueryCondition) {
+    public List<DrugChooseMsg> queryByCode(DrugQueryCondition drugQueryCondition) {
         return this.drugRetailMapper.queryByCode(drugQueryCondition);
     }
-
     @Override
-    public List<DrugMsg> queryByName(DrugQueryCondition drugQueryCondition) {
+    public List<DrugChooseMsg> queryByName(DrugQueryCondition drugQueryCondition) {
         return this.drugRetailMapper.queryByName(drugQueryCondition);
     }
 }

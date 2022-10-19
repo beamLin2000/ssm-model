@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gxa.mapper.drugRetail.DrugRetailMapper">
 
-    <resultMap id="drugMsg" type="com.gxa.entity.drugRetail.DrugMsg">
+    <resultMap id="drugChooseMsg" type="com.gxa.entity.drugRetail.DrugChooseMsg">
         <id property="drugCode" column="code"></id>
         <result property="drugName" column="drug_name"></result>
         <result property="specs" column="specs"></result>
@@ -13,20 +13,27 @@
         <result property="stock" column="stock"></result>
         <result property="salesPrice" column="sales_price"></result>
     </resultMap>
-    <insert id="saveDrugMsg" parameterType="com.gxa.entity.drugRetail.DrugRetail">
+    <insert id="saveDrugMsg">
         INSERT INTO toll_drugs(toll_drugs_name,toll_drugs_money,toll_drugs_quantity,toll_drugs_unit,toll_drugs_retail,
                                person_idcard,person_name,toll_number)
-        values (#{drugName},#{salesPrice},#{num},#{company},#{totalPrice},#{patientDocuments},#{patientName},#{tollNum})
+        values (#{drugMsg.drugName},#{drugMsg.salesPrice},#{drugMsg.num},#{drugMsg.company},#{drugMsg.totalPrice},#{drugRetail.patientDocuments},#{drugRetail.patientName},#{drugRetail.tollNum})
     </insert>
     <insert id="savePatientMsg" parameterType="com.gxa.entity.drugRetail.DrugRetail">
         INSERT INTO patient_drugs(patient_card,patient_name,patient_age,patient_gender,patient_phone,patient_documents,patient_birthday,toll_number,operator)
         values (#{patientCard},#{patientName},#{patientAge},#{patientGender},#{patientPhone},#{patientDocuments},#{patientBirthday},#{tollNum},#{operator})
     </insert>
-    <insert id="saveSurchargeMsg" parameterType="com.gxa.entity.drugRetail.DrugRetail">
+    <insert id="saveSurchargeMsg">
         INSERT INTO surcharges(name,price,num,person_name,person_idcard,toll_number)
-        values (#{surChargeFee.surChargeName},#{surChargeFee.price},#{surChargeFee.num},#{patientName},#{patientDocuments},#{tollNum})
+        values (#{surChargeFee.surChargeName},#{surChargeFee.price},#{surChargeFee.num},#{drugRetail.patientName},#{drugRetail.patientDocuments},#{drugRetail.tollNum})
     </insert>
-    <select id="queryByCode" parameterType="com.gxa.entity.drugRetail.DrugQueryCondition" resultMap="drugMsg">
+    <update id="updateStock" parameterType="com.gxa.entity.drugRetail.DrugMsg">
+        UPDATE drugManagement_inventoryManagement_inventoryInfo
+        SET stock=stock-#{num}
+        WHERE drug_info_id=(SELECT d.id
+                            FROM drugManagement_drugInformationTenance_drugBasicInformation d
+                            WHERE d.drug_name=#{drugName})
+    </update>
+    <select id="queryByCode" parameterType="com.gxa.entity.drugRetail.DrugQueryCondition" resultMap="drugChooseMsg">
         select f.code,f.drug_name,f.drug_type,f.specs,f.manufacturer,i.stock ,f.sales_price
         from drugManagement_drugInformationTenance_drugBasicInformation f,drugManagement_inventoryManagement_inventoryInfo i
         <where>
@@ -39,7 +46,7 @@
         </if>
         </where>
     </select>
-    <select id="queryByName" parameterType="com.gxa.entity.drugRetail.DrugQueryCondition" resultMap="drugMsg">
+    <select id="queryByName" parameterType="com.gxa.entity.drugRetail.DrugQueryCondition" resultMap="drugChooseMsg">
         select f.code,f.drug_name,f.drug_type,f.specs,f.manufacturer,i.stock ,f.sales_price
         from drugManagement_drugInformationTenance_drugBasicInformation f,drugManagement_inventoryManagement_inventoryInfo i
         <where>
