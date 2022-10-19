@@ -2,6 +2,7 @@ package com.gxa.controller.patients;
 
 import com.gxa.entity.patients.Family;
 import com.gxa.entity.patients.Patients;
+import com.gxa.entity.patients.PatientsDatePhone;
 import com.gxa.service.patient.FamilyService;
 import com.gxa.service.patient.PatientService;
 import com.gxa.utils.R;
@@ -36,12 +37,16 @@ public class PatientController {
     }
 
 
-    @GetMapping("/patient/datetime")
-    @ApiOperation(value = "查找日期",notes = "用开始日期和结束日期查找",httpMethod = "GET")
+    @PostMapping("/patient/datetime")
+    @ApiOperation(value = "查找日期",notes = "用开始日期和结束日期查找",httpMethod = "POST")
+    @ResponseBody
     @ApiResponses({
             @ApiResponse(code = 0,message = "ok",response = Patients.class)
     })
-    public R patientDateTimeList(@ApiParam(name = "开始时间", value = "firstDateTime") @RequestParam String patientsDateTim,String patientPhone){
+    public R patientDateTimeList(@RequestBody PatientsDatePhone patientsDatePhone){
+        String patientsDateTim = patientsDatePhone.getPatientsDateTim();
+        String patientPhone = patientsDatePhone.getPatientPhone();
+        System.out.println(patientsDateTim);
         if (patientsDateTim != null && !"".equals(patientsDateTim) && patientPhone != null && !"".equals(patientPhone)){
             String firstDateTime =null;
             String lastDateTime = null;
@@ -61,7 +66,7 @@ public class PatientController {
                 e.printStackTrace();
                 return R.ok("fale");
             }
-        }else if (patientsDateTim != null && !"null".equals(patientsDateTim) ){
+        }else if (patientsDateTim != null && !"".equals(patientsDateTim) ){
             String firstDateTime =null;
             String lastDateTime = null;
             String[] dateTime = patientsDateTim.split(",");
@@ -80,7 +85,7 @@ public class PatientController {
                 e.printStackTrace();
                 return R.ok("fale");
             }
-        }else if ( patientPhone != null && !"null".equals(patientPhone)){
+        }else if ( patientPhone != null && !"".equals(patientPhone)){
             List<Patients> patients = this.patientService.queryByPhone(patientPhone);
             Map map = new HashMap();
             map.put("patients",patients);

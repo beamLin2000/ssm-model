@@ -46,12 +46,12 @@
     <select id="queryByDateTime" resultType="com.gxa.entity.patients.Patients">
         SELECT patient_id,patient_card,patient_name,patient_gender,patient_age,patient_phone,patient_creat_time,operators
         FROM patients
-        WHERE patient_creat_time &gt;= #{firstTime} and patient_creat_time &lt;= #{lastTime}
+        WHERE patient_creat_time BETWEEN #{firstTime} and #{lastTime}
     </select>
     <select id="queryByDateTimePhone" resultType="com.gxa.entity.patients.Patients">
         SELECT patient_id,patient_card,patient_name,patient_gender,patient_age,patient_phone,patient_creat_time,operators
         FROM patients
-        WHERE patient_creat_time &gt;= #{firstTime} and patient_creat_time &lt;= #{lastTime} and (patient_name=#{patientPhone} OR patient_phone=#{patientPhone})
+        WHERE patient_creat_time BETWEEN #{firstTime} and #{lastTime} and (patient_name=#{patientPhone} OR patient_phone=#{patientPhone})
     </select>
 
 
