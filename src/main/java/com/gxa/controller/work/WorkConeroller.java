@@ -79,7 +79,7 @@ public class WorkConeroller {
         if(!workSelectDto.getStatus().equals("未就诊")){
             return R.error("fail");
         }
-      this.workPatientDtoService.updateStatus(workSelectDto.getIdCard());
+        this.workPatientDtoService.updateStatus(workSelectDto.getIdCard());
         WorkPatientDto workPatientDto = this.workPatientDtoService.queryWorkPatientDtoByPhoneNum(workSelectDto.getIdCard());
         MedicalRecordDto medicalRecordDto = this.medicalRecordDtoService.queryMedicalRecordDtoByIdCard(workSelectDto.getIdCard());
         PhysicalDto physicalDto = this.physicalDtoService.queryPhysicalDtoByIdCard(workSelectDto.getIdCard());
@@ -90,6 +90,14 @@ public class WorkConeroller {
         map.put("physical",physicalDto);
         R r = new R();
         return r.ok(map);
+    }
+    @PostMapping("/work/return")
+    @ResponseBody
+    @ApiOperation(value = "点击接诊后的点击返回",notes = "传入身份证号")
+    public R patientList0(@RequestBody WorkSelectDto workSelectDto){
+        this.workPatientDtoService.updateStatusIfReturn(workSelectDto.getIdCard());
+        R r = new R();
+        return r.ok();
     }
     //处方list  传一个string
     @PostMapping("/work/durglist")
@@ -225,7 +233,7 @@ public class WorkConeroller {
         this.workPatientDtoService.addprescriptionsInfo(prescriptions,relation);
 
         Toll toll = new Toll(1,orderNum ,"处方开立",patient.getName(),patient.getGender(),
-                patient.getAge(),patient.getPhone(),prescriptions.getDoctorName(),relation.getCreateTime(),prescriptions.getTotalMoney(),0);
+                patient.getAge(),patient.getPhone(),prescriptions.getDoctorName(),relation.getCreateTime(),prescriptions.getTotalMoney(),0,"");
         this.workPatientDtoService.addToll(toll,relation);
         List<TollDrugs> tollDrugsList = new ArrayList<>();
         for (ItemCharge itemCharge :

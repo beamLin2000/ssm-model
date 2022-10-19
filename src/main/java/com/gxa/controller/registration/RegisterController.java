@@ -2,6 +2,8 @@ package com.gxa.controller.registration;
 
 import com.gxa.entity.dto.rgister.ToUpdate;
 import com.gxa.entity.registration.*;
+import com.gxa.entity.systemSettings.EMEmployeeTable;
+import com.gxa.mapper.systemSettings.EmployeeManagementMapper;
 import com.gxa.service.register.RegisterService;
 import com.gxa.utils.R;
 import io.swagger.annotations.*;
@@ -16,6 +18,8 @@ import java.util.*;
 public class RegisterController {
     @Autowired
     private RegisterService registerService;
+    @Autowired
+    private EmployeeManagementMapper employeeManagementMapper;
 
     @PostMapping("/register/add")
     @ApiOperation(value = "添加接口",notes = "挂号添加",httpMethod = "POST")
@@ -85,16 +89,27 @@ public class RegisterController {
     })
     public R generateNo() {
         R r = new R();
+        Map map = new HashMap();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
         Date date = new Date();
         String str =simpleDateFormat.format(date);
         Random random = new Random();
         int ranNum = (int) (random.nextDouble() * (9999 - 1000 + 1)) + 1000;
         String generateNo = str + ranNum;
-        List<String> list = new ArrayList<>();
-        list.add(generateNo);
-        Map map = new HashMap();
-        map.put("generateNo", list);
+        List<String> no = new ArrayList<>();
+        no.add(generateNo);
+        List<EMEmployeeTable> emEmployeeTables = employeeManagementMapper.selectAll();
+        List<String> doctorNames = new ArrayList<>();
+        for (int i = 0; i < emEmployeeTables.size(); i++) {
+            for (int j = 0; j < emEmployeeTables.get(j).getRole().size(); j++) {
+                if (emEmployeeTables.get(i).getRole().get(j).getNameR().equals("医生")){
+                    doctorNames.add(emEmployeeTables.get(i).getName());
+                }
+            }
+        }
+        map.put("generateNo", no);
+        map.put("doctorNames",doctorNames);
         return r.ok(map);
+
     }
 }

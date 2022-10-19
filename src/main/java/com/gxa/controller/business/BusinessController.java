@@ -2,6 +2,7 @@ package com.gxa.controller.business;
 
 import com.alibaba.fastjson.JSON;
 import com.gxa.entity.business.BusinessReceiveInfo;
+import com.gxa.entity.business.DayAndMoney;
 import com.gxa.entity.business.OutpatientRecordToday;
 import com.gxa.entity.work.MedicalRecord;
 import com.gxa.service.business.BusinessService;
@@ -66,7 +67,9 @@ public class BusinessController {
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
-        List<Map> list = this.service.queryTotal(time, info.getDays());
+
+        List<DayAndMoney> list = this.service.queryTotal(time, info.getDays());
+
         R r = new R();
         r.put("list",list);
         return r;
@@ -90,6 +93,7 @@ public class BusinessController {
             throw new RuntimeException(e);
         }
         List<OutpatientRecordToday> list = this.service.queryByToday(time);
+
         R r = new R();
         r.put("todayList",list);
         return r;

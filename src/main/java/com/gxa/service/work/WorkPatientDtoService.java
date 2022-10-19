@@ -19,6 +19,7 @@ public interface WorkPatientDtoService {
 
     WorkPatientDto queryWorkPatientDtoByPhoneNum(String idCard);
     void updateStatus(String idCard);
+    void updateStatusIfReturn(String idCard);
 
     void addToll(Toll toll,Relation relation);
     void addTollDurgs(TollDrugs tollDrugs,Relation relation);

@@ -79,6 +79,11 @@ public class WorkPatientDtoServiceImpl implements WorkPatientDtoService {
     }
 
     @Override
+    public void updateStatusIfReturn(String idCard) {
+        this.workPatientDtoMapper.updateStatusIfReturn(idCard);
+    }
+
+    @Override
     public void addToll(Toll toll,Relation relation) {
         this.workPatientDtoMapper.addToll(toll,relation);
     }
