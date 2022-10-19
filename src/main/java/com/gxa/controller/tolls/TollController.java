@@ -91,7 +91,10 @@ public class TollController {
     @ResponseBody
     @ApiOperation(value = "查询项目明细",notes = "项目明细",httpMethod = "POST")
     @ApiResponses({
-            @ApiResponse(code = 0,message = "ok",response = TollDrugs.class)
+            @ApiResponse(code = 0,message = "tollPatient",response = TollPatient.class),
+            @ApiResponse(code = 1,message = "tollDrugs",response = TollDrugs.class),
+            @ApiResponse(code = 2,message = "patientDrugs",response = PatientDrugs.class),
+            @ApiResponse(code = 3,message = "tollFinish",response = TollFinish.class),
     })
     public R tollDrugs(@ApiParam(name = "查询条件", value = "tollNumber")@RequestBody TollNumbers tollNumbers){
         String tollNumber= tollNumbers.getTollNumber();
@@ -113,10 +116,11 @@ public class TollController {
     @ResponseBody
     @ApiOperation(value = "查询退费查看信息",notes = "退费信息",httpMethod = "POST")
     @ApiResponses({
-            @ApiResponse(code = 0,message = "ok",response = TollPatient.class),
-            @ApiResponse(code = 0,message = "ok",response = TollDrugs.class),
-            @ApiResponse(code = 0,message = "ok",response = PatientDrugs.class),
-            @ApiResponse(code = 0,message = "ok",response = TollFinish.class)
+            @ApiResponse(code = 0,message = "tollPatient",response = TollPatient.class),
+            @ApiResponse(code = 1,message = "tollDrugs",response = TollDrugs.class),
+            @ApiResponse(code = 2,message = "patientDrugs",response = PatientDrugs.class),
+            @ApiResponse(code = 3,message = "tollFinish",response = TollFinish.class),
+            @ApiResponse(code = 4,message = "surcharges",response = Surcharges.class)
     })
     public R tollPatient(@RequestBody TollNumbers tollNumbers){
         String tollNumber= tollNumbers.getTollNumber();
@@ -156,7 +160,9 @@ public class TollController {
     @ApiResponses({
             @ApiResponse(code = 0,message = "ok",response = TollDrugs.class)
     })
-    public R tollDrugsNum(@RequestParam String tollDrugsVer,String tollNumber){
+    public R tollDrugsNum(@RequestBody TollVerNumber tollVerNumber){
+        String tollDrugsVer = tollVerNumber.getTollDrugsVer();
+        String tollNumber = tollVerNumber.getTollNumber();
         List<TollDrugs> tollDrugs= this.tollDrugsService.queryByTollVer(tollDrugsVer,tollNumber);
         Map map = new HashMap();
         map.put("tollDrugs",tollDrugs);
@@ -169,7 +175,7 @@ public class TollController {
     @ApiResponses({
             @ApiResponse(code = 0,message = "ok")
     })
-    public R tollRefunds(@RequestParam TollNumbers tollNumbers){
+    public R tollRefunds(@RequestBody TollNumbers tollNumbers){
         String tollNumber= tollNumbers.getTollNumber();
         try {
             this.tollService.updateRefunds(tollNumber);
