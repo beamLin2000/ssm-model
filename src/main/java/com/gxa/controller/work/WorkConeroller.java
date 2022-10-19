@@ -20,7 +20,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
 import javax.swing.*;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
@@ -42,12 +46,18 @@ public class WorkConeroller {
     @Autowired
     private MedicalRecordDtoService medicalRecordDtoService;
 
+    @Autowired
+    private ConditionSelectService conditionSelectService;
+
+    @Autowired
+    private ElectMedicalRecordDtoService electMedicalRecordDtoService;
+
     //工作台list
     @GetMapping("/work/list")
     @ResponseBody
     @ApiOperation(value = "工作台的数据接口",notes = "工作台list")
     @ApiResponses({
-            @ApiResponse(code = 0,message = "ok",response = Patient1.class)
+            @ApiResponse(code = 0,message = "ok",response = PatientDto.class)
     })
     public R workList(){
 
@@ -62,14 +72,14 @@ public class WorkConeroller {
     @ResponseBody
     @ApiOperation(value = "点击接诊后的显示该病人所有数据的接口",notes = "就诊人信息")
     @ApiResponses({
-            @ApiResponse(code = 0,message = "ok",response = WorkPatient.class)
+            @ApiResponse(code = 0,message = "ok",response = WorkPatientDto.class)
     })
     public R patientList(@RequestBody WorkSelectDto workSelectDto){
 
         if(!workSelectDto.getStatus().equals("未就诊")){
             return R.error("fail");
         }
-        this.workPatientDtoService.updateStatus(workSelectDto.getIdCard());
+      this.workPatientDtoService.updateStatus(workSelectDto.getIdCard());
         WorkPatientDto workPatientDto = this.workPatientDtoService.queryWorkPatientDtoByPhoneNum(workSelectDto.getIdCard());
         MedicalRecordDto medicalRecordDto = this.medicalRecordDtoService.queryMedicalRecordDtoByIdCard(workSelectDto.getIdCard());
         PhysicalDto physicalDto = this.physicalDtoService.queryPhysicalDtoByIdCard(workSelectDto.getIdCard());
@@ -84,9 +94,10 @@ public class WorkConeroller {
     //处方list  传一个string
     @PostMapping("/work/durglist")
     @ResponseBody
-    @ApiOperation(value = "工作台的接诊的药品渲染",notes = "传西/成药或中药或检查项目")
+    @ApiOperation(value = "工作台的接诊的药品渲染",notes = "传西/成药或中药或检查项目" +
+            " \"prescriptionName\": \"中药\"")
     @ApiResponses({
-            @ApiResponse(code = 0,message = "ok",response = Drug.class)
+            @ApiResponse(code = 0,message = "ok",response = DrugDto.class)
     })
     public R durgList(@RequestBody WorkSelectDto workSelectDto){
         Map map = new HashMap();
@@ -100,6 +111,7 @@ public class WorkConeroller {
         R r = new R();
         return r.ok(map);
     }
+
     @PostMapping("/work/chargeList")
     @ResponseBody
     @ApiOperation(value = "工作台的查看患者信息",notes = "收费的渲染")
@@ -112,6 +124,67 @@ public class WorkConeroller {
         map.put("list",charges);
         return R.ok(map);
     }
+
+
+    @PostMapping("/work/ConditionList")
+    @ResponseBody
+    @ApiOperation(value = "工作台的搜索条件查询数据接口",notes = "搜索条件")
+    @ApiResponses({
+            @ApiResponse(code = 0,message = "ok",response = PatientDto.class)
+    })
+    public R workListByCondition(@RequestBody ConditionSelectDto conditionSelectDto){
+        String startTime = null;
+        String endTime = null;
+        Date startDate = null;
+        Date endDate = null;
+
+        String selectTime = conditionSelectDto.getSelectTime();
+        String status = conditionSelectDto.getStatus();
+        String patientName = conditionSelectDto.getPatientName();
+
+        if (selectTime != null && !selectTime.equals("")){
+            String[] times = selectTime.split(",");
+            startTime = times[0];
+            endTime = times[1];
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                startDate = sdf.parse(selectTime);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            try {
+                endDate = sdf.parse(endTime);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
+        List<PatientDto> patientDtos = this.conditionSelectService.queryPatientByCondition(startDate,endDate,status,patientName);
+
+        Map map = new HashMap();
+        map.put("patientDtos",patientDtos);
+
+        R r = new R();
+        return r.ok(map);
+    }
+
+    @PostMapping("/work/medicalRecordList")
+    @ResponseBody
+    @ApiOperation(value = "电子病历病历的数据接口",notes = "电子病历左边病历")
+    @ApiResponses({
+            @ApiResponse(code = 0,message = "ok",response = Drug.class)
+    })
+    public R medicalRecordList(@RequestBody WorkSelectDto workSelectDto){
+
+        List<ElectMedicalRecordDto> electMedicalRecordDtos = this.electMedicalRecordDtoService.queryAllMedicalRecord(workSelectDto.getIdCard());
+        Map map = new HashMap();
+        map.put("electMedicalRecordDtos",electMedicalRecordDtos);
+        R r = new R();
+        return r.ok(map);
+    }
+
+
 
     //保存患者信息
     @PostMapping("/work/savePatient")

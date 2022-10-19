@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @ApiModel("返回对象实体")
 public class DrugDto {
-    @ApiModelProperty(name = "id",value ="药品id")
+    @ApiModelProperty(name = "id",value ="药品id",hidden = true)
     private Integer id;
     @ApiModelProperty(name = "name",value ="名字")
     private String name;
@@ -19,6 +19,6 @@ public class DrugDto {
     private String norms;
     @ApiModelProperty(name = "stock",value ="库存")
     private String stock;
-    @ApiModelProperty(name = "stock",value ="价格")
+    @ApiModelProperty(name = "price",value ="价格")
     private String price;
 }

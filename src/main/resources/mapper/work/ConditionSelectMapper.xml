@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxa.mapper.work.ConditionSelectMapper">
+    <resultMap id="patientDto" type="com.gxa.dto.work.PatientDto">
+        <result property="name" column="patient_name"></result>
+        <result property="age" column="patient_age"></result>
+        <result property="gender" column="patient_gender"></result>
+        <result property="status" column="status"></result>
+        <result property="registrationDate" column="patient_creat_time"></result>
+        <result property="attendingDoctor" column="attending_doctor"></result>
+        <result property="phoneNo" column="patient_phone"></result>
+        <result property="idCard" column="patient_documents"></result>
+    </resultMap>
+    <select id="selectByCondition" resultMap="patientDto">
+        SELECT p.patient_name,p.patient_age,p.patient_gender,r.status,p.patient_creat_time,r.attending_doctor,p.patient_phone,p.patient_documents
+        FROM register r ,patients p
+        WHERE r.registration_form=p.registration_form
+        <if test="startDate != null and endDate != null" >
+            AND r.registration_date BETWEEN #{startDate} AND #{endDate}
+        </if>
+        <if test="status != null and status !='' ">
+            AND r.status=#{status}
+        </if>
+        <if test="patientName != null and patientName !='' ">
+            AND p.patient_name=#{patientName}
+        </if>
+    </select>
+</mapper>

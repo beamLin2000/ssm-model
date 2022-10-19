@@ -30,6 +30,6 @@ public class PatientDto {
     private String attendingDoctor;
     @ApiModelProperty("电话")
     private String phoneNo;
-    @ApiModelProperty("身份证号")
+    @ApiModelProperty(value = "身份证号",required = true)
     private String idCard;
 }
