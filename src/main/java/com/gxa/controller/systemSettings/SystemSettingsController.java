@@ -325,8 +325,6 @@ public class SystemSettingsController {
 
 
 
-
-
     @PostMapping("/supplier/add")
     @ApiOperation(value = "供应商管理",notes = "添加接口",httpMethod = "Post")
     public YResult addSupplier(@RequestBody SupplierForm supplierForm){
@@ -366,8 +364,6 @@ public class SystemSettingsController {
 
         return YResult;
     }
-
-
 
 
 
@@ -453,6 +449,7 @@ public class SystemSettingsController {
         return YResult;
     }
 
+
     @PutMapping("/costsettings/edit")
     @ApiOperation(value = "费用设置-附加费用",notes = "修改接口",httpMethod = "Put")
     public YResult editCost(@RequestBody SurchargeFeeForm surchargeForm){
@@ -465,6 +462,7 @@ public class SystemSettingsController {
 
         return  YResult;
     }
+
 
     @DeleteMapping("/costsettings/delete")
     @ApiOperation(value = "费用设置-附加费用",notes = "删除接口",httpMethod = "Delete")
@@ -634,14 +632,13 @@ public class SystemSettingsController {
     @PutMapping("/paymentMethod/xiugai")
     @ApiOperation(value = "支付方式设置",notes = "修改接口",httpMethod = "Put")
     public YResult updatePaymentMethod(@RequestBody PaymentMethodForm paymentMethodForm){
-        PaymentMethod paymentMethod = new PaymentMethod(paymentMethodForm.getId(),paymentMethodForm.getPaymentMethod(),paymentMethodForm.getState());
-        this.paymentMethodService.updateById(paymentMethod);
-        YResult YResult = new YResult(0,"修改成功",paymentMethod);
+        this.paymentMethodService.updateByState(paymentMethodForm);
+
+        YResult YResult = new YResult(0,"修改成功",paymentMethodForm);
 
 
         return YResult;
     }
-
 
 
 
