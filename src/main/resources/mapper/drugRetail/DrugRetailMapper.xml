@@ -12,6 +12,7 @@
         <result property="manuFactor" column="manufacturer"></result>
         <result property="stock" column="stock"></result>
         <result property="salesPrice" column="sales_price"></result>
+        <result property="company" column="base_unit"></result>
     </resultMap>
     <insert id="saveDrugMsg">
         INSERT INTO toll_drugs(toll_drugs_name,toll_drugs_money,toll_drugs_quantity,toll_drugs_unit,toll_drugs_retail,
@@ -34,10 +35,11 @@
                             WHERE d.drug_name=#{drugName})
     </update>
     <select id="queryByCode" parameterType="com.gxa.entity.drugRetail.DrugQueryCondition" resultMap="drugChooseMsg">
-        select f.code,f.drug_name,f.drug_type,f.specs,f.manufacturer,i.stock ,f.sales_price
-        from drugManagement_drugInformationTenance_drugBasicInformation f,drugManagement_inventoryManagement_inventoryInfo i
+        select f.code,f.drug_name,f.drug_type,f.specs,f.manufacturer,i.stock ,f.sales_price,p.base_unit
+        from drugManagement_drugInformationTenance_drugBasicInformation f,drugManagement_inventoryManagement_inventoryInfo i,
+        drugManagement_drugInformationTenance_drugPackageInformation p
         <where>
-            f.id=i.drug_info_id
+            f.id=i.drug_info_id and f.id=p.drug_info_id
         <if test="drugType !=null and drugType !='' ">
             and f.drug_type=#{drugType}
         </if>
