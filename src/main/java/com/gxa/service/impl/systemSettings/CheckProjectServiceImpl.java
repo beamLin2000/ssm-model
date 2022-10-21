@@ -46,8 +46,32 @@ public class CheckProjectServiceImpl implements CheckProjectSetService {
 
     @Override
     public List<CPSMainTable> select(CPSEdit cpsEdit) {
-        List<CPSMainTable> select = checkProjectSet_mapper.select(cpsEdit);
-        return select;
+        if (cpsEdit.getProjectStatus().length()==0 && cpsEdit.getProjectName().length()==0 ){
+
+
+            System.out.println("111111111111111111");
+            List<CPSMainTable> cpsMainTables = checkProjectSet_mapper.selectALl();
+            return cpsMainTables;
+        }else if(cpsEdit.getProjectStatus().length()==0 ) {
+
+            System.out.println("2222222222222222222");
+            List<CPSMainTable> select = checkProjectSet_mapper.select(cpsEdit);
+            return select;
+        }else if (cpsEdit.getProjectStatus().length()!=0 && cpsEdit.getProjectName().length()!=0 ) {
+
+
+            System.out.println("333333333333333333333");
+            List<CPSMainTable> select = checkProjectSet_mapper.select2(cpsEdit);
+            return select;
+        }else if (cpsEdit.getProjectStatus().length()!=0 && cpsEdit.getProjectName().length()==0 ) {
+
+            System.out.println("44444444444444444");
+            List<CPSMainTable> select = checkProjectSet_mapper.select1(cpsEdit);
+            return select;
+        }
+
+        System.out.println("555555555555555555555");
+        return null;
     }
 
     @Override
@@ -55,6 +79,9 @@ public class CheckProjectServiceImpl implements CheckProjectSetService {
         List<CPSViceTable> drop = checkProjectSet_mapper.drop();
         return drop;
     }
+
+
+
 }
 
 

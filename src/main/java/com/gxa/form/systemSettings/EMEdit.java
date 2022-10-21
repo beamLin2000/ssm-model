@@ -1,17 +1,21 @@
 package com.gxa.form.systemSettings;
 
+import com.gxa.entity.systemSettings.Role;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
+import java.util.Date;
 import java.util.List;
 
 @Data
 @ApiModel
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class EMEdit {
     @ApiModelProperty(value = "id",name = "id",hidden = false,required = false)
     private int id;//id
@@ -19,9 +23,9 @@ public class EMEdit {
     private String workNumber;//工号
     @ApiModelProperty(value = "员工姓名",name = "name",hidden = false,required =true)
     private String name;//员工姓名
-    @ApiModelProperty(value = "员工年龄",name = "age",hidden = false,required = true)
+    @ApiModelProperty(value = "员工年龄",name = "age",hidden = false)
     private int age;//员工年龄
-    @ApiModelProperty(value = "员工性别",name = "sex",hidden = false,required = true)
+    @ApiModelProperty(value = "员工性别",name = "sex",hidden = false)
     private String sex;//员工性别
     @ApiModelProperty(value = "手机号码",name = "phoneNumber",hidden = false,required = false)
     private String phoneNumber;//手机号码
@@ -33,8 +37,8 @@ public class EMEdit {
     @ApiModelProperty(value = "员工状态",name = "employeeStatus",hidden = false,required = false)
     private String employeeStatus;//员工状态    停用    启用
 
-    @ApiModelProperty(value = "电子邮箱",name = "letterBox",hidden = false,required = false)
-    private String letterBox;//电子邮箱
+    @ApiModelProperty(value = "电子邮箱",name = "email",hidden = false,required = false)
+    private String email;//电子邮箱
     @ApiModelProperty(value = "证件号码",name = "idNumber",hidden = false,required = false)
     private String idNumber;//证件号码
     @ApiModelProperty(value = "职位",name = "position",hidden = false,required = false)
@@ -54,6 +58,13 @@ public class EMEdit {
 
     @ApiModelProperty(value = "角色表",name = "rolesEdit",hidden = false,required = true)
     private List<RoleTable> roleTable;
+
+
+    @ApiModelProperty(value = "创建时间",name = "creationTime",hidden = false)
+    private Date creationTime;
+
+    @ApiModelProperty(value = "创建人员",name = "createPerson",hidden = false)
+    private String createPerson;
 
 
 }

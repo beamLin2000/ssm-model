@@ -12,6 +12,7 @@ import java.util.List;
 public interface EmployeeManagementService {
 
     List<EMEmployeeTable> selectAll();
+    EMEmployeeTable incloud(String userName);
     void update(EMEdit emEdit);
     void insert(EMEdit emEdit);
     void delete(int id);

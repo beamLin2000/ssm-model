@@ -14,8 +14,8 @@
 
     </resultMap>
     <insert id="insert">
-        insert into role(roleNumber,name,description,creationTime,createPerson,roleStatus)
-        values (#{roleNumber},#{nameR},#{description},#{creationTime},#{createPerson},#{roleStatus})
+        insert into role(,creationTime,roleNumber,name,description,creationTime,createPerson,roleStatus)
+        values (#{creationTime},#{roleNumber},#{nameR},#{description},#{creationTime},#{createPerson},#{roleStatus})
     </insert>
 
     <!--    <insert id="insert">-->
@@ -25,7 +25,7 @@
 
     <update id="update">
         update role
-        set roleNumber=#{roleNumber},name=#{nameR},description=#{description},creationTime=#{creationTime},createPerson=#{createPerson},roleStatus=#{roleStatus}
+        set creationTime=#{creationTime},roleNumber=#{roleNumber},name=#{nameR},description=#{description},creationTime=#{creationTime},createPerson=#{createPerson},roleStatus=#{roleStatus}
         where id=#{id}
     </update>
 

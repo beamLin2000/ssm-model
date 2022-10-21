@@ -1,6 +1,7 @@
 package com.gxa.entity.systemSettings;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.gxa.form.systemSettings.RoleTable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -34,7 +35,7 @@ public class EMEmployeeTable {
 //    @ApiModelProperty(value = "角色",name = "roles",hidden = false,required = true)
 //    private String roles;//角色
     @ApiModelProperty(value = "创建时间",name = "creationTime",hidden = false,required = false)
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+    @JsonFormat(pattern="yyyy-MM-dd ",timezone="GMT+8")
     private Date creationTime;//创建时间
     @ApiModelProperty(value = "创建人员",name = "createPerson",hidden = false,required = false)
     private String createPerson;//创建人员
@@ -43,15 +44,26 @@ public class EMEmployeeTable {
 
     @ApiModelProperty(value = "邮箱",name = "email")
     private String email;
-    @ApiModelProperty(value = "证件号码",name = "id_num")
-    private String id_num;
+    @ApiModelProperty(value = "证件号码",name = "idNumber")
+    private String idNumber;
     @ApiModelProperty(value = "地址",name = "address")
     private String address;
-//    @ApiModelProperty(value = "职位",name = "position")
-//    private String position;
+    @ApiModelProperty(value = "职位",name = "position")
+    private String position;
+    @ApiModelProperty(value = "密码",name = "pwd")
+    private String pwd;
+
+
+
+
+    private int roleId;//角色索引
+
 
     @ApiModelProperty(value = "角色,表",name = "role")
     private List<Role> role;
+
+    @ApiModelProperty(value = "角色,表",name = "roleTable")
+    private List<RoleTable> roleTable;
 
 
 

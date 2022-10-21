@@ -14,6 +14,7 @@ import com.gxa.form.systemSettings.supplier.SupplierForm;
 import com.gxa.service.systemSettings.*;
 import com.gxa.utils.systemSettings.Result;
 import com.gxa.utils.systemSettings.YResult;
+import com.gxa.utils.systemSettings.Information;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ public class SystemSettingsController {
 
     @GetMapping("/CheckProjectSet/List")//查询所有
     @ApiOperation(value = "检查项目设置-查询所有数据" ,notes = "",httpMethod = "Get",response = CPSMainTable.class)
-    public Result CheckProjectSet_List(){
+    public Result checkProjectSetList(){
 
         List<CPSMainTable> cpsMainTables = checkProjectSet_service.selectAll();
         Result result = new Result(1,"seccess",cpsMainTables);
@@ -45,7 +46,7 @@ public class SystemSettingsController {
 
     @PostMapping("/CheckProjectSet/Edit")//编辑
     @ApiOperation(value = "检查项目设置-编辑数据" ,notes = "",httpMethod = "Post")
-    public Result CheckProjectSet_Edit(@RequestBody CPSEdit cps_edit){
+    public Result checkProjectSetEdit(@RequestBody CPSEdit cps_edit){
         checkProjectSet_service.update(cps_edit);
         Result result = new Result(2,"成功","hello");
         return result;
@@ -53,7 +54,7 @@ public class SystemSettingsController {
 
     @PostMapping("/CheckProjectSet/Insert")//添加
     @ApiOperation(value = "检查项目设置-添加数据" ,notes = "",httpMethod = "Post")
-    public Result CheckProjectSet_Insert(@RequestBody CPSEdit cps_edit){
+    public Result checkProjectSetInsert(@RequestBody CPSEdit cps_edit){
 
         System.out.println(cps_edit);
         checkProjectSet_service.insert(cps_edit);
@@ -63,7 +64,7 @@ public class SystemSettingsController {
 
     @GetMapping("/CheckProjectSet/Delete")//删除
     @ApiOperation(value = "检查项目设置-停用,启用数据" ,notes = "根据id,状态停，启用数据",httpMethod = "Get")
-    public Result CheckProjectSet_Delete(@RequestParam("id") int id ,@RequestParam("projectStatus") String projectStatus ){
+    public Result checkProjectSetDelete(@RequestParam("id") int id ,@RequestParam("projectStatus") String projectStatus ){
         System.out.println(id+"------------------"+projectStatus);
         checkProjectSet_service.delete(id,projectStatus);
         Result result = new Result(2,"成功","hello");
@@ -72,7 +73,7 @@ public class SystemSettingsController {
 
     @PostMapping("/CheckProjectSet/Select")//根据条件搜索
     @ApiOperation(value = "检查项目设置-根据条件查询数据" ,notes = "",httpMethod = "post")
-    public Result CheckProjectSet_Select(@RequestBody CPSEdit cpsEdit){
+    public Result checkProjectSetSelect(@RequestBody CPSEdit cpsEdit){
 
         System.out.println(cpsEdit+"----------------------");
         List<CPSMainTable> select = checkProjectSet_service.select(cpsEdit);
@@ -82,7 +83,7 @@ public class SystemSettingsController {
 
     @GetMapping("/CheckProjectSet/Drop")//查询下拉框
     @ApiOperation(value = "检查项目设置-下拉框的数据" ,notes = "",httpMethod = "Get")
-    public Result CheckProjectSet_Drop(){
+    public Result checkProjectSetDrop(){
 
         List<CPSViceTable> drop = checkProjectSet_service.drop();
         Result result = new Result(1,"seccess",drop);
@@ -102,7 +103,7 @@ public class SystemSettingsController {
 
     @GetMapping("/Roles/List")//查询所有
     @ApiOperation(value = "角色列表-查询所有数据" ,notes = "",httpMethod = "Get",response = Role.class)
-    public Result Roles_List(){
+    public Result rolesList(){
         List<Role> roles = rolesSetService.selectAll();
 
         Result result = new Result(1,"seccess", roles);
@@ -111,7 +112,7 @@ public class SystemSettingsController {
 
     @PostMapping("/Roles/Edit")//编辑
     @ApiOperation(value = "角色列表-编辑数据" ,notes = "",httpMethod = "Post")
-    public Result Roles_Edit(@RequestBody Role role){
+    public Result rolesEdit(@RequestBody Role role){
         rolesSetService.update(role);
         Result result = new Result(2,"成功","hello");
         return result;
@@ -119,7 +120,7 @@ public class SystemSettingsController {
 
     @PostMapping("/Roles/Insert")//添加
     @ApiOperation(value = "角色列表-添加数据" ,notes = "",httpMethod = "Post")
-    public Result Roles_Insert(@RequestBody Role role){
+    public Result rolesInsert(@RequestBody Role role){
         rolesSetService.insert(role);
         Result result = new Result(2,"成功","hello");
         return result;
@@ -127,7 +128,7 @@ public class SystemSettingsController {
 
     @GetMapping("/Roles/Delete")//删除
     @ApiOperation(value = "角色列表-删除数据" ,notes = "根据id删除数据",httpMethod = "Get")
-    public Result Roles_Delete(@RequestParam("id") int id){
+    public Result rolesDelete(@RequestParam("id") int id){
         rolesSetService.delete(id);
         Result result = new Result(2,"成功","hello");
         return result;
@@ -135,7 +136,7 @@ public class SystemSettingsController {
 
     @GetMapping("/Roles/Select")//根据条件搜索
     @ApiOperation(value = "角色列表-根据条件查询数据" ,notes = "",httpMethod = "get")
-    public Result Roles_Select(@RequestParam ("name") String name){
+    public Result rolesSelect(@RequestParam ("name") String name){
 
         List<Role> select = rolesSetService.select(name);
         Result result = new Result(1,"seccess",select);
@@ -156,7 +157,7 @@ public class SystemSettingsController {
 
     @GetMapping("/EmployeeManagement/List")//查询所有
     @ApiOperation(value = "员工列表-查询所有数据" ,notes = "",httpMethod = "Get",response = EMEmployeeTable.class)
-    public Result EmployeeManagement_List(){
+    public Result employeeManagementList(){
         List<EMEmployeeTable> emEmployeeTables = employeeManagementService.selectAll();
 
        Result result = new Result(1,"seccess",emEmployeeTables);
@@ -165,32 +166,35 @@ public class SystemSettingsController {
 
     @PostMapping("/EmployeeManagement/Edit")//编辑
     @ApiOperation(value = "员工列表-编辑数据" ,notes = "",httpMethod = "Post")
-    public Result EmployeeManagement_Edit(@RequestBody EMEdit em_edit){
+    public Result employeeManagementEdit(@RequestBody EMEdit em_edit){
         System.out.println(em_edit+"--------------------");
         employeeManagementService.update(em_edit);
-        Result result = new Result(2,"成功","hello");
+        Result result = new Result(2,Information.message,"hello");
         return result;
     }
 
     @PostMapping("/EmployeeManagement/Insert")//添加
     @ApiOperation(value = "员工列表-添加数据" ,notes = "",httpMethod = "Post")
-    public Result EmployeeManagement_Insert(@RequestBody EMEdit em_edit){
+    public Result employeeManagementInsert(@RequestBody EMEdit em_edit){
+
+        System.out.println(em_edit+"11111111111111111111111111111111111111111111111111");
         employeeManagementService.insert(em_edit);
-        Result result = new Result(2,"成功","hello");
+        Result result = new Result(2,Information.message,"hello");
         return result;
     }
 
     @GetMapping("/EmployeeManagement/Delete")//删除
     @ApiOperation(value = "员工列表-删除数据" ,notes = "根据ID删除数据",httpMethod = "Get")
-    public Result EmployeeManagement_Delete(@RequestParam("id") int id){
+    public Result employeeManagementDelete(@RequestParam("id") int id){
         employeeManagementService.delete(id);
-        Result result = new Result(2,"成功","hello");
+        Result result = new Result(2,"成功", "hello");
+
         return result;
     }
 
     @GetMapping("/EmployeeManagement/Select")//根据条件搜索
     @ApiOperation(value = "员工列表-根据条件查询数据" ,notes = "",httpMethod = "get")
-    public Result EmployeeManagement_Select(@RequestParam ("name") String  name){
+    public Result employeeManagementSelect(@RequestParam ("name") String  name){
         List<EMEmployeeTable> select = employeeManagementService.select(name);
 
         Result result = new Result(1,"seccess",select);
@@ -199,9 +203,19 @@ public class SystemSettingsController {
 
     @GetMapping("/EmployeeManagement/Drop")//查询下拉框
     @ApiOperation(value = "员工列表-角色下拉框的数据" ,notes = "",httpMethod = "Get")
-    public Result EmployeeManagement_Drop(){
+    public Result employeeManagementDrop(){
 
         List<Role> drop = employeeManagementService.drop();
+
+        Result result = new Result(1,"seccess",drop);
+        return result;
+    }
+
+    @GetMapping("/EmployeeManagement/Incloud")//
+    @ApiOperation(value = "员工列表-编辑，通过员工编号做数据回显" ,notes = "",httpMethod = "Get")
+    public Result employeeManagementIncloud(@RequestParam("userName") String userName){
+
+        EMEmployeeTable drop = employeeManagementService.incloud(userName);
 
         Result result = new Result(1,"seccess",drop);
         return result;
