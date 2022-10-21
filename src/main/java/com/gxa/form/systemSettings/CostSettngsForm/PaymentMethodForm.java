@@ -13,8 +13,6 @@ import lombok.NoArgsConstructor;
 public class PaymentMethodForm {
     @ApiModelProperty(value = "id",name = "id",required = false)
     private Integer id;
-    @ApiModelProperty(value = "paymentMethod",name = "支付方式",required = false)
-    private String paymentMethod;
     @ApiModelProperty(value = "state",name = "状态",required = false)
     private String state;
 

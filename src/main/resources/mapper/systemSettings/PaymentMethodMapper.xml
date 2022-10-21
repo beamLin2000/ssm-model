@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxa.mapper.systemSettings.PaymentMethodMapper">
+
+    <resultMap id="paymentMethod" type="com.gxa.entity.systemSettings.PaymentMethod">
+        <id property="id" column="id"></id>
+        <result property="paymentMethod" column="paymentMethod"></result>
+        <result property="state" column="state"></result>
+    </resultMap>
+    <update id="updateByState">
+        UPDATE payment_method
+        SET state=#{state}
+        WHERE id=#{id}
+    </update>
+    <select id="queryAll" resultType="com.gxa.entity.systemSettings.PaymentMethod">
+        SELECT *
+        FROM payment_method
+    </select>
+
+</mapper>
