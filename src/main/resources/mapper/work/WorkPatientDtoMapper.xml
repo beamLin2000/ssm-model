@@ -29,7 +29,7 @@
     </update>
     <update id="updateStatusIfReturn">
         UPDATE register r, patients p
-        SET r.`status`='待就诊'
+        SET r.`status`='未就诊'
         WHERE r.registration_form=p.registration_form
           AND p.patient_documents=#{idCard} AND r.status='就诊中'
     </update>
@@ -86,6 +86,11 @@
         SELECT p.patient_name,p.patient_card,p.patient_age,p.patient_birthday,p.patient_gender,p.patient_phone,p.patient_documents,r.reception_type,p.patient_detailed_address
         FROM register r ,patients p
         WHERE r.registration_form=p.registration_form AND p.patient_documents=#{idCard}
+    </select>
+    <select id="queryWorkPatientDtoByForm" resultMap="workPatientDto">
+        SELECT p.patient_name,p.patient_card,p.patient_age,p.patient_birthday,p.patient_gender,p.patient_phone,p.patient_documents,r.reception_type,p.patient_detailed_address
+        FROM register r ,patients p
+        WHERE r.registration_form=p.registration_form AND p.registration_form=#{registrationForm}
     </select>
 
 </mapper>

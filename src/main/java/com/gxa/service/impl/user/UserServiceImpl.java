@@ -71,4 +71,11 @@ public class UserServiceImpl implements UserService {
         updateWrapper.eq("user_name",user.getUserName());
         this.userMapper.update(user,updateWrapper);
     }
+
+    @Override
+    public void updateTokenByUser(User user) {
+        UpdateWrapper updateWrapper = new UpdateWrapper();
+        updateWrapper.eq("user_name",user.getUserName());
+        this.userMapper.update(user,updateWrapper);
+    }
 }

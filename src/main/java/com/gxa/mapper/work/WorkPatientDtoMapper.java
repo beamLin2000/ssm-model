@@ -19,7 +19,7 @@ public interface WorkPatientDtoMapper extends BaseMapper<WorkPatientDto> {
 
 
     WorkPatientDto queryWorkPatientDtoByPhoneNum(@Param("idCard") String idCard);
-
+    WorkPatientDto queryWorkPatientDtoByForm(@Param("registrationForm") String registrationForm);
     void updateStatus(String idCard);
     void updateStatusIfReturn(@Param("idCard")String idCard);
     void addToll(@Param("toll")Toll toll,@Param("relation") Relation relation);

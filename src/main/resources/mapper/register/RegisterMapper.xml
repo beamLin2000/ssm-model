@@ -89,7 +89,6 @@
                 and c.registration_date_time between #{startTime} and #{endTime}
            </if>
         </where>
-        limit 10
     </select>
     <select id="toUpdate" resultMap="registerUpdateMsg" parameterType="string">
         select r.registration_form,c.amount_paid,c.insurance_payment,c.pay_method,c.change_money,c.registration_date_time,r.reception_type,

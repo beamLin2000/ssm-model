@@ -9,10 +9,7 @@ import com.gxa.entity.work.*;
 import com.gxa.service.work.*;
 import com.gxa.utils.OrderNo;
 import com.gxa.utils.R;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
+
 @Api(tags = {"工作台接口"})
 public class WorkConeroller {
 
@@ -60,10 +58,11 @@ public class WorkConeroller {
             @ApiResponse(code = 0,message = "ok",response = PatientDto.class)
     })
     public R workList(){
-
+        System.out.println("11111");
             Map map = new HashMap();
             List<PatientDto> patientDtos = this.patientService.queryAllPatientDto();
             map.put("drugs",patientDtos);
+        System.out.println(patientDtos);
             R r = new R();
             return r.ok(map);
     }
@@ -79,10 +78,16 @@ public class WorkConeroller {
         if(!workSelectDto.getStatus().equals("未就诊")){
             return R.error("fail");
         }
-        this.workPatientDtoService.updateStatus(workSelectDto.getIdCard());
-        WorkPatientDto workPatientDto = this.workPatientDtoService.queryWorkPatientDtoByPhoneNum(workSelectDto.getIdCard());
-        MedicalRecordDto medicalRecordDto = this.medicalRecordDtoService.queryMedicalRecordDtoByIdCard(workSelectDto.getIdCard());
-        PhysicalDto physicalDto = this.physicalDtoService.queryPhysicalDtoByIdCard(workSelectDto.getIdCard());
+        WorkPatientDto workPatientDto = null;
+//        this.workPatientDtoService.updateStatus(workSelectDto.getIdCard());
+        if (workSelectDto.getIdCard()!=null&&!"".equals(workSelectDto.getIdCard())){
+             workPatientDto = this.workPatientDtoService.queryWorkPatientDtoByPhoneNum(workSelectDto.getIdCard());
+        }else {
+             workPatientDto = this.workPatientDtoService.queryWorkPatientDtoByForm(workSelectDto.getRegistrationForm());
+        }
+
+        MedicalRecordDto medicalRecordDto = this.medicalRecordDtoService.queryMedicalRecordDtoByIdCard(workPatientDto.getIdcard());
+        PhysicalDto physicalDto = this.physicalDtoService.queryPhysicalDtoByIdCard(workPatientDto.getIdcard());
 
         Map map = new HashMap();
         map.put("drugs",workPatientDto);
@@ -111,10 +116,10 @@ public class WorkConeroller {
         Map map = new HashMap();
         if (workSelectDto.getPrescriptionName().equals("检查项目")){
             List<Inspect> inspects = this.drugDtoService.queryAllInspect();
-            map.put("inspect/drugs",inspects);
+            map.put("inspectordrugs",inspects);
         }else {
             List<DrugDto> drugDtos = this.drugDtoService.queryAllDrugDto(workSelectDto.getPrescriptionName());
-            map.put("inspect/drugs",drugDtos);
+            map.put("inspectordrugs",drugDtos);
         }
         R r = new R();
         return r.ok(map);

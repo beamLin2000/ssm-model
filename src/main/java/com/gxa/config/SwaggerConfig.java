@@ -23,7 +23,8 @@ public class SwaggerConfig {
                 .enable(true)//开始swagger
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.gxa.controller"))
-                .build();
+                .build()
+                .pathMapping("/swagger");
     }
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()

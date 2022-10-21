@@ -18,6 +18,7 @@ public interface WorkPatientDtoService {
     void addprescriptionsInfo(Prescriptions prescriptions,Relation relation);
 
     WorkPatientDto queryWorkPatientDtoByPhoneNum(String idCard);
+    WorkPatientDto queryWorkPatientDtoByForm(String registrationForm);
     void updateStatus(String idCard);
     void updateStatusIfReturn(String idCard);
 

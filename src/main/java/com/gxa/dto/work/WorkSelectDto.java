@@ -11,4 +11,6 @@ public class WorkSelectDto {
     private String status;
     @ApiModelProperty(name = "prescriptionName",value ="患者的名称")
     private String prescriptionName;
+    @ApiModelProperty(name = "registration_form",value ="患者的挂号单号")
+    private String registrationForm;
 }

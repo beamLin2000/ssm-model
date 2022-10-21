@@ -74,6 +74,12 @@ public class WorkPatientDtoServiceImpl implements WorkPatientDtoService {
     }
 
     @Override
+    public WorkPatientDto queryWorkPatientDtoByForm(String registrationForm) {
+        WorkPatientDto workPatientDto = this.workPatientDtoMapper.queryWorkPatientDtoByForm(registrationForm);
+        return workPatientDto;
+    }
+
+    @Override
     public void updateStatus(String idCard) {
         this.workPatientDtoMapper.updateStatus(idCard);
     }

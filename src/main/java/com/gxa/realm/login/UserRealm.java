@@ -30,24 +30,6 @@ public class UserRealm extends AuthorizingRealm {
 
         User user = this.userService.queryByUserName(userName);
 
-
-
-//        User user = new User();
-//
-//        if (userName.equals("admin")){
-//            user.setSalt("123");
-//            user.setUserName("admin");
-//            user.setPwd("3bcbb857c763d1429a24959cb8de2593");
-//        }else if (userName.equals("doctor")){
-//            user.setSalt("123");
-//            user.setUserName("doctor");
-//            user.setPwd("9c3b5c0672cd599ccf1019bddaa8089b");
-//        }else if (userName.equals("finance")){
-//            user.setSalt("123");
-//            user.setUserName("finance");
-//            user.setPwd("9c3b5c0672cd599ccf1019bddaa8089b");
-//        }
-
         ByteSource salt = ByteSource.Util.bytes(user.getSalt());
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user,user.getPwd(),salt,this.getName());
 

@@ -6,6 +6,7 @@ import com.gxa.dto.user.Menu;
 import com.gxa.entity.login.User;
 import com.gxa.service.impl.user.UserServiceImpl;
 import com.gxa.utils.DBMenu;
+import com.gxa.utils.JwtUtil;
 import com.gxa.utils.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -49,10 +50,11 @@ public class LoginController {
             String menu = this.userService.queryMenuByUserName(userName);
             List<Menu> menus = JSON.parseArray(menu,Menu.class);
             System.out.println(menus);
-
+            String jwtToken = JwtUtil.getJwtToken(userName,user.getPwd());
             map.put("menu",menus);
             User user1 = this.userService.queryByUserName(userName);
             map.put("user",user1);
+            map.put("token",jwtToken);
             return R.ok(map);
 
         } catch (AuthenticationException e) {

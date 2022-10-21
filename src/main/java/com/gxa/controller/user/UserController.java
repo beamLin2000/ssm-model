@@ -49,11 +49,12 @@ public class UserController {
 
         try {
             this.userService.updateUserByUser(user);
+            return R.ok("账户资料更新成功");
         } catch (Exception e) {
             e.printStackTrace();
-            R.ok("账户资料更新成功");
+            return R.error(1,"账户资料更新失败");
         }
-        return R.error(1,"账户资料更新失败");
+
     }
 
 }

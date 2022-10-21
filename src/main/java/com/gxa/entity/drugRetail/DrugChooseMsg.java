@@ -26,4 +26,6 @@ public class DrugChooseMsg {
     private String stock;//库存
     @ApiModelProperty(name = "price",value = "零售价格")
     private Double salesPrice;//零售价格
+    @ApiModelProperty(name = "company",value = "单位")
+    private String company;//单位
 }

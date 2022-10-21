@@ -19,7 +19,6 @@
     <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
         <property name="securityManager" ref="securityManager"></property>
     </bean>
-
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"></property>
         <property name="loginUrl" value="/index.html"></property>
@@ -29,9 +28,14 @@
         <property name="filterChainDefinitions">
             <value>
                 / = anon
-                /index.html = anon
+                /index.jsp = anon
                 /login = anon
                 /logout = anon
+                /docs=anon
+                /swagger-ui.html=anon
+                /webjars/springfox-swagger-ui/**=anon
+                /swagger-resources/**=anon
+                /v2/api-docs=anon
                 /** = anon
             </value>
         </property>
