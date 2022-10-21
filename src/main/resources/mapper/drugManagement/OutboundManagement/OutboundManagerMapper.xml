@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxa.mapper.drugManagement.outboundManagement.OutboundManagerMapper">
+
+    <resultMap id="queryAll" type="com.gxa.entity.drugManagement.outboundManagement.OutboundInfo">
+        <id property="id" column="id"/>
+        <result property="deliveryOrderNo" column="receipt_no"/>
+        <result property="deliveryType" column="receipt_type"/>
+        <result property="voucherPreparer" column="voucher_preparer"/>
+        <result property="purchasePrice" column="purchase_price"/>
+        <result property="retailAmount" column="retail_amount"/>
+        <result property="warehouseOutPersonnel" column="warehousing_personnel"/>
+        <result property="createTime" column="create_time"/>
+        <result property="auditStatus" column="audit_status"/>
+        <result property="remarks" column="remarks"/>
+        <result property="preparationDate" column="preparation_date"/>
+        <result property="deliveryTime" column="receipt_time"/>
+        <result property="auditDate" column="audit_date"/>
+    </resultMap>
+
+<!--    添加主表保存-->
+    <insert id="saveOutboundInfo">
+        INSERT INTO `drugManagement_inboundManagement_inboundInfo` values
+            (#{id},#{deliveryOrderNo},
+             #{deliveryType},null,
+             #{voucherPreparer},#{purchasePrice},
+             #{retailAmount},#{warehouseOutPersonnel},
+             #{createTime},#{auditStatus},
+             #{deliveryTime},#{preparationDate},
+             #{remarks},#{reviewer},
+             #{auditDate})
+    </insert>
+
+<!--    添加药品保存-->
+    <insert id="saveOutboundInfoArray">
+        INSERT INTO `drugManagement_outboundManagement_ioboundInfoAddArray` values
+        <foreach collection="IOboundInfoAddList" item="IOboundInfoArray" separator=",">
+            (<choose>
+            <when test="IOboundInfoArray.id != null and IOboundInfoArray.id != ''">
+                #{IOboundInfoArray.id}
+            </when>
+            <otherwise>
+                null
+            </otherwise>
+        </choose>
+            ,#{IOboundInfoArray.code},
+            #{IOboundInfoArray.drugType},#{IOboundInfoArray.medicalName},
+            #{IOboundInfoArray.drugSpecifications},#{IOboundInfoArray.manufacturer},
+            #{IOboundInfoArray.medicalNumber},
+            #{IOboundInfoArray.unit},#{IOboundInfoArray.purchasePrice},
+            #{IOboundInfoArray.retailPrice},#{IOboundInfoArray.batchNo},
+            #{IOboundInfoArray.expiryDrugsDate},#{IOboundInfoArray.purchaseAmount},
+            #{IOboundInfoArray.retailAmount},
+            <choose>
+                <when test="InboundInfoId != null and InboundInfoId != ''">
+                    #{InboundInfoId},0
+                </when>
+                <otherwise>
+                    0,#{OutboundInfoId}
+                </otherwise>
+            </choose>
+            )
+        </foreach>
+    </insert>
+    <update id="updateInventoryInfo">
+        update `drugManagement_inventoryManagement_inventoryInfo` set
+        stock = case drug_info_id
+        <foreach collection="newInventoryInfos" item="Inventory">
+            when #{Inventory.medicalId} then #{Inventory.stock}
+        </foreach>
+        end
+        where drug_info_id in
+        <trim suffix=")" prefix="(" suffixOverrides=",">
+            <foreach collection="newInventoryInfos" item="Inventory">
+                #{Inventory.medicalId},
+            </foreach>
+        </trim>
+    </update>
+
+    <!--    查询所有-->
+    <select id="queryAll" resultMap="queryAll">
+        SELECT * FROM `drugManagement_inboundManagement_inboundInfo`
+                 <choose>
+                 <!--判断是否为查询所有-->
+                     <when test="isAll != null and isAll != ''"></when>
+                 <otherwise>
+                     WHERE `supplier_name` IS NULL
+                 </otherwise>
+                 </choose>
+    </select>
+
+
+
+
+<!--    根据条件查询-->
+    <select id="search" resultMap="queryAll" >
+        SELECT * FROM `drugManagement_inboundManagement_inboundInfo`
+            <trim prefix="where" suffixOverrides="and" prefixOverrides="and">
+                <if test="auditStatus != null and auditStatus != '' ">
+                audit_status = #{auditStatus} and (`supplier_name`='' or`supplier_name` is null ) and
+                </if>
+                <if test="deliveryType != null and deliveryType != '' ">
+                receipt_type = #{deliveryType} and
+                </if>
+                <if test="rules != null and rules != ''">
+                receipt_no like concat('%',#{rules},'%')
+                </if>
+            </trim>
+<!--        <if test="rules != null and rules != ''">-->
+<!--        and-->
+<!--                <trim prefix="(" suffix=")">-->
+<!--                    receipt_no like concat('%',#{rules},'%')-->
+<!--                </trim>-->
+<!--        </if>-->
+    </select>
+
+    <!--    根据id查询出库信息-->
+    <select id="queryById" resultMap="queryAll">
+        SELECT * FROM `drugManagement_inboundManagement_inboundInfo`
+                 where id = #{id} and (`supplier_name`='' or`supplier_name` is null )
+    </select>
+
+<!--    根据id查询小表的信息-->
+    <!--    仅仅查看入库药品-->
+    <resultMap id="queryArrayById" type="com.gxa.entity.drugManagement.inboundManagement.IOboundInfoAddArray">
+        <id column="id" property="id"/>
+        <result column="code" property="code"/>
+        <result column="drug_type" property="drugType"/>
+        <result column="drug_specifications" property="drugSpecifications"/>
+        <result column="drug_name" property="medicalName"/>
+        <result column="manufacturer" property="manufacturer"/>
+        <result column="medical_number" property="medicalNumber"/>
+        <result column="unit" property="unit"/>
+        <result column="purchase_price" property="purchasePrice"/>
+        <result column="retail_price" property="retailPrice"/>
+        <result column="batch_no" property="batchNo"/>
+        <result column="expiry_drugs_date" property="expiryDrugsDate"/>
+        <result column="purchase_amount" property="purchaseAmount"/>
+        <result column="retail_amount" property="retailAmount"/>
+        <result column="inbound_info_id" property="inboundInfoId"/>
+        <result column="outbound_info_id" property="outboundInfoId"/>
+    </resultMap>
+    <select id="queryArrayById" resultMap="queryArrayById">
+        select * from `drugManagement_outboundManagement_ioboundInfoAddArray` where outbound_info_id = #{id}
+    </select>
+
+    <!--    根据id删除主表-->
+    <delete id="deleteById">
+        DELETE FROM `drugManagement_inboundManagement_inboundInfo` where id = #{id}
+    </delete>
+
+    <delete id="deleteInboundInfoArrayById">
+        delete from `drugManagement_inboundManagement_inboundInfo` where id = #{id}
+    </delete>
+
+    <delete id="deleteOutboundInfoArrayById">
+        delete from `drugManagement_outboundManagement_ioboundInfoAddArray` where outbound_info_id = #{id}
+    </delete>
+
+</mapper>

@@ -1,6 +1,7 @@
 package com.gxa.entity.drugManagement.outboundManagement;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.gxa.entity.drugManagement.inboundManagement.IOboundInfoAddArray;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -56,6 +57,11 @@ public class OutboundInfo {
     //备注
     @ApiModelProperty(name = "remarks",value = "备注",required = true)
     private String remarks;
+    //审核人员
+    @ApiModelProperty(name = "reviewer",value = "审核人员",required = true)
+    private String reviewer;
+    @ApiModelProperty(name = "auditDate",value = "审核日期",required = true)
+    private String auditDate;
     @ApiModelProperty(name = "outboundInfoAddArray",value = "出库的添加药品",required = true)
-    private List<OutboundInfoAddArray> outboundInfoAddArray;
+    private List<IOboundInfoAddArray> IOboundInfoAddArray;
 }

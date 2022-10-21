@@ -1,14 +1,18 @@
 package com.gxa.controller.drugManagement.inventoryCountingManagement;
 
 import com.gxa.entity.drugManagement.inventoryCountingManagement.InventoryCountingInfo;
+import com.gxa.entity.drugManagement.inventoryCountingManagement.InventoryCountingInfoArray;
+import com.gxa.entity.drugManagement.inventoryCountingManagement.InventoryCountingInfoArrayAll;
 import com.gxa.result.Result;
 import com.gxa.result.ResultUtils;
+import com.gxa.service.drugManagement.inventoryCountingManagement.InventoryCountingInfoArrayAllService;
+import com.gxa.service.drugManagement.inventoryCountingManagement.InventoryCountingManagementService;
 import io.swagger.annotations.*;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author :林溪
@@ -20,7 +24,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class InventoryCountingController {
 
     @Autowired
-    private InventoryCountingVisualData inventoryCountingVisualData;
+    private InventoryCountingManagementService inventoryCountingManagementService;
+
+    @Autowired
+    private InventoryCountingInfoArrayAllService inventoryCountingInfoArrayAllService;
 
     @GetMapping("/list")
     @ApiOperation(value = "list",notes = "库存盘点table表")
@@ -28,8 +35,9 @@ public class InventoryCountingController {
             @ApiResponse(code = 200,message = "ok",response = InventoryCountingInfo.class)//
     })
     public Result list(){
+        List<InventoryCountingInfo> inventoryCountingInfos = this.inventoryCountingManagementService.queryAll();
         System.out.println("list");
-        return ResultUtils.buildFail(200,"ok",0L,inventoryCountingVisualData.getInventoryCountingInfo());
+        return ResultUtils.buildFail(200,"ok",0L,inventoryCountingInfos);
     }
 
     @GetMapping("/search")
@@ -38,17 +46,17 @@ public class InventoryCountingController {
             @ApiResponse(code = 200,message = "ok",response = InventoryCountingInfo.class )//,response = InventoryCountingInfo.class
     })
     public Result search(@ApiParam("创建时间")String createTime,@ApiParam("盘点单号")String countSheetNo){
-        System.out.println(createTime+","+countSheetNo);
-        return ResultUtils.buildFail(200,"ok",0L,inventoryCountingVisualData.getInventoryCountingInfo());
+        List<InventoryCountingInfo> inventoryCountingInfos = this.inventoryCountingManagementService.queryByCondition(createTime,countSheetNo);
+        return ResultUtils.buildFail(200,"ok",0L,inventoryCountingInfos);
     }
 
-    @PostMapping("/delete")
+    @DeleteMapping("/delete")
     @ApiOperation(value = "delete",notes = "库存盘点删除功能")
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok")//,response = InventoryCountingInfo.class
     })
-    public Result delete(@ApiParam("需要北山出的数据id")Integer id){
-        System.out.println(id);
+    public Result delete(@ApiParam("需要被删除的数据id")@Param("id")Integer id){
+        this.inventoryCountingManagementService.deleteById(id);
         return ResultUtils.buildFail(200,"ok",0L,null);
     }
 
@@ -57,9 +65,9 @@ public class InventoryCountingController {
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok",response = InventoryCountingInfo.class)//,
     })
-    public Result queryById(@ApiParam("需要查看记录的id")Integer id){
-        System.out.println(id);
-        return ResultUtils.buildFail(200,"ok",0L,inventoryCountingVisualData.getInventoryCountingInfo().get(1));
+    public Result queryById(@ApiParam("需要查看记录的id")@Param("id") Integer id){
+        List<InventoryCountingInfoArrayAll> inventoryCountingInfoArrayAlls = this.inventoryCountingInfoArrayAllService.queryAll(id);
+        return ResultUtils.buildFail(200,"ok",0L,inventoryCountingInfoArrayAlls);
     }
 
     @PostMapping("/save")
@@ -67,8 +75,18 @@ public class InventoryCountingController {
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok")//,
     })
-    public Result save(@ApiParam("提交需要被保存的数据")InventoryCountingInfo inventoryCountingInfo){
+    public Result save(@ApiParam("提交需要被保存的数据")@RequestBody InventoryCountingInfo inventoryCountingInfo){
         System.out.println(inventoryCountingInfo);
+        this.inventoryCountingManagementService.saveAllData(inventoryCountingInfo);
         return ResultUtils.buildFail(200,"ok",0L,null);
+    }
+    @PostMapping("/savePre")
+    @ApiOperation(value = "save",notes = "新增前对药品信息的所有查询")
+    @ApiResponses({
+            @ApiResponse(code = 200,message = "ok")//,
+    })
+    public Result savePre(){
+        List<InventoryCountingInfoArray> inventoryCountingInfoArrays = inventoryCountingInfoArrayAllService.queryAllDrugInfo();
+        return ResultUtils.buildFail(200,"ok",Long.valueOf(inventoryCountingInfoArrays.size()),inventoryCountingInfoArrays);
     }
 }

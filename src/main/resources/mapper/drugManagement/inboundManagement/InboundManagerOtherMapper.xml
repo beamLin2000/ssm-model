@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxa.mapper.drugManagement.inboundManagement.InboundManagerOtherMapper">
+<!--    入库类型下拉框-->
+    <resultMap id="queryAllInboundType" type="com.gxa.entity.drugManagement.basicInfo.BasicInfo">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+    </resultMap>
+    <select id="queryAllInboundType" resultMap="queryAllInboundType" parameterType="int">
+        select * from `drugManagement_basicInfo` where type_id = #{typeId};
+    </select>
+
+<!--供应商下拉框-->
+    <resultMap id="queryAllManufacture" type="com.gxa.entity.drugManagement.basicInfo.BasicInfo">
+        <id column="id" property="id"/>
+        <result column="suppliername" property="name"/>
+    </resultMap>
+    <select id="queryAllManufacture" resultMap="queryAllManufacture">
+        select `id`,`suppliername` from `supplier_administration`
+    </select>
+
+<!--    查询入库人员-->
+    <select id="queryAllWarehousingPersonnel" resultType="com.gxa.entity.drugManagement.basicInfo.BasicInfo">
+        select * from `` where
+    </select>
+
+
+    <resultMap id="queryAll" type="com.gxa.entity.drugManagement.inventoryManagement.InventoryInfo">
+        <id property="id" column="id"/>
+        <result property="drugCode" column="code"/>
+        <result property="locationNo" column="location_no"/>
+        <result property="drugName" column="drug_name"/>
+        <result property="drugType" column="drug_type"/>
+        <result property="specs" column="specs"/>
+        <result property="dosage" column="pharmaceutical_dosage"/>
+        <result property="manufactor" column="manufacturer"/>
+        <result property="stock" column="stock"/>
+        <result property="purchaseAmount" column="purchase_amount"/>
+        <result property="retailAmount" column="retail_amount"/>
+        <result property="drugInfoId" column="id"/>
+    </resultMap>
+    <select id="searchAdd" resultMap="queryAll">
+        select d.id,`code`,
+        `pharmaceutical_dosage`,`drug_name`,
+        `drug_type`,`specs`,
+        `manufacturer`,
+        `location_no`,`stock`,
+        `purchase_amount`,`retail_amount`,
+        from
+        `drugManagement_drugInformationTenance_drugBasicInformation` as d inner join `drugManagement_inventoryManagement_inventoryInfo`as i
+        on d.id = i.drug_info_id inner join `drugManagement_drugInformationTenance_drugOtherInformation` as o on i.drug_info_id = o.drug_info_id
+        <where>
+            <if test="drugType != null and drugType != ''">
+                drug_type = #{drugType}
+            </if>
+            <if test="rules != null and rules != ''">
+                and
+                <trim suffix="(" prefix=")">
+                    `drug_name` like concat('%',#{rules},'%') or
+                    `code` like concat('%',#{rules},'%')
+                </trim>
+            </if>
+        </where>
+    </select>
+</mapper>

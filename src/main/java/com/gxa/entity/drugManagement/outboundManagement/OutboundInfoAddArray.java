@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 /**
  * @Author LXD
  * @Date 2022/10/12 14:05
@@ -22,12 +24,12 @@ public class OutboundInfoAddArray {
     private Integer id;
     @ApiModelProperty(name = "code",value = "药品编码",required = true)
     private String code;
-    @ApiModelProperty(name = "medicalName",value = "药品名称",required = true)
-    private String medicalName;
     @ApiModelProperty(name = "drugType",value = "收费类别/处方类别",required = true)
     private String drugType;
-    @ApiModelProperty(name = "specifications",value = "规格",required = true)
-    private String specifications;
+    @ApiModelProperty(name = "drugName",value = "药品名称",required = true)
+    private String drugName;
+    @ApiModelProperty(name = "drugSpecifications",value = "规格",required = true)
+    private String drugSpecifications;
     @ApiModelProperty(name = "manufacturer",value = "生产厂家",required = true)
     private String manufacturer;
     @ApiModelProperty(name = "stock",value = "库存",required = true)
@@ -48,4 +50,8 @@ public class OutboundInfoAddArray {
     private Double purchaseAmount;
     @ApiModelProperty(name = "retailAmount",value = "零售金额",required = true)
     private Double retailAmount;
+    private Integer OutboundInfoId;
+    // 添加药品
+    @ApiModelProperty(name = "InboundInfoAddArray",value = "添加药品",required = true)
+    private List<com.gxa.entity.drugManagement.inboundManagement.IOboundInfoAddArray> IOboundInfoAddArray;
 }

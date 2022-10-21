@@ -54,6 +54,7 @@ public class LoginController {
             map.put("menu",menus);
             User user1 = this.userService.queryByUserName(userName);
             map.put("user",user1);
+            this.userService.updateTokenByUser(jwtToken,user);
             map.put("token",jwtToken);
             return R.ok(map);
 

@@ -31,4 +31,5 @@ public class AfficacyDescription {
     private Integer consumption;
     @ApiModelProperty(name = "unit",value = "单位",required = true)
     private String unit;
+    private Integer drugInfoId;
 }

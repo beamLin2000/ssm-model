@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxa.mapper.drugManagement.inventoryCountingManagement.InventoryCountingInfoArrayAllMapper">
+
+    <resultMap id="InventoryCountingInfoArrayAll" type="com.gxa.entity.drugManagement.inventoryCountingManagement.InventoryCountingInfoArrayAll">
+        <id property="id" column="id"></id>
+        <result property="countingInfoId" column="counting_info_id"></result>
+        <result property="inventoryId" column="inventory_id"></result>
+        <result property="countingStock" column="counting_stock"></result>
+        <result property="profitLoss" column="profit_loss"></result>
+        <result property="remarks" column="remarks"></result>
+
+        <result property="inventoryCountingInfo.id" column="id"></result>
+        <result property="inventoryCountingInfo.countSheetNo" column="count_sheet_no"></result>
+        <result property="inventoryCountingInfo.voucherPreparer" column="voucher_preparer"></result>
+        <result property="inventoryCountingInfo.countDate" column="count_date"></result>
+
+        <result property="inventoryInfo.drugInfoId" column="drug_info_id"></result>
+        <result property="inventoryInfo.locationNo" column="location_no"></result>
+
+        <result property="drugBasicInformation.id" column="id"></result>
+        <result property="drugBasicInformation.code" column="code"></result>
+        <result property="drugBasicInformation.commonNameDrug" column="drug_name"></result>
+        <result property="drugBasicInformation.drugType" column="drug_type"></result>
+        <result property="drugBasicInformation.drugSpecifications" column="specs"></result>
+        <result property="drugBasicInformation.manufacturer" column="manufacturer"></result>
+    </resultMap>
+
+    <insert id="saveAllArray" parameterType="com.gxa.entity.drugManagement.inventoryCountingManagement.InventoryCountingInfoArray">
+        INSERT INTO
+        `drugManagement_inventoryCounting_inventoryCountingInfoArraySon`
+       (counting_info_id,drug_info_id,counting_stock,profit_loss,remarks)
+        VALUE <foreach collection="inventoryCountingArrayToData" item="val" separator=",">
+        (null,#{val.countingInfoId},#{val.inventoryId},#{val.countingStock},#{val.profitLoss},#{val.remarks})
+    </foreach>
+
+    </insert>
+
+
+    <!--    主页查询所有-->
+    <select id="queryAll" resultMap="InventoryCountingInfoArrayAll">
+       SELECT d.code,d.drug_name,d.drug_type,d.specs,d.manufacturer,e.location_no,c.drug_info_id,
+       b.count_sheet_no,b.voucher_preparer,count_date,a.counting_info_id,a.inventory_id,a.counting_stock,a.profit_loss,a.remarks
+        FROM
+        drugManagement_inventoryCounting_inventoryCountingInfoArraySon a,
+        drugManagement_inventoryCounting_inventoryCountingInfo b,
+        drugManagement_inventoryManagement_inventoryInfo c,
+        drugManagement_drugInformationTenance_drugBasicInformation d,
+        `drugManagement_drugInformationTenance_drugOtherInformation` e
+
+        WHERE a.counting_info_id=b.id and a.inventory_id=c.id and  d.id=c.drug_info_id and d.id = e.drug_info_id  and b.id=#{inventoryCountingInfo.id}
+
+    </select>
+
+<!--    搜索-->
+    <select id="queryByruls" resultMap="InventoryCountingInfoArrayAll">
+        SELECT d.code,d.drug_name,d.drug_type,d.specs,d.manufacturer,c.location_no,c.drug_info_id,
+       b.count_sheet_no,b.voucher_preparer,count_date,a.counting_info_id,a.inventory_id,a.counting_stock,a.profit_loss,a.remarks
+        FROM
+        drugManagement_inventoryCounting_inventoryCountingInfoArraySon a,
+        drugManagement_inventoryCounting_inventoryCountingInfo b,
+        drugManagement_inventoryManagement_inventoryInfo c,
+        drugManagement_drugInformationTenance_drugBasicInformation d
+        WHERE a.counting_info_id=b.id and a.inventory_id=c.id and  d.id=c.drug_info_id
+            <if test="drugType != null and drugType != ''" >
+                and d.drug_type=#{drugType}
+            </if>
+
+            <if test="rules!=null and rules != ''">
+                and(d.code like concat('%',#{rules},'%') or
+                d.drug_name like concat('%',#{rules},'%') or
+                d.manufacturer like concat('%',#{rules},'%'))
+
+            </if>
+
+    </select>
+    <resultMap id="queryAllDrugInfo" type="com.gxa.entity.drugManagement.inventoryCountingManagement.InventoryCountingInfoArray">
+        <id column="id" property="id"/>
+        <result column="code" property="code"/>
+        <result column="drug_name" property="drugName"/>
+        <result column="location_no" property="locationNo"/>
+        <result column="drug_type" property="drugType"/>
+        <result column="specs" property="specs"/>
+        <result column="manufacturer" property="manufacturer"/>
+        <result column="stock" property="currentInventoryDataVolume"/>
+    </resultMap>
+    <select id="queryAllDrugInfo"
+            resultMap="queryAllDrugInfo">
+        SELECT
+         `b.id`,`b.code`,`b.drug_name`,`o.location_no`,`b.drug_type`,`b.specs`,`b.manufacturer`,`i.stock`
+         FROM
+        `drugManagement_drugInformationTenance_drugBasicInformation` AS b,
+        `drugManagement_drugInformationTenance_drugOtherInformation` AS o,
+        `drugManagement_inventoryManagement_inventoryInfo` AS i WHERE
+         b.id = o.drug_info_id AND o.drug_info_id = i.drug_info_id
+    </select>
+
+
+</mapper>

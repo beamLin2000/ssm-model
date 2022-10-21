@@ -12,5 +12,6 @@ public interface UserService {
     String querySaltByUserName(String userName);
     void updatePwd(String userName,String pwd);
     void updateUserByUser(User user);
-    void updateTokenByUser(User user);
+    void updateTokenByUser(String token,User user);
+    String queryToken(String token);
 }

@@ -1,6 +1,7 @@
 package com.gxa.entity.drugManagement.inventoryManagement;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.gxa.entity.drugManagement.drugInformationTenance.DrugBasicInformation;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -42,8 +43,8 @@ public class InventoryInfo {
     @ApiModelProperty(name = "dosage",value = "药品/剂型",required = true)
     private String dosage;
     //厂家
-    @ApiModelProperty(name = "manuFactor",value = "厂家",required = true)
-    private String manuFactor;
+    @ApiModelProperty(name = "manufactor",value = "厂家",required = true)
+    private String manufactor;
     //库存
     @ApiModelProperty(name = "stock",value = "库存数量",required = true)
     private Integer stock;
@@ -56,12 +57,13 @@ public class InventoryInfo {
 
 
     //收费类别
-    @ApiModelProperty(name = "chargeCategory",value = "收费类型",required = true)
-    private String chargeCategory;
+//    @ApiModelProperty(name = "chargeCategory",value = "收费类型",required = true)
+//    private String chargeCategory;
     //库存数量
 
-
-    //库存明细
+    //药品信息
+    private Integer drugInfoId;
+    //查看明细
     @ApiModelProperty(name = "inventoryDetails",value = "库存明细",required = true)
     private List<InventoryDetails> inventoryDetails;
 }

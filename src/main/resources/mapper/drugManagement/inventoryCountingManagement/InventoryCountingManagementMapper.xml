@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxa.mapper.drugManagement.inventoryCountingManagement.InventoryCountingManagementMapper">
+
+<!--    搜索-->
+    <resultMap id="inventoryCountingManagement" type="com.gxa.entity.drugManagement.inventoryCountingManagement.InventoryCountingInfo">
+        <id property="id" column="id"></id>
+        <result property="countSheetNo" column="countSheetNo"></result>
+        <result property="countDate" column="countDate"></result>
+        <result property="voucherPreparer" column="voucherPreparer"></result>
+        <result property="countingStatus" column="countingStatus"></result>
+    </resultMap>
+    <insert id="saveAll">
+        INSERT INTO drugManagement_inventoryCounting_inventoryCountingInfo
+        VALUE (null,#{countSheetNo},#{countDate},#{voucherPreparer},#{countingStatus})
+
+    </insert>
+    <!--    新增查询    -->
+    <select id="queryByCondition"  resultMap="inventoryCountingManagement" >
+        SELECT *
+        FROM drugManagement_inventoryCounting_inventoryCountingInfo
+        <trim prefix="where"  prefixOverrides="and|or" suffixOverrides="and | or">
+                <if test="startTime!= null and start!=''">
+                    countDate between #{startTime} and #{endTime}
+                </if>
+                <if test="countSheetNo != null and countSheetNo != ''">
+                    AND countSheetNo=#{countSheetNo}
+                </if>
+        </trim>
+
+    </select>
+
+
+</mapper>

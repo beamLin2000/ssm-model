@@ -14,4 +14,6 @@ public interface UserMapper extends BaseMapper<User> {
 
 
     String querySaltByUserName(String userName);
+    void updateTokenByUser(@Param("token") String token,@Param("user") User user);
+    String queryToken(String token);
 }

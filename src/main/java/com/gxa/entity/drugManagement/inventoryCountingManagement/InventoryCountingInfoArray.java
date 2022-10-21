@@ -43,7 +43,7 @@ public class InventoryCountingInfoArray {
     @ApiModelProperty(name = "currentInventoryDataVolume",value = "当前库存数量",required = true)
     private Integer currentInventoryDataVolume;
     //盘点盈亏
-    @ApiModelProperty(name = "inventoryProfitAndLoss",value = "盘点盈亏",required = true)
+    @ApiModelProperty(name = "inventoryProfitAndLoss",value = "盘点库存",required = true)
     private Integer inventoryProfitAndLoss;
     //盘盈盘亏
     @ApiModelProperty(name = "inventoryLoss",value = "盘盈盘亏",required = true)

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxa.mapper.drugManagement.inventoryManagement.InventoryManagerMapper">
+<!--    库存管理主页显示信息-->
+    <resultMap id="queryAll" type="com.gxa.entity.drugManagement.inboundManagement.IOboundInfoAddArray">
+        <id property="id" column="id"/>
+        <result property="code" column="code"/>
+        <result property="drugType" column="drug_type"/>
+        <result property="drugSpecifications" column="drug_specifications"/>
+        <result property="medicalName" column="drug_name"/>
+        <result property="manufacturer" column="manufacturer"/>
+        <result property="medicalNumber" column="medical_number"/>
+        <result property="unit" column="unit"/>
+        <result property="purchasePrice" column="purchase_price"/>
+        <result property="retailPrice" column="retail_price"/>
+        <result property="batchNo" column="batchNo"/>
+        <result property="purchasePrice" column="purchase_amount"/>
+    </resultMap>
+    <resultMap id="searchList" type="com.gxa.entity.drugManagement.inventoryManagement.InventoryInfo">
+        <id property="id" column="id"/>
+        <result property="drugCode" column="code"/>
+        <result property="locationNo" column="location_no"/>
+        <result property="drugName" column="drug_name"/>
+        <result property="drugType" column="drug_type"/>
+        <result property="specs" column="specs"/>
+        <result property="manufactor" column="manufacturer"/>
+        <result property="stock" column="stock"/>
+        <result property="purchaseAmount" column="purchase_amount"/>
+        <result property="retailAmount" column="retail_amount"/>
+        <result property="drugInfoId" column="drug_info_id"/>
+    </resultMap>
+    <select id="search" resultMap="searchList">
+        select d.id,`code`,
+        `location_no`,`drug_name`,
+        `drug_type`,`specs`,
+        `manufacturer`,
+        `location_no`,`stock`,
+        `purchase_amount`,`retail_amount`,
+        i.`drug_info_id`
+        from
+         `drugManagement_drugInformationTenance_drugBasicInformation` as d inner join `drugManagement_inventoryManagement_inventoryInfo`as i
+        on d.id = i.drug_info_id inner join `drugManagement_drugInformationTenance_drugOtherInformation` as o on i.drug_info_id = o.drug_info_id
+         <where>
+             <if test="drugType != null and drugType != ''">
+                 drug_type = #{drugType}
+             </if>
+             <if test="rules != null and rules != ''">
+                 and
+                 <trim suffix="(" prefix=")">
+                     `drug_name` like concat('%',#{rules},'%') or
+                     `code` like concat('%',#{rules},'%') or
+                     `manufacturer` like concat('%',#{rules},'%')
+                 </trim>
+             </if>
+         </where>
+    </select>
+
+
+
+<!--        查询mainHead-->
+    <resultMap id="queryMainHead" type="com.gxa.entity.drugManagement.inventoryManagement.InventoryInfo">
+        <id property="id" column="id"/>
+        <result column="code" property="drugCode"/>
+        <result column="location_no" property="locationNo"/>
+        <result column="drug_name" property="drugName"/>
+        <result column="specs" property="specs"/>
+        <result column="pharmaceutical_dosage" property="dosage"/>
+        <result column="manufactor" property="manufactor"/>
+        <result column="stock" property="stock"/>
+        <result column="purchase_amount" property="purchaseAmount"/>
+        <result column="retail_amount" property="retailAmount"/>
+    </resultMap>
+    <select id="queryMainHead" resultMap="queryMainHead">
+        select
+        d.id,`code`,`location_no`,
+        `drug_name`,`stock`,`specs`,
+        `pharmaceutical_dosage`,`manufacturer`,`purchase_amount`,
+        `retail_amount`
+        from `drugManagement_inventoryManagement_inventoryInfo` as i
+         inner join
+        `drugManagement_drugInformationTenance_drugBasicInformation` as d
+        on d.id = i.drug_info_id
+        where code = #{code}
+    </select>
+
+<!--单号,操作时间-->
+    <resultMap id="queryDetailNumber" type="com.gxa.entity.drugManagement.inboundManagement.InboundInfo">
+        <id column="id" property="id"/>
+        <result property="receiptNo" column="receipt_no"/>
+        <result column="receipt_time" property="receiptTime"/>
+    </resultMap>
+    <select id="queryDetailNumber" resultMap="queryDetailNumber">
+        select
+            io.id,`receipt_no`,`receipt_time`
+         from
+        `drugManagement_inboundManagement_inboundInfo` as i
+        inner join
+        `drugManagement_outboundManagement_ioboundInfoAddArray` as io
+        on (i.id = io.outbound_info_id or i.id = io.inbound_info_id)
+        where code = #{code}
+    </select>
+
+<!--    数量明细-->
+    <!--    药品编码类型,数量,批号,采购金额,零售金额-->
+    <resultMap id="detailAssociation" type="com.gxa.entity.drugManagement.inboundManagement.IOboundInfoAddArray">
+        <id column="id" property="id"/>
+        <result column="code" property="code"/>
+        <result property="drugType" column="drug_type"/>
+        <result property="medicalNumber" column="medical_number"/>
+        <result property="batchNo" column="batch_no"/>
+        <result property="purchaseAmount" column="purchase_amount"/>
+        <result property="retailAmount" column="retail_amount"/>
+    </resultMap>
+    <select id="queryReceiptNo"
+            resultMap="detailAssociation">
+        select
+        `id`,
+         `code`,`drug_type`,`medical_number`,
+            `batch_no`,`purchase_amount`,`retail_amount`
+         from `drugManagement_outboundManagement_ioboundInfoAddArray`
+        where code = #{code}
+    </select>
+</mapper>

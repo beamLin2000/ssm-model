@@ -11,8 +11,8 @@ import java.util.List;
  */
 public interface DrugInformationService {
     List<DrugBasicInformation> list();
-    List<DrugBasicInformation> search(String prescriptionCategory,String status,String createTime,String rules);
+    List<DrugBasicInformation> search(String prescriptionCategory,Integer status,String createTime,String rules);
     void editStatus(Integer id);
-    List<DrugBasicInformation> editPre(Integer id);
+    DrugBasicInformation editPre(Integer id);
     void save(DrugBasicInformation drugBasicInformation);
 }

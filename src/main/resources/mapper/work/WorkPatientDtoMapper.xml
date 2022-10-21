@@ -33,6 +33,12 @@
         WHERE r.registration_form=p.registration_form
           AND p.patient_documents=#{idCard} AND r.status='就诊中'
     </update>
+    <update id="updateStatus01">
+        UPDATE register r, patients p
+        SET r.`status`='已就诊'
+        WHERE r.registration_form=p.registration_form
+          AND p.patient_documents=#{idCard} AND r.status='就诊中'
+    </update>
     <insert id="addPatientPhyInfo">
         INSERT INTO medical_record_physique (sickTime,suit,present,previous,allergy,personalized,familyHistory,
                                              auxiliary,treatment,notes,temperature,breathe,blood,pulse,height,weight

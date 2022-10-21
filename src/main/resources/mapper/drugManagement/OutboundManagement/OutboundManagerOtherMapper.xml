@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxa.mapper.drugManagement.outboundManagement.OutboundManagerOtherMapper">
+
+    <resultMap id="queryAllOutboundType" type="com.gxa.entity.drugManagement.basicInfo.BasicInfo"></resultMap>
+    <select id="queryAllOutboundType" resultMap="queryAllOutboundType">
+        SELECT * FROM `drugManagement_basicInfo` where type_id = #{id};
+    </select>
+    <select id="queryAllWarehousingPersonnel" resultType="com.gxa.entity.drugManagement.basicInfo.BasicInfo"></select>
+
+    <resultMap id="search" type="com.gxa.entity.drugManagement.inboundManagement.IOboundInfoAddArray">
+        <id column="id" property="id"/>
+        <result column="code" property="code"/>
+        <result column="drug_type" property="drugType"/>
+        <result column="drug_specifications" property="drugSpecifications"/>
+        <result column="drug_name" property="medicalName"/>
+        <result column="manufacturer" property="manufacturer"/>
+        <result column="medical_number" property="medicalNumber"/>
+        <result column="unit" property="unit"/>
+        <result column="purchase_price" property="purchasePrice"/>
+        <result column="retail_price" property="retailPrice"/>
+        <result column="batch_no" property="batchNo"/>
+        <result column="expiry_drugs_date" property="expiryDrugsDate"/>
+        <result column="purchase_amount" property="purchaseAmount"/>
+        <result column="retail_amount" property="retailAmount"/>
+        <result column="inbound_info_id" property="inboundInfoId"/>
+        <result column="outbound_info_id" property="outboundInfoId"/>
+    </resultMap>
+    <select id="search" resultMap="search">
+        SELECT * FROM `drugManagement_outboundManagement_ioboundInfoAddArray`
+        <trim prefix="where" suffixOverrides="and" prefixOverrides="and">
+            <if test="drugType != null">
+                drug_type = #{drugType} and
+            </if>
+        </trim>
+        <if test="rules != null and rules != '' ">
+            and (code like concat('%',#{rules},'%')) or
+                (drug_name like concat ('%','rules','%'))
+        </if>
+
+    </select>
+
+</mapper>

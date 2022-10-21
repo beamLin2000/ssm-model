@@ -32,6 +32,7 @@ public class DrugOtherInformation {
     private String drugDescription;
     @ApiModelProperty(name = "remarks",value = "备注",required = true)
     private String remarks;
+    private Integer drugInfoId;
 
 }
 
