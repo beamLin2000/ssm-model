@@ -27,6 +27,10 @@
         INSERT INTO surcharges(name,price,num,person_name,person_idcard,toll_number)
         values (#{surChargeFee.surChargeName},#{surChargeFee.price},#{surChargeFee.num},#{drugRetail.patientName},#{drugRetail.patientDocuments},#{drugRetail.tollNum})
     </insert>
+    <insert id="saveToll">
+        INSERT INTO toll(toll_name,toll_age,toll_gender,toll_phone,toll_idcard,toll_number,toll_type,toll_doctor,toll_money,toll_state,toll_creat_time)
+        values (#{patientName},#{patientAge},#{patientGender},#{patientPhone},#{patientDocuments},#{tollNum},"药品零售",#{operator},#{tollMoney},1,#{creatTime})
+    </insert>
     <update id="updateStock" parameterType="com.gxa.entity.drugRetail.DrugMsg">
         UPDATE drugManagement_inventoryManagement_inventoryInfo
         SET stock=stock-#{num}
@@ -40,12 +44,12 @@
         drugManagement_drugInformationTenance_drugPackageInformation p
         <where>
             f.id=i.drug_info_id and f.id=p.drug_info_id
-            <if test="drugType !=null and drugType !='' ">
-                and f.drug_type=#{drugType}
-            </if>
-            <if test="drugCodeOrName !=null and drugCodeOrName !='' ">
-                and f.code=#{drugCodeOrName}
-            </if>
+        <if test="drugType !=null and drugType !='' ">
+            and f.drug_type=#{drugType}
+        </if>
+        <if test="drugCodeOrName !=null and drugCodeOrName !='' ">
+            and f.code=#{drugCodeOrName}
+        </if>
         </where>
     </select>
     <select id="queryByName" parameterType="com.gxa.entity.drugRetail.DrugQueryCondition" resultMap="drugChooseMsg">

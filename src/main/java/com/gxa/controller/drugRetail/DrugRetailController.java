@@ -8,9 +8,7 @@ import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,12 +20,25 @@ public class DrugRetailController {
 
     @PostMapping("/drugRetail/add")
     @ApiOperation(value = "保存接口",notes = "药品零售页保存",httpMethod = "POST")
+    @ApiResponses({
+            @ApiResponse(code = 0,message = "ok",response = String.class)
+    })
     public R add(@ApiParam(name = "drugRetail", value = "药品零售添加信息")@RequestBody DrugRetail drugRetail){
         System.out.println(drugRetail);
         R r = new R();
         drugRetail.setTollNum(OrderNo.orderNum());
+//        drugRetail.setTollType("药品零售");
+//        drugRetail.setTollState(1);
+        Date date = new Date();
+        long time = date.getTime();
+        date.setTime(time);
+        drugRetail.setCreatTime(date);
         this.drugRetailService.add(drugRetail);
-        return r.ok("success");
+        List<String> list = new ArrayList<>();
+        list.add(drugRetail.getTollNum());
+        Map map = new HashMap();
+        map.put("tollNum", list);
+        return r.ok(map);
     }
     @PostMapping ("/drugRetail/query")
     @ApiOperation(value = "查询药品接口",notes = "查询药品",httpMethod = "POST")

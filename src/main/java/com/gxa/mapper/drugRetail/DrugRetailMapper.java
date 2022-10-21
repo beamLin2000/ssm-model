@@ -8,6 +8,7 @@ import java.util.List;
 public interface DrugRetailMapper{
     void saveDrugMsg(@Param("drugRetail") DrugRetail drugRetail,@Param("drugMsg")DrugMsg drugMsgs);
     void savePatientMsg(DrugRetail drugRetail);
+    void saveToll(DrugRetail drugRetail);
     void saveSurchargeMsg(@Param("drugRetail") DrugRetail drugRetail,@Param("surChargeFee")SurChargeFee surChargeFees);
     void updateStock(DrugMsg drugMsgs);
     List<DrugChooseMsg> queryByCode(DrugQueryCondition drugQueryCondition);

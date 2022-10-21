@@ -22,8 +22,9 @@ public class DrugRetailServiceImpl implements DrugRetailService {
                 this.drugRetailMapper.saveDrugMsg(drugRetail,drugMsgs.get(i));
                 this.drugRetailMapper.updateStock(drugMsgs.get(i));
             }
-        this.drugRetailMapper.savePatientMsg(drugRetail);
-        if (drugRetail.getSurChargeFee().size() > 0){
+            this.drugRetailMapper.savePatientMsg(drugRetail);
+            this.drugRetailMapper.saveToll(drugRetail);
+        if (drugRetail.getSurChargeFee().size() > 0 &&  drugRetail.getSurChargeFee().get(0).getNum() != 0){
             List<SurChargeFee> surChargeFees = drugRetail.getSurChargeFee();
             for (int i = 0; i < drugRetail.getSurChargeFee().size(); i++) {
                 this.drugRetailMapper.saveSurchargeMsg(drugRetail,surChargeFees.get(i));

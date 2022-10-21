@@ -34,5 +34,12 @@ public class DrugRetail {
     private String operator;
     @ApiModelProperty(name = "surChargeFee",value = "附加费用")
     private List<SurChargeFee> surChargeFee;
+    @ApiModelProperty(name = "tollMoney",value = "总计费用")
+    private Double tollMoney;
+    @ApiModelProperty(name = "tollNum",value = "编号",hidden = true)
     private String tollNum;//编号
+//    private String tollType;//类型
+//    private Integer tollState;//收费状态
+    @ApiModelProperty(name = "creatTime",value = "创建时间",hidden = true)
+    private Date creatTime;//创建时间
 }
