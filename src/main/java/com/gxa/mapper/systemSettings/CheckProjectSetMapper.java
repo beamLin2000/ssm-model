@@ -17,5 +17,8 @@ public interface CheckProjectSetMapper {
     List<CPSMainTable> select1(CPSEdit cpsEdit);
     List<CPSMainTable> select2(CPSEdit cpsEdit);
     List<CPSViceTable> drop();
+    void dropA(String unit);
+    void dropB(String projectCategory);
+    void dropC(String invoiceItem);
     void change(int id);
 }

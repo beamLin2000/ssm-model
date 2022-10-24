@@ -14,4 +14,7 @@ public interface CheckProjectSetService {
     void delete(int id,String projectStatus);
     List<CPSMainTable> select(CPSEdit cpsEdit);
     List<CPSViceTable> drop();
+    void dropA(String unit);
+    void dropB(String projectCategory);
+    void dropC(String invoiceItem);
 }

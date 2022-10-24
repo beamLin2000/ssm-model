@@ -80,6 +80,35 @@ public class CheckProjectServiceImpl implements CheckProjectSetService {
         return drop;
     }
 
+    @Override
+    public void dropA(String unit) {
+        checkProjectSet_mapper.dropA(unit);
+
+//        if (unit.length()==0 && projectCategory.length()>0 && invoiceItem.length()>0){
+//            checkProjectSet_mapper.xll(projectCategory,invoiceItem);
+//        } if (unit.length()==0 && projectCategory.length()==0 && invoiceItem.length()>0){
+//            checkProjectSet_mapper.xxl(invoiceItem);
+//        } if (unit.length()==0 && projectCategory.length()==0 && invoiceItem.length()==0){
+//            System.out.println("");
+//        } if (unit.length()>0 && projectCategory.length()==0 && invoiceItem.length()>0){
+//            checkProjectSet_mapper.lxl(unit,invoiceItem);
+//        }if (unit.length()>0 && projectCategory.length()==0 && invoiceItem.length()==0){
+//            checkProjectSet_mapper.lxx(unit);
+//        }if (unit.length()>0 && projectCategory.length()>0 && invoiceItem.length()==0){
+//            checkProjectSet_mapper.lxx(unit,projectCategory);
+//        }
+//        checkProjectSet_mapper.dropA(unit,projectCategory,invoiceItem);
+    }
+
+    @Override
+    public void dropB(String projectCategory) {
+        checkProjectSet_mapper.dropB(projectCategory);
+    }
+
+    @Override
+    public void dropC(String invoiceItem) {
+        checkProjectSet_mapper.dropC(invoiceItem);
+    }
 
 
 }

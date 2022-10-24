@@ -14,8 +14,8 @@
 
     </resultMap>
     <insert id="insert">
-        insert into role(,creationTime,roleNumber,name,description,creationTime,createPerson,roleStatus)
-        values (#{creationTime},#{roleNumber},#{nameR},#{description},#{creationTime},#{createPerson},#{roleStatus})
+        insert into role(creationTime,roleNumber,name,description,createPerson,roleStatus)
+        values (#{creationTime},#{roleNumber},#{nameR},#{description},#{createPerson},#{roleStatus})
     </insert>
 
     <!--    <insert id="insert">-->
