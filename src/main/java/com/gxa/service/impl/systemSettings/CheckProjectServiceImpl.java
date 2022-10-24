@@ -3,12 +3,10 @@ package com.gxa.service.impl.systemSettings;
 import com.gxa.entity.systemSettings.CPSMainTable;
 import com.gxa.entity.systemSettings.CPSViceTable;
 import com.gxa.form.systemSettings.CPSEdit;
-import com.gxa.form.systemSettings.DropA;
 import com.gxa.mapper.systemSettings.CheckProjectSetMapper;
 import com.gxa.service.systemSettings.CheckProjectSetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Date;
 import java.util.List;

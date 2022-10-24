@@ -3,8 +3,6 @@
 import com.gxa.entity.systemSettings.CPSMainTable;
 import com.gxa.entity.systemSettings.CPSViceTable;
 import com.gxa.form.systemSettings.CPSEdit;
-import com.gxa.form.systemSettings.DropA;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
