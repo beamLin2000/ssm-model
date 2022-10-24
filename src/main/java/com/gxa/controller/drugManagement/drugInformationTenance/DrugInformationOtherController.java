@@ -6,10 +6,7 @@ import com.gxa.result.ResultUtils;
 import com.gxa.service.drugManagement.drugInformationTenance.DrugInformationOtherService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,8 +76,9 @@ public class DrugInformationOtherController {
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok")
     })
-    public Result drugTypeAdd(@ApiParam(value = "药品分类新增名字")String drugType){
-        drugInformationOtherService.addOneType(new BasicInfo(DRUG_TYPE_ID,drugType));
+    public Result drugTypeAdd(@ApiParam(value = "药品分类新增名字") @RequestBody BasicInfo basicInfo){
+        System.out.println("basicInfo"+basicInfo.getName());
+        drugInformationOtherService.addOneType(new BasicInfo(DRUG_TYPE_ID, basicInfo.getName()));
         return ResultUtils.buildFail(200,"ok",2L,null);
     }
 
@@ -107,8 +105,8 @@ public class DrugInformationOtherController {
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok")
     })
-    public Result drugDosageAdd(@ApiParam(value = "药品剂型新增名字")String drugDosage){
-        drugInformationOtherService.addOneType(new BasicInfo(DRUG_DOSAGE_ID,drugDosage));
+    public Result drugDosageAdd(@ApiParam(value = "药品剂型新增名字")@RequestBody BasicInfo basicInfo){
+        drugInformationOtherService.addOneType(new BasicInfo(DRUG_DOSAGE_ID, basicInfo.getName()));
         return ResultUtils.buildFail(200,"ok",0L,null);
     }
 
@@ -122,8 +120,8 @@ public class DrugInformationOtherController {
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok")
     })
-    public Result invoiceItemsAdd(@ApiParam(value = "新增发票名字")String invoiceItems){
-        drugInformationOtherService.addOneType(new BasicInfo(INVOICE_ITEMS_Id,invoiceItems));
+    public Result invoiceItemsAdd(@ApiParam(value = "新增发票名字")@RequestBody BasicInfo basicInfo){
+        drugInformationOtherService.addOneType(new BasicInfo(INVOICE_ITEMS_Id, basicInfo.getName()));
         return ResultUtils.buildFail(200,"ok",0L,null);
     }
 
@@ -148,8 +146,8 @@ public class DrugInformationOtherController {
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok",response = BasicInfo.class)
     })
-    public Result manufacturerAdd(@ApiParam(value = "生产厂家名字")String manufacturer){
-        drugInformationOtherService.addOneType(new BasicInfo(MANUFACTURER_ID,manufacturer));
+    public Result manufacturerAdd(@ApiParam(value = "生产厂家名字")@RequestBody BasicInfo basicInfo){
+        drugInformationOtherService.addOneType(new BasicInfo(MANUFACTURER_ID, basicInfo.getName()));
         return ResultUtils.buildFail(200,"ok",0L,null);
     }
 
@@ -174,9 +172,9 @@ public class DrugInformationOtherController {
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok",response = BasicInfo.class)
     })
-    public Result packingUnitAdd(@ApiParam(value = "包装单位新增名字")String packingUnit){
-        System.out.println(packingUnit);
-        drugInformationOtherService.addOneType(new BasicInfo(PACKING_UNIT,packingUnit));
+    public Result packingUnitAdd(@ApiParam(value = "包装单位新增名字")@RequestBody BasicInfo basicInfo){
+
+        drugInformationOtherService.addOneType(new BasicInfo(PACKING_UNIT, basicInfo.getName()));
         return ResultUtils.buildFail(200,"ok",0L,null);
     }
 
@@ -201,9 +199,9 @@ public class DrugInformationOtherController {
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok",response = BasicInfo.class)
     })
-    public Result basicUnitAdd(@ApiParam(value = "基本系数名字")String basicUnit){
-        drugInformationOtherService.addOneType(new BasicInfo(BASIC_UNIT_ID,basicUnit));
-        System.out.println(basicUnit);
+    public Result basicUnitAdd(@ApiParam(value = "基本系数名字")@RequestBody BasicInfo basicInfo){
+        drugInformationOtherService.addOneType(new BasicInfo(BASIC_UNIT_ID, basicInfo.getName()));
+
         return ResultUtils.buildFail(200,"ok",0L,null);
     }
 
@@ -228,9 +226,9 @@ public class DrugInformationOtherController {
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok",response = BasicInfo.class)
     })
-    public Result dosageUnitAdd(@ApiParam(value = "新增剂量系数名字")String dosageUnit){
-        System.out.println(dosageUnit);
-        drugInformationOtherService.addOneType(new BasicInfo(DOSAGE_UNIT_ID,dosageUnit));
+    public Result dosageUnitAdd(@ApiParam(value = "新增剂量系数名字")@RequestBody BasicInfo basicInfo){
+
+        drugInformationOtherService.addOneType(new BasicInfo(DOSAGE_UNIT_ID, basicInfo.getName()));
         return ResultUtils.buildFail(200,"ok",0L,null);
     }
     //剂量单位查询列表
@@ -253,9 +251,9 @@ public class DrugInformationOtherController {
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok")
     })
-    public Result useMethodAdd(@ApiParam(value = "使用方法名字")String useMethod){
-        drugInformationOtherService.addOneType(new BasicInfo(USE_METHOD_ID,useMethod));
-        System.out.println(useMethod);
+    public Result useMethodAdd(@ApiParam(value = "使用方法名字")@RequestBody BasicInfo basicInfo){
+        drugInformationOtherService.addOneType(new BasicInfo(USE_METHOD_ID, basicInfo.getName()));
+
         return ResultUtils.buildFail(200,"ok",0L,null);
     }
     //剂量系数查询列表

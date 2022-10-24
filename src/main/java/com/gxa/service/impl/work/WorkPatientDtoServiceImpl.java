@@ -10,10 +10,12 @@ import com.gxa.mapper.work.WorkPatientDtoMapper;
 import com.gxa.service.work.WorkPatientDtoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class WorkPatientDtoServiceImpl implements WorkPatientDtoService {
     @Autowired
     private WorkPatientDtoMapper workPatientDtoMapper;
@@ -82,6 +84,11 @@ public class WorkPatientDtoServiceImpl implements WorkPatientDtoService {
     @Override
     public void updateStatus(String idCard) {
         this.workPatientDtoMapper.updateStatus(idCard);
+    }
+
+    @Override
+    public void updateStatus01(String idCard) {
+        this.workPatientDtoMapper.updateStatus01(idCard);
     }
 
     @Override

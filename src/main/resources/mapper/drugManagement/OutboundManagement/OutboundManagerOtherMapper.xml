@@ -4,13 +4,15 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gxa.mapper.drugManagement.outboundManagement.OutboundManagerOtherMapper">
 
-    <resultMap id="queryAllOutboundType" type="com.gxa.entity.drugManagement.basicInfo.BasicInfo"></resultMap>
-    <select id="queryAllOutboundType" resultMap="queryAllOutboundType">
+    <resultMap id="queryAllOutboundTypes" type="com.gxa.entity.drugManagement.basicInfo.BasicInfo"></resultMap>
+    <select id="queryAllOutboundType" resultMap="queryAllOutboundTypes">
         SELECT * FROM `drugManagement_basicInfo` where type_id = #{id};
     </select>
-    <select id="queryAllWarehousingPersonnel" resultType="com.gxa.entity.drugManagement.basicInfo.BasicInfo"></select>
+    <select id="queryAllWarehousingPersonnel" resultType="com.gxa.entity.drugManagement.basicInfo.BasicInfo">
+        SELECT `name` FROM `user`;
+    </select>
 
-    <resultMap id="search" type="com.gxa.entity.drugManagement.inboundManagement.IOboundInfoAddArray">
+    <resultMap id="searchs" type="com.gxa.entity.drugManagement.inboundManagement.IOboundInfoAddArray">
         <id column="id" property="id"/>
         <result column="code" property="code"/>
         <result column="drug_type" property="drugType"/>
@@ -28,7 +30,7 @@
         <result column="inbound_info_id" property="inboundInfoId"/>
         <result column="outbound_info_id" property="outboundInfoId"/>
     </resultMap>
-    <select id="search" resultMap="search">
+    <select id="search" resultMap="searchs">
         SELECT * FROM `drugManagement_outboundManagement_ioboundInfoAddArray`
         <trim prefix="where" suffixOverrides="and" prefixOverrides="and">
             <if test="drugType != null">

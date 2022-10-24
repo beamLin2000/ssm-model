@@ -75,7 +75,7 @@ public class WorkConeroller {
     })
     public R patientList(@RequestBody WorkSelectDto workSelectDto){
 
-        if(!workSelectDto.getStatus().equals("未就诊")){
+        if(workSelectDto.getStatus()!=null&&!workSelectDto.getStatus().equals("")&&!workSelectDto.getStatus().equals("未就诊")){
             return R.error("fail");
         }
         WorkPatientDto workPatientDto = null;
@@ -202,7 +202,7 @@ public class WorkConeroller {
     //保存患者信息
     @PostMapping("/work/savePatient")
     @ResponseBody
-    @ApiOperation(value = "工作台的接诊里面的",notes = "保存")
+    @ApiOperation(value = "工作台的接诊里面的保存",notes = "保存")
     @ApiResponses({
             @ApiResponse(code = 0,message = "ok",response = PatientAllInfoDto.class)
     })
@@ -260,7 +260,7 @@ public class WorkConeroller {
         }
         Charge charge = new Charge("处方收费","未收费",orderNum,prescriptions.getTotalMoney(),0.0,"","",null);
         this.workPatientDtoService.addCharge(charge,relation);
-
+        this.workPatientDtoService.updateStatus01(relation.getIdCard());
         R r = new R();
 
 

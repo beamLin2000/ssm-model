@@ -1,5 +1,6 @@
 package com.gxa.controller.drugManagement.drugInformationTenance;
 
+import com.gxa.entity.drugManagement.basicInfo.BasicInfo;
 import com.gxa.entity.drugManagement.drugInformationTenance.*;
 import com.gxa.result.Result;
 import com.gxa.result.ResultUtils;
@@ -43,12 +44,16 @@ public class DrugInformationController {
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok",response =DrugBasicInformation.class )
     })
-    public Result search(@ApiParam(name = "prescriptionCategory",value = "处方类别") String prescriptionCategory,
-                         @ApiParam(name = "status",value = "药品状态") Integer status,
-                         @ApiParam(name = "createTime",value = "创建时间") String createTime,
-                         @ApiParam(name = "rules",value = "药品名称/编码/生成厂家") String rules){
-        System.out.println(prescriptionCategory+","+status+","+createTime+","+rules);
-        List<DrugBasicInformation> search = drugInformationService.search(prescriptionCategory, status, createTime, rules);
+    public Result search(@ApiParam(name = "drugType",value = "处方类别") @RequestParam("drugType") String drugType,
+                         @ApiParam(name = "status",value = "药品状态")@RequestParam("status") String status,
+                         @ApiParam(name = "createTime",value = "创建时间")@RequestParam("createTime") String createTime,
+                         @ApiParam(name = "rules",value = "药品名称/编码/生成厂家")@RequestParam("rules") String rules){
+        System.out.println(drugType+","+status+","+createTime+","+rules);
+        Integer statusNum = null;
+        if (!status.equals("NaN") && status.length() != 0){
+            statusNum = Integer.parseInt(status);
+        }
+        List<DrugBasicInformation> search = drugInformationService.search(drugType,statusNum,createTime, rules);
         return ResultUtils.buildFail(200,"ok",Long.valueOf(search.size()),search);
     }
 
@@ -58,8 +63,8 @@ public class DrugInformationController {
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok")
     })
-    public Result editStatus(@ApiParam( name = "id",value = "需要被修改状态的id")Integer id){
-        drugInformationService.editStatus(id);
+    public Result editStatus(@ApiParam( name = "id",value = "需要被修改状态的id") @RequestBody BasicInfo basicInfo){
+        drugInformationService.editStatus(basicInfo.getId());
         return ResultUtils.buildFail(200,"ok",2L,null);
     }
 
@@ -69,8 +74,9 @@ public class DrugInformationController {
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok",response = DrugBasicInformation.class )
     })
-    public Result editPre(@ApiParam(value = "需要被更新记录的id") Integer id){
-        DrugBasicInformation drugBasicInformations = drugInformationService.editPre(id);
+    public Result editPre(@ApiParam(value = "需要被更新记录的id") @RequestBody BasicInfo basicInfo){
+        System.out.println("查询的id=" + basicInfo.getId());
+        DrugBasicInformation drugBasicInformations = drugInformationService.editPre(basicInfo.getId());
         return ResultUtils.buildFail(200,"ok",2L,drugBasicInformations);
     }
 
@@ -82,7 +88,7 @@ public class DrugInformationController {
     })
     public Result save(@ApiParam(value = "药品信息提交接口")@RequestBody DrugBasicInformation drugBasicInformation){
         drugInformationService.save(drugBasicInformation);
-        System.out.println("drugBasicInformation");
+        System.out.println("drugBasicInformation"+drugBasicInformation);
         return ResultUtils.buildFail(200,"ok",2L,null);
     }
 

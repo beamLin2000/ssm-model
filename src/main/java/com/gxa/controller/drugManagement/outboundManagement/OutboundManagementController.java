@@ -1,5 +1,6 @@
 package com.gxa.controller.drugManagement.outboundManagement;
 
+import com.gxa.entity.drugManagement.basicInfo.BasicInfo;
 import com.gxa.entity.drugManagement.outboundManagement.OutboundInfo;
 import com.gxa.result.Result;
 import com.gxa.result.ResultUtils;
@@ -33,6 +34,7 @@ public class OutboundManagementController {
         try {
             outboundManagerService.saveAndEdit(outboundInfo);
         } catch (Exception e) {
+            e.printStackTrace();
             return ResultUtils.buildFail(300,"库存数量不足以出库",0L,null);
         }
         return ResultUtils.buildFail(200,"add",0L,null);
@@ -67,10 +69,10 @@ public class OutboundManagementController {
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok")
     })
-    public Result outboundAgain(@ApiParam(name = "id",value = "通过id去查询到数据") Integer id){
-        System.out.println("获取到的id="+id);
+    public Result outboundAgain(@ApiParam(name = "id",value = "通过id去查询到数据") @RequestBody BasicInfo basicInfo){
+        System.out.println("获取到的id="+basicInfo.getId());
         System.out.println("outboundAgain");
-        OutboundInfo outboundInfo = outboundManagerService.queryById(id);
+        OutboundInfo outboundInfo = outboundManagerService.queryById(basicInfo.getId());
         return ResultUtils.buildFail(200,"outboundAgain",1L,outboundInfo);
     }
     //删除
@@ -79,10 +81,10 @@ public class OutboundManagementController {
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok")
     })
-    public Result deleteById(@ApiParam (value = "id",name = "根据id删除")Integer id){
+    public Result deleteById(@ApiParam (value = "id",name = "根据id删除") @RequestBody BasicInfo basicInfo){
         System.out.println("deleteById");
-        System.out.println("获取到的id="+id);
-        outboundManagerService.deleteById(id);
+        System.out.println("获取到的id="+basicInfo.getId());
+        outboundManagerService.deleteById(basicInfo.getId());
         return ResultUtils.buildFail(200,"deleteById",0L,null);
     }
 

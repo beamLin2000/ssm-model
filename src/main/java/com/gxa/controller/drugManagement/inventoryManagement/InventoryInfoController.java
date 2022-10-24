@@ -1,4 +1,5 @@
 package com.gxa.controller.drugManagement.inventoryManagement;
+import com.gxa.entity.drugManagement.basicInfo.BasicInfo;
 import com.gxa.entity.drugManagement.inboundManagement.IOboundInfoAddArray;
 import com.gxa.entity.drugManagement.inventoryManagement.InventoryInfo;
 import com.gxa.result.Result;
@@ -55,9 +56,9 @@ public class InventoryInfoController {
   @ApiResponses({
           @ApiResponse(code = 200,message = "ok",response = InventoryInfo.class)//,
   })
-  public Result queryDetails(@ApiParam("根据id查看单条数据明细")Integer id,String code){
-    System.out.println(id+","+code);
-    InventoryInfo inventoryInfo = inventoryManagerService.queryIOboundInfoAddArrayById(id, code);
+  public Result queryDetails(@ApiParam("根据id查看单条数据明细")BasicInfo basicInfo, String code){
+    System.out.println("获取到的id="+basicInfo.getId()+","+code);
+    InventoryInfo inventoryInfo = inventoryManagerService.queryIOboundInfoAddArrayById(basicInfo.getId(), code);
     return ResultUtils.buildFail(200,"ok",0L,inventoryInfo);
   }
 }

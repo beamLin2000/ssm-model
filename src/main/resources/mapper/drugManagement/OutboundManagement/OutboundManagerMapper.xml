@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gxa.mapper.drugManagement.outboundManagement.OutboundManagerMapper">
 
-    <resultMap id="queryAll" type="com.gxa.entity.drugManagement.outboundManagement.OutboundInfo">
+    <resultMap id="queryAlls" type="com.gxa.entity.drugManagement.outboundManagement.OutboundInfo">
         <id property="id" column="id"/>
         <result property="deliveryOrderNo" column="receipt_no"/>
         <result property="deliveryType" column="receipt_type"/>
@@ -80,7 +80,7 @@
     </update>
 
     <!--    查询所有-->
-    <select id="queryAll" resultMap="queryAll">
+    <select id="queryAll" resultMap="queryAlls">
         SELECT * FROM `drugManagement_inboundManagement_inboundInfo`
                  <choose>
                  <!--判断是否为查询所有-->
@@ -95,12 +95,27 @@
 
 
 <!--    根据条件查询-->
-    <select id="search" resultMap="queryAll" >
+    <select id="search" resultMap="queryAlls" >
         SELECT * FROM `drugManagement_inboundManagement_inboundInfo`
             <trim prefix="where" suffixOverrides="and" prefixOverrides="and">
-                <if test="auditStatus != null and auditStatus != '' ">
-                audit_status = #{auditStatus} and (`supplier_name`='' or`supplier_name` is null ) and
-                </if>
+<!--                <if test="auditStatus != null and auditStatus != '' ">-->
+<!--                audit_status = #{auditStatus} and (`supplier_name`='' or`supplier_name` is null ) and-->
+<!--                </if>-->
+            <choose>
+                <when test="auditStatus == 0">
+                    audit_status = 0 and (`supplier_name`='' or`supplier_name` is null ) and
+                </when>
+                <when test="auditStatus == 1">
+                    audit_status = 1 and (`supplier_name`='' or`supplier_name` is null ) and
+                </when>
+
+                <when test="auditStatus == 2">
+                    audit_status = 2 and (`supplier_name`='' or`supplier_name` is null ) and
+                </when>
+                <otherwise>
+                (`supplier_name`='' or`supplier_name` is null ) and
+                </otherwise>
+            </choose>
                 <if test="deliveryType != null and deliveryType != '' ">
                 receipt_type = #{deliveryType} and
                 </if>
@@ -117,14 +132,14 @@
     </select>
 
     <!--    根据id查询出库信息-->
-    <select id="queryById" resultMap="queryAll">
+    <select id="queryById" resultMap="queryAlls">
         SELECT * FROM `drugManagement_inboundManagement_inboundInfo`
                  where id = #{id} and (`supplier_name`='' or`supplier_name` is null )
     </select>
 
 <!--    根据id查询小表的信息-->
     <!--    仅仅查看入库药品-->
-    <resultMap id="queryArrayById" type="com.gxa.entity.drugManagement.inboundManagement.IOboundInfoAddArray">
+    <resultMap id="queryArrayByIds" type="com.gxa.entity.drugManagement.inboundManagement.IOboundInfoAddArray">
         <id column="id" property="id"/>
         <result column="code" property="code"/>
         <result column="drug_type" property="drugType"/>
@@ -142,7 +157,7 @@
         <result column="inbound_info_id" property="inboundInfoId"/>
         <result column="outbound_info_id" property="outboundInfoId"/>
     </resultMap>
-    <select id="queryArrayById" resultMap="queryArrayById">
+    <select id="queryArrayById" resultMap="queryArrayByIds">
         select * from `drugManagement_outboundManagement_ioboundInfoAddArray` where outbound_info_id = #{id}
     </select>
 

@@ -50,12 +50,12 @@ public class InventoryCountingManagementServiceImpl implements InventoryCounting
     @Override
     public void saveAllData(InventoryCountingInfo inventoryCountingInfo) {
         //查询所有
-        List<InventoryCountingInfo> inventoryCountingInfos1 = this.queryAll();
+        List<InventoryCountingInfo> inventoryCountingInfos1 = inventoryCountingManagementMapper.queryAll();
         StringBuilder code = new StringBuilder("SA");
         if(inventoryCountingInfos1.size()==0){
             code.append("20221022");
         }else{
-            code.append(Integer.parseInt(inventoryCountingInfos1.get(inventoryCountingInfos1.size()-1).getCountSheetNo().substring(2))+1);
+            code.append(Long.parseLong(inventoryCountingInfos1.get(inventoryCountingInfos1.size()-1).getCountSheetNo().substring(2))+1);
         }
         //定义todata
         List<InventoryCountingArrayToData> inventoryCountingArrayToData = new ArrayList<>();

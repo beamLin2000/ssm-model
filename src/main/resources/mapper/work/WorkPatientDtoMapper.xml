@@ -62,7 +62,7 @@
     </insert>
     <insert id="addSurcharges">
         INSERT INTO surcharges (`name`,price,person_name,person_idcard,create_time,toll_number)
-        VALUES (#{surcharges.name},#{surcharges.price},#{relation.personName},#{relation.idCard},#{relation.createTime},#{orderNum.})
+        VALUES (#{surcharges.name},#{surcharges.price},#{relation.personName},#{relation.idCard},#{relation.createTime},#{orderNum})
     </insert>
     <insert id="addprescriptionsInfo">
         INSERT INTO prescriptions (doctorName,totalMoney,prescriptionsNum,idCard,personName,createTime)

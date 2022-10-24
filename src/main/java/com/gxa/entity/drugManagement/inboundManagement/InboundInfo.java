@@ -69,6 +69,6 @@ public class InboundInfo {
     private String auditDate;
     // 添加药品
     @ApiModelProperty(name = "InboundInfoAddArray",value = "添加药品",required = true)
-    private List<IOboundInfoAddArray> IOboundInfoAddArray;
+    private List<IOboundInfoAddArray> iOboundInfoAddArray;
 
 }

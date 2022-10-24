@@ -19,6 +19,10 @@ import lombok.NoArgsConstructor;
 public class DrugPriceAdjustInfoList {
     @ApiModelProperty(name = "id",value = "主键id")
     private Integer id;
+    @ApiModelProperty(name = "code",value = "药品编码",required = true)
+    private String code;
+    @ApiModelProperty(name = "drugName",value = "药品名称",required = true)
+    private String drugName;
     //采购编号
     @ApiModelProperty(name = "purchaseNo",value = "采购编号",required = true)
     private String purchaseNo;
@@ -55,4 +59,7 @@ public class DrugPriceAdjustInfoList {
     //操作员
     @ApiModelProperty(name = "operator",value = "操作员",required = true)
     private String operator;
+
+    @ApiModelProperty(name = "inboundArrayId",value = "inboundArrayId",required = true)
+    private Integer inboundArrayId;
 }

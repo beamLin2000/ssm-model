@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gxa.mapper.drugManagement.inboundManagement.InboundManagerMapper">
-    <resultMap id="queryAll" type="com.gxa.entity.drugManagement.inboundManagement.InboundInfo">
+    <resultMap id="queryAlls" type="com.gxa.entity.drugManagement.inboundManagement.InboundInfo">
         <id property="id" column="id"/>
         <result property="receiptNo" column="receipt_no"/>
         <result property="receiptType" column="receipt_type"/>
@@ -21,7 +21,7 @@
         <result property="auditDate" column="audit_date"/>
     </resultMap>
     <!--    主页,查询所有 入库-->
-    <select id="queryAll" resultMap="queryAll">
+    <select id="queryAll" resultMap="queryAlls">
         select * from `drugManagement_inboundManagement_inboundInfo`
                  <choose>
                      <when test="isAll != null and isAll !=''">
@@ -36,12 +36,12 @@
 
 <!--    编辑与查看信息
             仅仅查看入库信息-->
-    <select id="queryById" resultMap="queryAll">
+    <select id="queryById" resultMap="queryAlls">
         select * from `drugManagement_inboundManagement_inboundInfo` where id = #{id} and `supplier_name` is not null
     </select>
 
     <!--    仅仅查看入库药品-->
-    <resultMap id="queryArrayById" type="com.gxa.entity.drugManagement.inboundManagement.IOboundInfoAddArray">
+    <resultMap id="queryArrayByIds" type="com.gxa.entity.drugManagement.inboundManagement.IOboundInfoAddArray">
         <id column="id" property="id"/>
         <result column="code" property="code"/>
         <result column="drug_type" property="drugType"/>
@@ -59,7 +59,7 @@
         <result column="inbound_info_id" property="inboundInfoId"/>
         <result column="outbound_info_id" property="outboundInfoId"/>
     </resultMap>
-    <select id="queryArrayById" resultMap="queryArrayById">
+    <select id="queryArrayById" resultMap="queryArrayByIds">
         select * from `drugManagement_outboundManagement_ioboundInfoAddArray` where inbound_info_id = #{id}
     </select>
 
@@ -84,13 +84,19 @@
             </if>
             <if test="rules!=null and rules != ''">
                 and(receipt_no like concat('%',#{rules},'%') or
-                su_ppliername like concat('%',#{rules},'%'))
+                supplier_name like concat('%',#{rules},'%'))
             </if>
         </trim>
 
     </select>
+    <select id="queryIoArrayIdByInboundId" resultType="java.lang.Integer">
+        SELECT `id` FROM drugManagement_outboundManagement_ioboundInfoAddArray where inbound_info_id in
+        (<foreach collection="ioInfoID" item="ioInfoID" separator=",">
+        #{ioInfoID}
+        </foreach>)
+    </select>
 
-<!--    保存主页入库信息-->
+    <!--    保存主页入库信息-->
     <insert id="saveInboundInfo">
         insert into `drugManagement_inboundManagement_inboundInfo` values
         (#{id},#{receiptNo},

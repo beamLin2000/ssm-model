@@ -17,7 +17,7 @@ public interface OutboundManagerMapper {
     List<OutboundInfo> queryAll(@Param("isAll") String isAll);
 
     //主页搜索功能
-    List<OutboundInfo> search(@Param("auditStatus") Integer auditStatus,
+    List<OutboundInfo> search(@Param("auditStatus") String auditStatus,
                               @Param("deliveryType") String deliveryType,
                               @Param("rules") String rules);
 

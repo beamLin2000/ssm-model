@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * @author :林溪
  * @date : 2022/10/12 14:16
@@ -36,7 +38,8 @@ public class OutboundManagementOtherController {
     })
     public Result outboundPerson(){
         System.out.println("outboundPerson");
-        return ResultUtils.buildFail(200,"outboundPerson",0L,outboundManagerOtherService);
+        List<BasicInfo> basicInfos = outboundManagerOtherService.queryAllWarehousingPersonnel();
+        return ResultUtils.buildFail(200,"outboundPerson",Long.valueOf(basicInfos.size()),basicInfos);
     }
     //出库类型
     @GetMapping("/outboundType")

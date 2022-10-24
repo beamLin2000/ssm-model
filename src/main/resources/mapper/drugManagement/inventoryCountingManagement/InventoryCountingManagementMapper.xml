@@ -5,12 +5,12 @@
 <mapper namespace="com.gxa.mapper.drugManagement.inventoryCountingManagement.InventoryCountingManagementMapper">
 
 <!--    搜索-->
-    <resultMap id="inventoryCountingManagement" type="com.gxa.entity.drugManagement.inventoryCountingManagement.InventoryCountingInfo">
+    <resultMap id="inventoryCountingManagements" type="com.gxa.entity.drugManagement.inventoryCountingManagement.InventoryCountingInfo">
         <id property="id" column="id"></id>
-        <result property="countSheetNo" column="countSheetNo"></result>
-        <result property="countDate" column="countDate"></result>
-        <result property="voucherPreparer" column="voucherPreparer"></result>
-        <result property="countingStatus" column="countingStatus"></result>
+        <result property="countSheetNo" column="count_sheet_no"></result>
+        <result property="countDate" column="count_date"></result>
+        <result property="voucherPreparer" column="voucher_preparer"></result>
+        <result property="countingStatus" column="counting_status"></result>
     </resultMap>
     <insert id="saveAll">
         INSERT INTO drugManagement_inventoryCounting_inventoryCountingInfo
@@ -18,18 +18,29 @@
 
     </insert>
     <!--    新增查询    -->
-    <select id="queryByCondition"  resultMap="inventoryCountingManagement" >
-        SELECT *
+    <select id="queryByCondition"  resultMap="inventoryCountingManagements" >
+        SELECT `id`,`count_sheet_no`,`count_date`,`voucher_preparer`,`counting_status`
         FROM drugManagement_inventoryCounting_inventoryCountingInfo
         <trim prefix="where"  prefixOverrides="and|or" suffixOverrides="and | or">
                 <if test="startTime!= null and start!=''">
-                    countDate between #{startTime} and #{endTime}
+                    count_date between #{startTime} and #{endTime}
                 </if>
                 <if test="countSheetNo != null and countSheetNo != ''">
-                    AND countSheetNo=#{countSheetNo}
+                    AND count_sheet_no=#{countSheetNo}
                 </if>
         </trim>
 
+    </select>
+    
+    <resultMap id="query" type="com.gxa.entity.drugManagement.inventoryCountingManagement.InventoryCountingInfo">
+        <id column="id" property="id"/>
+        <result column="count_sheet_no" property="countSheetNo"/>
+        <result column="count_date" property="countDate"/>
+        <result column="voucher_preparer" property="voucherPreparer"/>
+        <result column="counting_status" property="countingStatus"/>
+    </resultMap>
+    <select id="queryAll" resultMap="query">
+        SELECT * FROM `drugManagement_inventoryCounting_inventoryCountingInfo`
     </select>
 
 

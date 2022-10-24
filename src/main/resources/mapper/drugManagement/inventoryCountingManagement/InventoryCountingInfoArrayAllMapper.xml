@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gxa.mapper.drugManagement.inventoryCountingManagement.InventoryCountingInfoArrayAllMapper">
 
-    <resultMap id="InventoryCountingInfoArrayAll" type="com.gxa.entity.drugManagement.inventoryCountingManagement.InventoryCountingInfoArrayAll">
+    <resultMap id="InventoryCountingInfoArrayAlls" type="com.gxa.entity.drugManagement.inventoryCountingManagement.InventoryCountingInfoArrayAll">
         <id property="id" column="id"></id>
         <result property="countingInfoId" column="counting_info_id"></result>
         <result property="inventoryId" column="inventory_id"></result>
@@ -31,7 +31,7 @@
     <insert id="saveAllArray" parameterType="com.gxa.entity.drugManagement.inventoryCountingManagement.InventoryCountingInfoArray">
         INSERT INTO
         `drugManagement_inventoryCounting_inventoryCountingInfoArraySon`
-       (counting_info_id,drug_info_id,counting_stock,profit_loss,remarks)
+       (id,counting_info_id,drug_info_id,counting_stock,profit_loss,remarks)
         VALUE <foreach collection="inventoryCountingArrayToData" item="val" separator=",">
         (null,#{val.countingInfoId},#{val.inventoryId},#{val.countingStock},#{val.profitLoss},#{val.remarks})
     </foreach>
@@ -40,9 +40,9 @@
 
 
     <!--    主页查询所有-->
-    <select id="queryAll" resultMap="InventoryCountingInfoArrayAll">
+    <select id="queryAll" resultMap="InventoryCountingInfoArrayAlls">
        SELECT d.code,d.drug_name,d.drug_type,d.specs,d.manufacturer,e.location_no,c.drug_info_id,
-       b.count_sheet_no,b.voucher_preparer,count_date,a.counting_info_id,a.inventory_id,a.counting_stock,a.profit_loss,a.remarks
+       b.count_sheet_no,b.voucher_preparer,count_date,a.counting_info_id,a.drug_info_id,a.counting_stock,a.profit_loss,a.remarks
         FROM
         drugManagement_inventoryCounting_inventoryCountingInfoArraySon a,
         drugManagement_inventoryCounting_inventoryCountingInfo b,
@@ -50,20 +50,20 @@
         drugManagement_drugInformationTenance_drugBasicInformation d,
         `drugManagement_drugInformationTenance_drugOtherInformation` e
 
-        WHERE a.counting_info_id=b.id and a.inventory_id=c.id and  d.id=c.drug_info_id and d.id = e.drug_info_id  and b.id=#{inventoryCountingInfo.id}
+        WHERE a.counting_info_id=b.id and a.drug_info_id=c.id and  d.id=c.drug_info_id and d.id = e.drug_info_id  and b.id=#{inventoryCountingInfo.id}
 
     </select>
 
 <!--    搜索-->
-    <select id="queryByruls" resultMap="InventoryCountingInfoArrayAll">
-        SELECT d.code,d.drug_name,d.drug_type,d.specs,d.manufacturer,c.location_no,c.drug_info_id,
-       b.count_sheet_no,b.voucher_preparer,count_date,a.counting_info_id,a.inventory_id,a.counting_stock,a.profit_loss,a.remarks
+    <select id="queryByruls" resultMap="InventoryCountingInfoArrayAlls">
+        SELECT d.code,d.drug_name,d.drug_type,d.specs,d.manufacturer,c.drug_info_id,
+       b.count_sheet_no,b.voucher_preparer,count_date,a.counting_info_id,a.drug_info_id,a.counting_stock,a.profit_loss,a.remarks
         FROM
         drugManagement_inventoryCounting_inventoryCountingInfoArraySon a,
         drugManagement_inventoryCounting_inventoryCountingInfo b,
         drugManagement_inventoryManagement_inventoryInfo c,
         drugManagement_drugInformationTenance_drugBasicInformation d
-        WHERE a.counting_info_id=b.id and a.inventory_id=c.id and  d.id=c.drug_info_id
+        WHERE a.counting_info_id=b.id and a.drug_info_id=c.id and  d.id=c.drug_info_id
             <if test="drugType != null and drugType != ''" >
                 and d.drug_type=#{drugType}
             </if>
@@ -76,7 +76,7 @@
             </if>
 
     </select>
-    <resultMap id="queryAllDrugInfo" type="com.gxa.entity.drugManagement.inventoryCountingManagement.InventoryCountingInfoArray">
+    <resultMap id="queryAllDrugInfos" type="com.gxa.entity.drugManagement.inventoryCountingManagement.InventoryCountingInfoArray">
         <id column="id" property="id"/>
         <result column="code" property="code"/>
         <result column="drug_name" property="drugName"/>
@@ -87,9 +87,9 @@
         <result column="stock" property="currentInventoryDataVolume"/>
     </resultMap>
     <select id="queryAllDrugInfo"
-            resultMap="queryAllDrugInfo">
+            resultMap="queryAllDrugInfos">
         SELECT
-         `b.id`,`b.code`,`b.drug_name`,`o.location_no`,`b.drug_type`,`b.specs`,`b.manufacturer`,`i.stock`
+         b.`id`,b.`code`,b.`drug_name`,o.`location_no`,b.`drug_type`,b.`specs`,b.`manufacturer`,i.`stock`
          FROM
         `drugManagement_drugInformationTenance_drugBasicInformation` AS b,
         `drugManagement_drugInformationTenance_drugOtherInformation` AS o,

@@ -1,5 +1,6 @@
 package com.gxa.controller.drugManagement.inboundManagement;
 
+import com.gxa.entity.drugManagement.basicInfo.BasicInfo;
 import com.gxa.entity.drugManagement.inboundManagement.InboundInfo;
 import com.gxa.result.Result;
 import com.gxa.result.ResultUtils;
@@ -33,13 +34,14 @@ public class InboundManagerController {
         return ResultUtils.buildFail(200,"ok",Long.valueOf(inboundInfos.size()),inboundInfos);
     }
     //根据id查询
-    @GetMapping("/queryById")
+    @PostMapping("/queryById")
     @ApiOperation(value = "queryById",notes = "修改功能,根据id查询数据")
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok",response = InboundInfo.class )
     })
-    public Result queryById(@ApiParam("再次入库与查询功能所需id")Integer id){
-        InboundInfo inboundInfos = inboundManagerService.queryById(id);
+    public Result queryById(@ApiParam("再次入库与查询功能所需id") @RequestBody BasicInfo basicInfo){
+        System.out.println("获取到的id=" + basicInfo.getId());
+        InboundInfo inboundInfos = inboundManagerService.queryById(basicInfo.getId());
 
         return ResultUtils.buildFail(200,"ok",1L,inboundInfos);
     }
@@ -50,9 +52,9 @@ public class InboundManagerController {
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok")
     })
-    public Result delete(@ApiParam("删除数据所需id")Integer id){
-        System.out.println("删除功能"+id);
-        inboundManagerService.deleteById(id);
+    public Result delete(@ApiParam("删除数据所需id")@RequestBody BasicInfo basicInfo){
+        System.out.println("删除功能"+basicInfo.getId());
+        inboundManagerService.deleteById(basicInfo.getId());
         return ResultUtils.buildFail(200,"ok",30L,null);
     }
 

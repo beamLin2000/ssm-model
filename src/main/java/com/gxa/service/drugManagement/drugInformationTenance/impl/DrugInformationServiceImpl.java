@@ -47,6 +47,7 @@ public class DrugInformationServiceImpl implements DrugInformationService {
     public void editStatus(Integer id) {
         //根据id查询到需要修改的状态
         DrugBasicInformation drugBasicInformation = drugInformationMapper.queryStatusById(id);
+        System.out.println(drugBasicInformation);
         //状态取反,进行更新
         drugInformationMapper.updateStatus(id,drugBasicInformation.getStatus()==1?0:1);
     }
@@ -54,9 +55,14 @@ public class DrugInformationServiceImpl implements DrugInformationService {
     @Override
     public DrugBasicInformation editPre(Integer id) {
         DrugBasicInformation drugBasicInformation = drugInformationMapper.queryDrugBasicInformationById(id);
+        System.out.println("drugBasicInformation=" + drugBasicInformation);
         AfficacyDescription afficacyDescription = drugInformationMapper.queryAfficacyDescription(id);
+        System.out.println("afficacyDescription=" + afficacyDescription);
         DrugOtherInformation drugOtherInformation = drugInformationMapper.queryDrugOtherInformationById(id);
+        System.out.println("drugOtherInformation=" + drugOtherInformation);
         DrugPackageInformation drugPackageInformation = drugInformationMapper.queryDrugPackageInformationById(id);
+        System.out.println("drugPackageInformation=" + drugPackageInformation);
+
         drugBasicInformation.setAfficacyDescription(afficacyDescription);
         drugBasicInformation.setDrugOtherInformation(drugOtherInformation);
         drugBasicInformation.setDrugPackageInformation(drugPackageInformation);

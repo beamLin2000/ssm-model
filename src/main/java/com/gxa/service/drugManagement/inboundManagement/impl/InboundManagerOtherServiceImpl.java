@@ -28,7 +28,8 @@ public class InboundManagerOtherServiceImpl implements InboundManagerOtherServic
 
     @Override
     public List<BasicInfo> queryAllWarehousingPersonnel() {
-        return null;
+        List<BasicInfo> basicInfos = inboundManagerOtherMapper.queryAllWarehousingPersonnel();
+        return basicInfos;
     }
 
     @Override

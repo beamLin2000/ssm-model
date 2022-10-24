@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxa.mapper.drugManagement.drugPriceAdjustment.DrugPriceAdjustmentMapper">
+    <resultMap id="queryDrugPriceAdjustments" type="com.gxa.entity.drugManagement.drugPriceAdjustment.DrugPriceAdjustInfo">
+        <id property="id" column="id"/>
+        <result property="code" column="code"/>
+        <result property="drugName" column="drug_name"/>
+        <result property="drugType" column="drug_type"/>
+        <result property="specifications" column="specs"/>
+        <result property="pharmaceuticalDosage" column="pharmaceutical_dosage"/>
+        <result property="manufacture" column="manufacturer"/>
+    </resultMap>
+
+    <delete id="deleteByCode">
+    DELETE FROM drugManagement_drugPriceAdjustment_drugPriceAdjustInfoList WHERE drug_code = #{code}
+    </delete>
+
+    <select id="search" resultMap="queryDrugPriceAdjustments">
+SELECT d.id,d.code,d.drug_name,d.drug_type,d.specs,d.pharmaceutical_dosage,d.manufacturer FROM `drugManagement_drugInformationTenance_drugBasicInformation` as d
+<trim prefix="where" prefixOverrides="and|or" suffixOverrides="and|or">
+    <if test="drugType != null and drugType != '' ">
+        drug_type = #{drugType} and
+    </if>
+</trim>
+        <if test="rules != null and rules !=''">
+            and<trim prefix="(" suffix=")">
+            drug_name like concat('%',#{rules},'%') or
+            code like concat('%',#{rules},'%') or
+            manufacturer like concat('%',#{rules},'%')
+        </trim>
+        </if>
+    ORDER BY `code`;
+    </select>
+
+    <resultMap id="queryByCodeRes" type="com.gxa.entity.drugManagement.drugPriceAdjustment.DrugPriceAdjustInfoList">
+        <result property="code" column="code"/>
+        <result property="drugName" column="drug_name"/>
+        <result property="purchaseNo" column="receipt_no"/>
+        <result property="specs" column="drug_specifications"/>
+        <result property="inventory" column="medical_number"/>
+        <result property="batchNo" column="batch_no"/>
+        <result property="purchasePrice" column="purchase_price"/>
+        <result property="originalZeroPrice" column="retail_price"/>
+        <result property="spotSellingPrice" column="spot_selling_price"/>
+        <result property="priceDifference" column="price_difference"/>
+        <result property="proportion" column="proportion"/>
+        <result property="operationTime" column="operation_time"/>
+        <result property="operator" column="operator"/>
+        <result property="remarks" column="remarks"/>
+    </resultMap>
+
+    <insert id="saveDrugPriceAdjustInfoList">
+        INSERT INTO `drugManagement_drugPriceAdjustment_drugPriceAdjustInfoList` VALUES
+            <foreach collection="drugPriceAdjustInfoList" item="d" separator=",">
+                (NULL,#{d.code},#{d.drugName},#{d.purchaseNo},#{d.specs},#{d.inventory},#{d.batchNo},#{d.purchasePrice},#{d.originalZeroPrice},
+                #{d.spotSellingPrice},#{d.priceDifference},#{d.proportion},#{operationTime},#{operator},#{d.remarks},#{d.inboundArrayId})
+            </foreach>
+
+    </insert>
+
+    <select id="queryByCode" resultMap="queryByCodeRes">
+        SELECT a.code,a.drug_type,a.drug_name,b.receipt_no,a.drug_specifications,a.medical_number,a.batch_no,a.purchase_price,a.retail_price,c.spot_selling_price,c.price_difference,c.proportion,c.operator
+        FROM `drugManagement_outboundManagement_ioboundInfoAddArray` AS a
+        LEFT JOIN `drugManagement_inboundManagement_inboundInfo` as b
+            ON a.inbound_info_id = b.id
+        LEFT JOIN `drugManagement_drugPriceAdjustment_drugPriceAdjustInfoList` AS c
+            ON a.code = c.iobound_aray_id
+        WHERE a.code = #{code} and b.supplier_name is not null
+    </select>
+
+    <select id="searchDrugPriceAdjust" resultMap="queryDrugPriceAdjustments">
+        SELECT d.id,d.code,d.drug_name,d.drug_type,d.specs,d.pharmaceutical_dosage,d.manufacturer FROM `drugManagement_drugInformationTenance_drugBasicInformation` as d
+        <trim prefix="where" prefixOverrides="and|or" suffixOverrides="and|or">
+            <if test="drugType != null and drugType != '' ">
+                drug_type = #{drugType} and
+            </if>
+        </trim>
+        <if test="rules != null and rules !=''">
+            and<trim prefix="(" suffix=")">
+            drug_name like concat('%',#{rules},'%') or
+            code like concat('%',#{rules},'%') or
+            manufacturer like concat('%',#{rules},'%')
+        </trim>
+        </if>
+    </select>
+
+    <resultMap id="queryCounts" type="com.gxa.entity.drugManagement.basicInfo.BasicInfo">
+        <result column="c" property="id"/>
+        <result column="code" property="name"/>
+    </resultMap>
+    <select id="queryCount" resultMap="queryCounts">
+        SELECT COUNT(*) AS c , code FROM `drugManagement_outboundManagement_ioboundInfoAddArray` GROUP BY `code` ORDER BY `code`
+    </select>
+
+    <resultMap id="queryByIds" type="com.gxa.entity.drugManagement.drugPriceAdjustment.DrugPriceAdjustInfoList">
+        <result property="code" column="code"/>
+        <result property="drugName" column="drug_name"/>
+        <result property="purchaseNo" column="purchase_no"/>
+        <result property="specs" column="specs"/>
+        <result property="inventory" column="inventory"/>
+        <result property="batchNo" column="batch_no"/>
+        <result property="purchasePrice" column="purchase_price"/>
+        <result property="originalZeroPrice" column="retail_price"/>
+        <result property="spotSellingPrice" column="spot_selling_price"/>
+        <result property="priceDifference" column="price_difference"/>
+        <result property="proportion" column="proportion"/>
+        <result property="operationTime" column="operation_time"/>
+        <result property="operator" column="operator"/>
+        <result property="remarks" column="remarks"/>
+    </resultMap>
+
+    <select id="queryById" resultMap="queryByIds">
+        SELECT * FROM drugManagement_drugPriceAdjustment_drugPriceAdjustInfoList;
+    </select>
+
+</mapper>

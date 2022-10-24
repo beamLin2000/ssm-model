@@ -42,4 +42,5 @@ public interface InboundManagerMapper {
     //每次入库均需要对其值进行增加
     void updateInventoryInfo(@Param("newInventoryInfos") List<UpdateInventoryList> updateInventoryLists);
 
+    List<Integer> queryIoArrayIdByInboundId(@Param("ioInfoID") List<Integer> ioInfoID);
 }

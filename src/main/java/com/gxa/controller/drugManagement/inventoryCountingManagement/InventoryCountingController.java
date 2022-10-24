@@ -1,5 +1,6 @@
 package com.gxa.controller.drugManagement.inventoryCountingManagement;
 
+import com.gxa.entity.drugManagement.basicInfo.BasicInfo;
 import com.gxa.entity.drugManagement.inventoryCountingManagement.InventoryCountingInfo;
 import com.gxa.entity.drugManagement.inventoryCountingManagement.InventoryCountingInfoArray;
 import com.gxa.entity.drugManagement.inventoryCountingManagement.InventoryCountingInfoArrayAll;
@@ -50,24 +51,25 @@ public class InventoryCountingController {
         return ResultUtils.buildFail(200,"ok",0L,inventoryCountingInfos);
     }
 
-    @DeleteMapping("/delete")
+    @PostMapping("/delete")
     @ApiOperation(value = "delete",notes = "库存盘点删除功能")
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok")//,response = InventoryCountingInfo.class
     })
-    public Result delete(@ApiParam("需要被删除的数据id")@Param("id")Integer id){
-        this.inventoryCountingManagementService.deleteById(id);
+    public Result delete(@ApiParam("需要被删除的数据id")@RequestBody BasicInfo basicInfo){
+        this.inventoryCountingManagementService.deleteById(basicInfo.getId());
         return ResultUtils.buildFail(200,"ok",0L,null);
     }
 
-    @GetMapping("/queryById")
+    @PostMapping("/queryById")
     @ApiOperation(value = "queryById",notes = "库存盘点查看功能")
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok",response = InventoryCountingInfo.class)//,
     })
-    public Result queryById(@ApiParam("需要查看记录的id")@Param("id") Integer id){
-        List<InventoryCountingInfoArrayAll> inventoryCountingInfoArrayAlls = this.inventoryCountingInfoArrayAllService.queryAll(id);
-        return ResultUtils.buildFail(200,"ok",0L,inventoryCountingInfoArrayAlls);
+    public Result queryById(@ApiParam("需要查看记录的id") @RequestBody BasicInfo basicInfo){
+        List<InventoryCountingInfoArrayAll> inventoryCountingInfoArrayAlls = this.inventoryCountingInfoArrayAllService.queryAll(basicInfo.getId());
+        System.out.println(inventoryCountingInfoArrayAlls);
+        return ResultUtils.buildFail(200,"ok",Long.valueOf(inventoryCountingInfoArrayAlls.size()),inventoryCountingInfoArrayAlls);
     }
 
     @PostMapping("/save")

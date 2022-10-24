@@ -18,20 +18,20 @@
         <result property="batchNo" column="batchNo"/>
         <result property="purchasePrice" column="purchase_amount"/>
     </resultMap>
-    <resultMap id="searchList" type="com.gxa.entity.drugManagement.inventoryManagement.InventoryInfo">
+    <resultMap id="searchLists" type="com.gxa.entity.drugManagement.inventoryManagement.InventoryInfo">
         <id property="id" column="id"/>
-        <result property="drugCode" column="code"/>
+        <result property="code" column="code"/>
         <result property="locationNo" column="location_no"/>
-        <result property="drugName" column="drug_name"/>
+        <result property="medicalName" column="drug_name"/>
         <result property="drugType" column="drug_type"/>
         <result property="specs" column="specs"/>
-        <result property="manufactor" column="manufacturer"/>
+        <result property="manufacturer" column="manufacturer"/>
         <result property="stock" column="stock"/>
         <result property="purchaseAmount" column="purchase_amount"/>
         <result property="retailAmount" column="retail_amount"/>
         <result property="drugInfoId" column="drug_info_id"/>
     </resultMap>
-    <select id="search" resultMap="searchList">
+    <select id="search" resultMap="searchLists">
         select d.id,`code`,
         `location_no`,`drug_name`,
         `drug_type`,`specs`,
@@ -48,7 +48,7 @@
              </if>
              <if test="rules != null and rules != ''">
                  and
-                 <trim suffix="(" prefix=")">
+                 <trim suffix=")" prefix="(">
                      `drug_name` like concat('%',#{rules},'%') or
                      `code` like concat('%',#{rules},'%') or
                      `manufacturer` like concat('%',#{rules},'%')
@@ -60,21 +60,21 @@
 
 
 <!--        查询mainHead-->
-    <resultMap id="queryMainHead" type="com.gxa.entity.drugManagement.inventoryManagement.InventoryInfo">
+    <resultMap id="queryMainHeads" type="com.gxa.entity.drugManagement.inventoryManagement.InventoryInfo">
         <id property="id" column="id"/>
-        <result column="code" property="drugCode"/>
+        <result column="code" property="code"/>
         <result column="location_no" property="locationNo"/>
-        <result column="drug_name" property="drugName"/>
+        <result column="drug_name" property="medicalName"/>
         <result column="specs" property="specs"/>
         <result column="pharmaceutical_dosage" property="dosage"/>
-        <result column="manufactor" property="manufactor"/>
+        <result column="manufactor" property="manufacturer"/>
         <result column="stock" property="stock"/>
         <result column="purchase_amount" property="purchaseAmount"/>
         <result column="retail_amount" property="retailAmount"/>
     </resultMap>
-    <select id="queryMainHead" resultMap="queryMainHead">
+    <select id="queryMainHead" resultMap="queryMainHeads">
         select
-        d.id,`code`,`location_no`,
+        d.id,`code`,
         `drug_name`,`stock`,`specs`,
         `pharmaceutical_dosage`,`manufacturer`,`purchase_amount`,
         `retail_amount`
@@ -86,12 +86,12 @@
     </select>
 
 <!--单号,操作时间-->
-    <resultMap id="queryDetailNumber" type="com.gxa.entity.drugManagement.inboundManagement.InboundInfo">
+    <resultMap id="queryDetailNumbers" type="com.gxa.entity.drugManagement.inboundManagement.InboundInfo">
         <id column="id" property="id"/>
         <result property="receiptNo" column="receipt_no"/>
         <result column="receipt_time" property="receiptTime"/>
     </resultMap>
-    <select id="queryDetailNumber" resultMap="queryDetailNumber">
+    <select id="queryDetailNumber" resultMap="queryDetailNumbers">
         select
             io.id,`receipt_no`,`receipt_time`
          from

@@ -6,6 +6,8 @@ import com.gxa.entity.tolls.TollDrugs;
 import com.gxa.entity.work.*;
 import com.gxa.dto.work.WorkPatientDto;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.transaction.annotation.Transactional;
+
 
 public interface WorkPatientDtoMapper extends BaseMapper<WorkPatientDto> {
     WorkPatientDto queryWorkPatientDtoByPhoneNum(@Param("phoneNum") String phoneNum, @Param("status") String status);

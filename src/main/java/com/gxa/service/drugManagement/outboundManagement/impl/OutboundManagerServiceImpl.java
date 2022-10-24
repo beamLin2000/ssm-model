@@ -59,7 +59,14 @@ public class OutboundManagerServiceImpl implements OutboundManagerService {
 
     @Override
     public List<OutboundInfo> search(Integer auditStatus, String deliveryType, String rules) {
-        List<OutboundInfo> search = outboundManagerMapper.search(auditStatus, deliveryType, rules);
+        System.out.println("service获取到的aud=" + auditStatus + deliveryType + rules);
+        String aud = null;
+        if(auditStatus == null){
+            aud = "3";
+        }else {
+           aud =  String.valueOf(auditStatus);
+        }
+        List<OutboundInfo> search = outboundManagerMapper.search(aud, deliveryType, rules);
         return search;
     }
 
@@ -79,11 +86,10 @@ public class OutboundManagerServiceImpl implements OutboundManagerService {
             int size = outboundInfoList.size();
             if (size == 0) {//如果没有数据，那么第一条id为1
                 id = 1;
-                code = code.append("20221022");
+                code = code.append("202210220820");
             } else {
                 id = outboundInfoList.get(size - 1).getId() + 1;
-                String codePre = outboundInfoList.get(size - 1).getDeliveryOrderNo().substring(2);
-                code.append(String.valueOf(codePre)+1);
+                code.append(Long.parseLong(outboundInfoList.get(size - 1).getDeliveryOrderNo().substring(2))+1);
             }
             //将id赋值给出库单号的id
             outboundInfo.setId(id);
@@ -120,12 +126,13 @@ public class OutboundManagerServiceImpl implements OutboundManagerService {
                     if (updateInventoryList.getMedicalId().intValue() == info.getDrugInfoId().intValue()) {
                         //减少库存值
                         //如果库存不够
-                        if (updateInventoryList.getStock() < info.getStock()) {
+                        System.out.println("更新后的数量=" + updateInventoryList.getStock() + "库存" + info.getStock());
+                        if (updateInventoryList.getStock() > info.getStock()) {
                             System.out.println("库存不够");
                             new Exception("库存不够");
                         } else {
-                            System.out.println("当前库存"+updateInventoryList.getStock()+"，当前需要出库的数量"+info.getStock());
-                            updateInventoryLists.get(i).setStock(updateInventoryList.getStock() - info.getStock());
+                            System.out.println("当前库存"+info.getStock() +"，当前需要出库的数量"+ updateInventoryList.getStock());
+                            updateInventoryLists.get(i).setStock(info.getStock() - updateInventoryList.getStock());
                         }
                         break;
                     }
@@ -136,6 +143,9 @@ public class OutboundManagerServiceImpl implements OutboundManagerService {
             System.out.println("获取了所有的新增库存id以及库存后" + updateInventoryLists);
             //执行修改库存方法
             outboundManagerMapper.updateInventoryInfo(updateInventoryLists);
+            for (IOboundInfoAddArray o :iOboundInfoAddArray) {
+                o.setId(null);
+            }
             //执行保存array方法
             outboundManagerMapper.saveOutboundInfoArray(iOboundInfoAddArray, null, id);
         } else {//修改

@@ -54,6 +54,9 @@ public class InventoryManagerServiceImpl implements InventoryManagerService {
             //
             inventoryDetails.add(inventoryDetail);
         }
+        System.out.println("获取到的inventoryDetails=" + inventoryDetails);
+        System.out.println("获取到的inventoryInfoHead=" + inventoryInfoHead);
+
         inventoryInfoHead.setInventoryDetails(inventoryDetails);
         return inventoryInfoHead;
     }

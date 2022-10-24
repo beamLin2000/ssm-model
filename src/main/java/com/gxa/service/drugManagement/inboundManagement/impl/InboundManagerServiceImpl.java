@@ -67,7 +67,7 @@ public class InboundManagerServiceImpl implements InboundManagerService {
         //获取来自前端新增的药品array数据
         List<IOboundInfoAddArray> HTMLioboundInfoAddArray = inboundInfo.getIOboundInfoAddArray();
         System.out.println("来自前端的数据"+HTMLioboundInfoAddArray);
-        if(inboundInfo.getId()==null){//新增
+        if(inboundInfo.getId()==null) {//新增
             //首先获取所有已经新增的记录,获取最后一条数据,其值+1为本条新增记录的id
             List<InboundInfo> inboundInfos = inboundManagerMapper.queryAll("true");
             //定义主键id
@@ -75,15 +75,18 @@ public class InboundManagerServiceImpl implements InboundManagerService {
             //判断入库记录中是否存在数据
             int inboundInfoSize = inboundInfos.size();
             StringBuilder code = new StringBuilder("SP");
-            if(inboundInfoSize==0){//如果没有数据,则设置id为1
-                id=1;
-                code.append("20221022");
-            }else{//若存在数据,则id值为其最后一条数据的id+1
-                id=inboundInfos.get(inboundInfoSize-1).getId()+1;
-                code.append(Integer.parseInt(inboundInfos.get(inboundInfoSize-1).getReceiptNo().substring(2))+1);
+            if (inboundInfoSize == 0) {//如果没有数据,则设置id为1
+                id = 1;
+                code.append("202210220820");
+            } else {//若存在数据,则id值为其最后一条数据的id+1
+                id = inboundInfos.get(inboundInfoSize - 1).getId() + 1;
+                System.out.println("code123"+inboundInfos.get(inboundInfoSize - 1).getReceiptNo().substring(2));
+                code.append(Long.parseLong(inboundInfos.get(inboundInfoSize - 1).getReceiptNo().substring(2)) + 1);
             }
             //将id值赋予入库信息
             inboundInfo.setId(id);
+            //填入单号
+            inboundInfo.setReceiptNo(code.toString());
             //审核日期
             String format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
             inboundInfo.setAuditDate(format);
@@ -91,39 +94,40 @@ public class InboundManagerServiceImpl implements InboundManagerService {
             inboundInfo.setReviewer("lx");
             //执行保存主页显示数据方法
             inboundManagerMapper.saveInboundInfo(inboundInfo);
-
-            //获取新增的药品及其数量
-                //收集新增入库的药品id及其数量
+            if (HTMLioboundInfoAddArray != null){
+            //收集新增入库的药品id及其数量
             List<UpdateInventoryList> newInventoryInfos = new ArrayList<>();
             //交替循环遍历新增的列表与药品信息
-            for(int i = 0; i< drugBasicInformations1.size(); i++){
-                for(IOboundInfoAddArray array:HTMLioboundInfoAddArray){
+            for (int i = 0; i < drugBasicInformations1.size(); i++) {
+                for (IOboundInfoAddArray array : HTMLioboundInfoAddArray) {
                     //通过判断两者的code,获取新增的数量与药品信息id,便于根据id修改库存
-                    if(drugBasicInformations1.get(i).getCode().equals(array.getCode())){
-                        newInventoryInfos.add(new UpdateInventoryList(1,array.getMedicalNumber(),drugBasicInformations1.get(i).getId()));
+                    if (drugBasicInformations1.get(i).getCode().equals(array.getCode())) {
+                        newInventoryInfos.add(new UpdateInventoryList(1, array.getMedicalNumber(), drugBasicInformations1.get(i).getId()));
                     }
                 }
             }
-            System.out.println("获取了所有的新增库存id以及库存后"+newInventoryInfos);
+            System.out.println("获取了所有的新增库存id以及库存后" + newInventoryInfos);
             //查询所有库存
             List<InventoryInfo> inventoryInfos = inventoryManagerMapper.search(null, null);
-            System.out.println("库存信息"+inventoryInfos);
+            System.out.println("库存信息" + inventoryInfos);
             //判断code的相等性,修改库存值
-            for(int i = 0; i<newInventoryInfos.size();i++){
-                for(InventoryInfo array:inventoryInfos){
+            for (int i = 0; i < newInventoryInfos.size(); i++) {
+                for (InventoryInfo array : inventoryInfos) {
                     UpdateInventoryList updateInventoryList = newInventoryInfos.get(i);
-                    if(updateInventoryList.getMedicalId().intValue()==array.getDrugInfoId().intValue()){
+                    if (updateInventoryList.getMedicalId().intValue() == array.getDrugInfoId().intValue()) {
                         //存储库存值
-                        newInventoryInfos.get(i).setStock(updateInventoryList.getStock()+array.getStock());
+                        newInventoryInfos.get(i).setStock(updateInventoryList.getStock() + array.getStock());
                     }
                 }
             }
-            System.out.println("获取了所有的新增库存id以及库存后"+newInventoryInfos);
+            inboundManagerMapper.saveInboundInfoArray(HTMLioboundInfoAddArray, id, null);
+
+
+            System.out.println("获取了所有的新增库存id以及库存后" + newInventoryInfos);
             //执行修改库存方法
             inboundManagerMapper.updateInventoryInfo(newInventoryInfos);
             //执行保存array方法
-            inboundManagerMapper.saveInboundInfoArray(HTMLioboundInfoAddArray,id,null);
-
+        }
         }else{//修改
 //首先将曾经添加过的药品信息从inbound删除,并将库存数量进行相减
             //获取曾经添加过的药品

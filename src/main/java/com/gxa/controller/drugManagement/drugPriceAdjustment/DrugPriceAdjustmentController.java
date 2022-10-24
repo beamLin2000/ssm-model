@@ -1,15 +1,16 @@
 package com.gxa.controller.drugManagement.drugPriceAdjustment;
 
+import com.gxa.entity.drugManagement.basicInfo.SearchCondition;
 import com.gxa.entity.drugManagement.drugPriceAdjustment.DrugPriceAdjustInfo;
+import com.gxa.entity.drugManagement.drugPriceAdjustment.DrugPriceAdjustInfoList;
 import com.gxa.result.Result;
 import com.gxa.result.ResultUtils;
+import com.gxa.service.drugManagement.drugPriceAdjustment.DrugPriceAdjustmentService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author :林溪
@@ -21,27 +22,25 @@ import org.springframework.web.bind.annotation.RestController;
 public class DrugPriceAdjustmentController {
 
     @Autowired
-    private DrugPriceAdjustmentVisualData drugPriceAdjustmentVisualData;
+    private DrugPriceAdjustmentService drugPriceAdjustmentService;
     //搜索
-    @GetMapping("/search")
+    @PostMapping("/search")
     @ApiOperation(value = "search",notes = "药品调价搜素")
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok",response = DrugPriceAdjustInfo.class )
     })
-    public Result search(@ApiParam(value = "处方类别")String drugType,
-                         @ApiParam(value = "药品名称/编码/生产厂家")String rules){
-        System.out.println(drugType+","+rules);
-        return ResultUtils.buildFail(200,"drugPriceAdjustment",0L,drugPriceAdjustmentVisualData.getDrugPriceAdjustInfos());
+    public Result search(@ApiParam(value = "搜搜类里面的条件") @RequestBody SearchCondition searchCondition){
+        System.out.println(searchCondition.getDrugType()+","+searchCondition.getRules());
+        return ResultUtils.buildFail(200,"drugPriceAdjustment",0L,drugPriceAdjustmentService.search(searchCondition.getDrugType(), searchCondition.getRules()));
     }
     //调价pre
     @PostMapping("/queryById")
-    @ApiOperation(value = "queryById",notes = "药品调价前,根据id搜素")
+    @ApiOperation(value = "queryById",notes = "药品调价前,根据code搜素")
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok",response = DrugPriceAdjustInfo.class )
     })
-    public Result queryById(@ApiParam(value = "需要调价信息的id")Integer id){
-        System.out.println(id);
-        return ResultUtils.buildFail(200,"updatePre",0L,drugPriceAdjustmentVisualData.getDrugPriceAdjustInfos());
+    public Result queryById(@ApiParam(value = "需要调价信息的id") @RequestBody SearchCondition searchCondition){
+        return ResultUtils.buildFail(200,"updatePre",0L,drugPriceAdjustmentService.queryByCode(searchCondition.getCode()));
     }
     //调价保存
     @PostMapping("/save")
@@ -49,8 +48,9 @@ public class DrugPriceAdjustmentController {
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok")
     })
-    public Result save(@ApiParam(value = "调价保存的数据") DrugPriceAdjustInfo drugPriceAdjustInfo){
-        System.out.println(drugPriceAdjustInfo);
+    public Result save(@ApiParam(value = "调价保存的数据") @RequestBody List<DrugPriceAdjustInfoList> drugPriceAdjustInfoList){
+        System.out.println("DrugPriceAdjustInfoList123=" + drugPriceAdjustInfoList);
+        drugPriceAdjustmentService.saveDrugPriceAdjustInfoList(drugPriceAdjustInfoList,null,null);
         return ResultUtils.buildFail(200,"update",0L,null);
     }
     //list
@@ -61,7 +61,7 @@ public class DrugPriceAdjustmentController {
     })
     public Result list(){
         System.out.println("list");
-        return ResultUtils.buildFail(200,"list",0L,drugPriceAdjustmentVisualData.getDrugPriceAdjustInfos());
+        return ResultUtils.buildFail(200,"list",0L,drugPriceAdjustmentService.search(null,null));
     }
     //调价记录=查看详情
     @GetMapping("/detail")
@@ -71,7 +71,7 @@ public class DrugPriceAdjustmentController {
     })
     public Result detail(@ApiParam(value="调价记录查看详情")Integer id){
         System.out.println(id);
-        return ResultUtils.buildFail(200,"updatePre",0L,drugPriceAdjustmentVisualData.getDrugPriceAdjustInfos());
+        return ResultUtils.buildFail(200,"updatePre",0L,drugPriceAdjustmentService.queryById(id));
     }
 
 }

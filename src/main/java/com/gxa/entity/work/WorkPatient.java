@@ -2,15 +2,15 @@ package com.gxa.entity.work;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Date;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 @ApiModel("返回的work里面的患者对象")
 public class WorkPatient {
     @ApiModelProperty("id")
@@ -32,7 +32,7 @@ public class WorkPatient {
     @ApiModelProperty(value = "接诊类型",required = true)
     private String type;
     @ApiModelProperty(value = "地址",required = true)
-    private Address address;
+    private String address;
     @ApiModelProperty(value = "诊断",required = true)
     private String diagnosis;
     @ApiModelProperty(value = "医嘱",required = true)

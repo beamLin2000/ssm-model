@@ -27,7 +27,8 @@ public class OutboundManagerOtherServiceImpl implements OutboundManagerOtherServ
 
     @Override
     public List<BasicInfo> queryAllWarehousingPersonnel() {
-        return null;
+        List<BasicInfo> basicInfos = outboundManagerOtherMapper.queryAllWarehousingPersonnel();
+        return basicInfos;
     }
 
 

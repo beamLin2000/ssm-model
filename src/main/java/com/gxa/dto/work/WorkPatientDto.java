@@ -2,15 +2,15 @@ package com.gxa.dto.work;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Date;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 @ApiModel("返回的work里面的患者对象")
 public class WorkPatientDto {
     @ApiModelProperty("id")

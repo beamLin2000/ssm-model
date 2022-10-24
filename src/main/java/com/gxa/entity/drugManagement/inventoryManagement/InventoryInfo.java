@@ -25,14 +25,14 @@ public class InventoryInfo {
     @ApiModelProperty(name = "id",value = "主键id",required = true)
     private Integer id;
     //药品编码
-    @ApiModelProperty(name = "drugCode",value = "药品编码",required = true)
-    private String drugCode;
+    @ApiModelProperty(name = "code",value = "药品编码",required = true)
+    private String code;//
     //货位号
     @ApiModelProperty(name = "locationNo",value = "货位号",required = true)
     private String locationNo;
     //药品名称
-    @ApiModelProperty(name = "drugName",value = "药品名称",required = true)
-    private String drugName;
+    @ApiModelProperty(name = "medicalName",value = "药品名称",required = true)
+    private String medicalName;//
     //处方类型
     @ApiModelProperty(name = "drugType",value = "处方类别",required = true)
     private String drugType;
@@ -43,8 +43,8 @@ public class InventoryInfo {
     @ApiModelProperty(name = "dosage",value = "药品/剂型",required = true)
     private String dosage;
     //厂家
-    @ApiModelProperty(name = "manufactor",value = "厂家",required = true)
-    private String manufactor;
+    @ApiModelProperty(name = "manufacturer",value = "厂家",required = true)
+    private String manufacturer;//
     //库存
     @ApiModelProperty(name = "stock",value = "库存数量",required = true)
     private Integer stock;

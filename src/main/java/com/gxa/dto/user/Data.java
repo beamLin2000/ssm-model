@@ -5,5 +5,5 @@ import java.util.List;
 public class Data {
     private String path;
     private String name;
-
+    private String com;
 }

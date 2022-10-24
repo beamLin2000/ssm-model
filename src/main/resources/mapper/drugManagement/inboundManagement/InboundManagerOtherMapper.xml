@@ -4,38 +4,38 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gxa.mapper.drugManagement.inboundManagement.InboundManagerOtherMapper">
 <!--    入库类型下拉框-->
-    <resultMap id="queryAllInboundType" type="com.gxa.entity.drugManagement.basicInfo.BasicInfo">
+    <resultMap id="queryAllInboundTypes" type="com.gxa.entity.drugManagement.basicInfo.BasicInfo">
         <id property="id" column="id"/>
         <result property="name" column="name"/>
     </resultMap>
-    <select id="queryAllInboundType" resultMap="queryAllInboundType" parameterType="int">
+    <select id="queryAllInboundType" resultMap="queryAllInboundTypes" parameterType="int">
         select * from `drugManagement_basicInfo` where type_id = #{typeId};
     </select>
 
 <!--供应商下拉框-->
-    <resultMap id="queryAllManufacture" type="com.gxa.entity.drugManagement.basicInfo.BasicInfo">
+    <resultMap id="queryAllManufactures" type="com.gxa.entity.drugManagement.basicInfo.BasicInfo">
         <id column="id" property="id"/>
         <result column="suppliername" property="name"/>
     </resultMap>
-    <select id="queryAllManufacture" resultMap="queryAllManufacture">
+    <select id="queryAllManufacture" resultMap="queryAllManufactures">
         select `id`,`suppliername` from `supplier_administration`
     </select>
 
 <!--    查询入库人员-->
     <select id="queryAllWarehousingPersonnel" resultType="com.gxa.entity.drugManagement.basicInfo.BasicInfo">
-        select * from `` where
+        select `name` from `user`;
     </select>
 
 
     <resultMap id="queryAll" type="com.gxa.entity.drugManagement.inventoryManagement.InventoryInfo">
         <id property="id" column="id"/>
-        <result property="drugCode" column="code"/>
+        <result property="code" column="code"/>
         <result property="locationNo" column="location_no"/>
-        <result property="drugName" column="drug_name"/>
+        <result property="medicalName" column="drug_name"/>
         <result property="drugType" column="drug_type"/>
         <result property="specs" column="specs"/>
         <result property="dosage" column="pharmaceutical_dosage"/>
-        <result property="manufactor" column="manufacturer"/>
+        <result property="manufacturer" column="manufacturer"/>
         <result property="stock" column="stock"/>
         <result property="purchaseAmount" column="purchase_amount"/>
         <result property="retailAmount" column="retail_amount"/>

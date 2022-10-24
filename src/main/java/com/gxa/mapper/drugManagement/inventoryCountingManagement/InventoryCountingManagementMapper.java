@@ -10,4 +10,6 @@ public interface InventoryCountingManagementMapper extends BaseMapper<InventoryC
     List<InventoryCountingInfo>queryByCondition(@Param("startTime") String startTime, @Param("endTime") String EndTime, @Param("countSheetNo") String countSheetNo);
     void saveAll(InventoryCountingInfo inventoryCountingInfo);
 
+    List<InventoryCountingInfo> queryAll();
+
 }

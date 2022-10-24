@@ -24,7 +24,7 @@ public class InboundManagerOtherController {
     private InboundManagerOtherService inboundManagerOtherService;
     @Autowired
     private InventoryManagerMapper inventoryManagerMapper;
-    private final Integer INBOUND_TYPE = 12;
+    private final Integer INBOUND_TYPE = 13;
 
     //入库类型
     @GetMapping("/inboundType")
@@ -45,7 +45,7 @@ public class InboundManagerOtherController {
     })
     public Result warehousingPersonnel(){
         System.out.println("inboundType");
-        return ResultUtils.buildFail(200,"ok",0L,inboundManagerOtherService);
+        return ResultUtils.buildFail(200,"ok",Long.valueOf(inboundManagerOtherService.queryAllWarehousingPersonnel().size()),inboundManagerOtherService.queryAllWarehousingPersonnel());
     }
 
     //添加药品pre

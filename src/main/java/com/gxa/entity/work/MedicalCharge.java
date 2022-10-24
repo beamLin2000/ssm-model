@@ -2,9 +2,7 @@ package com.gxa.entity.work;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Date;
 import java.util.List;
@@ -12,6 +10,8 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 @ApiModel("接收的中西药信息")
 public class MedicalCharge {
     @ApiModelProperty(value = "是中药处方还是西药处方",required = true)
