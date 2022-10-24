@@ -3,10 +3,12 @@ package com.gxa.service.impl.systemSettings;
 import com.gxa.entity.systemSettings.CPSMainTable;
 import com.gxa.entity.systemSettings.CPSViceTable;
 import com.gxa.form.systemSettings.CPSEdit;
+import com.gxa.form.systemSettings.DropA;
 import com.gxa.mapper.systemSettings.CheckProjectSetMapper;
 import com.gxa.service.systemSettings.CheckProjectSetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Date;
 import java.util.List;
@@ -80,6 +82,35 @@ public class CheckProjectServiceImpl implements CheckProjectSetService {
         return drop;
     }
 
+    @Override
+    public void dropA(String unit) {
+        checkProjectSet_mapper.dropA(unit);
+
+//        if (unit.length()==0 && projectCategory.length()>0 && invoiceItem.length()>0){
+//            checkProjectSet_mapper.xll(projectCategory,invoiceItem);
+//        } if (unit.length()==0 && projectCategory.length()==0 && invoiceItem.length()>0){
+//            checkProjectSet_mapper.xxl(invoiceItem);
+//        } if (unit.length()==0 && projectCategory.length()==0 && invoiceItem.length()==0){
+//            System.out.println("");
+//        } if (unit.length()>0 && projectCategory.length()==0 && invoiceItem.length()>0){
+//            checkProjectSet_mapper.lxl(unit,invoiceItem);
+//        }if (unit.length()>0 && projectCategory.length()==0 && invoiceItem.length()==0){
+//            checkProjectSet_mapper.lxx(unit);
+//        }if (unit.length()>0 && projectCategory.length()>0 && invoiceItem.length()==0){
+//            checkProjectSet_mapper.lxx(unit,projectCategory);
+//        }
+//        checkProjectSet_mapper.dropA(unit,projectCategory,invoiceItem);
+    }
+
+    @Override
+    public void dropB(String projectCategory) {
+        checkProjectSet_mapper.dropB(projectCategory);
+    }
+
+    @Override
+    public void dropC(String invoiceItem) {
+        checkProjectSet_mapper.dropC(invoiceItem);
+    }
 
 
 }

@@ -19,12 +19,12 @@ public class Role {
     private int id;//序号
     @ApiModelProperty(value = "角色编号",name = "roleNumber",hidden = false,required = false)
     private String roleNumber;//角色编号
-    @ApiModelProperty(value = "角色名称",name = "nameRole",hidden = false,required = false)
+    @ApiModelProperty(value = "角色名称",name = "nameR",hidden = false,required = false)
     private String nameR;//角色名称
     @ApiModelProperty(value = "角色描述",name = "description",hidden = false,required = false)
     private String description;//角色描述
     @ApiModelProperty(value = "创建时间",name = "creationTime",hidden = false,required = false)
-    @JsonFormat(pattern="yyyy-MM-dd ",timezone="GMT+8")
+//    @JsonFormat(pattern="yyyy-MM-dd ",timezone="GMT+8")
     private Date creationTime;//创建时间
     @ApiModelProperty(value = "创建人员",name = "createPerson",hidden = false,required = false)
     private String createPerson;//创建人员

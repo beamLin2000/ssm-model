@@ -7,11 +7,13 @@ import com.gxa.form.systemSettings.CPSEdit;
 import com.gxa.form.systemSettings.CostSettngsForm.RegisterFeeForm;
 import com.gxa.form.systemSettings.CostSettngsForm.SurchargeFeeForm;
 import com.gxa.form.systemSettings.CostSettngsForm.TreatmentFeeForm;
+import com.gxa.form.systemSettings.DropA;
 import com.gxa.form.systemSettings.EMEdit;
 
 import com.gxa.form.systemSettings.clinicInformation.ClinicInformationForm;
 import com.gxa.form.systemSettings.supplier.SupplierForm;
 import com.gxa.service.systemSettings.*;
+import com.gxa.utils.R;
 import com.gxa.utils.systemSettings.Result;
 import com.gxa.utils.systemSettings.YResult;
 import com.gxa.utils.systemSettings.Information;
@@ -20,8 +22,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Api(tags = {"系统设置接口"})
 @RestController
@@ -83,10 +84,80 @@ public class SystemSettingsController {
 
     @GetMapping("/CheckProjectSet/Drop")//查询下拉框
     @ApiOperation(value = "检查项目设置-下拉框的数据" ,notes = "",httpMethod = "Get")
-    public Result checkProjectSetDrop(){
+    public R checkProjectSetDrop(){
 
         List<CPSViceTable> drop = checkProjectSet_service.drop();
-        Result result = new Result(1,"seccess",drop);
+        List<String> a =new ArrayList<>();
+        List<String> a1 =new ArrayList<>();
+        List<String> a2 =new ArrayList<>();
+        for (CPSViceTable i: drop
+             ) {
+            if (i.getUnit()!=null && !i.getUnit().equals("")){
+                a.add(i.getUnit());
+            }
+            if (i.getProjectCategory()!=null && !i.getProjectCategory().equals("") ){
+                a1.add(i.getProjectCategory());
+            }
+            if (i.getInvoiceItem()!=null && !i.getInvoiceItem().equals("")){
+                a2.add(i.getInvoiceItem());
+            }
+        }
+        Map map = new HashMap();
+        R r = new R();
+        map.put("unit",a);
+        map.put("projectCategory",a1);
+        map.put("invoiceItem",a2);
+        return r.ok(map);
+    }
+
+//
+//    @PostMapping("/CheckProjectSet/DropA")//查询下拉框
+//    @ApiOperation(value = "检查项目设置-新增单位" ,notes = "",httpMethod = "Get")
+//    public Result checkProjectSetDropA(@RequestBody DropA dropA){
+//        if (dropA.getUnit().length()==0 && dropA.getProjectCategory().length()==0 && dropA.getInvoiceItem().length()==0 ){
+//            System.out.println("------------");
+//        } else {
+//            if (dropA.getUnit().length()==0 ){
+//                dropA.setUnit(null);
+//            }
+//            if (dropA.getProjectCategory().length()==0 ){
+//                dropA.setProjectCategory(null);
+//            }
+//            if (dropA.getInvoiceItem().length()==0 ){
+//                dropA.setInvoiceItem(null);
+//            }
+//            checkProjectSet_service.dropA(dropA);
+//        }
+//
+//
+//        Result result = new Result(1,"seccess","");
+//        return result;
+//    }
+    @GetMapping("/CheckProjectSet/DropA")//查询下拉框
+    @ApiOperation(value = "检查项目设置-新增单位" ,notes = "",httpMethod = "Get")
+    public Result checkProjectSetDropA(@RequestParam String unit) {
+
+        checkProjectSet_service.dropA(unit);
+        Result result = new Result(1,"seccess","");
+        return result;
+    }
+
+
+    @GetMapping("/CheckProjectSet/DropB")//查询下拉框
+    @ApiOperation(value = "检查项目设置-新增项目分类" ,notes = "",httpMethod = "Get")
+    public Result checkProjectSetDropB(@RequestParam("projectCategory") String projectCategory){
+
+        checkProjectSet_service.dropB(projectCategory);
+        Result result = new Result(1,"seccess","");
+        return result;
+    }
+
+    @GetMapping("/CheckProjectSet/DropC")//查询下拉框
+    @ApiOperation(value = "检查项目设置-新增发票项目" ,notes = "",httpMethod = "Get")
+    public Result checkProjectSetDropC(@RequestParam("invoiceItem") String invoiceItem){
+
+        checkProjectSet_service.dropC(invoiceItem);
+        Result result = new Result(1,"seccess","");
         return result;
     }
 
