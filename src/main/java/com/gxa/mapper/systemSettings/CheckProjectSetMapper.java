@@ -14,6 +14,8 @@ public interface CheckProjectSetMapper {
     void insert(CPSEdit cpsEdit);
     void delete(int id);
     List<CPSMainTable> select(CPSEdit cpsEdit);
+    List<CPSMainTable> select1(CPSEdit cpsEdit);
+    List<CPSMainTable> select2(CPSEdit cpsEdit);
     List<CPSViceTable> drop();
     void change(int id);
 }

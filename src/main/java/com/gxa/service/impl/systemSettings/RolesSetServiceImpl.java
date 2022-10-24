@@ -7,6 +7,7 @@ import com.gxa.service.systemSettings.RolesSetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -22,6 +23,9 @@ public class RolesSetServiceImpl implements RolesSetService {
     @Override
     public void update(Role role) {
         int id = role.getId();
+        Date date = new Date();
+        role.setCreationTime(date);
+
         if (id!=1&&id!=2&&id!=3){
         rolesSetMapper.update(role);
         }
@@ -29,6 +33,8 @@ public class RolesSetServiceImpl implements RolesSetService {
 
     @Override
     public void insert(Role role) {
+        Date date = new Date();
+        role.setCreationTime(date);
         int id = role.getId();
         if (id!=1&&id!=2&&id!=3){
             rolesSetMapper.insert(role);

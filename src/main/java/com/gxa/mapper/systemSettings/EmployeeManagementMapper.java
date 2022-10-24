@@ -12,9 +12,13 @@ import java.util.List;
 
 public interface EmployeeManagementMapper {
     List<EMEmployeeTable> selectAll();
+    EMEmployeeTable incloud(String userName);
     void update(EMEdit emEdit);
+    void update1(EMEdit emEdit);
     void insertRole(@Param("id") int id, @Param("nameRole") int nameRole);
     void deleteRole(int id);
+
+    List<String> insertO();
 //    List<RoleTable> selectUpdate(EMEdit emEdit);
 //    void update1(EMEdit emEdit);
 //    void update3(EMEdit emEdit);

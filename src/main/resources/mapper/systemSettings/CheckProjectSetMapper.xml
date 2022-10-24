@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gxa.mapper.systemSettings.CheckProjectSetMapper">
     <insert id="insert">
-        insert into CPSMainTable(creationTime,itemNumber,projectName,costPrice,retailPrice,unit,projectCategory,invoiceItem,part,projectStatus,remarks)
+        insert into CPSMainTable(createcreationTime,itemNumber,projectName,costPrice,retailPrice,unit,projectCategory,invoiceItem,part,projectStatus,remarks)
         values(#{creationTime},#{itemNumber},#{projectName},#{costPrice},#{retailPrice},#{unit},#{projectCategory},#{invoiceItem},#{part},#{projectStatus},#{remarks})
     </insert>
 
@@ -30,7 +30,29 @@
         select * from CPSMainTable
     </select>
 
+
     <select id="select" resultType="com.gxa.entity.systemSettings.CPSMainTable">
+        select * from CPSMainTable
+        <where>
+            <if test="projectName!=null">
+                and projectName=#{projectName}
+            </if>
+            <if test="itemNumber!=null">
+                and itemNumber=#{itemNumber}
+            </if>
+        </where>
+    </select>
+
+    <select id="select1" resultType="com.gxa.entity.systemSettings.CPSMainTable">
+        select * from CPSMainTable
+        <where>
+            <if test="projectStatus!=null" >
+                and projectStatus=#{projectStatus}
+            </if>
+        </where>
+    </select>
+
+    <select id="select2" resultType="com.gxa.entity.systemSettings.CPSMainTable">
         select * from CPSMainTable
         <where>
             <if test="projectStatus!=null" >
@@ -45,7 +67,10 @@
         </where>
     </select>
 
+
     <select id="drop" resultType="com.gxa.entity.systemSettings.CPSViceTable">
         select * from CPSViceTable
     </select>
+
+
 </mapper>
