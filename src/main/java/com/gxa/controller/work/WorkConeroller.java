@@ -1,7 +1,6 @@
 package com.gxa.controller.work;
 
 
-import com.alibaba.fastjson.JSON;
 import com.gxa.dto.work.*;
 import com.gxa.entity.tolls.Toll;
 import com.gxa.entity.tolls.TollDrugs;
@@ -18,8 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
-import javax.swing.*;
-
+import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -58,11 +56,10 @@ public class WorkConeroller {
             @ApiResponse(code = 0,message = "ok",response = PatientDto.class)
     })
     public R workList(){
-        System.out.println("11111");
             Map map = new HashMap();
             List<PatientDto> patientDtos = this.patientService.queryAllPatientDto();
             map.put("drugs",patientDtos);
-        System.out.println(patientDtos);
+            System.out.println(patientDtos);
             R r = new R();
             return r.ok(map);
     }
@@ -218,53 +215,70 @@ public class WorkConeroller {
         List<MedicalCharge> medicalCharges = dto.getMedicalCharges();
         List<ItemCharge> itemCharges = dto.getItemCharge();
         Prescriptions prescriptions = dto.getPrescriptions();
+
         //保存对象的关联信息
         Relation relation = dto.getRelation();
+
+
         for (MedicalCharge m :
                 medicalCharges) {
             m.setOrderNum(orderNum);
         }
         //修改给患者的医嘱，建议
         this.workPatientDtoService.updataPatientIncfo(patient);
-        //
+        //添加病历体格
             this.workPatientDtoService.addPatientPhyInfo(medicalRecordPhysical,relation);
-
-        this.workPatientDtoService.addPatientMedicalChargeInfo(medicalCharges,relation);
-        for (ItemCharge itemCharge :
-                itemCharges) {
-            this.workPatientDtoService.addPatientItemInfo(itemCharge,relation);
+        //添加药品信息
+        if (medicalCharges!=null){
+            this.workPatientDtoService.addPatientMedicalChargeInfo(medicalCharges,relation);
+        }
+        //添加项目检查
+        if (itemCharges!=null){
+            for (ItemCharge itemCharge :
+                    itemCharges) {
+                this.workPatientDtoService.addPatientItemInfo(itemCharge,relation);
+            }
         }
 
+        //处方合计金额
         this.workPatientDtoService.addprescriptionsInfo(prescriptions,relation);
-
+        //添加收费
         Toll toll = new Toll(1,orderNum ,"处方开立",patient.getName(),patient.getGender(),
                 patient.getAge(),patient.getPhone(),prescriptions.getDoctorName(),relation.getCreateTime(),prescriptions.getTotalMoney(),0,"");
         this.workPatientDtoService.addToll(toll,relation);
+
         List<TollDrugs> tollDrugsList = new ArrayList<>();
-        for (ItemCharge itemCharge :
-                itemCharges) {
-            TollDrugs tollDrugs = new TollDrugs(1,itemCharge.getType(),itemCharge.getName(),itemCharge.getTotalUnivalent(),
-                    itemCharge.getNum(),"次",itemCharge.getTotalUnivalent(),orderNum);
-            tollDrugsList.add(tollDrugs);
+        if (itemCharges!=null){
+            for (ItemCharge itemCharge :
+                    itemCharges) {
+                TollDrugs tollDrugs = new TollDrugs(1,itemCharge.getType(),itemCharge.getName(),itemCharge.getTotalUnivalent(),
+                        itemCharge.getNum(),"次",itemCharge.getTotalUnivalent(),orderNum);
+                tollDrugsList.add(tollDrugs);
+            }
+
+        }
+        if (medicalCharges!=null){
+            for (MedicalCharge charge :
+                    medicalCharges) {
+                TollDrugs tollDrugs = new TollDrugs(1,charge.getType(),charge.getName(),charge.getPrice(),
+                        Integer.parseInt(charge.getTotal()),"次",charge.getTotalPrice(),orderNum);
+                tollDrugsList.add(tollDrugs);
+            }
+
+        }
+        if (tollDrugsList!=null){
+            for (TollDrugs drugs :
+                    tollDrugsList) {
+                this.workPatientDtoService.addTollDurgs(drugs,relation);
+            }
         }
 
-        for (MedicalCharge charge :
-                medicalCharges) {
-            TollDrugs tollDrugs = new TollDrugs(1,charge.getType(),charge.getName(),charge.getPrice(),
-                    Integer.parseInt(charge.getTotal()),"次",charge.getTotalPrice(),orderNum);
-            tollDrugsList.add(tollDrugs);
-        }
-        for (TollDrugs drugs :
-                tollDrugsList) {
-            this.workPatientDtoService.addTollDurgs(drugs,relation);
-        }
         Charge charge = new Charge("处方收费","未收费",orderNum,prescriptions.getTotalMoney(),0.0,"","",null);
         this.workPatientDtoService.addCharge(charge,relation);
         this.workPatientDtoService.updateStatus01(relation.getIdCard());
         R r = new R();
-
-
-        return r.ok();
+        Map map = new HashMap();
+        map.put("orderNum",orderNum);
+        return r.ok(map);
     }
-
 }

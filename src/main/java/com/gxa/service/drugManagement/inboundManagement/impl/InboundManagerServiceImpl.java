@@ -94,6 +94,9 @@ public class InboundManagerServiceImpl implements InboundManagerService {
             inboundInfo.setReviewer("lx");
             //执行保存主页显示数据方法
             inboundManagerMapper.saveInboundInfo(inboundInfo);
+
+
+
             if (HTMLioboundInfoAddArray != null){
             //收集新增入库的药品id及其数量
             List<UpdateInventoryList> newInventoryInfos = new ArrayList<>();

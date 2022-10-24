@@ -32,17 +32,19 @@ public class JwtInterceptor implements HandlerInterceptor {
         }
         // 验证
         String token1 = this.userService.queryToken(token);
+
         if (!JwtUtil.checkToken(token)){
                 response.setCharacterEncoding("UTF-8");
                 response.setContentType("application/json;charset=utf-8");
-                response.getWriter().write(JSONUtils.toJSONString(R.error("token失效,请重新登录")));
+                response.getWriter().write(JSONUtils.toJSONString(R.error(401,"token失效,请重新登录")));
                 return false;
             } else if (token1==null||token1.equals("")){
                 response.setCharacterEncoding("UTF-8");
                 response.setContentType("application/json;charset=utf-8");
-                response.getWriter().write(JSONUtils.toJSONString(R.error("token可能被篡改,请重新登录")));
+                response.getWriter().write(JSONUtils.toJSONString(R.error(401,"token可能被篡改,请重新登录")));
                 return false;
             }
+
         return true;
     }
 }

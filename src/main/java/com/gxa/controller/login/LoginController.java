@@ -37,19 +37,20 @@ public class LoginController {
     @PostMapping("/login")
     @ApiOperation(value = "登录接口",notes = "登录",httpMethod = "POST")
     public R login(@RequestBody User user){
-
-        System.out.println(user);
-
-        Subject subject = SecurityUtils.getSubject();
-        UsernamePasswordToken token = new UsernamePasswordToken(user.getUserName(),user.getPwd());
-
+        String userName = user.getUserName();
+        Map map = new HashMap();
+        User user2 = this.userService.queryByUserName(userName);
+        if (user2.getPwd().equals(user.getPwd())){
+            map.put("user",user2);
+            return R.ok(map);
+        }
         try {
+            Subject subject = SecurityUtils.getSubject();
+            UsernamePasswordToken token = new UsernamePasswordToken(user.getUserName(),user.getPwd());
             subject.login(token);
-            String userName = user.getUserName();
-            Map map = new HashMap();
             String menu = this.userService.queryMenuByUserName(userName);
             List<Menu> menus = JSON.parseArray(menu,Menu.class);
-            System.out.println(menus);
+
             String jwtToken = JwtUtil.getJwtToken(userName,user.getPwd());
             map.put("menu",menus);
             User user1 = this.userService.queryByUserName(userName);

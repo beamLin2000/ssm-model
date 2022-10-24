@@ -23,10 +23,10 @@ public class InventoryManagerServiceImpl implements InventoryManagerService {
     //库存明细
     @Override
     public InventoryInfo queryIOboundInfoAddArrayById(Integer ioboundInfoId,String code) {
-        //数量
+        //根据药品编码查询出入库的药品记录
         List<IOboundInfoAddArray> queryReceiptNo = inventoryManagerMapper.queryReceiptNo(code);
         System.out.println("数量个数:"+queryReceiptNo.size());
-        //单号
+        //单号根据code查询所有入库单号
         List<InboundInfo> InboundInfos = inventoryManagerMapper.queryDetailNumber(code);
         System.out.println("单号个数:"+InboundInfos.size());
         //mainHead

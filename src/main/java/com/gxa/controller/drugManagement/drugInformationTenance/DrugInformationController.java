@@ -1,6 +1,7 @@
 package com.gxa.controller.drugManagement.drugInformationTenance;
 
 import com.gxa.entity.drugManagement.basicInfo.BasicInfo;
+import com.gxa.entity.drugManagement.basicInfo.SearchCondition;
 import com.gxa.entity.drugManagement.drugInformationTenance.*;
 import com.gxa.result.Result;
 import com.gxa.result.ResultUtils;
@@ -39,21 +40,22 @@ public class DrugInformationController {
     }
 
     //搜索功能
-    @GetMapping("/search")
+    @PostMapping("/search")
     @ApiOperation(value = "search",notes = "药品信息搜索")
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok",response =DrugBasicInformation.class )
     })
-    public Result search(@ApiParam(name = "drugType",value = "处方类别") @RequestParam("drugType") String drugType,
-                         @ApiParam(name = "status",value = "药品状态")@RequestParam("status") String status,
-                         @ApiParam(name = "createTime",value = "创建时间")@RequestParam("createTime") String createTime,
-                         @ApiParam(name = "rules",value = "药品名称/编码/生成厂家")@RequestParam("rules") String rules){
-        System.out.println(drugType+","+status+","+createTime+","+rules);
+    public Result search(@ApiParam(name = "drugType",value = "处方类别") @RequestBody SearchCondition searchCondition){
+//                         @ApiParam(name = "status",value = "药品状态") @RequestParam Integer status,
+//                         @ApiParam(name = "createTime",value = "创建时间")@RequestParam("createTime") String createTime,
+//                         @ApiParam(name = "rules",value = "药品名称/编码/生成厂家")@RequestParam("rules") String rules
+
+        System.out.println("search=" + searchCondition);
         Integer statusNum = null;
-        if (!status.equals("NaN") && status.length() != 0){
-            statusNum = Integer.parseInt(status);
-        }
-        List<DrugBasicInformation> search = drugInformationService.search(drugType,statusNum,createTime, rules);
+//        if (!status.equals("NaN") && status.length() != 0){
+//            statusNum = Integer.parseInt(status);
+//        }
+        List<DrugBasicInformation> search = drugInformationService.search(searchCondition.getDrugType(),searchCondition.getStatus(),searchCondition.getCreateTime(),searchCondition.getRules());
         return ResultUtils.buildFail(200,"ok",Long.valueOf(search.size()),search);
     }
 

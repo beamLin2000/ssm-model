@@ -16,8 +16,8 @@
     </resultMap>
     <insert id="saveDrugMsg">
         INSERT INTO toll_drugs(toll_drugs_name,toll_drugs_money,toll_drugs_quantity,toll_drugs_unit,toll_drugs_retail,
-                               person_idcard,person_name,toll_number)
-        values (#{drugMsg.drugName},#{drugMsg.salesPrice},#{drugMsg.num},#{drugMsg.company},#{drugMsg.totalPrice},#{drugRetail.patientDocuments},#{drugRetail.patientName},#{drugRetail.tollNum})
+                               person_idcard,person_name,toll_number,toll_drugs_ver)
+        values (#{drugMsg.drugName},#{drugMsg.salesPrice},#{drugMsg.num},#{drugMsg.company},#{drugMsg.totalPrice},#{drugRetail.patientDocuments},#{drugRetail.patientName},#{drugRetail.tollNum},#{drugMsg.drugType})
     </insert>
     <insert id="savePatientMsg" parameterType="com.gxa.entity.drugRetail.DrugRetail">
         INSERT INTO patient_drugs(patient_card,patient_name,patient_age,patient_gender,patient_phone,patient_documents,patient_birthday,toll_number,operator)

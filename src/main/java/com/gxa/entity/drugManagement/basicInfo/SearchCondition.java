@@ -16,4 +16,6 @@ public class SearchCondition {
   private String code;
   private String drugType;
   private String rules;
+  private Integer status;
+  private String createTime;
 }

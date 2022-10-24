@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 public class DrugMsg {
     @ApiModelProperty(name = "drugName",value = "药品名称")
     private String drugName;
-    //    @ApiModelProperty(name = "specs",value = "药品规格")
-//    private String specs;
+    @ApiModelProperty(name = "drugType",value = "药品类型")
+    private String drugType;
     @ApiModelProperty(name = "num",value = "数量")
     private Integer num;
     @ApiModelProperty(name = "company",value = "单位")

@@ -24,7 +24,9 @@ import java.util.List;
 
 @Api(tags = {"系统设置接口"})
 @RestController
-public class SystemSettingsController {
+public class
+
+SystemSettingsController {
 
     @Autowired
     private CheckProjectSetService checkProjectSet_service;

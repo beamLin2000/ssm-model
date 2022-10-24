@@ -42,18 +42,21 @@
         from `drugManagement_drugInformationTenance_drugBasicInformation`
         <trim prefix="where" prefixOverrides="and|or" suffixOverrides="and|or">
             <if test="prescriptionCategory != null and prescriptionCategory !=''">
-                drug_type = #{prescriptionCategory} and
+                drug_type = #{prescriptionCategory}
             </if>
-            <if test="status != null and status !=''">
-                status = #{status} and
+            <if test="status == 0">
+                and status = 0
+            </if>
+            <if test="status == 1">
+                and status = 1
             </if>
             <if test="(start != null and start !='') or (end !=null and end !='')">
-                create_time between #{start} and #{end}
+                and create_time between #{start} and #{end}
             </if>
             <if test="rules != null and rules !=''">
-                and<trim prefix="(" suffix=")">
+                and <trim prefix="(" suffix=")">
                 drug_name like concat('%',#{rules},'%') or
-                code like concat('%',#{rules},'%') or
+                `code` like concat('%',#{rules},'%') or
                 manufacturer like concat('%',#{rules},'%')
             </trim>
             </if>

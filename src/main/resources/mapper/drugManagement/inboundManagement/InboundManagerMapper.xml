@@ -113,7 +113,7 @@
         insert into `drugManagement_outboundManagement_ioboundInfoAddArray` values
         <foreach collection="IOboundInfoAddList" item="IOboundInfoArray" separator=",">
             (<choose>
-                <when test="IOboundInfoArray.id = null and IOboundInfoArray.id != ''">
+                <when test="IOboundInfoArray.id != null and IOboundInfoArray.id != ''">
                     #{IOboundInfoArray.id}
                 </when>
                 <otherwise>
