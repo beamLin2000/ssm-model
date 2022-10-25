@@ -1,6 +1,7 @@
 package com.gxa.controller.patients;
 
 import com.gxa.entity.patients.Family;
+import com.gxa.entity.patients.PatientCard;
 import com.gxa.entity.patients.Patients;
 import com.gxa.entity.patients.PatientsDatePhone;
 import com.gxa.service.patient.FamilyService;
@@ -116,12 +117,14 @@ public class PatientController {
         return R.ok("succes");
     }
 
-    @GetMapping("/patient/updatePre")
-    @ApiOperation(value = "查询接口",notes = "患者修改查询",httpMethod = "GET")
+    @PostMapping("/patient/updatePre")
+    @ResponseBody
+    @ApiOperation(value = "查询接口",notes = "患者修改查询",httpMethod = "POST")
     @ApiResponses({
             @ApiResponse(code = 0,message = "ok",response = Patients.class)
     })
-    public R tpPatientUpdate(@ApiParam(name = "患者修改条件",value = "patientCard")@RequestParam("patientCard") String patientCard){
+    public R tpPatientUpdate(@ApiParam(name = "患者修改条件",value = "patientCard")@RequestBody PatientCard patientCard1){
+        String patientCard=patientCard1.getPatientCard();
         Patients patients = this.patientService.queryById(patientCard);
         Map map = new HashMap();
         map.put("patients",patients);

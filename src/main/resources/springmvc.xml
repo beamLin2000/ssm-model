@@ -26,21 +26,21 @@
     <mvc:annotation-driven/>
     <mvc:resources location="classpath:/META-INF/resources/" mapping="swagger-ui.html"/>
     <mvc:resources location="classpath:/META-INF/resources/webjars/" mapping="/webjars/**"/>
-<!--    <mvc:interceptors>-->
-<!--        <mvc:interceptor>-->
-<!--            <mvc:mapping path="/**"/>-->
-<!--            <mvc:exclude-mapping path="/v2/api-docs"/>-->
-<!--            <mvc:exclude-mapping path="/swagger-resources/configuration/ui"/>-->
-<!--            <mvc:exclude-mapping path="/swagger-resources/configuration/security"/>-->
-<!--            <mvc:exclude-mapping path="/swagger-resources"/>-->
-<!--            <mvc:exclude-mapping path="/swagger-ui.html"/>-->
-<!--            <mvc:exclude-mapping path="/login"/>-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/v2/api-docs"/>
+            <mvc:exclude-mapping path="/swagger-resources/configuration/ui"/>
+            <mvc:exclude-mapping path="/swagger-resources/configuration/security"/>
+            <mvc:exclude-mapping path="/swagger-resources"/>
+            <mvc:exclude-mapping path="/swagger-ui.html"/>
+            <mvc:exclude-mapping path="/login"/>
 
 
 
-<!--            <bean class="com.gxa.utils.JwtInterceptor"></bean>-->
-<!--        </mvc:interceptor>-->
-<!--    </mvc:interceptors>-->
+            <bean class="com.gxa.utils.JwtInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"></bean>
 

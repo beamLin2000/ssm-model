@@ -14,11 +14,11 @@ public class InventoryCountingInfoArrayAllServiceImpl implements InventoryCounti
     @Autowired
     private InventoryCountingInfoArrayAllMapper inventoryCountingInfoArrayAllMapper;
 
-    @Override
-    public List<InventoryCountingInfoArrayAll> queryAll(Integer id) {
-        List<InventoryCountingInfoArrayAll> inventoryCountingInfoArrayAlls = this.inventoryCountingInfoArrayAllMapper.queryAll(id);
-        return inventoryCountingInfoArrayAlls;
-    }
+//    @Override
+//    public List<InventoryCountingInfoArrayAll> queryAll(Integer id) {
+//        List<InventoryCountingInfoArrayAll> inventoryCountingInfoArrayAlls = this.inventoryCountingInfoArrayAllMapper.queryAll(id);
+//        return inventoryCountingInfoArrayAlls;
+//    }
 
     @Override
     public List<InventoryCountingInfoArrayAll> queryByruls(String drugType, String rules) {

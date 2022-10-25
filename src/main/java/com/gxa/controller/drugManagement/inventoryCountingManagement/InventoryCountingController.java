@@ -1,6 +1,7 @@
 package com.gxa.controller.drugManagement.inventoryCountingManagement;
 
 import com.gxa.entity.drugManagement.basicInfo.BasicInfo;
+import com.gxa.entity.drugManagement.basicInfo.SearchCondition;
 import com.gxa.entity.drugManagement.inventoryCountingManagement.InventoryCountingInfo;
 import com.gxa.entity.drugManagement.inventoryCountingManagement.InventoryCountingInfoArray;
 import com.gxa.entity.drugManagement.inventoryCountingManagement.InventoryCountingInfoArrayAll;
@@ -30,6 +31,8 @@ public class InventoryCountingController {
     @Autowired
     private InventoryCountingInfoArrayAllService inventoryCountingInfoArrayAllService;
 
+
+
     @GetMapping("/list")
     @ApiOperation(value = "list",notes = "库存盘点table表")
     @ApiResponses({
@@ -41,13 +44,15 @@ public class InventoryCountingController {
         return ResultUtils.buildFail(200,"ok",0L,inventoryCountingInfos);
     }
 
-    @GetMapping("/search")
+    @PostMapping("/search")
     @ApiOperation(value = "search",notes = "库存盘点搜索功能")
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok",response = InventoryCountingInfo.class )//,response = InventoryCountingInfo.class
     })
-    public Result search(@ApiParam("创建时间")String createTime,@ApiParam("盘点单号")String countSheetNo){
-        List<InventoryCountingInfo> inventoryCountingInfos = this.inventoryCountingManagementService.queryByCondition(createTime,countSheetNo);
+    public Result search(@RequestBody SearchCondition searchCondition){
+        List<InventoryCountingInfo> inventoryCountingInfos = this.inventoryCountingManagementService.queryByCondition(searchCondition.getCreateTime(),searchCondition.getCountSheetNo());
+        System.out.println("创建时间=" + searchCondition.getCreateTime());
+        System.out.println("盘点单号=" + searchCondition.getCountSheetNo());
         return ResultUtils.buildFail(200,"ok",0L,inventoryCountingInfos);
     }
 
@@ -67,9 +72,10 @@ public class InventoryCountingController {
             @ApiResponse(code = 200,message = "ok",response = InventoryCountingInfo.class)//,
     })
     public Result queryById(@ApiParam("需要查看记录的id") @RequestBody BasicInfo basicInfo){
-        List<InventoryCountingInfoArrayAll> inventoryCountingInfoArrayAlls = this.inventoryCountingInfoArrayAllService.queryAll(basicInfo.getId());
-        System.out.println(inventoryCountingInfoArrayAlls);
-        return ResultUtils.buildFail(200,"ok",Long.valueOf(inventoryCountingInfoArrayAlls.size()),inventoryCountingInfoArrayAlls);
+        InventoryCountingInfo inventoryCountingInfo = this.inventoryCountingManagementService.queryById(basicInfo.getId());
+
+        System.out.println(inventoryCountingInfo);
+        return ResultUtils.buildFail(200,"ok",Long.valueOf(inventoryCountingInfo.getInventoryCountingInfoArrays().size()),inventoryCountingInfo);
     }
 
     @PostMapping("/save")
@@ -78,7 +84,7 @@ public class InventoryCountingController {
             @ApiResponse(code = 200,message = "ok")//,
     })
     public Result save(@ApiParam("提交需要被保存的数据")@RequestBody InventoryCountingInfo inventoryCountingInfo){
-        System.out.println(inventoryCountingInfo);
+        System.out.println("盘点信息"+inventoryCountingInfo);
         this.inventoryCountingManagementService.saveAllData(inventoryCountingInfo);
         return ResultUtils.buildFail(200,"ok",0L,null);
     }
@@ -89,6 +95,7 @@ public class InventoryCountingController {
     })
     public Result savePre(){
         List<InventoryCountingInfoArray> inventoryCountingInfoArrays = inventoryCountingInfoArrayAllService.queryAllDrugInfo();
+        System.out.println("保存前的查询=" + inventoryCountingInfoArrays);
         return ResultUtils.buildFail(200,"ok",Long.valueOf(inventoryCountingInfoArrays.size()),inventoryCountingInfoArrays);
     }
 }

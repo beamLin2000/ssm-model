@@ -12,7 +12,7 @@
         <result property="profitLoss" column="profit_loss"></result>
         <result property="remarks" column="remarks"></result>
 
-        <result property="inventoryCountingInfo.id" column="id"></result>
+            <result property="inventoryCountingInfo.id" column="id"></result>
         <result property="inventoryCountingInfo.countSheetNo" column="count_sheet_no"></result>
         <result property="inventoryCountingInfo.voucherPreparer" column="voucher_preparer"></result>
         <result property="inventoryCountingInfo.countDate" column="count_date"></result>
@@ -28,32 +28,62 @@
         <result property="drugBasicInformation.manufacturer" column="manufacturer"></result>
     </resultMap>
 
-    <insert id="saveAllArray" parameterType="com.gxa.entity.drugManagement.inventoryCountingManagement.InventoryCountingInfoArray">
+
+    <insert id="saveAllArray" parameterType="com.gxa.entity.drugManagement.inventoryCountingManagement.InventoryCountingArrayToData">
         INSERT INTO
         `drugManagement_inventoryCounting_inventoryCountingInfoArraySon`
        (id,counting_info_id,drug_info_id,counting_stock,profit_loss,remarks)
         VALUE <foreach collection="inventoryCountingArrayToData" item="val" separator=",">
-        (null,#{val.countingInfoId},#{val.inventoryId},#{val.countingStock},#{val.profitLoss},#{val.remarks})
+        (null,#{val.countingInfoId},#{val.drugInfoId},#{val.countingStock},#{val.profitLoss},#{val.remarks})
     </foreach>
 
     </insert>
 
 
-    <!--    主页查询所有-->
-    <select id="queryAll" resultMap="InventoryCountingInfoArrayAlls">
-       SELECT d.code,d.drug_name,d.drug_type,d.specs,d.manufacturer,e.location_no,c.drug_info_id,
-       b.count_sheet_no,b.voucher_preparer,count_date,a.counting_info_id,a.drug_info_id,a.counting_stock,a.profit_loss,a.remarks
-        FROM
-        drugManagement_inventoryCounting_inventoryCountingInfoArraySon a,
-        drugManagement_inventoryCounting_inventoryCountingInfo b,
-        drugManagement_inventoryManagement_inventoryInfo c,
-        drugManagement_drugInformationTenance_drugBasicInformation d,
-        `drugManagement_drugInformationTenance_drugOtherInformation` e
 
-        WHERE a.counting_info_id=b.id and a.drug_info_id=c.id and  d.id=c.drug_info_id and d.id = e.drug_info_id  and b.id=#{inventoryCountingInfo.id}
+    <!--    根据单号查询盘点明细-->
+    <select id="queryAll" resultMap="InventoryCountingInfoArrays">
+#        SELECT d.code,d.drug_name,d.drug_type,d.specs,d.manufacturer,e.location_no,c.drug_info_id,
+#        b.count_sheet_no,b.voucher_preparer,count_date,a.counting_info_id,a.drug_info_id,a.counting_stock,a.profit_loss,a.remarks
+#         FROM
+#         drugManagement_inventoryCounting_inventoryCountingInfoArraySon a,
+#         drugManagement_inventoryCounting_inventoryCountingInfo b,
+#         drugManagement_inventoryManagement_inventoryInfo c,
+#         drugManagement_drugInformationTenance_drugBasicInformation d,
+#         `drugManagement_drugInformationTenance_drugOtherInformation` e
+#
+#         WHERE a.counting_info_id=b.id and a.drug_info_id=c.id and  d.id=c.drug_info_id and d.id = e.drug_info_id  and b.id=#{inventoryCountingInfo.id}
 
+
+SELECT d.code,d.drug_name,d.drug_type,d.specs,d.manufacturer,e.location_no
+,c.drug_info_id,
+       ,a.counting_info_id,a.drug_info_id
+        ,a.counting_stock,a.profit_loss
+     ,a.remarks
+FROM
+    drugManagement_inventoryCounting_inventoryCountingInfoArraySon a,
+
+    drugManagement_inventoryManagement_inventoryInfo c,
+    drugManagement_drugInformationTenance_drugBasicInformation d,
+    `drugManagement_drugInformationTenance_drugOtherInformation` e
+
+WHERE   a.drug_info_id=c.id and  d.id=c.drug_info_id and d.id = e.drug_info_id  and a.counting_info_id=#{countingInfoId}
     </select>
+    <resultMap id="InventoryCountingInfoArrays" type="com.gxa.entity.drugManagement.inventoryCountingManagement.InventoryCountingInfoArray">
+        <id property="id" column="id"></id>
+        <result property="code" column="code"></result>
+        <result property="drugName" column="drug_name"></result>
+        <result property="locationNo" column="location_no"></result>
+        <result property="drugType" column="drug_type"></result>
+        <result property="specs" column="specs"></result>
+        <result property="manufacturer" column="manufacturer"></result>
+        <result property="currentInventoryDataVolume" column="currentInventory_data_volume"></result>
+        <result property="inventoryProfitAndLoss" column="inventory_profit_andLoss"></result>
+        <result property="inventoryLoss" column="inventory_loss"></result>
+        <result property="remarks" column="remarks"></result>
 
+
+    </resultMap>
 <!--    搜索-->
     <select id="queryByruls" resultMap="InventoryCountingInfoArrayAlls">
         SELECT d.code,d.drug_name,d.drug_type,d.specs,d.manufacturer,c.drug_info_id,

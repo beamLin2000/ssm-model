@@ -18,4 +18,6 @@ public class SearchCondition {
   private String rules;
   private Integer status;
   private String createTime;
+  private String countSheetNo;
+  private String deliveryOrderNo;
 }

@@ -279,6 +279,7 @@ public class WorkConeroller {
         R r = new R();
         Map map = new HashMap();
         map.put("orderNum",orderNum);
+        map.put("tollDurgsVer","西/成药");
         return r.ok(map);
     }
 }

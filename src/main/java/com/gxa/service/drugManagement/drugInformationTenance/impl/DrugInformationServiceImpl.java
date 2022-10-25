@@ -93,6 +93,10 @@ public class DrugInformationServiceImpl implements DrugInformationService {
             drugBasicInformation.setCode(String.valueOf(code));
             //设置三个小表的外键id，并调用mapper方法
             DrugPackageInformation drugPackageInformation = drugBasicInformation.getDrugPackageInformation();
+            Double purchasePrice = drugPackageInformation.getPurchasePrice();
+            Double retailPrice = drugPackageInformation.getRetailPrice();
+            drugBasicInformation.setPurchasePrice(purchasePrice);
+            drugBasicInformation.setSalesPrice(retailPrice);
             System.out.println("包装信息"+drugPackageInformation);
             drugPackageInformation.setDrugInfoId(id);
             drugInformationMapper.saveDrugPackageInformation(drugPackageInformation);

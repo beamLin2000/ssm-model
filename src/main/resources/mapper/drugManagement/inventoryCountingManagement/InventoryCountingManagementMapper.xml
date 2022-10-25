@@ -22,7 +22,7 @@
         SELECT `id`,`count_sheet_no`,`count_date`,`voucher_preparer`,`counting_status`
         FROM drugManagement_inventoryCounting_inventoryCountingInfo
         <trim prefix="where"  prefixOverrides="and|or" suffixOverrides="and | or">
-                <if test="startTime!= null and start!=''">
+                <if test="startTime!= null and startTime !=''">
                     count_date between #{startTime} and #{endTime}
                 </if>
                 <if test="countSheetNo != null and countSheetNo != ''">
@@ -42,6 +42,27 @@
     <select id="queryAll" resultMap="query">
         SELECT * FROM `drugManagement_inventoryCounting_inventoryCountingInfo`
     </select>
+
+    <resultMap id="inventoryCountingInfos" type="com.gxa.entity.drugManagement.inventoryCountingManagement.InventoryCountingInfo">
+        <id property="id" column="id"></id>
+        <result property="countSheetNo" column="count_sheet_no"></result>
+        <result property="countDate" column="count_date"></result>
+        <result property="voucherPreparer" column="voucher_preparer"></result>
+        <result property="countingStatus" column="counting_status"></result>
+
+
+    </resultMap>
+    <select id="queryArraysById" resultMap="inventoryCountingInfos">
+        SELECT id,count_sheet_no,count_date,voucher_preparer,counting_status
+        FROM drugManagement_inventoryCounting_inventoryCountingInfo
+        WHERE id=#{id}
+    </select>
+
+    <resultMap id="queryArraysByIds" type="com.gxa.entity.drugManagement.inventoryCountingManagement.InventoryCountingInfoArray">
+        <id property="id" column="id"></id>
+        <result property="code" column=""></result>
+    </resultMap>
+
 
 
 </mapper>

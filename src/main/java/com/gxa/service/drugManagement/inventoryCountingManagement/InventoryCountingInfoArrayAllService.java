@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface InventoryCountingInfoArrayAllService {
-    List<InventoryCountingInfoArrayAll> queryAll(Integer id);
+//    List<InventoryCountingInfoArrayAll> queryAll(Integer id);
     List<InventoryCountingInfoArrayAll> queryByruls(String drugType, String rules);
     //新增前的查询
     List<InventoryCountingInfoArray> queryAllDrugInfo();

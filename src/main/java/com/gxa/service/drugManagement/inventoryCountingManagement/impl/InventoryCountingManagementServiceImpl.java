@@ -3,6 +3,7 @@ package com.gxa.service.drugManagement.inventoryCountingManagement.impl;
 import com.gxa.entity.drugManagement.inventoryCountingManagement.InventoryCountingArrayToData;
 import com.gxa.entity.drugManagement.inventoryCountingManagement.InventoryCountingInfo;
 import com.gxa.entity.drugManagement.inventoryCountingManagement.InventoryCountingInfoArray;
+import com.gxa.entity.drugManagement.inventoryCountingManagement.InventoryCountingInfoArrayAll;
 import com.gxa.mapper.drugManagement.inventoryCountingManagement.InventoryCountingInfoArrayAllMapper;
 import com.gxa.mapper.drugManagement.inventoryCountingManagement.InventoryCountingManagementMapper;
 import com.gxa.service.drugManagement.inventoryCountingManagement.InventoryCountingManagementService;
@@ -29,21 +30,24 @@ public class InventoryCountingManagementServiceImpl implements InventoryCounting
 
 
     @Override
-    public List<InventoryCountingInfo> queryByCondition(String time, String countSheetNo) {
-        if(time.indexOf(",")!=-1){
-            String[] split = time.split(",");//拆分
-            System.out.println("拆分左---"+split[0]);
-            System.out.println("拆分右---"+split[1]);
-            return inventoryCountingManagementMapper.queryByCondition(split[0],split[1],countSheetNo);
+    public List<InventoryCountingInfo> queryByCondition(String createTime, String countSheetNo) {
+        //将前端获取到的字符串数据拆分
+        String start = null;
+        String end = null;
+        if(createTime!=null && createTime.indexOf(",")!=-1){
+            String[] createTimeArray = createTime.split(",");
+            start = createTimeArray[0].trim();
+            end = createTimeArray[1].trim();
         }
-        return inventoryCountingManagementMapper.queryByCondition(null,null,countSheetNo);
-
+        return inventoryCountingManagementMapper.queryByCondition(start,end,countSheetNo);
     }
 
     //查询buid
     @Override
     public InventoryCountingInfo queryById(Integer id) {
-        InventoryCountingInfo inventoryCountingInfo = this.inventoryCountingManagementMapper.selectById(id);
+        InventoryCountingInfo inventoryCountingInfo = this.inventoryCountingManagementMapper.queryArraysById(id);
+        List<InventoryCountingInfoArray> inventoryCountingInfoArrayAlls = this.inventoryCountingInfoArrayAllMapper.queryAll(id);
+        inventoryCountingInfo.setInventoryCountingInfoArrays(inventoryCountingInfoArrayAlls);
         return inventoryCountingInfo;
     }
 
@@ -51,9 +55,10 @@ public class InventoryCountingManagementServiceImpl implements InventoryCounting
     public void saveAllData(InventoryCountingInfo inventoryCountingInfo) {
         //查询所有
         List<InventoryCountingInfo> inventoryCountingInfos1 = inventoryCountingManagementMapper.queryAll();
+        System.out.println("查询所有=" + inventoryCountingInfos1);
         StringBuilder code = new StringBuilder("SA");
         if(inventoryCountingInfos1.size()==0){
-            code.append("20221022");
+            code.append("201911190030");
         }else{
             code.append(Long.parseLong(inventoryCountingInfos1.get(inventoryCountingInfos1.size()-1).getCountSheetNo().substring(2))+1);
         }
@@ -73,7 +78,10 @@ public class InventoryCountingManagementServiceImpl implements InventoryCounting
             inventoryCountingArrayToData.add(new InventoryCountingArrayToData(null,countInfoId,tempObj.getId(),tempObj.getInventoryProfitAndLoss(),tempObj.getInventoryLoss(),tempObj.getRemarks()));
         }
         //保存小表的数据
-        inventoryCountingInfoArrayAllMapper.saveAllArray(inventoryCountingArrayToData);
+        if(inventoryCountingArrayToData!=null){
+            inventoryCountingInfoArrayAllMapper.saveAllArray(inventoryCountingArrayToData);
+        }
+
 
     }
 

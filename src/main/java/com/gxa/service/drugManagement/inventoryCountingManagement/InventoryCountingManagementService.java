@@ -12,4 +12,5 @@ public interface InventoryCountingManagementService {
     void saveAllData(InventoryCountingInfo inventoryCountingInfo);
     void deleteById(Integer id);
 
+
 }

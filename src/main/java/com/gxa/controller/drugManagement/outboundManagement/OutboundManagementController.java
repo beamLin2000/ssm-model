@@ -1,6 +1,7 @@
 package com.gxa.controller.drugManagement.outboundManagement;
 
 import com.gxa.entity.drugManagement.basicInfo.BasicInfo;
+import com.gxa.entity.drugManagement.basicInfo.SearchCondition;
 import com.gxa.entity.drugManagement.outboundManagement.OutboundInfo;
 import com.gxa.result.Result;
 import com.gxa.result.ResultUtils;
@@ -40,17 +41,15 @@ public class OutboundManagementController {
         return ResultUtils.buildFail(200,"add",0L,null);
     }
     //搜索功能
-    @GetMapping("/search")
+    @PostMapping("/search")
     @ApiOperation(value = "search",notes = "搜索功能")
     @ApiResponses({
             @ApiResponse(code = 200,message = "ok",response = OutboundInfo.class)
     })
-    public Result search(@ApiParam(name = "auditStatus",value = "审核状态") Integer auditStatus,
-                         @ApiParam(name = "deliveryType",value = "出库类型") String deliveryType,
-                         @ApiParam(name = "deliveryOrderNo",value = "出库单号") String deliveryOrderNo){
+    public Result search(@RequestBody SearchCondition searchCondition){
         System.out.println("search");
-        System.out.println("审核状态"+auditStatus + "出库类型" + deliveryType + "出库单号" + deliveryOrderNo);
-        List<OutboundInfo> search = outboundManagerService.search(auditStatus, deliveryType, deliveryOrderNo);
+        System.out.println("审核状态"+searchCondition.getStatus() + "出库类型" + searchCondition.getDrugType() + "出库单号" + searchCondition.getDeliveryOrderNo());
+        List<OutboundInfo> search = outboundManagerService.search(searchCondition.getStatus(), searchCondition.getDrugType(), searchCondition.getDeliveryOrderNo());
         return ResultUtils.buildFail(200,"ok",Long.valueOf(search.size()),search);
     }
 

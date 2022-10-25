@@ -89,8 +89,9 @@ public class DrugInformationController {
             @ApiResponse(code = 200,message = "ok")
     })
     public Result save(@ApiParam(value = "药品信息提交接口")@RequestBody DrugBasicInformation drugBasicInformation){
+        System.out.println("drugBasicInformation123"+drugBasicInformation);
         drugInformationService.save(drugBasicInformation);
-        System.out.println("drugBasicInformation"+drugBasicInformation);
+
         return ResultUtils.buildFail(200,"ok",2L,null);
     }
 

@@ -166,6 +166,7 @@ public class OutboundManagerServiceImpl implements OutboundManagerService {
 
 
             System.out.println("药品信息管理=" + drugBasicInformations);
+
             if (oldIOboundInfoAddArrays.size() != 0) {//如果曾经添加过药品,则将药品删除以及库存数量删除
                 //定义需要进行相减库存的集合
                 List<UpdateInventoryList> mulitIOboundInfoAddArrays = new ArrayList<>();
@@ -192,7 +193,7 @@ public class OutboundManagerServiceImpl implements OutboundManagerService {
                 outboundManagerMapper.deleteOutboundInfoArrayById(outboundInfo.getId());
                 //加上曾经添加过的药品数量
                 outboundManagerMapper.updateInventoryInfo(mulitIOboundInfoAddArrays);
-            }//如果曾经未曾添加过药品,则直接新增
+            }//如果曾经未曾添加过药品,则直接新增,当回滚掉之前出库的数据之后，对即将出库的数据进行操作
 //最后进行数据的添加
             //将前端提交的数据添加到库存管理中
             //获取来自前端新增的array数据
@@ -201,15 +202,17 @@ public class OutboundManagerServiceImpl implements OutboundManagerService {
             //获取新增的药品及其数量
             //收集新增出库的药品id及其数量
             List<UpdateInventoryList> newAddInventoryInfos = new ArrayList<>();
+
             //提取添加过药品的id以及已添加的数量
-            for (int i = 0; i < oldIOboundInfoAddArrays.size(); i++) {
+            for (int i = 0; i < IOboundInfoAddArray.size(); i++) {
                 for (int j = 0; j < drugBasicInformations.size(); j++) {
-                    if (oldIOboundInfoAddArrays.get(i).getCode().equals(drugBasicInformations.get(j).getCode())) {
-                        newAddInventoryInfos.add(new UpdateInventoryList(1, oldIOboundInfoAddArrays.get(i).getMedicalNumber(), drugBasicInformations.get(j).getId()));
+                    if (IOboundInfoAddArray.get(i).getCode().equals(drugBasicInformations.get(j).getCode())) {
+                        //获取需要出库药品的数量以及出库药品的id便于对库存表进行修改
+                        newAddInventoryInfos.add(new UpdateInventoryList(1, IOboundInfoAddArray.get(i).getMedicalNumber(),
+                                                                                drugBasicInformations.get(j).getId()));
                         break;
                     }
                 }
-
             }
             System.out.println("获取现在需要添加的药品以及数量"+newAddInventoryInfos);
             //查询所有库存
@@ -222,6 +225,7 @@ public class OutboundManagerServiceImpl implements OutboundManagerService {
                     System.out.println("获取到的更新库存的list=" + updateInventoryList);
                     if (updateInventoryList.getMedicalId().intValue() == array.getDrugInfoId().intValue()) {
                         System.out.println("获取到的updateInventoryList.getStock = "  + updateInventoryList.getStock());
+                        System.out.println("获取到的库存数量为=" + array.getStock());
                         //存储库存值
                         if (array.getStock() - updateInventoryList.getStock() < 0){
                             new Exception("库存不够");
@@ -240,7 +244,8 @@ public class OutboundManagerServiceImpl implements OutboundManagerService {
             for (IOboundInfoAddArray iOboundInfoAddArray : HTMLiOboundInfoAddArray) {
                 iOboundInfoAddArray.setId(null);
             }
-
+            //更新保存
+            outboundManagerMapper.updateOutboundInfo(outboundInfo);
             //新增添加的药品
             outboundManagerMapper.saveOutboundInfoArray(HTMLiOboundInfoAddArray, null, outboundInfo.getId());
         }

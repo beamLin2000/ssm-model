@@ -51,10 +51,13 @@ public class WorkPatientDtoServiceImpl implements WorkPatientDtoService {
         for (MedicalCharge medicalCharge:
              medicalCharges) {
             List<Surcharges> surcharges = medicalCharge.getSurcharges();
-            for (Surcharges surcharge:
-                 surcharges) {
-                this.workPatientDtoMapper.addSurcharges(surcharge,relation,medicalCharge.getOrderNum());
+            if (surcharges!=null){
+                for (Surcharges surcharge:
+                        surcharges) {
+                    this.workPatientDtoMapper.addSurcharges(surcharge,relation,medicalCharge.getOrderNum());
+                }
             }
+
             this.workPatientDtoMapper.addPatientMedicalChargeInfo(medicalCharge,relation);
         }
     }

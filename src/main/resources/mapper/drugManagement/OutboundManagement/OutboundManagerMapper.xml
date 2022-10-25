@@ -78,6 +78,23 @@
             </foreach>
         </trim>
     </update>
+    <update id="updateOutboundInfo">
+        UPDATE `drugManagement_inboundManagement_inboundInfo` set
+      receipt_no = #{deliveryOrderNo},
+      receipt_type = #{deliveryType},
+      voucher_preparer = #{voucherPreparer},
+      purchase_price = #{purchasePrice},
+      retail_amount = #{retailAmount},
+      warehousing_personnel = #{warehouseOutPersonnel},
+      create_time = #{createTime},
+      audit_status = #{auditStatus},
+      receipt_time = #{deliveryTime},
+      preparation_date = #{preparationDate},
+      remarks = #{remarks},
+      reviewer = #{reviewer},
+      audit_date = #{auditDate}
+        where id = #{id}
+    </update>
 
     <!--    查询所有-->
     <select id="queryAll" resultMap="queryAlls">

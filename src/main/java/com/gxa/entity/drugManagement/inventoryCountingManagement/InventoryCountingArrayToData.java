@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 public class InventoryCountingArrayToData {
     private Integer id;
     private Integer countingInfoId;
-    private Integer inventoryId;
+    private Integer drugInfoId;
     private Integer countingStock;
     private Integer profitLoss;
     private String remarks;

@@ -2,6 +2,7 @@ package com.gxa.mapper.drugManagement.outboundManagement;
 
 import com.gxa.entity.drugManagement.basicInfo.UpdateInventoryList;
 import com.gxa.entity.drugManagement.inboundManagement.IOboundInfoAddArray;
+import com.gxa.entity.drugManagement.inboundManagement.InboundInfo;
 import com.gxa.entity.drugManagement.outboundManagement.OutboundInfo;
 import org.apache.ibatis.annotations.Param;
 
@@ -45,5 +46,7 @@ public interface OutboundManagerMapper {
                                @Param("OutboundInfoId") Integer outboundInfoId);
 
     void updateInventoryInfo(@Param("newInventoryInfos") List<UpdateInventoryList> updateInventoryLists);
+
+    void updateOutboundInfo(OutboundInfo outboundInfo);
 
 }

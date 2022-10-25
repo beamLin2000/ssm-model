@@ -9,8 +9,8 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 //查看中的查询
-public interface InventoryCountingInfoArrayAllMapper extends BaseMapper<InventoryCountingInfo> {
-    List<InventoryCountingInfoArrayAll> queryAll(Integer id);
+public interface InventoryCountingInfoArrayAllMapper {
+    List<InventoryCountingInfoArray> queryAll(@Param("countingInfoId") Integer countingInfoId);
     List<InventoryCountingInfoArrayAll> queryByruls(@Param("drugType") String drugType, @Param("rules") String rules);
     List<InventoryCountingInfoArray> queryAllDrugInfo();
     void saveAllArray(@Param("inventoryCountingArrayToData") List<InventoryCountingArrayToData> inventoryCountingArrayToData);

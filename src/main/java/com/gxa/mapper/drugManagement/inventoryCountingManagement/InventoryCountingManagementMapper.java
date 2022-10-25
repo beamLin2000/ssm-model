@@ -2,6 +2,7 @@ package com.gxa.mapper.drugManagement.inventoryCountingManagement;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.gxa.entity.drugManagement.inventoryCountingManagement.InventoryCountingInfo;
+import com.gxa.entity.drugManagement.inventoryCountingManagement.InventoryCountingInfoArray;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -11,5 +12,7 @@ public interface InventoryCountingManagementMapper extends BaseMapper<InventoryC
     void saveAll(InventoryCountingInfo inventoryCountingInfo);
 
     List<InventoryCountingInfo> queryAll();
+
+    InventoryCountingInfo queryArraysById(Integer id);
 
 }
